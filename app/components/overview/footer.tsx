@@ -24,7 +24,7 @@ export default function FooterNav() {
           borderBottom="1px solid"
           borderColor="gray.200">
           <Flex h="100%" align="center" justify="center">
-            <Text>유저 랭킹</Text>
+            <Text color="black">유저 랭킹</Text>
           </Flex>
         </Box>
         <Box
@@ -34,7 +34,7 @@ export default function FooterNav() {
           borderBottom="1px solid"
           borderColor="gray.200">
           <Flex h="100%" align="center" justify="center">
-            <Text>최근 전적</Text>
+            <Text color="black">최근 전적</Text>
           </Flex>
         </Box>
         <Box
@@ -44,7 +44,7 @@ export default function FooterNav() {
           borderBottom="1px solid"
           borderColor="gray.200">
           <Flex h="100%" align="center" justify="center">
-            <Text>기타 사항</Text>
+            <Text color="black">기타 사항</Text>
           </Flex>
         </Box>
       </Flex>

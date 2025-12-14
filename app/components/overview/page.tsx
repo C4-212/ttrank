@@ -92,7 +92,7 @@ export default function OverviewPage() {
       >
         <Flex h="100%" align="center" justify="center">
           <Icon as={HiHeart} color="red.400" mr={2} />
-          <Text fontSize="sm" color="black"> 후원 계좌 : 601027 5611 9562 농협 (강천수) </Text>
+          <Text fontSize="sm" color="black"> 후원 계좌 : 601027-5611-9562 농협 (강천수) </Text>
         </Flex>
       </Box>
 
