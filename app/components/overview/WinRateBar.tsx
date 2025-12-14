@@ -1,33 +1,13 @@
-type Props = {
-  teamAWinRate: number; // 0 ~ 100
-};
-
-export default function WinRateBar({ teamAWinRate }: Props) {
+export default function WinRateBar({ winRate }: { winRate: number }) {
   return (
-    <div style={{ marginTop: 12 }}>
-      <div style={{ display: "flex", height: 20, width: "100%" }}>
-        <div
-          style={{
-            width: `${teamAWinRate}%`,
-            background: "#4ade80",
-          }}
-        />
-        <div
-          style={{
-            width: `${100 - teamAWinRate}%`,
-            background: "#f87171",
-          }}
-        />
+    <div className="mt-4">
+      <div className="h-3 w-full bg-neutral-800 rounded overflow-hidden flex">
+        <div className="bg-green-500" style={{ width: `${winRate}%` }} />
+        <div className="bg-red-500" style={{ width: `${100 - winRate}%` }} />
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          fontSize: 12,
-        }}
-      >
-        <span>팀 A {teamAWinRate}%</span>
-        <span>팀 B {100 - teamAWinRate}%</span>
+      <div className="flex justify-between text-xs mt-1 text-neutral-400">
+        <span>A {winRate}%</span>
+        <span>B {100 - winRate}%</span>
       </div>
     </div>
   );

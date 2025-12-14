@@ -1,30 +1,26 @@
+import SideMenu from "./SideMenu";
 import StreamIcons from "./StreamIcons";
 import LiveMatch from "./LiveMatch";
 
 export default function OverviewPage() {
+  // 실제 데이터는 API fetch로 대체 권장
+  const teamA = [
+    { name: "PlayerA1", mmr: 2100 },
+    { name: "PlayerA2", mmr: 2050 },
+  ];
+  const teamB = [
+    { name: "PlayerB1", mmr: 1950 },
+    { name: "PlayerB2", mmr: 2000 },
+  ];
+
   return (
-    <main style={{ padding: 32 }}>
-      <h1>TT Rank Overview</h1>
+    <>
+      <SideMenu />
 
-      {/* 방송 송출 */}
-      <section>
-        <h2>📺 방송 송출</h2>
+      <main className="flex-1 p-4 overflow-y-auto">
         <StreamIcons />
-      </section>
-
-      {/* 실시간 경기 */}
-      <section>
-        <LiveMatch
-          teamA={[
-            { name: "PlayerA1", mmr: 2100 },
-            { name: "PlayerA2", mmr: 2000 },
-          ]}
-          teamB={[
-            { name: "PlayerB1", mmr: 1900 },
-            { name: "PlayerB2", mmr: 1950 },
-          ]}
-        />
-      </section>
-    </main>
+        <LiveMatch teamA={teamA} teamB={teamB} />
+      </main>
+    </>
   );
 }

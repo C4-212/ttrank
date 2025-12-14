@@ -1,59 +1,34 @@
 import WinRateBar from "./WinRateBar";
 
-type Player = {
-  name: string;
-  mmr: number;
-};
-
-type Props = {
-  teamA: Player[];
-  teamB: Player[];
-};
-
-function calcWinRate(teamA: Player[], teamB: Player[]) {
-  const avgA =
-    teamA.reduce((sum, p) => sum + p.mmr, 0) / teamA.length;
-  const avgB =
-    teamB.reduce((sum, p) => sum + p.mmr, 0) / teamB.length;
-
-  return Math.round((avgA / (avgA + avgB)) * 100);
-}
-
-export default function LiveMatch({ teamA, teamB }: Props) {
-  const winRateA = calcWinRate(teamA, teamB);
+export default function LiveMatch({
+  teamA,
+  teamB,
+}: {
+  teamA: { name: string; mmr: number }[];
+  teamB: { name: string; mmr: number }[];
+}) {
+  const avgA = teamA.reduce((s, p) => s + p.mmr, 0) / teamA.length;
+  const avgB = teamB.reduce((s, p) => s + p.mmr, 0) / teamB.length;
+  const winRate = Math.round((avgA / (avgA + avgB)) * 100);
 
   return (
-    <div
-      style={{
-        border: "1px solid #333",
-        padding: 16,
-        borderRadius: 8,
-        marginTop: 24,
-      }}
-    >
-      <h3>🔴 실시간 경기</h3>
-
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <div className="bg-neutral-900 rounded-lg p-4 mt-6">
+      <h3 className="text-lg mb-2">🔴 실시간 경기</h3>
+      <div className="flex justify-between text-sm">
         <div>
-          <h4>Team A</h4>
+          <div className="font-semibold mb-1">TEAM A</div>
           {teamA.map((p) => (
-            <div key={p.name}>
-              {p.name} (MMR {p.mmr})
-            </div>
+            <div key={p.name}>{p.name} (MMR {p.mmr})</div>
           ))}
         </div>
-
         <div>
-          <h4>Team B</h4>
+          <div className="font-semibold mb-1">TEAM B</div>
           {teamB.map((p) => (
-            <div key={p.name}>
-              {p.name} (MMR {p.mmr})
-            </div>
+            <div key={p.name}>{p.name} (MMR {p.mmr})</div>
           ))}
         </div>
       </div>
-
-      <WinRateBar teamAWinRate={winRateA} />
+      <WinRateBar winRate={winRate} />
     </div>
   );
 }
