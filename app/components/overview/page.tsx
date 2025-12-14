@@ -6,10 +6,16 @@ import {
   Flex,
   Heading,
   VStack,
+  Image,
+  Link,
   Text,
   Spacer,
-  IconButton
+  Icon,
+  IconButton,
+  Center
 } from "@chakra-ui/react";
+import FooterNav from "./footer";
+import { HiHeart } from "react-icons/hi";
 
 export default function OverviewPage() {
   return (
@@ -25,9 +31,9 @@ export default function OverviewPage() {
         alignItems="center"
       >
         <Flex align="center" w="100%" h="100%">
-          <Text fontWeight="semibold" color="black">TT Rank</Text>
-          <Spacer/>
-          <IconButton aria-label="메뉴"> <span>☰</span> </IconButton>
+          <Text fontWeight="semibold" color="black">승점/MMR 확인</Text>
+          <Spacer />
+          {/* <IconButton aria-label="메뉴"> <span>☰</span> </IconButton> */}
         </Flex>
       </Box>
 
@@ -39,17 +45,64 @@ export default function OverviewPage() {
         px={4}
         py={3}
       >
-        <Heading size="sm" color="black">Header</Heading>
+        <Flex align="center" w="100%" h="100%">
+          <Link href="https://www.sooplive.co.kr/station/prowlgus" target="_blank" rel="noopener noreferrer">
+            <Image
+              src="/icons/streaming/icon_soop.png"
+              boxSize="50px"
+              borderRadius="full"
+              fit="cover"
+              alt="SOOP"
+              cursor="pointer"
+              _hover={{ opacity: 0.85 }}
+            />
+          </Link>
+          <Spacer />
+          <Link href="https://www.youtube.com/@티티2" target="_blank" rel="noopener noreferrer">
+            <Image
+              src="/icons/streaming/icon_youtube.png"
+              boxSize="50px"
+              borderRadius="full"
+              fit="cover"
+              alt="Youtube"
+              cursor="pointer"
+              _hover={{ opacity: 0.85 }}
+            />
+          </Link>
+          <Spacer />
+          <Link href="https://chzzk.naver.com/10a18c8e9a3a0672a9f0987b2f4394e7" target="_blank" rel="noopener noreferrer">
+            <Image
+              src="/icons/streaming/icon_chzzk.png"
+              boxSize="50px"
+              borderRadius="full"
+              fit="cover"
+              alt="CHZZK"
+              cursor="pointer"
+              _hover={{ opacity: 0.85 }}
+            />
+          </Link>
+        </Flex>
+      </Box>
+      <Box
+        bg="white"
+        borderBottom="1px solid"
+        borderColor="gray.200"
+        px={4}
+        py={3}
+      >
+        <Flex h="100%" align="center" justify="center">
+          <Icon as={HiHeart} color="red.400" mr={2} />
+          <Text fontSize="sm" color="black"> 후원 계좌 : 601027 5611 9562 농협 (강천수) </Text>
+        </Flex>
       </Box>
 
       {/* Main Content */}
       <Container
-        maxW="md"
         py={6}
         flex="1"
+        pb="96px"
       >
         <VStack align="stretch">
-          {/* Column Card */}
           <Box
             bg="white"
             borderRadius="lg"
@@ -58,10 +111,17 @@ export default function OverviewPage() {
             p={4}
             minH="120px"
           >
-            <Text fontWeight="medium" color="black">Column</Text>
+            <Text fontWeight="medium" color="black">📢공지사항</Text>
+            <Flex
+              h="100px"
+              bg="white"
+              align="center"
+              justify="center"
+            >
+              <Text color="black">승점 및 MMR을 확인할 수 있는 페이지 입니다.</Text>
+            </Flex>
           </Box>
 
-          {/* Content Card */}
           <Box
             bg="white"
             borderRadius="lg"
@@ -70,10 +130,30 @@ export default function OverviewPage() {
             p={4}
             minH="240px"
           >
-            <Text fontWeight="medium" color="black">Content</Text>
+            <Text fontWeight="medium" color="black">🔥실시간 라이브</Text>
+            <Flex
+              h="200px"
+              bg="white"
+              align="center"
+              justify="center"
+            >
+              <Text color="black">진행중인 경기가 없습니다.</Text>
+            </Flex>
+          </Box>
+
+          <Box
+            bg="white"
+            borderRadius="lg"
+            border="1px solid"
+            borderColor="gray.200"
+            p={4}
+            minH="300px"
+          >
+            <Text fontWeight="medium" color="black">🥇유저 랭킹</Text>
           </Box>
         </VStack>
       </Container>
+      <FooterNav />
     </Flex>
   );
 }
