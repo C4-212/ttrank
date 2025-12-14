@@ -7,6 +7,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <head>
+        <style>
+          {`
+            html, body, #__next {
+              background: transparent !important;
+            }
+          `}
+        </style>
+      </head>
       <body>
         <Provider>{children}</Provider>
       </body>

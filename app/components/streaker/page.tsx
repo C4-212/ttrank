@@ -1,48 +1,45 @@
 "use client";
 
-import {
-  Box,
-  Flex,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 export default function OverviewPage() {
+  const leaderboard = [
+    { rank: "🥇", name: "홍길동", streak: 7, color: "yellow" },
+    { rank: "🥈", name: "홍길동", streak: 7, color: "yellow" },
+    { rank: "🥉", name: "홍길동", streak: 6, color: "yellow" },
+    { rank: "", name: "홍길동", streak: 6, color: "white" },
+    { rank: "", name: "홍길동", streak: 5, color: "white" },
+    { rank: "", name: "홍길동", streak: 5, color: "white" },
+    { rank: "", name: "홍길동", streak: 3, color: "white" },
+    { rank: "", name: "홍길동", streak: 3, color: "white" },
+    { rank: "", name: "홍길동", streak: 1, color: "white" },
+    { rank: "", name: "홍길동", streak: 1, color: "white" },
+  ];
+
   return (
     <Box
+      position="fixed"
+      inset={0}
+      pointerEvents="none"
       bg="transparent"
-      p={4}
-      minH="300px"
     >
-      <Text fontSize="20px" fontWeight="bold" color="yellow" textShadow=" -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black">
-        🥇홍길동 (7연승)
-      </Text>
-      <Text fontSize="20px" fontWeight="bold" color="yellow" textShadow=" -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black">
-        🥈홍길동 (7연승)
-      </Text>
-      <Text fontSize="20px" fontWeight="bold" color="yellow" textShadow=" -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black">
-        🥉홍길동 (6연승)
-      </Text>
-      <Text fontSize="20px" fontWeight="bold" color="white" textShadow=" -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black">
-        홍길동 (6연승)
-      </Text>
-      <Text fontSize="20px" fontWeight="bold" color="white" textShadow=" -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black">
-        홍길동 (5연승)
-      </Text>
-      <Text fontSize="20px" fontWeight="bold" color="white" textShadow=" -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black">
-        홍길동 (5연승)
-      </Text>
-      <Text fontSize="20px" fontWeight="bold" color="white" textShadow=" -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black">
-        홍길동 (3연승)
-      </Text>
-      <Text fontSize="20px" fontWeight="bold" color="white" textShadow=" -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black">
-        홍길동 (3연승)
-      </Text>
-      <Text fontSize="20px" fontWeight="bold" color="white" textShadow=" -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black">
-        홍길동 (1연승)
-      </Text>
-      <Text fontSize="20px" fontWeight="bold" color="white" textShadow=" -1px -1px 0 black, 1px -1px 0 black, -1px  1px 0 black, 1px  1px 0 black">
-        홍길동 (1연승)
-      </Text>
+      <Box
+        p={4}
+        minH="300px"
+        bg="transparent"
+      >
+        {leaderboard.map((item, idx) => (
+          <Text
+            key={idx}
+            fontSize="40px"
+            fontWeight="bold"
+            color={item.color}
+            textShadow="-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black"
+          >
+            {item.rank}{item.name} ({item.streak}연승)
+          </Text>
+        ))}
+      </Box>
     </Box>
   );
 }
