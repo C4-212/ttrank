@@ -17,7 +17,8 @@ const system = createSystem(defaultConfig, {
   theme: {
     tokens: {
       fonts: {
-        body: { value: 'var(--font-outfit)' },
+        body: { value: "Pretendard, system-ui, sans-serif" },
+        heading: { value: "Pretendard, system-ui, sans-serif" },
       },
     },
     semanticTokens: {

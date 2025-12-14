@@ -7,6 +7,8 @@ import {
   Heading,
   VStack,
   Text,
+  Spacer,
+  IconButton
 } from "@chakra-ui/react";
 
 export default function OverviewPage() {
@@ -22,7 +24,11 @@ export default function OverviewPage() {
         display="flex"
         alignItems="center"
       >
-        <Text fontWeight="semibold">Navbar</Text>
+        <Flex align="center" w="100%" h="100%">
+          <Text fontWeight="semibold" color="black">TT Rank</Text>
+          <Spacer/>
+          <IconButton aria-label="메뉴"> <span>☰</span> </IconButton>
+        </Flex>
       </Box>
 
       {/* Header */}
@@ -33,7 +39,7 @@ export default function OverviewPage() {
         px={4}
         py={3}
       >
-        <Heading size="sm">Header</Heading>
+        <Heading size="sm" color="black">Header</Heading>
       </Box>
 
       {/* Main Content */}
@@ -42,7 +48,7 @@ export default function OverviewPage() {
         py={6}
         flex="1"
       >
-        <VStack spaceX={6} spaceY={6} align="stretch">
+        <VStack align="stretch">
           {/* Column Card */}
           <Box
             bg="white"
@@ -52,7 +58,7 @@ export default function OverviewPage() {
             p={4}
             minH="120px"
           >
-            <Text fontWeight="medium">Column</Text>
+            <Text fontWeight="medium" color="black">Column</Text>
           </Box>
 
           {/* Content Card */}
@@ -64,7 +70,7 @@ export default function OverviewPage() {
             p={4}
             minH="240px"
           >
-            <Text fontWeight="medium">Content</Text>
+            <Text fontWeight="medium" color="black">Content</Text>
           </Box>
         </VStack>
       </Container>
