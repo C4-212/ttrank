@@ -14,7 +14,7 @@ import {
   IconButton,
   Center
 } from "@chakra-ui/react";
-import FooterNav from "./footer";
+import FooterNav from "../common/footer";
 import { HiHeart } from "react-icons/hi";
 
 export default function OverviewPage() {
