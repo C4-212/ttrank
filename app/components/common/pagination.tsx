@@ -36,7 +36,7 @@ export default function Pagination({
           <Button
             key={p}
             size="sm"
-            color="black"
+            bg={active ? "black" : "white"}
             variant={active ? "solid" : "outline"}
             onClick={() => onChange(p)}
           >

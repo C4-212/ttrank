@@ -118,7 +118,10 @@ export default function OverviewPage() {
               align="center"
               justify="center"
             >
-              <Text color="black">TT 티비 방송에서 플레이한 경기의 승점 및 MMR을 확인할 수 있는 페이지 입니다.</Text>
+              <Text color="black">
+                TT 티비 방송에서 참여한 경기의<br />
+                승점, MMR을 확인할 수 있는 페이지 입니다<br />
+                방송 시청해주셔서 감사합니다!</Text>
             </Flex>
           </Box>
 
@@ -140,7 +143,6 @@ export default function OverviewPage() {
               <Text color="black">진행중인 경기가 없습니다.</Text>
             </Flex>
           </Box>
-
           <Box
             bg="white"
             borderRadius="lg"
@@ -149,7 +151,7 @@ export default function OverviewPage() {
             p={4}
             minH="300px"
           >
-            <Text fontWeight="medium" color="black">🥇유저 랭킹</Text>
+            <Text fontWeight="medium" color="black">🥇연승자</Text>
             <Flex
               h="200px"
               bg="white"
