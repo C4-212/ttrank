@@ -17,10 +17,36 @@ export default function FooterNav() {
       zIndex="1000"
     >
       <Flex h="100%" align="center" justify="center">
-        <Icon as={HiHeart} color="red.400" mr={2} />
-        <Text fontSize="sm" color="black">
-          TT Rank
-        </Text>
+        <Box
+          w="33%"
+          h="100%"
+          bg="white"
+          borderBottom="1px solid"
+          borderColor="gray.200">
+          <Flex h="100%" align="center" justify="center">
+            <Text>유저 랭킹</Text>
+          </Flex>
+        </Box>
+        <Box
+          w="33%"
+          h="100%"
+          bg="white"
+          borderBottom="1px solid"
+          borderColor="gray.200">
+          <Flex h="100%" align="center" justify="center">
+            <Text>최근 전적</Text>
+          </Flex>
+        </Box>
+        <Box
+          w="33%"
+          h="100%"
+          bg="white"
+          borderBottom="1px solid"
+          borderColor="gray.200">
+          <Flex h="100%" align="center" justify="center">
+            <Text>기타 사항</Text>
+          </Flex>
+        </Box>
       </Flex>
     </Box>
   );
