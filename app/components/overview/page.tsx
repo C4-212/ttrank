@@ -31,7 +31,7 @@ export default function OverviewPage() {
         alignItems="center"
       >
         <Flex align="center" w="100%" h="100%">
-          <Text fontWeight="semibold" color="black">승점/MMR 확인</Text>
+          <Text fontWeight="semibold" color="black">TT생컨 연승/승점/MMR 확인</Text>
           <Spacer />
           {/* <IconButton aria-label="메뉴"> <span>☰</span> </IconButton> */}
         </Flex>
