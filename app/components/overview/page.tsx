@@ -1,26 +1,73 @@
-import SideMenu from "./SideMenu";
-import StreamIcons from "./StreamIcons";
-import LiveMatch from "./LiveMatch";
+"use client";
+
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  VStack,
+  Text,
+} from "@chakra-ui/react";
 
 export default function OverviewPage() {
-  // 실제 데이터는 API fetch로 대체 권장
-  const teamA = [
-    { name: "PlayerA1", mmr: 2100 },
-    { name: "PlayerA2", mmr: 2050 },
-  ];
-  const teamB = [
-    { name: "PlayerB1", mmr: 1950 },
-    { name: "PlayerB2", mmr: 2000 },
-  ];
-
   return (
-    <>
-      <SideMenu />
+    <Flex minH="100vh" bg="gray.50" direction="column">
+      {/* Navbar */}
+      <Box
+        h="48px"
+        bg="white"
+        borderBottom="1px solid"
+        borderColor="gray.200"
+        px={4}
+        display="flex"
+        alignItems="center"
+      >
+        <Text fontWeight="semibold">Navbar</Text>
+      </Box>
 
-      <main className="flex-1 p-4 overflow-y-auto">
-        <StreamIcons />
-        <LiveMatch teamA={teamA} teamB={teamB} />
-      </main>
-    </>
+      {/* Header */}
+      <Box
+        bg="white"
+        borderBottom="1px solid"
+        borderColor="gray.200"
+        px={4}
+        py={3}
+      >
+        <Heading size="sm">Header</Heading>
+      </Box>
+
+      {/* Main Content */}
+      <Container
+        maxW="md"
+        py={6}
+        flex="1"
+      >
+        <VStack spaceX={6} spaceY={6} align="stretch">
+          {/* Column Card */}
+          <Box
+            bg="white"
+            borderRadius="lg"
+            border="1px solid"
+            borderColor="gray.200"
+            p={4}
+            minH="120px"
+          >
+            <Text fontWeight="medium">Column</Text>
+          </Box>
+
+          {/* Content Card */}
+          <Box
+            bg="white"
+            borderRadius="lg"
+            border="1px solid"
+            borderColor="gray.200"
+            p={4}
+            minH="240px"
+          >
+            <Text fontWeight="medium">Content</Text>
+          </Box>
+        </VStack>
+      </Container>
+    </Flex>
   );
 }

@@ -1,28 +1,37 @@
-import Link from "next/link";
+type Props = {
+  open: boolean;
+  onClose: () => void;
+};
 
-const menus = [
-  { name: "선수 랭킹", href: "/ranking" },
-  { name: "경기 기록", href: "/matches" },
-];
-
-export default function SideMenu() {
+export default function SideMenu({ open, onClose }: Props) {
   return (
-    <aside className="w-[220px] bg-neutral-900 border-r border-neutral-800 flex flex-col p-4">
-      <div className="text-xl font-bold mb-6 text-center">
-        TT Rank
+    <aside
+      className={`
+        fixed top-0 left-0 z-50 h-full w-[260px]
+        bg-neutral-900 text-neutral-100
+        transform transition-transform duration-300
+        ${open ? "translate-x-0" : "-translate-x-full"}
+      `}
+    >
+      <div className="flex items-center justify-between p-4 border-b border-white/10">
+        <span className="font-semibold">메뉴</span>
+        <button onClick={onClose} className="text-sm text-neutral-400">
+          닫기
+        </button>
       </div>
 
-      <nav className="flex flex-col gap-4">
-        {menus.map((menu) => (
-          <Link
-            key={menu.name}
-            href={menu.href}
-            className="text-lg text-neutral-300 hover:text-white transition"
-          >
-            {menu.name}
-          </Link>
-        ))}
+      <nav className="flex flex-col p-2 gap-1">
+        <MenuItem label="선수 랭킹" />
+        <MenuItem label="경기 기록" />
       </nav>
     </aside>
+  );
+}
+
+function MenuItem({ label }: { label: string }) {
+  return (
+    <button className="w-full text-left rounded-lg px-3 py-2 hover:bg-neutral-800">
+      {label}
+    </button>
   );
 }
