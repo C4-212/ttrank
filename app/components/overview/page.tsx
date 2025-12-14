@@ -118,7 +118,7 @@ export default function OverviewPage() {
               align="center"
               justify="center"
             >
-              <Text color="black">승점 및 MMR을 확인할 수 있는 페이지 입니다.</Text>
+              <Text color="black">TT 티비 방송에서 플레이한 경기의 승점 및 MMR을 확인할 수 있는 페이지 입니다.</Text>
             </Flex>
           </Box>
 
@@ -150,7 +150,6 @@ export default function OverviewPage() {
             minH="300px"
           >
             <Text fontWeight="medium" color="black">🥇유저 랭킹</Text>
-            <Text fontWeight="medium" color="black">🔥실시간 라이브</Text>
             <Flex
               h="200px"
               bg="white"
