@@ -1,6 +1,6 @@
 "use client";
 
-import { Flex, Button, IconButton } from "@chakra-ui/react";
+import { Text, Flex, Button, IconButton } from "@chakra-ui/react";
 
 type PaginationProps = {
   page: number;
@@ -36,10 +36,11 @@ export default function Pagination({
           <Button
             key={p}
             size="sm"
+            color="black"
             variant={active ? "solid" : "outline"}
             onClick={() => onChange(p)}
           >
-            {p}
+            {active?<Text color="white">{p}</Text>:<Text color="black">{p}</Text>}
           </Button>
         );
       })}
