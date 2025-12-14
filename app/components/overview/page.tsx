@@ -150,6 +150,15 @@ export default function OverviewPage() {
             minH="300px"
           >
             <Text fontWeight="medium" color="black">🥇유저 랭킹</Text>
+            <Text fontWeight="medium" color="black">🔥실시간 라이브</Text>
+            <Flex
+              h="200px"
+              bg="white"
+              align="center"
+              justify="center"
+            >
+              <Text color="black">유저 랭킹 정보가 없습니다.</Text>
+            </Flex>
           </Box>
         </VStack>
       </Container>
