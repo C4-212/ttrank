@@ -57,7 +57,7 @@ export default function OverviewPage() {
         alignItems="center"
       >
         <Flex align="center" w="100%" h="100%">
-          <Text fontWeight="semibold" color="black">TT생컨 연승/승점/MMR 확인</Text>
+          <Text fontWeight="semibold" color="black">[TTRANK.kr] 연승/승점/MMR 확인</Text>
           <Spacer />
           {/* <IconButton aria-label="메뉴"> <span>☰</span> </IconButton> */}
         </Flex>
@@ -145,7 +145,7 @@ export default function OverviewPage() {
               justify="center"
             >
               <Text color="black">
-                TT 티비 방송에서 참여한 경기의<br />
+                TT 방송에서 참여한 경기의<br />
                 승점, MMR을 확인할 수 있는 페이지 입니다<br />
                 방송 시청해주셔서 감사합니다!</Text>
             </Flex>
