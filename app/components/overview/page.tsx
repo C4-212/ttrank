@@ -16,25 +16,33 @@ import {
   Center
 } from "@chakra-ui/react";
 import { MatchPlayer, WinningStreaker } from "../common/class";
+import WinRate from "./WinRate";
 import FooterNav from "../common/footer";
 import { HiHeart } from "react-icons/hi";
 
 export default function OverviewPage() {
   const leaderboard: WinningStreaker[] = [
-    { rank: 1, rank_emoji: "1️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 7, player_mmr: 2152 },
-    { rank: 2, rank_emoji: "2️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 7, player_mmr: 1572 },
-    { rank: 3, rank_emoji: "3️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 6, player_mmr: 1242 },
-    { rank: 4, rank_emoji: "4️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 6, player_mmr: 1235 },
-    { rank: 5, rank_emoji: "5️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 5, player_mmr: 1623 },
-    { rank: 6, rank_emoji: "6️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 5, player_mmr: 1721 },
-    { rank: 7, rank_emoji: "7️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 3, player_mmr: 1823 },
-    { rank: 8, rank_emoji: "8️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 3, player_mmr: 2153 },
-    { rank: 9, rank_emoji: "9️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 1, player_mmr: 2045 },
-    { rank: 10, rank_emoji: "🔟", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 0, player_mmr: 1862 },
+    { rank: 1, rank_emoji: "1️⃣", player_name: "Air.Force", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 2152 },
+    { rank: 2, rank_emoji: "2️⃣", player_name: "TT[Air]", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1572 },
+    { rank: 3, rank_emoji: "3️⃣", player_name: "StarJoKKACHiHam", player_battle_tag: "얼어붙은발바닥#323951", streak: 6, player_mmr: 1242 },
+    { rank: 4, rank_emoji: "4️⃣", player_name: "Tato", player_battle_tag: "얼어붙은발바닥#323951", streak: 6, player_mmr: 1235 },
+    { rank: 5, rank_emoji: "5️⃣", player_name: "Sally-_-", player_battle_tag: "얼어붙은발바닥#323951", streak: 5, player_mmr: 1623 },
+    { rank: 6, rank_emoji: "6️⃣", player_name: "TemuRain", player_battle_tag: "얼어붙은발바닥#323951", streak: 5, player_mmr: 1721 },
+    { rank: 7, rank_emoji: "7️⃣", player_name: "GGyo^^", player_battle_tag: "얼어붙은발바닥#323951", streak: 3, player_mmr: 1823 },
+    { rank: 8, rank_emoji: "8️⃣", player_name: "MelonMangoDrink", player_battle_tag: "얼어붙은발바닥#323951", streak: 3, player_mmr: 2153 },
+    { rank: 9, rank_emoji: "9️⃣", player_name: "Hanyu..", player_battle_tag: "얼어붙은발바닥#323951", streak: 1, player_mmr: 2045 },
+    { rank: 10, rank_emoji: "🔟", player_name: "PlaytheLavi", player_battle_tag: "얼어붙은발바닥#323951", streak: 0, player_mmr: 1862 },
   ];
 
 
-  let match_player: MatchPlayer = new MatchPlayer;
+  let match_player: MatchPlayer = {
+    team1_player1: { player_name: "StarJoKKACHiHam", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 2153 },
+    team1_player2: { player_name: "TT[Air]", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1621 },
+    team2_player1: { player_name: "Air.Force", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1522 },
+    team2_player2: { player_name: "GGyo^^", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1723 },
+    win_rate: 0,
+  };
+  const win_rate = WinRate(match_player);
 
   return (
     <Flex minH="100vh" bg="gray.50" direction="column">
@@ -168,10 +176,18 @@ export default function OverviewPage() {
                       pb="1px"
                       minH="150px">
                       <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
-                      <Text color="black">{match_player.team1_player1.player_name} </Text>
+                      <Text
+                        color="black"
+                        fontSize={match_player.team1_player1.player_name.length > 10 ? "12px" : "16px"}>
+                        {match_player.team1_player1.player_name}
+                      </Text>
                       <Text fontSize="12px" color="grey">{match_player.team1_player1.streak}연승 ({match_player.team1_player1.player_mmr})</Text>
                       <Box minH="10px"></Box>
-                      <Text color="black">{match_player.team1_player2.player_name} </Text>
+                      <Text
+                        color="black"
+                        fontSize={match_player.team1_player2.player_name.length > 10 ? "12px" : "16px"}>
+                        {match_player.team1_player2.player_name}
+                      </Text>
                       <Text fontSize="12px" color="grey">{match_player.team1_player2.streak}연승 ({match_player.team1_player2.player_mmr})</Text>
                     </Box>
                     <Spacer />
@@ -185,10 +201,16 @@ export default function OverviewPage() {
                       textAlign="right"
                       minH="150px">
                       <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
-                      <Text color="black">{match_player.team2_player1.player_name} </Text>
+                      <Text
+                        color="black"
+                        fontSize={match_player.team2_player1.player_name.length > 10 ? "12px" : "16px"}>
+                        {match_player.team2_player1.player_name} </Text>
                       <Text fontSize="12px" color="grey">{match_player.team2_player1.streak}연승 ({match_player.team2_player1.player_mmr})</Text>
                       <Box minH="10px"></Box>
-                      <Text color="black">{match_player.team2_player2.player_name} </Text>
+                      <Text
+                        color="black"
+                        fontSize={match_player.team2_player2.player_name.length > 10 ? "12px" : "16px"}>
+                        {match_player.team2_player2.player_name} </Text>
                       <Text fontSize="12px" color="grey">{match_player.team2_player2.streak}연승 ({match_player.team2_player2.player_mmr})</Text>
                     </Box>
                   </Flex>
@@ -205,19 +227,35 @@ export default function OverviewPage() {
                       bg="white"
                       align="center"
                       justify="center">
-                      <Box 
-                      bg="#f23f3f" 
-                      w="75%" 
-                      p={1} h="95%"
-                      textAlign="left">
-                        <Text fontSize="10px" color="white" pb="1px">75%</Text>
+                      <Box
+                        bg="#f23f3f"
+                        p={1}
+                        w={win_rate.winrate_1}
+                        h="95%"
+                        textAlign="left">
+                        <Text fontSize="10px"
+                          color="white"
+                          pb="1px"
+                          left="4px"
+                          position="absolute"
+                          whiteSpace="nowrap">
+                          {win_rate.winrate_1}
+                        </Text>
                       </Box>
-                      <Box 
-                      bg="#4775ea" 
-                      w="25%" p={1} 
-                      h="95%"
-                      textAlign="right">
-                        <Text fontSize="10px" color="white" pb="1px">25%</Text>
+                      <Box
+                        bg="#4775ea"
+                        p={1}
+                        w={win_rate.winrate_2}
+                        h="95%"
+                        textAlign="right">
+                        <Text fontSize="10px"
+                          color="white"
+                          pb="1px"
+                          position="absolute"
+                          right="4px"
+                          whiteSpace="nowrap">
+                          {win_rate.winrate_2}
+                        </Text>
                       </Box>
                     </Flex>
                   </Box>

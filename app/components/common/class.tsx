@@ -11,7 +11,7 @@ export class WinningStreaker
 export class Player
 {
     player_name:string = "홍길동";
-    player_battle_tag:string = "#배틀태그";
+    player_battle_tag:string = "얼어붙은발바닥#323951";
     player_mmr:number = 1500;
     streak:number = 0;
 }
