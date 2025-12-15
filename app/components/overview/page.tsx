@@ -14,22 +14,26 @@ import {
   IconButton,
   Center
 } from "@chakra-ui/react";
+import { MatchPlayer, WinningStreaker } from "../common/class";
 import FooterNav from "../common/footer";
 import { HiHeart } from "react-icons/hi";
 
 export default function OverviewPage() {
-  const leaderboard = [
-    { rank: "1️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 7},
-    { rank: "2️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 7},
-    { rank: "3️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 6},
-    { rank: "4️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 6},
-    { rank: "5️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 5},
-    { rank: "6️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 5},
-    { rank: "7️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 3},
-    { rank: "8️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 3},
-    { rank: "9️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 1},
-    { rank: "🔟", name: "홍길동", battle_tag:"#무지개1234",  streak: 0},
+  const leaderboard: WinningStreaker[] = [
+    { rank: 1, rank_emoji: "1️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 7 },
+    { rank: 2, rank_emoji: "2️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 7 },
+    { rank: 3, rank_emoji: "3️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 6 },
+    { rank: 4, rank_emoji: "4️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 6 },
+    { rank: 5, rank_emoji: "5️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 5 },
+    { rank: 6, rank_emoji: "6️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 5 },
+    { rank: 7, rank_emoji: "7️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 3 },
+    { rank: 8, rank_emoji: "8️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 3 },
+    { rank: 9, rank_emoji: "9️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 1 },
+    { rank: 10, rank_emoji: "🔟", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 0 },
   ];
+
+
+  let match_player: MatchPlayer = new MatchPlayer;
 
   return (
     <Flex minH="100vh" bg="gray.50" direction="column">
@@ -146,15 +150,56 @@ export default function OverviewPage() {
             p={4}
             minH="240px"
           >
-            <Text fontWeight="medium" color="black">🔥실시간 라이브</Text>
-            <Flex
-              h="200px"
-              bg="white"
-              align="center"
-              justify="center"
-            >
-              <Text color="black">진행중인 경기가 없습니다.</Text>
-            </Flex>
+            <Text fontWeight="medium" color="black" pb="5px">🔥실시간 라이브</Text>
+            {
+              match_player !== null ?
+                <Flex
+                  h="100%"
+                  bg="white"
+                  align="center"
+                  justify="center"
+                >
+                  <Box
+                    w="40%"
+                    bg="white"
+                    p={4}
+                    pb="1px"
+                    minH="150px">
+                    <Text fontWeight="bold" color="black" pb="5px">[1팀]</Text>
+                    <Text color="black">{match_player.team1_player1.player_name} </Text>
+                    <Text fontSize="12px" color="grey">{match_player.team1_player1.streak}연승 ({match_player.team1_player1.player_mmr})</Text>
+                    <Box minH="10px"></Box>
+                    <Text color="black">{match_player.team1_player2.player_name} </Text>
+                    <Text fontSize="12px" color="grey">{match_player.team1_player2.streak}연승 ({match_player.team1_player2.player_mmr})</Text>
+                  </Box>
+                  <Spacer />
+                  <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
+                  <Spacer />
+                  <Box
+                    w="40%"
+                    bg="white"
+                    p={4}
+                    pb="1px"
+                    textAlign="right"
+                    minH="150px">
+                    <Text fontWeight="bold" color="black" pb="5px">[2팀]</Text>
+                    <Text color="black">{match_player.team2_player1.player_name} </Text>
+                    <Text fontSize="12px" color="grey">{match_player.team2_player1.streak}연승 ({match_player.team2_player1.player_mmr})</Text>
+                    <Box minH="10px"></Box>
+                    <Text color="black">{match_player.team2_player2.player_name} </Text>
+                    <Text fontSize="12px" color="grey">{match_player.team2_player2.streak}연승 ({match_player.team2_player2.player_mmr})</Text>
+                  </Box>
+                </Flex>
+                :
+                <Flex
+                  h="200px"
+                  bg="white"
+                  align="center"
+                  justify="center"
+                >
+                  <Text color="black">진행중인 경기가 없습니다.</Text>
+                </Flex>
+            }
           </Box>
           <Box
             bg="white"
@@ -179,11 +224,11 @@ export default function OverviewPage() {
                       h="20px"
                       bg="white"
                       align="center">
-                      <Text color="black">{item.rank} {item.name} </Text>
-                      <Text fontSize="12px" color="grey">　{item.battle_tag}</Text>
+                      <Text color="black">{item.rank_emoji} {item.player_name} </Text>
+                      <Text fontSize="12px" color="grey">　{item.player_battle_tag}</Text>
                       <Spacer />
                       {/* 1~3등은 빨간색 */}
-                      <Text fontWeight="bold" color={idx<3?"#f23f3f":"black"}>{item.streak}연승</Text>
+                      <Text fontWeight="bold" color={idx < 3 ? "#f23f3f" : "black"}>{item.streak}연승</Text>
 
                     </Flex>
                   </Box>
