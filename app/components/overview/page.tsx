@@ -18,6 +18,19 @@ import FooterNav from "../common/footer";
 import { HiHeart } from "react-icons/hi";
 
 export default function OverviewPage() {
+  const leaderboard = [
+    { rank: "1️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 7},
+    { rank: "2️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 7},
+    { rank: "3️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 6},
+    { rank: "4️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 6},
+    { rank: "5️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 5},
+    { rank: "6️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 5},
+    { rank: "7️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 3},
+    { rank: "8️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 3},
+    { rank: "9️⃣", name: "홍길동", battle_tag:"#무지개1234",  streak: 1},
+    { rank: "🔟", name: "홍길동", battle_tag:"#무지개1234",  streak: 0},
+  ];
+
   return (
     <Flex minH="100vh" bg="gray.50" direction="column">
       {/* Navbar */}
@@ -151,15 +164,38 @@ export default function OverviewPage() {
             p={4}
             minH="300px"
           >
-            <Text fontWeight="medium" color="black">🥇연승자</Text>
-            <Flex
-              h="200px"
-              bg="white"
-              align="center"
-              justify="center"
-            >
-              <Text color="black">유저 랭킹 정보가 없습니다.</Text>
-            </Flex>
+            <Text fontWeight="medium" color="black" pb="5px">🥇연승 순위</Text>
+
+            {/* ITEM */}
+            {
+              leaderboard.length !== 0 ?
+                leaderboard.map((item, idx) => (
+                  <Box
+                    bg="white"
+                    p={4}
+                    pb="1px"
+                    minH="15px">
+                    <Flex
+                      h="20px"
+                      bg="white"
+                      align="center">
+                      <Text color="black">{item.rank} {item.name} </Text>
+                      <Text fontSize="12px" color="grey">　{item.battle_tag}</Text>
+                      <Spacer />
+                      {/* 1~3등은 빨간색 */}
+                      <Text fontWeight="bold" color={idx<3?"#f23f3f":"black"}>{item.streak}연승</Text>
+
+                    </Flex>
+                  </Box>
+                )) :
+                <Flex
+                  h="200px"
+                  bg="white"
+                  align="center"
+                  justify="center">
+                  <Text color="black">유저 랭킹 정보가 없습니다.</Text>
+                </Flex>
+            }
           </Box>
         </VStack>
       </Container>
