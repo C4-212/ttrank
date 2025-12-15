@@ -11,6 +11,7 @@ import {
   Text,
   Spacer,
   Icon,
+  AbsoluteCenter,
   IconButton,
   Center
 } from "@chakra-ui/react";
@@ -20,16 +21,16 @@ import { HiHeart } from "react-icons/hi";
 
 export default function OverviewPage() {
   const leaderboard: WinningStreaker[] = [
-    { rank: 1, rank_emoji: "1️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 7 },
-    { rank: 2, rank_emoji: "2️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 7 },
-    { rank: 3, rank_emoji: "3️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 6 },
-    { rank: 4, rank_emoji: "4️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 6 },
-    { rank: 5, rank_emoji: "5️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 5 },
-    { rank: 6, rank_emoji: "6️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 5 },
-    { rank: 7, rank_emoji: "7️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 3 },
-    { rank: 8, rank_emoji: "8️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 3 },
-    { rank: 9, rank_emoji: "9️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 1 },
-    { rank: 10, rank_emoji: "🔟", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 0 },
+    { rank: 1, rank_emoji: "1️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 7, player_mmr: 2152 },
+    { rank: 2, rank_emoji: "2️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 7, player_mmr: 1572 },
+    { rank: 3, rank_emoji: "3️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 6, player_mmr: 1242 },
+    { rank: 4, rank_emoji: "4️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 6, player_mmr: 1235 },
+    { rank: 5, rank_emoji: "5️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 5, player_mmr: 1623 },
+    { rank: 6, rank_emoji: "6️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 5, player_mmr: 1721 },
+    { rank: 7, rank_emoji: "7️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 3, player_mmr: 1823 },
+    { rank: 8, rank_emoji: "8️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 3, player_mmr: 2153 },
+    { rank: 9, rank_emoji: "9️⃣", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 1, player_mmr: 2045 },
+    { rank: 10, rank_emoji: "🔟", player_name: "홍길동", player_battle_tag: "#무지개1234", streak: 0, player_mmr: 1862 },
   ];
 
 
@@ -153,43 +154,74 @@ export default function OverviewPage() {
             <Text fontWeight="medium" color="black" pb="5px">🔥실시간 라이브</Text>
             {
               match_player !== null ?
-                <Flex
-                  h="100%"
-                  bg="white"
-                  align="center"
-                  justify="center"
-                >
-                  <Box
-                    w="40%"
+                <Box w="100%" bg="white">
+                  <Flex
+                    h="100%"
                     bg="white"
-                    p={4}
-                    pb="1px"
-                    minH="150px">
-                    <Text fontWeight="bold" color="black" pb="5px">[1팀]</Text>
-                    <Text color="black">{match_player.team1_player1.player_name} </Text>
-                    <Text fontSize="12px" color="grey">{match_player.team1_player1.streak}연승 ({match_player.team1_player1.player_mmr})</Text>
-                    <Box minH="10px"></Box>
-                    <Text color="black">{match_player.team1_player2.player_name} </Text>
-                    <Text fontSize="12px" color="grey">{match_player.team1_player2.streak}연승 ({match_player.team1_player2.player_mmr})</Text>
-                  </Box>
-                  <Spacer />
-                  <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
-                  <Spacer />
+                    align="center"
+                    justify="center"
+                  >
+                    <Box
+                      w="40%"
+                      bg="white"
+                      p={4}
+                      pb="1px"
+                      minH="150px">
+                      <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
+                      <Text color="black">{match_player.team1_player1.player_name} </Text>
+                      <Text fontSize="12px" color="grey">{match_player.team1_player1.streak}연승 ({match_player.team1_player1.player_mmr})</Text>
+                      <Box minH="10px"></Box>
+                      <Text color="black">{match_player.team1_player2.player_name} </Text>
+                      <Text fontSize="12px" color="grey">{match_player.team1_player2.streak}연승 ({match_player.team1_player2.player_mmr})</Text>
+                    </Box>
+                    <Spacer />
+                    <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
+                    <Spacer />
+                    <Box
+                      w="40%"
+                      bg="white"
+                      p={4}
+                      pb="1px"
+                      textAlign="right"
+                      minH="150px">
+                      <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
+                      <Text color="black">{match_player.team2_player1.player_name} </Text>
+                      <Text fontSize="12px" color="grey">{match_player.team2_player1.streak}연승 ({match_player.team2_player1.player_mmr})</Text>
+                      <Box minH="10px"></Box>
+                      <Text color="black">{match_player.team2_player2.player_name} </Text>
+                      <Text fontSize="12px" color="grey">{match_player.team2_player2.streak}연승 ({match_player.team2_player2.player_mmr})</Text>
+                    </Box>
+                  </Flex>
+                  <Text fontSize="12px" color="grey" pb="1px">승자 예측</Text>
                   <Box
-                    w="40%"
-                    bg="white"
-                    p={4}
-                    pb="1px"
-                    textAlign="right"
-                    minH="150px">
-                    <Text fontWeight="bold" color="black" pb="5px">[2팀]</Text>
-                    <Text color="black">{match_player.team2_player1.player_name} </Text>
-                    <Text fontSize="12px" color="grey">{match_player.team2_player1.streak}연승 ({match_player.team2_player1.player_mmr})</Text>
-                    <Box minH="10px"></Box>
-                    <Text color="black">{match_player.team2_player2.player_name} </Text>
-                    <Text fontSize="12px" color="grey">{match_player.team2_player2.streak}연승 ({match_player.team2_player2.player_mmr})</Text>
+                    w="100%"
+                    h="30px"
+                    position="relative"
+                    borderRadius="lg"
+                    border="1px solid"
+                    borderColor="gray.200">
+                    <Flex
+                      h="100%"
+                      bg="white"
+                      align="center"
+                      justify="center">
+                      <Box 
+                      bg="#f23f3f" 
+                      w="75%" 
+                      p={1} h="95%"
+                      textAlign="left">
+                        <Text fontSize="10px" color="white" pb="1px">75%</Text>
+                      </Box>
+                      <Box 
+                      bg="#4775ea" 
+                      w="25%" p={1} 
+                      h="95%"
+                      textAlign="right">
+                        <Text fontSize="10px" color="white" pb="1px">25%</Text>
+                      </Box>
+                    </Flex>
                   </Box>
-                </Flex>
+                </Box>
                 :
                 <Flex
                   h="200px"
@@ -225,7 +257,7 @@ export default function OverviewPage() {
                       bg="white"
                       align="center">
                       <Text color="black">{item.rank_emoji} {item.player_name} </Text>
-                      <Text fontSize="12px" color="grey">　{item.player_battle_tag}</Text>
+                      <Text fontSize="12px" color="grey">　({item.player_mmr})</Text>
                       <Spacer />
                       {/* 1~3등은 빨간색 */}
                       <Text fontWeight="bold" color={idx < 3 ? "#f23f3f" : "black"}>{item.streak}연승</Text>

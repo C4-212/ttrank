@@ -4,6 +4,7 @@ export class WinningStreaker
     rank_emoji:string = "";
     player_name:string = "";
     player_battle_tag:string = "";
+    player_mmr:number = 1500;
     streak:number = 0;
 }
 
