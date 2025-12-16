@@ -15,7 +15,7 @@ import {
   IconButton,
   Center
 } from "@chakra-ui/react";
-import { MatchPlayer, WinningStreaker, MotionBox, MotionFlex, CardAnim} from "../common/class";
+import {Player, MatchPlayer, MotionBox, MotionFlex, CardAnim} from "../common/class";
 import WinRate from "./WinRate";
 import FooterNav from "../common/footer";
 import { HiHeart } from "react-icons/hi";
@@ -23,25 +23,76 @@ import { HiHeart } from "react-icons/hi";
 
 
 export default function OverviewPage() {
-  const leaderboard: WinningStreaker[] = [
-    { rank: 1, rank_emoji: "1️⃣", player_name: "Air.Force", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 2152, point:0 },
-    { rank: 2, rank_emoji: "2️⃣", player_name: "TT[Air]", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1572, point:0 },
-    { rank: 3, rank_emoji: "3️⃣", player_name: "StarJoKKACHiHam", player_battle_tag: "얼어붙은발바닥#323951", streak: 6, player_mmr: 1242, point:0 },
-    { rank: 4, rank_emoji: "4️⃣", player_name: "Tato", player_battle_tag: "얼어붙은발바닥#323951", streak: 6, player_mmr: 1235, point:0 },
-    { rank: 5, rank_emoji: "5️⃣", player_name: "Sally-_-", player_battle_tag: "얼어붙은발바닥#323951", streak: 5, player_mmr: 1623, point:0 },
-    { rank: 6, rank_emoji: "6️⃣", player_name: "TemuRain", player_battle_tag: "얼어붙은발바닥#323951", streak: 5, player_mmr: 1721, point:0 },
-    { rank: 7, rank_emoji: "7️⃣", player_name: "GGyo^^", player_battle_tag: "얼어붙은발바닥#323951", streak: 3, player_mmr: 1823, point:0 },
-    { rank: 8, rank_emoji: "8️⃣", player_name: "MelonMangoDrink", player_battle_tag: "얼어붙은발바닥#323951", streak: 3, player_mmr: 2153, point:0 },
-    { rank: 9, rank_emoji: "9️⃣", player_name: "Hanyu..", player_battle_tag: "얼어붙은발바닥#323951", streak: 1, player_mmr: 2045, point:0 },
-    { rank: 10, rank_emoji: "🔟", player_name: "PlaytheLavi", player_battle_tag: "얼어붙은발바닥#323951", streak: 0, player_mmr: 1862, point:0 },
+  const leaderboard: Player[] = [
+    new Player,
+    new Player,
+    new Player,
+    new Player,
+    new Player,
+    new Player,
+    new Player,
+    new Player,
+    new Player,
+    new Player,
   ];
+
+  leaderboard[0].rank = 1;
+  leaderboard[0].player_name = "Air.Force";
+  leaderboard[0].streak = 7;
+  leaderboard[0].player_mmr = 2152;
+
+  leaderboard[1].rank = 2;
+  leaderboard[1].player_name = "TT[Air]";
+  leaderboard[1].streak = 7;
+  leaderboard[1].player_mmr = 2032;
+
+  leaderboard[2].rank = 3;
+  leaderboard[2].player_name = "StarJoKKACHiHam";
+  leaderboard[2].streak = 6;
+  leaderboard[2].player_mmr = 2162;
+
+  leaderboard[3].rank = 4;
+  leaderboard[3].player_name = "Tato";
+  leaderboard[3].streak = 6;
+  leaderboard[3].player_mmr = 1937;
+
+  leaderboard[4].rank = 5;
+  leaderboard[4].player_name = "Sally-_-";
+  leaderboard[4].streak = 5;
+  leaderboard[4].player_mmr = 1983;
+
+  leaderboard[5].rank = 6;
+  leaderboard[5].player_name = "TemuRain";
+  leaderboard[5].streak = 5;
+  leaderboard[5].player_mmr = 2042;
+
+  leaderboard[6].rank = 7;
+  leaderboard[6].player_name = "GGyo^^";
+  leaderboard[6].streak = 4;
+  leaderboard[6].player_mmr = 2021;
+
+  leaderboard[7].rank = 8;
+  leaderboard[7].player_name = "MelonMangoDrink";
+  leaderboard[7].streak = 4;
+  leaderboard[7].player_mmr = 1996;
+
+  leaderboard[8].rank = 9;
+  leaderboard[8].player_name = "Hanyu..";
+  leaderboard[8].streak = 3;
+  leaderboard[8].player_mmr = 1879;
+
+  leaderboard[9].rank = 10;
+  leaderboard[9].player_name = "PlaytheLavi";
+  leaderboard[9].streak = 2;
+  leaderboard[9].player_mmr = 2038;
+
 
 
   let match_player: MatchPlayer = {
-    team1_player1: { player_name: "StarJoKKACHiHam", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 2153 },
-    team1_player2: { player_name: "TT[Air]", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1621 },
-    team2_player1: { player_name: "Air.Force", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1522 },
-    team2_player2: { player_name: "GGyo^^", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1723 },
+    team1_player1: leaderboard[8],
+    team1_player2: leaderboard[1],
+    team2_player1: leaderboard[3],
+    team2_player2: leaderboard[2],
     win_rate: 0,
   };
   const win_rate = WinRate(match_player);

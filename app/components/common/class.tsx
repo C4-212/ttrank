@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Box, Flex } from "@chakra-ui/react";
-export class WinningStreaker
+export class Player
 {
     rank:number = 0;
     rank_emoji:string = "";
@@ -9,14 +9,8 @@ export class WinningStreaker
     player_mmr:number = 1500;
     streak:number = 0;
     point:number = 0;
-}
-
-export class Player
-{
-    player_name:string = "홍길동";
-    player_battle_tag:string = "얼어붙은발바닥#323951";
-    player_mmr:number = 1500;
-    streak:number = 0;
+    win:number = 0;
+    lose:number = 0;
 }
 
 export class MatchPlayer

@@ -14,7 +14,7 @@ import {
   IconButton,
   Center
 } from "@chakra-ui/react";
-import { MatchPlayer, WinningStreaker, MotionBox, MotionFlex, CardAnim } from "../common/class";
+import { Player, MatchPlayer, MotionBox, MotionFlex, CardAnim } from "../common/class";
 import { useState } from "react";
 import FooterNav from "../common/footer";
 import Pagination from "../common/pagination";
@@ -23,12 +23,30 @@ export default function OverviewPage() {
   const [page, setPage] = useState(1);
 
   let match_player: MatchPlayer = {
-    team1_player1: { player_name: "StarJoKKACHiHam", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 2153 },
-    team1_player2: { player_name: "TT[Air]", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1621 },
-    team2_player1: { player_name: "Air.Force", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1522 },
-    team2_player2: { player_name: "GGyo^^", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1723 },
+    team1_player1: new Player,
+    team1_player2: new Player,
+    team2_player1: new Player,
+    team2_player2: new Player,
     win_rate: 0,
   };
+
+  match_player.team1_player1.player_name = "StarJoKKACHiHam";
+  match_player.team1_player1.streak = 7;
+  match_player.team1_player1.player_mmr = 2153;
+
+  match_player.team1_player2.player_name = "TT[Air]";
+  match_player.team1_player2.streak = 5;
+  match_player.team1_player2.player_mmr = 1621;
+
+  match_player.team2_player1.player_name = "Air.Force";
+  match_player.team2_player1.streak = 3;
+  match_player.team2_player1.player_mmr = 1522;
+
+  match_player.team2_player2.player_name = "GGyo^^";
+  match_player.team2_player2.streak = 7;
+  match_player.team2_player2.player_mmr = 1723;
+
+
 
   let matches: MatchPlayer[] = [
     match_player,
