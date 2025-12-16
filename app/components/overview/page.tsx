@@ -178,6 +178,7 @@ export default function OverviewPage() {
                     bg="white"
                     align="center"
                     justify="center"
+                    pb="5px"
                   >
                     <Box
                       w="40%"

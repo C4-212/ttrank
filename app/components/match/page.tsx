@@ -122,7 +122,7 @@ export default function OverviewPage() {
                           bg="white"
                           align="center">
                           <Text fontSize="12px" color="grey">{item.team1_player1.streak}연승 ({item.team1_player1.player_mmr})</Text>
-                          <Text fontSize="12px" color="green">　(+32)</Text>
+                          <Text fontWeight="bold" fontSize="12px" color="green">　(+32)</Text>
                         </Flex>
                         <Box minH="10px"></Box>
                         <Text
@@ -135,7 +135,7 @@ export default function OverviewPage() {
                           bg="white"
                           align="center">
                           <Text fontSize="12px" color="grey">{item.team1_player2.streak}연승 ({item.team1_player2.player_mmr})</Text>
-                          <Text fontSize="12px" color="green">　(+22)</Text>
+                          <Text fontWeight="bold" fontSize="12px" color="green">　(+22)</Text>
                         </Flex>
                       </Box>
                       <Spacer />
@@ -169,7 +169,7 @@ export default function OverviewPage() {
                           textAlign="right">
                           <Spacer />
                           <Text fontSize="12px" color="grey">{item.team2_player1.streak}연승 ({item.team2_player1.player_mmr})</Text>
-                          <Text fontSize="12px" color="red">　(-12)</Text>
+                          <Text fontWeight="bold" fontSize="12px" color="red">　(-12)</Text>
                         </Flex>
                         <Box minH="10px"></Box>
                         <Text
@@ -183,7 +183,7 @@ export default function OverviewPage() {
                           textAlign="right">
                           <Spacer />
                           <Text fontSize="12px" color="grey">{item.team2_player2.streak}연승 ({item.team2_player2.player_mmr})</Text>
-                          <Text fontSize="12px" color="red">　(-12)</Text>
+                          <Text fontWeight="bold" fontSize="12px" color="red">　(-12)</Text>
                         </Flex>
                       </Box>
                     </Flex>
