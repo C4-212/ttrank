@@ -15,10 +15,12 @@ import {
   IconButton,
   Center
 } from "@chakra-ui/react";
-import { MatchPlayer, WinningStreaker } from "../common/class";
+import { MatchPlayer, WinningStreaker, MotionBox, MotionFlex, CardAnim} from "../common/class";
 import WinRate from "./WinRate";
 import FooterNav from "../common/footer";
 import { HiHeart } from "react-icons/hi";
+
+
 
 export default function OverviewPage() {
   const leaderboard: WinningStreaker[] = [
@@ -129,13 +131,17 @@ export default function OverviewPage() {
         pb="96px"
       >
         <VStack align="stretch">
-          <Box
+          <MotionBox
             bg="white"
             borderRadius="lg"
             border="1px solid"
             borderColor="gray.200"
             p={4}
             minH="120px"
+            variants={CardAnim}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.4 }}
           >
             <Text fontWeight="medium" color="black">📢공지사항</Text>
             <Flex
@@ -149,15 +155,19 @@ export default function OverviewPage() {
                 승점, MMR을 확인할 수 있는 페이지 입니다<br />
                 방송 시청해주셔서 감사합니다!</Text>
             </Flex>
-          </Box>
+          </MotionBox>
 
-          <Box
+          <MotionBox
             bg="white"
             borderRadius="lg"
             border="1px solid"
             borderColor="gray.200"
             p={4}
             minH="240px"
+            variants={CardAnim}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.4 }}
           >
             <Text fontWeight="medium" color="black" pb="5px">🔥실시간 라이브</Text>
             {
@@ -270,14 +280,18 @@ export default function OverviewPage() {
                   <Text color="black">진행중인 경기가 없습니다.</Text>
                 </Flex>
             }
-          </Box>
-          <Box
+          </MotionBox>
+          <MotionBox
             bg="white"
             borderRadius="lg"
             border="1px solid"
             borderColor="gray.200"
             p={4}
             minH="300px"
+            variants={CardAnim}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.4 }}
           >
             <Text fontWeight="medium" color="black" pb="5px">🥇연승 순위</Text>
 
@@ -311,7 +325,7 @@ export default function OverviewPage() {
                   <Text color="black">유저 랭킹 정보가 없습니다.</Text>
                 </Flex>
             }
-          </Box>
+          </MotionBox>
         </VStack>
       </Container>
       <FooterNav />

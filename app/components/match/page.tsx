@@ -14,6 +14,7 @@ import {
   IconButton,
   Center
 } from "@chakra-ui/react";
+import { MotionFlex, MotionBox, CardAnim } from "../common/class";
 import { useState } from "react";
 import FooterNav from "../common/footer";
 import Pagination from "../common/pagination";
@@ -46,13 +47,17 @@ export default function OverviewPage() {
         pb="96px"
       >
         <VStack align="stretch">
-          <Box
+          <MotionBox
             bg="white"
             borderRadius="lg"
             border="1px solid"
             borderColor="gray.200"
             p={4}
             minH="600px"
+            variants={CardAnim}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.4 }}
           >
             <Flex
               h="100%"
@@ -62,7 +67,7 @@ export default function OverviewPage() {
             >
               <Text color="black">경기 기록 정보가 없습니다.</Text>
             </Flex>
-          </Box>
+          </MotionBox>
         </VStack>
         <Pagination
           page={page}

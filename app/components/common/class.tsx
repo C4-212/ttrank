@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+import { Box, Flex } from "@chakra-ui/react";
 export class WinningStreaker
 {
     rank:number = 0;
@@ -24,3 +26,11 @@ export class MatchPlayer
     team2_player2:Player = new Player;
     win_rate:number = 0;
 }
+
+export const MotionBox = motion(Box);
+export const MotionFlex = motion(Flex);
+
+export const CardAnim = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
