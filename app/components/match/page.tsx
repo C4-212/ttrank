@@ -96,7 +96,7 @@ export default function OverviewPage() {
                     >
                       <Box
                         w="50%"
-                        bg="#d5fbcf"
+                        bg="white"
                         p={4}
                         pb="1px"
                         minH="150px">
