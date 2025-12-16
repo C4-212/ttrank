@@ -24,16 +24,16 @@ import { HiHeart } from "react-icons/hi";
 
 export default function OverviewPage() {
   const leaderboard: WinningStreaker[] = [
-    { rank: 1, rank_emoji: "1️⃣", player_name: "Air.Force", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 2152 },
-    { rank: 2, rank_emoji: "2️⃣", player_name: "TT[Air]", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1572 },
-    { rank: 3, rank_emoji: "3️⃣", player_name: "StarJoKKACHiHam", player_battle_tag: "얼어붙은발바닥#323951", streak: 6, player_mmr: 1242 },
-    { rank: 4, rank_emoji: "4️⃣", player_name: "Tato", player_battle_tag: "얼어붙은발바닥#323951", streak: 6, player_mmr: 1235 },
-    { rank: 5, rank_emoji: "5️⃣", player_name: "Sally-_-", player_battle_tag: "얼어붙은발바닥#323951", streak: 5, player_mmr: 1623 },
-    { rank: 6, rank_emoji: "6️⃣", player_name: "TemuRain", player_battle_tag: "얼어붙은발바닥#323951", streak: 5, player_mmr: 1721 },
-    { rank: 7, rank_emoji: "7️⃣", player_name: "GGyo^^", player_battle_tag: "얼어붙은발바닥#323951", streak: 3, player_mmr: 1823 },
-    { rank: 8, rank_emoji: "8️⃣", player_name: "MelonMangoDrink", player_battle_tag: "얼어붙은발바닥#323951", streak: 3, player_mmr: 2153 },
-    { rank: 9, rank_emoji: "9️⃣", player_name: "Hanyu..", player_battle_tag: "얼어붙은발바닥#323951", streak: 1, player_mmr: 2045 },
-    { rank: 10, rank_emoji: "🔟", player_name: "PlaytheLavi", player_battle_tag: "얼어붙은발바닥#323951", streak: 0, player_mmr: 1862 },
+    { rank: 1, rank_emoji: "1️⃣", player_name: "Air.Force", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 2152, point:0 },
+    { rank: 2, rank_emoji: "2️⃣", player_name: "TT[Air]", player_battle_tag: "얼어붙은발바닥#323951", streak: 7, player_mmr: 1572, point:0 },
+    { rank: 3, rank_emoji: "3️⃣", player_name: "StarJoKKACHiHam", player_battle_tag: "얼어붙은발바닥#323951", streak: 6, player_mmr: 1242, point:0 },
+    { rank: 4, rank_emoji: "4️⃣", player_name: "Tato", player_battle_tag: "얼어붙은발바닥#323951", streak: 6, player_mmr: 1235, point:0 },
+    { rank: 5, rank_emoji: "5️⃣", player_name: "Sally-_-", player_battle_tag: "얼어붙은발바닥#323951", streak: 5, player_mmr: 1623, point:0 },
+    { rank: 6, rank_emoji: "6️⃣", player_name: "TemuRain", player_battle_tag: "얼어붙은발바닥#323951", streak: 5, player_mmr: 1721, point:0 },
+    { rank: 7, rank_emoji: "7️⃣", player_name: "GGyo^^", player_battle_tag: "얼어붙은발바닥#323951", streak: 3, player_mmr: 1823, point:0 },
+    { rank: 8, rank_emoji: "8️⃣", player_name: "MelonMangoDrink", player_battle_tag: "얼어붙은발바닥#323951", streak: 3, player_mmr: 2153, point:0 },
+    { rank: 9, rank_emoji: "9️⃣", player_name: "Hanyu..", player_battle_tag: "얼어붙은발바닥#323951", streak: 1, player_mmr: 2045, point:0 },
+    { rank: 10, rank_emoji: "🔟", player_name: "PlaytheLavi", player_battle_tag: "얼어붙은발바닥#323951", streak: 0, player_mmr: 1862, point:0 },
   ];
 
 
@@ -312,7 +312,7 @@ export default function OverviewPage() {
                       <Text fontSize="12px" color="grey">　({item.player_mmr})</Text>
                       <Spacer />
                       {/* 1~3등은 빨간색 */}
-                      <Text fontWeight="bold" color={idx < 3 ? "#f23f3f" : "black"}>{item.streak}연승</Text>
+                      <Text fontWeight="normal" color={idx < 3 ? "#f23f3f" : "black"}>{item.streak}연승</Text>
 
                     </Flex>
                   </Box>

@@ -8,6 +8,7 @@ export class WinningStreaker
     player_battle_tag:string = "";
     player_mmr:number = 1500;
     streak:number = 0;
+    point:number = 0;
 }
 
 export class Player
