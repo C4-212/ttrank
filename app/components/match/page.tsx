@@ -114,7 +114,7 @@ export default function OverviewPage() {
                         </Flex>
                         <Text
                           color="black"
-                          fontSize={item.team1_player1.player_name.length > 10 ? "12px" : "16px"}>
+                          fontSize={item.team1_player1.player_name.length > 10 ? "10px" : "16px"}>
                           {item.team1_player1.player_name}
                         </Text>
                         <Flex
@@ -127,7 +127,7 @@ export default function OverviewPage() {
                         <Box minH="10px"></Box>
                         <Text
                           color="black"
-                          fontSize={item.team1_player2.player_name.length > 10 ? "12px" : "16px"}>
+                          fontSize={item.team1_player2.player_name.length > 10 ? "10px" : "16px"}>
                           {item.team1_player2.player_name}
                         </Text>
                         <Flex
@@ -160,7 +160,7 @@ export default function OverviewPage() {
                         </Flex>
                         <Text
                           color="black"
-                          fontSize={item.team2_player1.player_name.length > 10 ? "12px" : "16px"}>
+                          fontSize={item.team2_player1.player_name.length > 10 ? "10px" : "16px"}>
                           {item.team2_player1.player_name} </Text>
                         <Flex
                           h="100%"
@@ -174,7 +174,7 @@ export default function OverviewPage() {
                         <Box minH="10px"></Box>
                         <Text
                           color="black"
-                          fontSize={item.team2_player2.player_name.length > 10 ? "12px" : "16px"}>
+                          fontSize={item.team2_player2.player_name.length > 10 ? "10px" : "16px"}>
                           {item.team2_player2.player_name} </Text>
                         <Flex
                           h="100%"

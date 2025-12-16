@@ -188,14 +188,14 @@ export default function OverviewPage() {
                       <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
                       <Text
                         color="black"
-                        fontSize={match_player.team1_player1.player_name.length > 10 ? "12px" : "16px"}>
+                        fontSize={match_player.team1_player1.player_name.length > 10 ? "10px" : "16px"}>
                         {match_player.team1_player1.player_name}
                       </Text>
                       <Text fontSize="12px" color="grey">{match_player.team1_player1.streak}연승 ({match_player.team1_player1.player_mmr})</Text>
                       <Box minH="10px"></Box>
                       <Text
                         color="black"
-                        fontSize={match_player.team1_player2.player_name.length > 10 ? "12px" : "16px"}>
+                        fontSize={match_player.team1_player2.player_name.length > 10 ? "10px" : "16px"}>
                         {match_player.team1_player2.player_name}
                       </Text>
                       <Text fontSize="12px" color="grey">{match_player.team1_player2.streak}연승 ({match_player.team1_player2.player_mmr})</Text>
@@ -213,13 +213,13 @@ export default function OverviewPage() {
                       <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
                       <Text
                         color="black"
-                        fontSize={match_player.team2_player1.player_name.length > 10 ? "12px" : "16px"}>
+                        fontSize={match_player.team2_player1.player_name.length > 10 ? "10px" : "16px"}>
                         {match_player.team2_player1.player_name} </Text>
                       <Text fontSize="12px" color="grey">{match_player.team2_player1.streak}연승 ({match_player.team2_player1.player_mmr})</Text>
                       <Box minH="10px"></Box>
                       <Text
                         color="black"
-                        fontSize={match_player.team2_player2.player_name.length > 10 ? "12px" : "16px"}>
+                        fontSize={match_player.team2_player2.player_name.length > 10 ? "10px" : "16px"}>
                         {match_player.team2_player2.player_name} </Text>
                       <Text fontSize="12px" color="grey">{match_player.team2_player2.streak}연승 ({match_player.team2_player2.player_mmr})</Text>
                     </Box>
