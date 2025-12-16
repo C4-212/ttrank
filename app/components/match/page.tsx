@@ -87,7 +87,7 @@ export default function OverviewPage() {
                     borderColor="gray.200"
                     minH="200px"
                     marginBottom="5px">
-                    <Text fontSize="10px" fontWeight="normal" color="grey" p={4} pb="1px">2025/01/01 19:12</Text>
+                    <Text fontSize="10px" fontWeight="normal" color="grey" p={4} pb="1px">2025/01/01 19:12:12</Text>
                     <Flex
                       h="100%"
                       bg="white"
