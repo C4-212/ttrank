@@ -54,6 +54,8 @@ export default function OverviewPage() {
             return;
         }
 
+        setCookie("authToken", result.data.token);
+
         alert("로그인 성공!");
         redirect("/");
     });

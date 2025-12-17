@@ -20,9 +20,15 @@ import { setCookie, getCookie } from 'cookies-next';
 import { Player, MatchPlayer, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
 import WinRate from "@/app/components/overview/WinRate";
 import FooterNav from "@/app/components/common/footer";
+import { redirect } from "next/navigation";
 import { HiHeart } from "react-icons/hi";
 import { useState, useEffect } from "react";
 
+function logout()
+{
+  setCookie("authToken","");
+  redirect("/");
+}
 
 export default function OverviewPage() {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
@@ -140,7 +146,9 @@ export default function OverviewPage() {
         <Flex align="center" w="100%" h="100%">
           <Text fontWeight="semibold" color="black">연승/승점/MMR 확인</Text>
           <Spacer />
-          {/* <IconButton aria-label="메뉴"> <span>☰</span> </IconButton> */}
+          {
+            isAdmin ? <Button onClick={logout}>로그아웃</Button>:""
+          }
         </Flex>
       </Box>
 
@@ -230,8 +238,8 @@ export default function OverviewPage() {
               justify="center"
             >
               <Text color="black">
-                TT 방송에서 참여한 경기의<br />
-                승점, MMR을 확인할 수 있는 페이지 입니다<br />
+                TT 방송에서 참여한 경기의 <br/>
+                승점, MMR을 확인할 수 있는 페이지 입니다 <br/>
                 방송 시청해주셔서 감사합니다!</Text>
             </Flex>
           </MotionBox>
