@@ -15,6 +15,7 @@ import {
   IconButton,
   Center
 } from "@chakra-ui/react";
+import { getCookie } from 'cookies-next';
 import {Player, MatchPlayer, MotionBox, MotionFlex, CardAnim} from "../common/class";
 import WinRate from "./WinRate";
 import FooterNav from "../common/footer";
@@ -23,6 +24,9 @@ import { HiHeart } from "react-icons/hi";
 
 
 export default function OverviewPage() {
+  const authToken = getCookie('authToken');
+  const isAdmin:boolean = true;
+
   const leaderboard: Player[] = [
     new Player,
     new Player,
