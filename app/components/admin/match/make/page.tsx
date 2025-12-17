@@ -17,7 +17,6 @@ import {
 
 import { setCookie, getCookie } from 'cookies-next';
 import { useEffect } from "react";
-import { admin_auth } from "@/app/components/common/auth";
 import { MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";
 import { useState } from "react";
@@ -33,26 +32,49 @@ interface FormValues {
 
 export default function OverviewPage() {
 
-    let authToken = getCookie('authToken')?.toString();
-    const isAdmin: boolean = admin_auth(authToken != null ? authToken : "");
+    const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+    const authToken = getCookie('authToken')?.toString();
 
     useEffect(() => {
-        if (!isAdmin) {
+        const checkAuth = async () => {
+            if (!authToken) {
+                setIsAdmin(false);
+                return;
+            }
+
+            const res = await fetch("/api/auth/token", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ token: authToken })
+            });
+
+            const data = await res.json();
+
+            setIsAdmin(data.success);
+        };
+
+        checkAuth();
+    }, []);
+
+    useEffect(() => {
+        if (isAdmin === false) {
             alert("관리자만 접근 가능합니다.");
             redirect("/");
         }
-    }, [isAdmin])
+    }, [isAdmin]);
 
-        const {
-            register,
-            handleSubmit,
-            formState: { errors },
-        } = useForm<FormValues>()
-    
-        const onSubmit = handleSubmit((data) => {
-            // 검증 및 생성
-            console.log(data)
-        });
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormValues>()
+
+    const onSubmit = handleSubmit((data) => {
+        // 검증 및 생성
+        console.log(data)
+    });
 
 
     return (
@@ -92,7 +114,7 @@ export default function OverviewPage() {
                         transition={{ duration: 0.4 }}
                     >
                         <form onSubmit={onSubmit}>
-                            
+
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.team1_player1_name}>
                                     <Field.Label>[팀1] 플레이어1 아이디</Field.Label>
@@ -116,7 +138,7 @@ export default function OverviewPage() {
                                     <Field.Label>[팀2] 플레이어2 아이디</Field.Label>
                                     <Input {...register("team2_player2_name")} />
                                     <Field.ErrorText>{errors.team2_player2_name?.message}</Field.ErrorText>
-                                </Field.Root>                                
+                                </Field.Root>
 
                                 <Button type="submit">생성</Button>
                             </Stack>

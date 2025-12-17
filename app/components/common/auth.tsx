@@ -1,17 +1,5 @@
-export function admin_auth(token:string)
-{
-    // TODO : 토크 검증 API
-    return false;
+import crypto from "crypto";
+
+export function generateToken() {
+    return crypto.randomBytes(30).toString("hex").substring(0, 40);
 }
-
-export function login(id:string, password:string)
-{
-
-}
-
-
-function generateToken()
-{
-    return "ABCDEFG";
-}
-

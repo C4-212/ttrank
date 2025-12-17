@@ -17,13 +17,12 @@ import {
 
 import { setCookie, getCookie } from 'cookies-next';
 import { useEffect } from "react";
-import { admin_auth } from "@/app/components/common/auth";
 import { MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";
-import { useState } from "react";
 import { redirect } from "next/navigation";
 import { PasswordInput } from "@/components/ui/password-input"
 import { useForm } from "react-hook-form"
+import { useState } from "react";
 
 interface FormValues {
     id: string
@@ -31,16 +30,7 @@ interface FormValues {
 }
 
 export default function OverviewPage() {
-
-    let authToken = getCookie('authToken')?.toString();
-    const isAdmin: boolean = admin_auth(authToken != null ? authToken : "");
-
-    useEffect(() => {
-        if (!isAdmin) {
-            alert("관리자만 접근 가능합니다.");
-            redirect("/");
-        }
-    }, [isAdmin])
+    const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
 
     const {
         register,
@@ -48,9 +38,24 @@ export default function OverviewPage() {
         formState: { errors },
     } = useForm<FormValues>()
 
-    const onSubmit = handleSubmit((data) => {
-        // 검증 및 로그인
-        console.log(data)
+    const onSubmit = handleSubmit(async (data) => {
+        const res = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+
+        if (!result.success) {
+            alert("아이디 또는 패스워드가 일치하지 않습니다.");
+            return;
+        }
+
+        alert("로그인 성공!");
+        redirect("/");
     });
 
 

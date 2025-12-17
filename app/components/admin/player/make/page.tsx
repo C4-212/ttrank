@@ -18,7 +18,6 @@ import { LuUser } from "react-icons/lu"
 
 import { setCookie, getCookie } from 'cookies-next';
 import { useEffect } from "react";
-import { admin_auth } from "@/app/components/common/auth";
 import { MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";
 import { useState } from "react";
@@ -31,16 +30,38 @@ interface FormValues {
 }
 
 export default function OverviewPage() {
-
-    let authToken = getCookie('authToken')?.toString();
-    const isAdmin: boolean = admin_auth(authToken != null ? authToken : "");
+    const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+    const authToken = getCookie('authToken')?.toString();
 
     useEffect(() => {
-        if (!isAdmin) {
+        const checkAuth = async () => {
+            if (!authToken) {
+                setIsAdmin(false);
+                return;
+            }
+
+            const res = await fetch("/api/auth/token", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ token: authToken })
+            });
+
+            const data = await res.json();
+
+            setIsAdmin(data.success);
+        };
+
+        checkAuth();
+    }, []);
+
+    useEffect(() => {
+        if (isAdmin === false) {
             alert("관리자만 접근 가능합니다.");
             redirect("/");
         }
-    }, [isAdmin])
+    }, [isAdmin]);
 
     const {
         register,

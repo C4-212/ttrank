@@ -18,18 +18,38 @@ import {
 } from "@chakra-ui/react";
 import { setCookie, getCookie } from 'cookies-next';
 import { Player, MatchPlayer, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
-import { admin_auth } from "@/app/components/common/auth";
 import WinRate from "@/app/components/overview/WinRate";
 import FooterNav from "@/app/components/common/footer";
 import { HiHeart } from "react-icons/hi";
-
+import { useState, useEffect } from "react";
 
 
 export default function OverviewPage() {
-  let authToken = getCookie('authToken')?.toString();
-  const isAdmin: boolean = admin_auth(authToken != null ? authToken : "");
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const authToken = getCookie('authToken')?.toString();
 
-  setCookie('authToken', 'test');
+  useEffect(() => {
+    const checkAuth = async () => {
+      if (!authToken) {
+        setIsAdmin(false);
+        return;
+      }
+
+      const res = await fetch("/api/auth/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ token: authToken })
+      });
+
+      const data = await res.json();
+
+      setIsAdmin(data.success);
+    };
+
+    checkAuth();
+  }, []);
 
   const leaderboard: Player[] = [
     new Player,
