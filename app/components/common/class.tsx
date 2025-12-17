@@ -4,9 +4,9 @@ export class Player
 {
     rank:number = 0;
     rank_emoji:string = "";
-    player_name:string = "";
+    player_name:string = "플레이어1";
     player_battle_tag:string = "";
-    player_mmr:number = 1500;
+    player_mmr:number = 1000;
     streak:number = 0;
     point:number = 0;
     win:number = 0;

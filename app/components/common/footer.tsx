@@ -24,7 +24,7 @@ export default function FooterNav() {
           borderBottom="1px solid"
           borderColor="gray.200">
           <Flex h="100%" align="center" justify="center">
-            <Link href="../components/player/" target="_self" rel="noopener noreferrer">
+            <Link href="/components/player/" target="_self" rel="noopener noreferrer">
               <Text color="black">유저 랭킹</Text>
             </Link>
           </Flex>
@@ -51,7 +51,7 @@ export default function FooterNav() {
           borderColor="gray.200">
 
           <Flex h="100%" align="center" justify="center">
-            <Link href="../components/match/" target="_self" rel="noopener noreferrer">
+            <Link href="/components/match/" target="_self" rel="noopener noreferrer">
               <Text color="black">경기 기록</Text>
             </Link>
           </Flex>

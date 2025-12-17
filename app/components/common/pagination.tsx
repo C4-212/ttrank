@@ -1,7 +1,7 @@
 "use client";
 
 import { Text, Flex, Button, IconButton } from "@chakra-ui/react";
-import { MotionFlex, MotionBox } from "./class";
+import { MotionFlex, MotionBox } from "@/app/components/common/class";
 
 type PaginationProps = {
   page: number;

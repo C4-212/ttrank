@@ -13,19 +13,23 @@ import {
   Icon,
   AbsoluteCenter,
   IconButton,
+  Button,
   Center
 } from "@chakra-ui/react";
-import { getCookie } from 'cookies-next';
-import {Player, MatchPlayer, MotionBox, MotionFlex, CardAnim} from "../common/class";
-import WinRate from "./WinRate";
-import FooterNav from "../common/footer";
+import { setCookie, getCookie } from 'cookies-next';
+import { Player, MatchPlayer, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
+import { admin_auth } from "@/app/components/common/auth";
+import WinRate from "@/app/components/overview/WinRate";
+import FooterNav from "@/app/components/common/footer";
 import { HiHeart } from "react-icons/hi";
 
 
 
 export default function OverviewPage() {
-  const authToken = getCookie('authToken');
-  const isAdmin:boolean = true;
+  let authToken = getCookie('authToken')?.toString();
+  const isAdmin: boolean = admin_auth(authToken != null ? authToken : "");
+
+  setCookie('authToken', 'test');
 
   const leaderboard: Player[] = [
     new Player,
@@ -114,7 +118,7 @@ export default function OverviewPage() {
         alignItems="center"
       >
         <Flex align="center" w="100%" h="100%">
-          <Text fontWeight="semibold" color="black">[TTRANK.kr] 연승/승점/MMR 확인</Text>
+          <Text fontWeight="semibold" color="black">연승/승점/MMR 확인</Text>
           <Spacer />
           {/* <IconButton aria-label="메뉴"> <span>☰</span> </IconButton> */}
         </Flex>
@@ -224,7 +228,36 @@ export default function OverviewPage() {
             animate="visible"
             transition={{ duration: 0.4 }}
           >
-            <Text fontWeight="medium" color="black" pb="5px">🔥실시간 라이브</Text>
+            <Flex
+              h="100%"
+              bg="white"
+              align="center">
+              <Text fontWeight="medium" color="black" pb="5px">🔥실시간 라이브</Text>
+              <Spacer />
+              {
+                isAdmin ?
+                  <Flex
+                    h="100%"
+                    bg="white"
+                    align="center">
+                    <Link href="/components/admin/player/make">
+                      <Button marginRight="5px"> 선수생성 </Button>
+                    </Link>
+                    {
+                      match_player !== null ?
+
+                        <Link href="/components/admin/match/edit">
+                          <Button> 경기변경 </Button>
+                        </Link>
+                        :
+                        <Link href="/components/admin/match/make">
+                          <Button> 경기생성 </Button>
+                        </Link>
+                    }
+                  </Flex>
+                  : ""
+              }
+            </Flex>
             {
               match_player !== null ?
                 <Box w="100%" bg="white">

@@ -14,10 +14,10 @@ import {
   IconButton,
   Center
 } from "@chakra-ui/react";
-import { Player, MatchPlayer, MotionBox, MotionFlex, CardAnim } from "../common/class";
+import { Player, MatchPlayer, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
 import { useState } from "react";
-import FooterNav from "../common/footer";
-import Pagination from "../common/pagination";
+import FooterNav from "@/app/components/common/footer";
+import Pagination from "@/app/components/common/pagination";
 
 export default function OverviewPage() {
   const [page, setPage] = useState(1);
@@ -71,7 +71,6 @@ export default function OverviewPage() {
         <Flex align="center" w="100%" h="100%">
           <Text fontWeight="semibold" color="black">🧾경기 기록</Text>
           <Spacer />
-          {/* <IconButton aria-label="메뉴"> <span>☰</span> </IconButton> */}
         </Flex>
       </Box>
 
