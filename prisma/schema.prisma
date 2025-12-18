@@ -51,5 +51,7 @@ model player {
   point       Int       @default(0)
   win         Int       @default(0)
   lose        Int       @default(0)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @default(now())
 }
 

@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
 
     console.log (token, name, battle_tag);
     if (!token) {
-      throw new Error("유효하지 않은 접근입니다.");
+      return NextResponse.json({ success: false, error: "유효하지 않은 접근입니다.", status: 500 });
     } 
     
     const admin = await prisma.admin.findFirst({ 
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
 
     if(admin !== null){
         if (!name || !battle_tag) {
-            throw new Error("이름, 배틀코드를 입력해주세요.");
+            return NextResponse.json({ success: false, error: "이름, 배틀코드를 입력해주세요.", status: 500 });
         }
 
         const create = await prisma.player.create({
@@ -26,13 +26,11 @@ export async function POST(request: NextRequest) {
             }
         });
 
-        console.log(create);
-
         return NextResponse.json({ success: true, status: 200 } );
     }
     else
     {
-        throw new Error("유효하지 않은 접근입니다.");
+        return NextResponse.json({ success: false, error: "유효하지 않은 접근입니다.", status: 500 });
     }
   } 
   catch (err) 

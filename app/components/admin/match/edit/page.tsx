@@ -25,8 +25,8 @@ import { useState, useEffect } from "react";
 import { redirect } from "next/navigation";
 
 const items = [
-    { label: "팀1 승리", value: "1" },
-    { label: "팀2 승리", value: "2" },
+    { label: "팀1", value: "1" },
+    { label: "팀2", value: "2" },
 ]
 
 export default function OverviewPage() {
@@ -163,6 +163,7 @@ export default function OverviewPage() {
                             </Flex>
                         </Box>
                         <RadioGroup.Root marginBottom="30px" defaultValue="1">
+                            <Text fontSize="12px" color="grey">승리팀 선택</Text>
                             <HStack gap="6">
                                 {items.map((item) => (
                                     <RadioGroup.Item key={item.value} value={item.value}>

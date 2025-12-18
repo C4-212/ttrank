@@ -25,6 +25,7 @@ import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form"
 
 interface FormValues {
+    token: string
     name: string
     battle_tag: string
 }
@@ -63,6 +64,8 @@ export default function OverviewPage() {
         }
     }, [isAdmin]);
 
+    // TODO: 시작한 경기가 있다면 메인화면으로
+
     const {
         register,
         handleSubmit,
@@ -70,6 +73,7 @@ export default function OverviewPage() {
     } = useForm<FormValues>()
 
     const onSubmit = handleSubmit(async (data) => {
+        data.token = authToken as string;
         const res = await fetch("/api/player/make", {
             method: "POST",
             headers: {

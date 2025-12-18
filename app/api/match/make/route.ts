@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     } = await request.json();
 
     if (!token) {
-      throw new Error("유효하지 않은 접근입니다.");
+      return NextResponse.json({ success: false, error: "유효하지 않은 접근입니다.", status: 500 });
     } 
     
     const admin = await prisma.admin.findFirst({ 
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
 
     if(admin !== null){
         if (!team1_player1 || !team1_player2 || !team2_player1 || !team2_player2) {
-            throw new Error("매치 정보가 유효하지 않습니다.");
+            return NextResponse.json({ success: false, error: "매치 플레이어 정보가 유효하지 않습니다.", status: 500 });
         }
 
         const create = await prisma.match.create({
@@ -48,13 +48,13 @@ export async function POST(request: NextRequest) {
     }
     else
     {
-        throw new Error("유효하지 않은 접근입니다.");
+        return NextResponse.json({ success: false, error: "유효하지 않은 접근입니다.", status: 500 });
     }
 
     return NextResponse.json({ success: true, status: 200 } );
   } 
   catch (err) 
   {
-    return NextResponse.json({ success: false, error: err, status: 500 });
+    return NextResponse.json({ success: false, error: "서버 에러", status: 500 });
   }
 }

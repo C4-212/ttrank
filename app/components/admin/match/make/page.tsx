@@ -24,6 +24,7 @@ import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form"
 
 interface FormValues {
+    token: string
     team1_player1_name: string
     team1_player2_name: string
     team2_player1_name: string
@@ -72,6 +73,7 @@ export default function OverviewPage() {
     } = useForm<FormValues>()
 
     const onSubmit = handleSubmit(async (data) => {
+        data.token = authToken as string;
         const res = await fetch("/api/match/make", {
             method: "POST",
             headers: {
