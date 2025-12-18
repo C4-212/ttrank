@@ -174,8 +174,8 @@ export default function OverviewPage() {
                                 ))}
                             </HStack>
                         </RadioGroup.Root>
-                        <Button marginRight="5px">변경</Button>
-                        <Button>경기무효</Button>
+                        <Button bg="black" color="white" marginRight="5px">변경</Button>
+                        <Button bg="black" color="white">경기무효</Button>
                     </MotionBox>
                 </VStack>
             </Container>

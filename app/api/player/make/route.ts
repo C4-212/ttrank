@@ -5,7 +5,6 @@ export async function POST(request: NextRequest) {
   try {
     const { token, name, battle_tag } = await request.json();
 
-    console.log (token, name, battle_tag);
     if (!token) {
       return NextResponse.json({ success: false, error: "유효하지 않은 접근입니다.", status: 500 });
     } 

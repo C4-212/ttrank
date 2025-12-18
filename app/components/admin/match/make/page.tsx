@@ -158,7 +158,7 @@ export default function OverviewPage() {
                                     <Field.ErrorText>{errors.team2_player2_name?.message}</Field.ErrorText>
                                 </Field.Root>
 
-                                <Button type="submit">생성</Button>
+                                <Button bg="black" color="white" type="submit">생성</Button>
                             </Stack>
                         </form>
                     </MotionBox>

@@ -145,7 +145,7 @@ export default function OverviewPage() {
                                     <Field.ErrorText>{errors.battle_tag?.message}</Field.ErrorText>
                                 </Field.Root>
 
-                                <Button type="submit">생성</Button>
+                                <Button bg="black" color="white" type="submit">생성</Button>
                             </Stack>
                         </form>
 

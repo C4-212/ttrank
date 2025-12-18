@@ -138,7 +138,7 @@ export default function OverviewPage() {
 
       if (match_data !== null) {
         const newMatchPlayer: MatchPlayer = new MatchPlayer();
-        
+
         newMatchPlayer.team1_player1.player_name = match_data.data.team1_player1_name;
         newMatchPlayer.team1_player1.streak = match_data.data.team1_player1_streak;
         newMatchPlayer.team1_player1.player_mmr = match_data.data.team1_player1_mmr;
@@ -182,7 +182,7 @@ export default function OverviewPage() {
           <Text fontWeight="semibold" color="black">연승/승점/MMR 확인</Text>
           <Spacer />
           {
-            isAdmin ? <Button onClick={logout}>로그아웃</Button> : ""
+            isAdmin ? <Button bg="black" color="white" onClick={logout}>로그아웃</Button> : ""
           }
         </Flex>
       </Box>
@@ -304,17 +304,17 @@ export default function OverviewPage() {
                     bg="white"
                     align="center">
                     <Link href="/components/admin/player/make">
-                      <Button marginRight="5px"> 선수생성 </Button>
+                      <Button bg="black" color="white"marginRight="5px"> 선수생성 </Button>
                     </Link>
                     {
                       match_player !== null ?
 
                         <Link href="/components/admin/match/edit">
-                          <Button> 경기변경 </Button>
+                          <Button bg="black" color="white"> 경기변경 </Button>
                         </Link>
                         :
                         <Link href="/components/admin/match/make">
-                          <Button> 경기생성 </Button>
+                          <Button bg="black" color="white"> 경기생성 </Button>
                         </Link>
                     }
                   </Flex>

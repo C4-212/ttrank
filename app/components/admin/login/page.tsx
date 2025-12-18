@@ -112,7 +112,7 @@ export default function OverviewPage() {
                                     <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
                                 </Field.Root>
 
-                                <Button type="submit">로그인</Button>
+                                <Button bg="black" color="white" type="submit">로그인</Button>
                             </Stack>
                         </form>
                     </MotionBox>
