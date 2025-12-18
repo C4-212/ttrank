@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
   try {
     const { id, password } = await req.json();
     if (!id || !password) {
-      throw new Error("아이디, 비밀번호을 입력해주세요.");
+      return NextResponse.json({ success: false, error: "아이디, 비밀번호을 입력해주세요.", status: 500 });
     }
 
     const admin = await prisma.admin.findFirst({
@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
 
     if (!admin) {
-      throw new Error("아이디 또는 비밀번호가 올바르지 않습니다.");
+      return NextResponse.json({ success: false, error: "아이디 또는 비밀번호가 올바르지 않습니다.", status: 500 });
     }
 
     const newToken = generateToken();
@@ -34,7 +34,8 @@ export async function POST(req: NextRequest) {
         token: updated.token
       }
     });
-  } catch (error) {
-    return NextResponse.json({ success: false, error: error, status: 500 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ success: false, error: "서버 에러", status: 500 });
   }
 }

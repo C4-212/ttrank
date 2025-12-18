@@ -34,15 +34,19 @@ export async function POST(request: NextRequest) {
             data: {
                 team1_player1_name: team1_player1.name,
                 team1_player1_mmr: team1_player1.mmr,
+                team1_player1_streak: team1_player1.streak,
 
                 team1_player2_name: team1_player2.name,
                 team1_player2_mmr: team1_player2.mmr,
+                team1_player2_streak: team1_player2.streak,
 
                 team2_player1_name: team2_player1.name,
                 team2_player1_mmr: team2_player1.mmr,
+                team2_player1_streak: team2_player1.streak,
 
                 team2_player2_name: team2_player2.name,
                 team2_player2_mmr: team2_player2.mmr,
+                team2_player2_streak: team2_player2.streak,
             }
         });
     }

@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const { token } = await request.json();
 
     if (!token) {
-      throw new Error("유효하지 않은 접근입니다.");
+      return NextResponse.json({ success: false, error: "유효하지 않은 접근입니다.", status: 500 });
     } 
     
     const admin = await prisma.admin.findFirst({ 
@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ success: false, error: err, status: 500 });
+    return NextResponse.json({ success: false, error: "서버 에러", status: 500 });
 
   }
 }

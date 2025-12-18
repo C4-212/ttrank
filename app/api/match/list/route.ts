@@ -12,8 +12,6 @@ export async function POST(request: NextRequest) {
     const totalCount = await prisma.match.count();
 
     const data = await prisma.match.findMany({
-      skip,
-      take,
       orderBy: {
         created_at: "desc",
       },

@@ -23,15 +23,19 @@ import FooterNav from "@/app/components/common/footer";
 import { redirect } from "next/navigation";
 import { HiHeart } from "react-icons/hi";
 import { useState, useEffect } from "react";
+import { set } from "react-hook-form";
 
-function logout()
-{
-  setCookie("authToken","");
+function logout() {
+  setCookie("authToken", "");
   redirect("/");
 }
 
 export default function OverviewPage() {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const [match_player, setMatchPlayer] = useState<MatchPlayer | null>(null);
+  const [win_rate, setWinRate] = useState<{ winrate_1: string, winrate_2: string } | null>(null);
+
+
   const authToken = getCookie('authToken')?.toString();
 
   useEffect(() => {
@@ -120,16 +124,47 @@ export default function OverviewPage() {
   leaderboard[9].streak = 2;
   leaderboard[9].player_mmr = 2038;
 
+  useEffect(() => {
+    const match_live = async () => {
+      const res = await fetch("/api/match/live", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ token: authToken })
+      });
 
+      const match_data = await res.json();
 
-  let match_player: MatchPlayer = {
-    team1_player1: leaderboard[8],
-    team1_player2: leaderboard[1],
-    team2_player1: leaderboard[3],
-    team2_player2: leaderboard[2],
-    win_rate: 0,
-  };
-  const win_rate = WinRate(match_player);
+      if (match_data !== null) {
+        const newMatchPlayer: MatchPlayer = new MatchPlayer();
+        
+        newMatchPlayer.team1_player1.player_name = match_data.data.team1_player1_name;
+        newMatchPlayer.team1_player1.streak = match_data.data.team1_player1_streak;
+        newMatchPlayer.team1_player1.player_mmr = match_data.data.team1_player1_mmr;
+        newMatchPlayer.team1_player1.streak = match_data.data.team1_player1_streak;
+
+        newMatchPlayer.team1_player2.player_name = match_data.data.team1_player2_name;
+        newMatchPlayer.team1_player2.streak = match_data.data.team1_player2_streak;
+        newMatchPlayer.team1_player2.player_mmr = match_data.data.team1_player2_mmr;
+        newMatchPlayer.team1_player2.streak = match_data.data.team1_player2_streak;
+
+        newMatchPlayer.team2_player1.player_name = match_data.data.team2_player1_name;
+        newMatchPlayer.team2_player1.streak = match_data.data.team2_player1_streak;
+        newMatchPlayer.team2_player1.player_mmr = match_data.data.team2_player1_mmr;
+        newMatchPlayer.team2_player1.streak = match_data.data.team2_player1_streak;
+
+        newMatchPlayer.team2_player2.player_name = match_data.data.team2_player2_name;
+        newMatchPlayer.team2_player2.streak = match_data.data.team2_player2_streak;
+        newMatchPlayer.team2_player2.player_mmr = match_data.data.team2_player2_mmr;
+        newMatchPlayer.team2_player2.streak = match_data.data.team2_player2_streak;
+
+        setMatchPlayer(newMatchPlayer);
+        setWinRate(WinRate(newMatchPlayer));
+      }
+    }
+    match_live();
+  }, []);
 
   return (
     <Flex minH="100vh" bg="gray.50" direction="column">
@@ -147,7 +182,7 @@ export default function OverviewPage() {
           <Text fontWeight="semibold" color="black">연승/승점/MMR 확인</Text>
           <Spacer />
           {
-            isAdmin ? <Button onClick={logout}>로그아웃</Button>:""
+            isAdmin ? <Button onClick={logout}>로그아웃</Button> : ""
           }
         </Flex>
       </Box>
@@ -238,8 +273,8 @@ export default function OverviewPage() {
               justify="center"
             >
               <Text color="black">
-                TT 방송에서 참여한 경기의 <br/>
-                승점, MMR을 확인할 수 있는 페이지 입니다 <br/>
+                TT 방송에서 참여한 경기의 <br />
+                승점, MMR을 확인할 수 있는 페이지 입니다 <br />
                 방송 시청해주셔서 감사합니다!</Text>
             </Flex>
           </MotionBox>
@@ -357,7 +392,7 @@ export default function OverviewPage() {
                       <Box
                         bg="#f23f3f"
                         p={1}
-                        w={win_rate.winrate_1}
+                        w={win_rate?.winrate_1}
                         h="95%"
                         textAlign="left">
                         <Text fontSize="10px"
@@ -366,13 +401,13 @@ export default function OverviewPage() {
                           left="4px"
                           position="absolute"
                           whiteSpace="nowrap">
-                          {win_rate.winrate_1}
+                          {win_rate?.winrate_1}
                         </Text>
                       </Box>
                       <Box
                         bg="#4775ea"
                         p={1}
-                        w={win_rate.winrate_2}
+                        w={win_rate?.winrate_2}
                         h="95%"
                         textAlign="right">
                         <Text fontSize="10px"
@@ -381,7 +416,7 @@ export default function OverviewPage() {
                           position="absolute"
                           right="4px"
                           whiteSpace="nowrap">
-                          {win_rate.winrate_2}
+                          {win_rate?.winrate_2}
                         </Text>
                       </Box>
                     </Flex>
