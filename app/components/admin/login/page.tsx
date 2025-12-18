@@ -48,9 +48,10 @@ export default function OverviewPage() {
         });
 
         const result = await res.json();
-
+        console.log(result)
+        
         if (!result.success) {
-            alert("아이디 또는 패스워드가 일치하지 않습니다.");
+            alert(result.error || "서버 에러");
             return;
         }
 

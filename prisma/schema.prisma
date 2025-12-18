@@ -46,7 +46,7 @@ model player {
   idx         Int       @id @default(autoincrement())
   name        String    @unique
   battle_tag  String?
-  player_mmr  Int       @default(1000)
+  mmr         Int       @default(1000)
   streak      Int       @default(0)
   point       Int       @default(0)
   win         Int       @default(0)

@@ -25,8 +25,8 @@ import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form"
 
 interface FormValues {
-    id: string
-    battletag: string
+    name: string
+    battle_tag: string
 }
 
 export default function OverviewPage() {
@@ -69,9 +69,25 @@ export default function OverviewPage() {
         formState: { errors },
     } = useForm<FormValues>()
 
-    const onSubmit = handleSubmit((data) => {
-        // 검증 및 생성
-        console.log(data)
+    const onSubmit = handleSubmit(async (data) => {
+        const res = await fetch("/api/player/make", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+        console.log(result)
+        
+        if (!result.success) {
+            alert(result.error || "서버 에러");
+            return;
+        }
+
+        alert("선수 생성 성공!");
+        redirect("/");
     });
 
 
@@ -113,16 +129,16 @@ export default function OverviewPage() {
                     >
                         <form onSubmit={onSubmit}>
                             <Stack gap="4" align="flex-start" maxW="sm">
-                                <Field.Root invalid={!!errors.id}>
+                                <Field.Root invalid={!!errors.name}>
                                     <Field.Label>아이디</Field.Label>
-                                    <Input {...register("id")} />
-                                    <Field.ErrorText>{errors.id?.message}</Field.ErrorText>
+                                    <Input {...register("name")} />
+                                    <Field.ErrorText>{errors.name?.message}</Field.ErrorText>
                                 </Field.Root>
 
-                                <Field.Root invalid={!!errors.battletag}>
-                                    <Field.Label>배틀코드</Field.Label>
-                                    <Input {...register("battletag")} />
-                                    <Field.ErrorText>{errors.battletag?.message}</Field.ErrorText>
+                                <Field.Root invalid={!!errors.battle_tag}>
+                                    <Field.Label>배틀태그</Field.Label>
+                                    <Input {...register("battle_tag")} />
+                                    <Field.ErrorText>{errors.battle_tag?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Button type="submit">생성</Button>

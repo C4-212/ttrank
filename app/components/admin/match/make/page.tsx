@@ -71,9 +71,25 @@ export default function OverviewPage() {
         formState: { errors },
     } = useForm<FormValues>()
 
-    const onSubmit = handleSubmit((data) => {
-        // 검증 및 생성
-        console.log(data)
+    const onSubmit = handleSubmit(async (data) => {
+        const res = await fetch("/api/match/make", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+        console.log(result)
+        
+        if (!result.success) {
+            alert(result.error || "서버 에러");
+            return;
+        }
+
+        alert("매치 생성 성공!");
+        redirect("/");
     });
 
 
