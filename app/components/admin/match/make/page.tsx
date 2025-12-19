@@ -136,25 +136,25 @@ export default function OverviewPage() {
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.team1_player1_name}>
                                     <Field.Label>[팀1] 플레이어1 아이디</Field.Label>
-                                    <Input {...register("team1_player1_name")} />
+                                    <Input color="black"{...register("team1_player1_name")} />
                                     <Field.ErrorText>{errors.team1_player1_name?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.team1_player2_name}>
                                     <Field.Label>[팀1] 플레이어2 아이디</Field.Label>
-                                    <Input {...register("team1_player2_name")} />
+                                    <Input color="black"{...register("team1_player2_name")} />
                                     <Field.ErrorText>{errors.team1_player2_name?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.team2_player1_name}>
                                     <Field.Label>[팀2] 플레이어1 아이디</Field.Label>
-                                    <Input {...register("team2_player1_name")} />
+                                    <Input color="black"{...register("team2_player1_name")} />
                                     <Field.ErrorText>{errors.team2_player1_name?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.team2_player2_name}>
                                     <Field.Label>[팀2] 플레이어2 아이디</Field.Label>
-                                    <Input {...register("team2_player2_name")} />
+                                    <Input color="black"{...register("team2_player2_name")} />
                                     <Field.ErrorText>{errors.team2_player2_name?.message}</Field.ErrorText>
                                 </Field.Root>
 

@@ -102,13 +102,13 @@ export default function OverviewPage() {
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.id}>
                                     <Field.Label>아이디</Field.Label>
-                                    <Input {...register("id")} />
+                                    <Input color="black" {...register("id")} />
                                     <Field.ErrorText>{errors.id?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.password}>
                                     <Field.Label>패스워드</Field.Label>
-                                    <PasswordInput {...register("password")} />
+                                    <PasswordInput color="black" {...register("password")} />
                                     <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
                                 </Field.Root>
 

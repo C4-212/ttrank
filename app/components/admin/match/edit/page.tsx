@@ -32,6 +32,9 @@ const items = [
 export default function OverviewPage() {
 
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+    const [match_player, setMatchPlayer] = useState<MatchPlayer | null>(null);
+    const [win_rate, setWinRate] = useState<{ winrate_1: string, winrate_2: string } | null>(null);
+
     const authToken = getCookie('authToken')?.toString();
 
     useEffect(() => {
@@ -64,13 +67,46 @@ export default function OverviewPage() {
         }
     }, [isAdmin]);
 
-    let match_player: MatchPlayer = {
-        team1_player1: new Player,
-        team1_player2: new Player,
-        team2_player1: new Player,
-        team2_player2: new Player,
-        win_rate: 0,
-    };
+    useEffect(() => {
+        const match_live = async () => {
+            const res = await fetch("/api/match/live", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ token: authToken })
+            });
+
+            const match_data = await res.json();
+
+            if (match_data !== null) {
+                const newMatchPlayer: MatchPlayer = new MatchPlayer();
+
+                newMatchPlayer.team1_player1.player_name = match_data.data.team1_player1_name;
+                newMatchPlayer.team1_player1.streak = match_data.data.team1_player1_streak;
+                newMatchPlayer.team1_player1.player_mmr = match_data.data.team1_player1_mmr;
+                newMatchPlayer.team1_player1.streak = match_data.data.team1_player1_streak;
+
+                newMatchPlayer.team1_player2.player_name = match_data.data.team1_player2_name;
+                newMatchPlayer.team1_player2.streak = match_data.data.team1_player2_streak;
+                newMatchPlayer.team1_player2.player_mmr = match_data.data.team1_player2_mmr;
+                newMatchPlayer.team1_player2.streak = match_data.data.team1_player2_streak;
+
+                newMatchPlayer.team2_player1.player_name = match_data.data.team2_player1_name;
+                newMatchPlayer.team2_player1.streak = match_data.data.team2_player1_streak;
+                newMatchPlayer.team2_player1.player_mmr = match_data.data.team2_player1_mmr;
+                newMatchPlayer.team2_player1.streak = match_data.data.team2_player1_streak;
+
+                newMatchPlayer.team2_player2.player_name = match_data.data.team2_player2_name;
+                newMatchPlayer.team2_player2.streak = match_data.data.team2_player2_streak;
+                newMatchPlayer.team2_player2.player_mmr = match_data.data.team2_player2_mmr;
+                newMatchPlayer.team2_player2.streak = match_data.data.team2_player2_streak;
+
+                setMatchPlayer(newMatchPlayer);
+            }
+        }
+        match_live();
+    }, []);
 
     return (
         <Flex minH="100vh" bg="gray.50" direction="column">
@@ -108,68 +144,72 @@ export default function OverviewPage() {
                         animate="visible"
                         transition={{ duration: 0.4 }}
                     >
-                        <Box w="100%" bg="white">
-                            <Flex
-                                h="100%"
-                                bg="white"
-                                align="center"
-                                justify="center"
-                                pb="5px"
-                            >
-                                <Box
-                                    w="40%"
-                                    bg="white"
-                                    p={4}
-                                    pb="1px"
-                                    minH="150px">
-                                    <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
-                                    <Text
-                                        color="black"
-                                        fontSize={match_player.team1_player1.player_name.length > 10 ? "10px" : "16px"}>
-                                        {match_player.team1_player1.player_name}
-                                    </Text>
-                                    <Text fontSize="12px" color="grey">{match_player.team1_player1.streak}연승 ({match_player.team1_player1.player_mmr})</Text>
-                                    <Box minH="10px"></Box>
-                                    <Text
-                                        color="black"
-                                        fontSize={match_player.team1_player2.player_name.length > 10 ? "10px" : "16px"}>
-                                        {match_player.team1_player2.player_name}
-                                    </Text>
-                                    <Text fontSize="12px" color="grey">{match_player.team1_player2.streak}연승 ({match_player.team1_player2.player_mmr})</Text>
+                        {
+                            match_player !== null ?
+                                <Box w="100%" bg="white">
+                                    <Flex
+                                        h="100%"
+                                        bg="white"
+                                        align="center"
+                                        justify="center"
+                                        pb="5px"
+                                    >
+                                        <Box
+                                            w="40%"
+                                            bg="white"
+                                            p={4}
+                                            pb="1px"
+                                            minH="150px">
+                                            <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
+                                            <Text
+                                                color="black"
+                                                fontSize={match_player.team1_player1.player_name.length > 10 ? "10px" : "16px"}>
+                                                {match_player.team1_player1.player_name}
+                                            </Text>
+                                            <Text fontSize="12px" color="grey">{match_player.team1_player1.streak}연승 ({match_player.team1_player1.player_mmr})</Text>
+                                            <Box minH="10px"></Box>
+                                            <Text
+                                                color="black"
+                                                fontSize={match_player.team1_player2.player_name.length > 10 ? "10px" : "16px"}>
+                                                {match_player.team1_player2.player_name}
+                                            </Text>
+                                            <Text fontSize="12px" color="grey">{match_player.team1_player2.streak}연승 ({match_player.team1_player2.player_mmr})</Text>
+                                        </Box>
+                                        <Spacer />
+                                        <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
+                                        <Spacer />
+                                        <Box
+                                            w="40%"
+                                            bg="white"
+                                            p={4}
+                                            pb="1px"
+                                            textAlign="right"
+                                            minH="150px">
+                                            <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
+                                            <Text
+                                                color="black"
+                                                fontSize={match_player.team2_player1.player_name.length > 10 ? "10px" : "16px"}>
+                                                {match_player.team2_player1.player_name} </Text>
+                                            <Text fontSize="12px" color="grey">{match_player.team2_player1.streak}연승 ({match_player.team2_player1.player_mmr})</Text>
+                                            <Box minH="10px"></Box>
+                                            <Text
+                                                color="black"
+                                                fontSize={match_player.team2_player2.player_name.length > 10 ? "10px" : "16px"}>
+                                                {match_player.team2_player2.player_name} </Text>
+                                            <Text fontSize="12px" color="grey">{match_player.team2_player2.streak}연승 ({match_player.team2_player2.player_mmr})</Text>
+                                        </Box>
+                                    </Flex>
                                 </Box>
-                                <Spacer />
-                                <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
-                                <Spacer />
-                                <Box
-                                    w="40%"
-                                    bg="white"
-                                    p={4}
-                                    pb="1px"
-                                    textAlign="right"
-                                    minH="150px">
-                                    <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
-                                    <Text
-                                        color="black"
-                                        fontSize={match_player.team2_player1.player_name.length > 10 ? "10px" : "16px"}>
-                                        {match_player.team2_player1.player_name} </Text>
-                                    <Text fontSize="12px" color="grey">{match_player.team2_player1.streak}연승 ({match_player.team2_player1.player_mmr})</Text>
-                                    <Box minH="10px"></Box>
-                                    <Text
-                                        color="black"
-                                        fontSize={match_player.team2_player2.player_name.length > 10 ? "10px" : "16px"}>
-                                        {match_player.team2_player2.player_name} </Text>
-                                    <Text fontSize="12px" color="grey">{match_player.team2_player2.streak}연승 ({match_player.team2_player2.player_mmr})</Text>
-                                </Box>
-                            </Flex>
-                        </Box>
+                                : ""
+                        }
                         <RadioGroup.Root marginBottom="30px" defaultValue="1">
-                            <Text fontSize="12px" color="grey">승리팀 선택</Text>
+                            <Text fontSize="12px" color="grey" pb="2px">승리팀 선택</Text>
                             <HStack gap="6">
                                 {items.map((item) => (
                                     <RadioGroup.Item key={item.value} value={item.value}>
                                         <RadioGroup.ItemHiddenInput />
                                         <RadioGroup.ItemIndicator />
-                                        <RadioGroup.ItemText>{item.label}</RadioGroup.ItemText>
+                                        <RadioGroup.ItemText color="black">{item.label}</RadioGroup.ItemText>
                                     </RadioGroup.Item>
                                 ))}
                             </HStack>
