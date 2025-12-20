@@ -13,9 +13,7 @@ export async function POST(request: NextRequest) {
 
     const data = await prisma.match.findMany({
       where: {
-        status: {
-          in:["completed","play"]
-        }
+        status:"completed"
       },
       skip,
       take,
