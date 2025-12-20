@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     });
 
     if(admin !== null){
-        if (!name || !battle_tag) {
+        if (!name) {
             return NextResponse.json({ success: false, error: "이름, 배틀코드를 입력해주세요.", status: 500 });
         }
 
