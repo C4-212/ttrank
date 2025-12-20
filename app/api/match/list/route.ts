@@ -12,6 +12,11 @@ export async function POST(request: NextRequest) {
     const totalCount = await prisma.match.count();
 
     const data = await prisma.match.findMany({
+      where: {
+        status: {
+          in:["completed","play"]
+        }
+      },
       skip,
       take,
       orderBy: {
