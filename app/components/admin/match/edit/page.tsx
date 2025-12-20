@@ -29,6 +29,11 @@ const items = [
     { label: "팀2", value: "2" },
 ]
 
+function update()
+{
+
+}
+
 export default function OverviewPage() {
 
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);

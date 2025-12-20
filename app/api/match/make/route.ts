@@ -49,13 +49,13 @@ export async function POST(request: NextRequest) {
                 team2_player2_streak: team2_player2.streak,
             }
         });
+
+        return NextResponse.json({ success: true, status: 200 } );
     }
     else
     {
         return NextResponse.json({ success: false, error: "유효하지 않은 접근입니다.", status: 500 });
     }
-
-    return NextResponse.json({ success: true, status: 200 } );
   } 
   catch (err) 
   {
