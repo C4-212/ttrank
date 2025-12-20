@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
   try {
     const { 
         token,
-        id,
+        idx,
         status
     } = await request.json();
 
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
         }
 
         const update = await prisma.match.update({
-            where: { id: 1 },
+            where: { idx: idx },
             data: {
                 status: status
             }
