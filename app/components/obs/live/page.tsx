@@ -64,7 +64,7 @@ export default function OverviewPage() {
       bg="transparent"
     >
       <Box
-        p={4}
+        p={2}
         minH="200px"
         bg="transparent"
       >
@@ -79,13 +79,14 @@ export default function OverviewPage() {
                 marginBottom="2px"
               >
                 <Box
-                  w="48%"
+                  w="45%"
                   bg="transparent"
                   p={4}
                   pb="1px"
-                  minH="100px">
+                  textAlign="left"
+                  height="100px">
                   <Flex
-                    h="100%"
+                    h="100px"
                     bg="transparent"
                     align="center"
                     justify="center">
@@ -94,7 +95,7 @@ export default function OverviewPage() {
                       bg="transparent"
                       p={4}
                       pb="1px"
-                      minH="100%">
+                      h="100px">
                       <Text
                         color="white"
                         fontSize={match.team1_player1_name.length > 10 ? "12px" : "18px"}>
@@ -103,11 +104,11 @@ export default function OverviewPage() {
                       <Text fontSize="14px" color="white">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
                     </Box>
                     <Box
-                      w="50%"
+                      w="40%"
                       bg="transparent"
                       p={4}
                       pb="1px"
-                      minH="100%">
+                      minH="100px">
                       <Text
                         color="white"
                         fontSize={match.team1_player2_name.length > 10 ? "12px" : "18px"}>
@@ -118,26 +119,35 @@ export default function OverviewPage() {
                   </Flex>
                 </Box>
                 <Spacer />
-                <Text fontWeight="bold" fontSize="32px" color="white">VS</Text>
+                <Box
+                  w="10%"
+                  bg="transparent"
+                  p={4}
+                  height="100px"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center">
+                  <Text fontWeight="bold" fontSize="32px" color="white">VS</Text>
+                </Box>
                 <Spacer />
                 <Box
-                  w="48%"
+                  w="45%"
                   bg="transparent"
                   p={4}
                   pb="1px"
                   textAlign="right"
-                  minH="100%">
+                  h="100px">
                   <Flex
-                    h="100%"
+                    h="100px"
                     bg="transparent"
                     align="center"
                     justify="center">
                     <Box
                       w="50%"
+                      h="100px"
                       bg="transparent"
                       p={4}
-                      pb="1px"
-                      minH="100%">
+                      pb="1px" >
                       <Text
                         color="white"
                         fontSize={match.team2_player1_name.length > 10 ? "12px" : "18px"}>
@@ -146,10 +156,10 @@ export default function OverviewPage() {
                     </Box>
                     <Box
                       w="50%"
+                      h="100%"
                       bg="transparent"
                       p={4}
-                      pb="1px"
-                      minH="100%">
+                      pb="1px">
                       <Text
                         color="white"
                         fontSize={match.team2_player2_name.length > 10 ? "12px" : "18px"}>
