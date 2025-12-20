@@ -236,9 +236,8 @@ export default function OverviewPage() {
               justify="center"
             >
               <Text color="black">
-                TT 방송에서 참여한 경기의 <br />
-                승점, MMR을 확인할 수 있는 페이지 입니다 <br />
-                방송 시청해주셔서 감사합니다!</Text>
+                TT 방송에서 참여한 경기의 승점, MMR을 확인할 수 있는 페이지 입니다 <br />
+                치킨 수령은 오픈챗 "TT스타"</Text>
             </Flex>
           </MotionBox>
 
