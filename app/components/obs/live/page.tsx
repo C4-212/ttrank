@@ -66,7 +66,7 @@ export default function OverviewPage() {
       <Box
         p={4}
         minH="300px"
-        bg="transparent"
+        bg="whiteAlpha.500"
       >
         {
           match !== null ?
@@ -83,24 +83,43 @@ export default function OverviewPage() {
                   bg="transparent"
                   p={4}
                   pb="1px"
-                  minH="150px">
+                  minH="100px">
                   <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
-                  <Text
-                    color="black"
-                    fontSize={match.team1_player1_name.length > 10 ? "10px" : "16px"}>
-                    {match.team1_player1_name}
-                  </Text>
-                  <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
-                  <Box minH="10px"></Box>
-                  <Text
-                    color="black"
-                    fontSize={match.team1_player2_name.length > 10 ? "10px" : "16px"}>
-                    {match.team1_player2_name}
-                  </Text>
-                  <Text fontSize="12px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr})</Text>
+                  <Flex
+                    h="100%"
+                    bg="transparent"
+                    align="center"
+                    justify="center">
+                    <Box
+                      w="40%"
+                      bg="transparent"
+                      p={4}
+                      pb="1px"
+                      minH="100px">
+                      <Text
+                        color="white"
+                        fontSize={match.team1_player1_name.length > 10 ? "10px" : "16px"}>
+                        {match.team1_player1_name}
+                      </Text>
+                      <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
+                    </Box>
+                    <Box
+                      w="40%"
+                      bg="transparent"
+                      p={4}
+                      pb="1px"
+                      minH="100px">
+                      <Text
+                        color="white"
+                        fontSize={match.team1_player2_name.length > 10 ? "10px" : "16px"}>
+                        {match.team1_player2_name}
+                      </Text>
+                      <Text fontSize="12px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr})</Text>
+                    </Box>
+                  </Flex>
                 </Box>
                 <Spacer />
-                <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
+                <Text fontWeight="bold" fontSize="32px" color="white">VS</Text>
                 <Spacer />
                 <Box
                   w="40%"
@@ -108,19 +127,38 @@ export default function OverviewPage() {
                   p={4}
                   pb="1px"
                   textAlign="right"
-                  minH="150px">
+                  minH="100px">
                   <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
-                  <Text
-                    color="black"
-                    fontSize={match.team2_player1_name.length > 10 ? "10px" : "16px"}>
-                    {match.team2_player1_name} </Text>
-                  <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
-                  <Box minH="10px"></Box>
-                  <Text
-                    color="black"
-                    fontSize={match.team2_player2_name.length > 10 ? "10px" : "16px"}>
-                    {match.team2_player2_name} </Text>
-                  <Text fontSize="12px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr})</Text>
+                  <Flex
+                    h="100%"
+                    bg="transparent"
+                    align="center"
+                    justify="center">
+                    <Box
+                      w="40%"
+                      bg="transparent"
+                      p={4}
+                      pb="1px"
+                      minH="100px">
+                      <Text
+                        color="white"
+                        fontSize={match.team2_player1_name.length > 10 ? "10px" : "16px"}>
+                        {match.team2_player1_name} </Text>
+                      <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
+                    </Box>
+                    <Box
+                      w="40%"
+                      bg="transparent"
+                      p={4}
+                      pb="1px"
+                      minH="100px">
+                      <Text
+                        color="white"
+                        fontSize={match.team2_player2_name.length > 10 ? "10px" : "16px"}>
+                        {match.team2_player2_name} </Text>
+                      <Text fontSize="12px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr})</Text>
+                    </Box>
+                  </Flex>
                 </Box>
               </Flex>
               <Text fontSize="12px" color="grey" pb="1px">승자 예측</Text>
@@ -128,7 +166,6 @@ export default function OverviewPage() {
                 w="100%"
                 h="30px"
                 position="relative"
-                borderRadius="lg"
                 border="1px solid"
                 borderColor="gray.200">
                 <Flex
@@ -169,7 +206,7 @@ export default function OverviewPage() {
                 </Flex>
               </Box>
             </Box>
-            :""
+            : ""
         }
       </Box>
     </Box>
