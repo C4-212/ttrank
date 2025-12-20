@@ -93,7 +93,7 @@ export default function OverviewPage() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ })
+        body: JSON.stringify({})
       });
 
       const match_data = await res.json();
@@ -144,8 +144,11 @@ export default function OverviewPage() {
         <Flex align="center" w="100%" h="100%">
           <Text fontWeight="semibold" color="black">연승/승점/MMR 확인</Text>
           <Spacer />
+          <Link href="/components/honors" target="_self" rel="noopener noreferrer">
+            <Button bg="black" color="white">아너스클럽</Button>
+          </Link>
           {
-            isAdmin ? <Button bg="black" color="white" onClick={logout}>로그아웃</Button> : ""
+            isAdmin ? <Button marginLeft="2px" bg="black" color="white" onClick={logout}>로그아웃</Button> : ""
           }
         </Flex>
       </Box>
@@ -237,7 +240,7 @@ export default function OverviewPage() {
             >
               <Text color="black">
                 TT 방송에서 참여한 경기의 승점, MMR을 확인할 수 있는 페이지 입니다 <br />
-                치킨 수령은 오픈챗 "TT스타"</Text>
+                치킨 수령은 오픈챗 <Link target="_blank" href="https://open.kakao.com/o/s4NX6SVh" rel="noopener noreferrer">TT스타</Link></Text>
             </Flex>
           </MotionBox>
 
@@ -266,7 +269,7 @@ export default function OverviewPage() {
                     bg="white"
                     align="center">
                     <Link href="/components/admin/player/make">
-                      <Button bg="black" color="white"marginRight="5px"> 선수생성 </Button>
+                      <Button bg="black" color="white" marginRight="5px"> 선수생성 </Button>
                     </Link>
                     {
                       match !== null ?
@@ -289,115 +292,115 @@ export default function OverviewPage() {
                   <Spinner size="lg" />
                 </Flex>
               ) :
-              match !== null ?
-                <Box w="100%" bg="white">
-                  <Flex
-                    h="100%"
-                    bg="white"
-                    align="center"
-                    justify="center"
-                    pb="5px"
-                  >
-                    <Box
-                      w="40%"
-                      bg="white"
-                      p={4}
-                      pb="1px"
-                      minH="150px">
-                      <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
-                      <Text
-                        color="black"
-                        fontSize={match.team1_player1_name.length > 10 ? "10px" : "16px"}>
-                        {match.team1_player1_name}
-                      </Text>
-                      <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
-                      <Box minH="10px"></Box>
-                      <Text
-                        color="black"
-                        fontSize={match.team1_player2_name.length > 10 ? "10px" : "16px"}>
-                        {match.team1_player2_name}
-                      </Text>
-                      <Text fontSize="12px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr})</Text>
-                    </Box>
-                    <Spacer />
-                    <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
-                    <Spacer />
-                    <Box
-                      w="40%"
-                      bg="white"
-                      p={4}
-                      pb="1px"
-                      textAlign="right"
-                      minH="150px">
-                      <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
-                      <Text
-                        color="black"
-                        fontSize={match.team2_player1_name.length > 10 ? "10px" : "16px"}>
-                        {match.team2_player1_name} </Text>
-                      <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
-                      <Box minH="10px"></Box>
-                      <Text
-                        color="black"
-                        fontSize={match.team2_player2_name.length > 10 ? "10px" : "16px"}>
-                        {match.team2_player2_name} </Text>
-                      <Text fontSize="12px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr})</Text>
-                    </Box>
-                  </Flex>
-                  <Text fontSize="12px" color="grey" pb="1px">승자 예측</Text>
-                  <Box
-                    w="100%"
-                    h="30px"
-                    position="relative"
-                    borderRadius="lg"
-                    border="1px solid"
-                    borderColor="gray.200">
+                match !== null ?
+                  <Box w="100%" bg="white">
                     <Flex
                       h="100%"
                       bg="white"
                       align="center"
-                      justify="center">
+                      justify="center"
+                      pb="5px"
+                    >
                       <Box
-                        bg="#f23f3f"
-                        p={1}
-                        w={win_rate?.winrate_1}
-                        h="95%"
-                        textAlign="left">
-                        <Text fontSize="10px"
-                          color="white"
-                          pb="1px"
-                          left="4px"
-                          position="absolute"
-                          whiteSpace="nowrap">
-                          {win_rate?.winrate_1}
+                        w="40%"
+                        bg="white"
+                        p={4}
+                        pb="1px"
+                        minH="150px">
+                        <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
+                        <Text
+                          color="black"
+                          fontSize={match.team1_player1_name.length > 10 ? "10px" : "16px"}>
+                          {match.team1_player1_name}
                         </Text>
+                        <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
+                        <Box minH="10px"></Box>
+                        <Text
+                          color="black"
+                          fontSize={match.team1_player2_name.length > 10 ? "10px" : "16px"}>
+                          {match.team1_player2_name}
+                        </Text>
+                        <Text fontSize="12px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr})</Text>
                       </Box>
+                      <Spacer />
+                      <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
+                      <Spacer />
                       <Box
-                        bg="#4775ea"
-                        p={1}
-                        w={win_rate?.winrate_2}
-                        h="95%"
-                        textAlign="right">
-                        <Text fontSize="10px"
-                          color="white"
-                          pb="1px"
-                          position="absolute"
-                          right="4px"
-                          whiteSpace="nowrap">
-                          {win_rate?.winrate_2}
-                        </Text>
+                        w="40%"
+                        bg="white"
+                        p={4}
+                        pb="1px"
+                        textAlign="right"
+                        minH="150px">
+                        <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
+                        <Text
+                          color="black"
+                          fontSize={match.team2_player1_name.length > 10 ? "10px" : "16px"}>
+                          {match.team2_player1_name} </Text>
+                        <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
+                        <Box minH="10px"></Box>
+                        <Text
+                          color="black"
+                          fontSize={match.team2_player2_name.length > 10 ? "10px" : "16px"}>
+                          {match.team2_player2_name} </Text>
+                        <Text fontSize="12px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr})</Text>
                       </Box>
                     </Flex>
+                    <Text fontSize="12px" color="grey" pb="1px">승자 예측</Text>
+                    <Box
+                      w="100%"
+                      h="30px"
+                      position="relative"
+                      borderRadius="lg"
+                      border="1px solid"
+                      borderColor="gray.200">
+                      <Flex
+                        h="100%"
+                        bg="white"
+                        align="center"
+                        justify="center">
+                        <Box
+                          bg="#f23f3f"
+                          p={1}
+                          w={win_rate?.winrate_1}
+                          h="95%"
+                          textAlign="left">
+                          <Text fontSize="10px"
+                            color="white"
+                            pb="1px"
+                            left="4px"
+                            position="absolute"
+                            whiteSpace="nowrap">
+                            {win_rate?.winrate_1}
+                          </Text>
+                        </Box>
+                        <Box
+                          bg="#4775ea"
+                          p={1}
+                          w={win_rate?.winrate_2}
+                          h="95%"
+                          textAlign="right">
+                          <Text fontSize="10px"
+                            color="white"
+                            pb="1px"
+                            position="absolute"
+                            right="4px"
+                            whiteSpace="nowrap">
+                            {win_rate?.winrate_2}
+                          </Text>
+                        </Box>
+                      </Flex>
+                    </Box>
                   </Box>
-                </Box>
-                :
-                <Flex
-                  h="200px"
-                  bg="white"
-                  align="center"
-                  justify="center"
-                >
-                  <Text color="black">진행중인 경기가 없습니다.</Text>
-                </Flex>
+                  :
+                  <Flex
+                    h="200px"
+                    bg="white"
+                    align="center"
+                    justify="center"
+                  >
+                    <Text color="black">진행중인 경기가 없습니다.</Text>
+                  </Flex>
             }
           </MotionBox>
           <MotionBox
@@ -421,33 +424,33 @@ export default function OverviewPage() {
                   <Spinner size="lg" />
                 </Flex>
               ) :
-              leaderboard?.length !== 0 ?
-                leaderboard?.map((item, idx) => (
-                  <Box
-                    bg="white"
-                    p={4}
-                    pb="1px"
-                    minH="15px">
-                    <Flex
-                      h="20px"
+                leaderboard?.length !== 0 ?
+                  leaderboard?.map((item, idx) => (
+                    <Box
                       bg="white"
-                      align="center">
-                      <Text color="black">{getEmoji(item.rank)} {item.name} </Text>
-                      <Text fontSize="12px" color="grey">　({item.mmr})</Text>
-                      <Spacer />
-                      {/* 1~3등은 빨간색 */}
-                      <Text fontWeight="normal" color={idx < 3 ? "#f23f3f" : "black"}>{item.streak}연승</Text>
+                      p={4}
+                      pb="1px"
+                      minH="15px">
+                      <Flex
+                        h="20px"
+                        bg="white"
+                        align="center">
+                        <Text color="black">{getEmoji(item.rank)} {item.name} </Text>
+                        <Text fontSize="12px" color="grey">　({item.mmr})</Text>
+                        <Spacer />
+                        {/* 1~3등은 빨간색 */}
+                        <Text fontWeight="normal" color={idx < 3 ? "#f23f3f" : "black"}>{item.streak}연승</Text>
 
-                    </Flex>
-                  </Box>
-                )) :
-                <Flex
-                  h="200px"
-                  bg="white"
-                  align="center"
-                  justify="center">
-                  <Text color="black">유저 랭킹 정보가 없습니다.</Text>
-                </Flex>
+                      </Flex>
+                    </Box>
+                  )) :
+                  <Flex
+                    h="200px"
+                    bg="white"
+                    align="center"
+                    justify="center">
+                    <Text color="black">유저 랭킹 정보가 없습니다.</Text>
+                  </Flex>
             }
           </MotionBox>
         </VStack>

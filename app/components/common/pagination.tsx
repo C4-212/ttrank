@@ -34,6 +34,8 @@ export default function Pagination({
         disabled={page === 1}
         onClick={() => onChange(page - 1)}
         size="sm"
+        color="white"
+        bg="black"
       >
         ◀
       </IconButton>
@@ -60,6 +62,8 @@ export default function Pagination({
       <IconButton
         aria-label="다음 페이지"
         disabled={page === totalPages}
+        color="white"
+        bg="black"
         onClick={() => onChange(page + 1)}
         size="sm"
       >

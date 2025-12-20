@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     } 
     
     const admin = await prisma.admin.findFirst({ 
-      where: { token }, 
+      where: { token:token }, 
     });
 
     // 매치 유효성 체크

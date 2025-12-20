@@ -6,7 +6,7 @@ import {
   Text,
   Spacer,
 } from "@chakra-ui/react";
-import { Match, getOBSEmoji } from "@/app/components/common/class";
+import { Match, Player, getOBSEmoji } from "@/app/components/common/class";
 import { useState, useEffect } from "react";
 import WinRate from "@/app/components/common/winrate";
 
@@ -56,122 +56,143 @@ export default function OverviewPage() {
     match_live();
   }, []);
 
-  return (
+
+  // 테스트 코드
+  // useEffect(() => {
+  //     const newMatch: Match = new Match();
+
+  //     let newPlayer:Player = new Player;
+  //     let newPlayer2:Player = new Player;
+  //     let newPlayer3:Player = new Player;
+  //     let newPlayer4:Player = new Player;
+
+  //     newPlayer.name = "GGyo^^..";
+  //     newPlayer2.name = "MelonMangoDrink";
+  //     newPlayer3.name = "StarJoKKACHiHam";
+  //     newPlayer4.name = "Air.Force";
+
+  //     newMatch.team1_player1_name = newPlayer.name;
+  //     newMatch.team1_player1_streak = newPlayer.streak;
+  //     newMatch.team1_player1_mmr = newPlayer.mmr;
+  //     newMatch.team1_player1_mmr_changed = 0;
+
+  //     newMatch.team1_player2_name = newPlayer2.name;
+  //     newMatch.team1_player2_streak = newPlayer.streak;
+  //     newMatch.team1_player2_mmr = newPlayer.mmr;
+  //     newMatch.team1_player2_mmr_changed = 0;
+
+  //     newMatch.team2_player1_name = newPlayer3.name;
+  //     newMatch.team2_player1_streak = newPlayer.streak;
+  //     newMatch.team2_player1_mmr = newPlayer.mmr;
+  //     newMatch.team2_player1_mmr_changed = 0;
+
+  //     newMatch.team2_player2_name = newPlayer4.name;
+  //     newMatch.team2_player2_streak = newPlayer.streak;
+  //     newMatch.team2_player2_mmr = newPlayer.mmr;
+  //     newMatch.team2_player2_mmr_changed = 0;
+
+  //     setMatch(newMatch);
+  //     setWinRate(WinRate(newMatch));
+  // }, []);
+
+  const PlayerBox = ({
+    name,
+    streak,
+    mmr,
+    align = "left",
+  }: {
+    name: string,
+    streak: number,
+    mmr: number,
+    align?: "left" | "right"
+  }) => (
     <Box
-      position="fixed"
-      inset={0}
-      pointerEvents="none"
-      bg="transparent"
+      w="50%"
+      h="100px"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      textAlign={align}
     >
-      <Box
-        p={2}
-        minH="200px"
-        bg="transparent"
+      <Text
+        color="white"
+        fontSize={name.length > 10 ? "14px" : "14px"}
       >
-        {
-          match !== null ?
-            <Box w="100%" bg="transparent">
+        {name}
+      </Text>
+      <Text fontSize="14px" color="white">
+        {streak}연승 ({mmr})
+      </Text>
+    </Box>
+  );
+
+  return (
+    <Box position="fixed" inset={0} pointerEvents="none" bg="transparent">
+      <Box p={2} minH="200px" bg="transparent">
+        {match && (
+          <Box w="100%" bg="transparent">
+            <Flex
+              h="100%"
+              bg="blackAlpha.900"
+              align="center"
+              pr="4"
+              pl="4"
+              justify="center"
+              marginBottom="2px"
+              minH="100px"
+            >
+              {/* Team 1 */}
+              <Flex w="45%" bg="transparent" height="100px">
+                <Flex w="100%" bg="transparent" align="center" justify="center">
+                  <PlayerBox
+                    name={match.team1_player1_name}
+                    streak={match.team1_player1_streak}
+                    mmr={match.team1_player1_mmr}
+                    align="left"
+                  />
+                  <PlayerBox
+                    name={match.team1_player2_name}
+                    streak={match.team1_player2_streak}
+                    mmr={match.team1_player2_mmr}
+                    align="left"
+                  />
+                </Flex>
+              </Flex>
+
+              <Spacer />
+
+              {/* VS */}
               <Flex
-                h="100%"
-                bg="blackAlpha.900"
+                w="10%"
+                height="100px"
                 align="center"
                 justify="center"
-                marginBottom="2px"
               >
-                <Box
-                  w="45%"
-                  bg="transparent"
-                  p={4}
-                  pb="1px"
-                  textAlign="left"
-                  height="100px">
-                  <Flex
-                    h="100px"
-                    bg="transparent"
-                    align="center"
-                    justify="center">
-                    <Box
-                      w="50%"
-                      bg="transparent"
-                      p={4}
-                      pb="1px"
-                      h="100px">
-                      <Text
-                        color="white"
-                        fontSize={match.team1_player1_name.length > 10 ? "10px" : "18px"}>
-                        {match.team1_player1_name}
-                      </Text>
-                      <Text fontSize="14px" color="white">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
-                    </Box>
-                    <Box
-                      w="40%"
-                      bg="transparent"
-                      p={4}
-                      pb="1px"
-                      minH="100px">
-                      <Text
-                        color="white"
-                        fontSize={match.team1_player2_name.length > 10 ? "10px" : "18px"}>
-                        {match.team1_player2_name}
-                      </Text>
-                      <Text fontSize="14px" color="white">{match.team1_player2_streak}연승 ({match.team1_player2_mmr})</Text>
-                    </Box>
-                  </Flex>
-                </Box>
-                <Spacer />
-                <Box
-                  w="10%"
-                  bg="transparent"
-                  p={4}
-                  height="100px"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center">
-                  <Text fontWeight="bold" fontSize="32px" color="white">VS</Text>
-                </Box>
-                <Spacer />
-                <Box
-                  w="45%"
-                  bg="transparent"
-                  p={4}
-                  pb="1px"
-                  textAlign="right"
-                  h="100px">
-                  <Flex
-                    h="100px"
-                    bg="transparent"
-                    align="center"
-                    justify="center">
-                    <Box
-                      w="50%"
-                      h="100px"
-                      bg="transparent"
-                      p={4}
-                      pb="1px" >
-                      <Text
-                        color="white"
-                        fontSize={match.team2_player1_name.length > 10 ? "10px" : "18px"}>
-                        {match.team2_player1_name} </Text>
-                      <Text fontSize="14px" color="white">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
-                    </Box>
-                    <Box
-                      w="50%"
-                      h="100%"
-                      bg="transparent"
-                      p={4}
-                      pb="1px">
-                      <Text
-                        color="white"
-                        fontSize={match.team2_player2_name.length > 10 ? "10px" : "18px"}>
-                        {match.team2_player2_name} </Text>
-                      <Text fontSize="14px" color="white">{match.team2_player2_streak}연승 ({match.team2_player2_mmr})</Text>
-                    </Box>
-                  </Flex>
-                </Box>
+                <Text fontWeight="bold" fontSize="32px" color="white">VS</Text>
               </Flex>
-            </Box>
-            : ""
-        }
+
+              <Spacer />
+
+              {/* Team 2 */}
+              <Flex w="45%" bg="transparent" height="100px">
+                <Flex w="100%" align="center" justify="center">
+                  <PlayerBox
+                    name={match.team2_player1_name}
+                    streak={match.team2_player1_streak}
+                    mmr={match.team2_player1_mmr}
+                    align="right"
+                  />
+                  <PlayerBox
+                    name={match.team2_player2_name}
+                    streak={match.team2_player2_streak}
+                    mmr={match.team2_player2_mmr}
+                    align="right"
+                  />
+                </Flex>
+              </Flex>
+            </Flex>
+          </Box>
+        )}
       </Box>
     </Box>
   );

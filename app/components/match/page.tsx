@@ -204,7 +204,7 @@ export default function OverviewPage() {
                   align="center"
                   justify="center"
                 >
-                  <Text color="black">진행중인 경기가 없습니다.</Text>
+                  <Text color="black">경기 정보가 없습니다.</Text>
                 </Flex>
             }
           </MotionBox>

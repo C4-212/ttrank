@@ -13,6 +13,14 @@ export class Player
     lose:number = 0;
 }
 
+export class Honors
+{
+  rank:number = 0;
+  idx:number = 0;
+  name:string = "후원자1";
+  point:string = "🪙";
+}
+
 export class Match
 {
     idx:number = 0;
@@ -91,3 +99,6 @@ export function getOBSEmoji(rank: number) {
   }
 }
 
+export function circleMask(num: number): string {
+  return "🪙".repeat(num.toString().length);
+}
