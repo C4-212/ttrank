@@ -81,7 +81,7 @@ export default function OverviewPage() {
                 <Box
                   w="40%"
                   bg="transparent"
-                  p={1}
+                  p={4}
                   pb="1px"
                   minH="100px">
                   <Flex
@@ -97,10 +97,10 @@ export default function OverviewPage() {
                       minH="100px">
                       <Text
                         color="white"
-                        fontSize={match.team1_player1_name.length > 10 ? "10px" : "16px"}>
+                        fontSize={match.team1_player1_name.length > 10 ? "12px" : "18px"}>
                         {match.team1_player1_name}
                       </Text>
-                      <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
+                      <Text fontSize="14px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
                     </Box>
                     <Box
                       w="50%"
@@ -110,10 +110,10 @@ export default function OverviewPage() {
                       minH="100px">
                       <Text
                         color="white"
-                        fontSize={match.team1_player2_name.length > 10 ? "10px" : "16px"}>
+                        fontSize={match.team1_player2_name.length > 10 ? "12px" : "18px"}>
                         {match.team1_player2_name}
                       </Text>
-                      <Text fontSize="12px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr})</Text>
+                      <Text fontSize="14px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr})</Text>
                     </Box>
                   </Flex>
                 </Box>
@@ -140,9 +140,9 @@ export default function OverviewPage() {
                       minH="100px">
                       <Text
                         color="white"
-                        fontSize={match.team2_player1_name.length > 10 ? "10px" : "16px"}>
+                        fontSize={match.team2_player1_name.length > 10 ? "12px" : "18px"}>
                         {match.team2_player1_name} </Text>
-                      <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
+                      <Text fontSize="14px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
                     </Box>
                     <Box
                       w="50%"
@@ -152,57 +152,13 @@ export default function OverviewPage() {
                       minH="100px">
                       <Text
                         color="white"
-                        fontSize={match.team2_player2_name.length > 10 ? "10px" : "16px"}>
+                        fontSize={match.team2_player2_name.length > 10 ? "12px" : "18px"}>
                         {match.team2_player2_name} </Text>
-                      <Text fontSize="12px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr})</Text>
+                      <Text fontSize="14px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr})</Text>
                     </Box>
                   </Flex>
                 </Box>
               </Flex>
-              <Text fontSize="12px" color="grey" pb="1px">승자 예측</Text>
-              <Box
-                w="100%"
-                h="30px"
-                position="relative"
-                border="1px solid"
-                borderColor="gray.200">
-                <Flex
-                  h="100%"
-                  bg="white"
-                  align="center"
-                  justify="center">
-                  <Box
-                    bg="#f23f3f"
-                    p={1}
-                    w={win_rate?.winrate_1}
-                    h="95%"
-                    textAlign="left">
-                    <Text fontSize="10px"
-                      color="white"
-                      pb="1px"
-                      left="4px"
-                      position="absolute"
-                      whiteSpace="nowrap">
-                      {win_rate?.winrate_1}
-                    </Text>
-                  </Box>
-                  <Box
-                    bg="#4775ea"
-                    p={1}
-                    w={win_rate?.winrate_2}
-                    h="95%"
-                    textAlign="right">
-                    <Text fontSize="10px"
-                      color="white"
-                      pb="1px"
-                      position="absolute"
-                      right="4px"
-                      whiteSpace="nowrap">
-                      {win_rate?.winrate_2}
-                    </Text>
-                  </Box>
-                </Flex>
-              </Box>
             </Box>
             : ""
         }
