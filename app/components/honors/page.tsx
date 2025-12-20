@@ -142,7 +142,7 @@ export default function OverviewPage() {
                                                     <Text color="black">{item.name}</Text>
                                                 </Flex>
                                                 <Spacer />
-                                                <Text fontWeight="normal" color="grey">{item.point} 원</Text>
+                                                <Text fontWeight="normal" color="grey" fontSize="12px">{item.point} 원</Text>
                                             </Flex>
                                         </Box>
                                     )) :
