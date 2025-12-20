@@ -79,7 +79,7 @@ export default function OverviewPage() {
                 marginBottom="2px"
               >
                 <Box
-                  w="40%"
+                  w="48%"
                   bg="transparent"
                   p={4}
                   pb="1px"
@@ -121,7 +121,7 @@ export default function OverviewPage() {
                 <Text fontWeight="bold" fontSize="32px" color="white">VS</Text>
                 <Spacer />
                 <Box
-                  w="40%"
+                  w="48%"
                   bg="transparent"
                   p={4}
                   pb="1px"
