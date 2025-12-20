@@ -70,17 +70,17 @@ export default function OverviewPage() {
       >
         {
           match !== null ?
-            <Box w="100%" bg="white">
+            <Box w="100%" bg="transparent">
               <Flex
                 h="100%"
-                bg="white"
+                bg="transparent"
                 align="center"
                 justify="center"
                 pb="5px"
               >
                 <Box
                   w="40%"
-                  bg="white"
+                  bg="transparent"
                   p={4}
                   pb="1px"
                   minH="150px">
@@ -104,7 +104,7 @@ export default function OverviewPage() {
                 <Spacer />
                 <Box
                   w="40%"
-                  bg="white"
+                  bg="transparent"
                   p={4}
                   pb="1px"
                   textAlign="right"
@@ -169,15 +169,7 @@ export default function OverviewPage() {
                 </Flex>
               </Box>
             </Box>
-            :
-            <Flex
-              h="200px"
-              bg="white"
-              align="center"
-              justify="center"
-            >
-              <Text color="black">진행중인 경기가 없습니다.</Text>
-            </Flex>
+            :""
         }
       </Box>
     </Box>
