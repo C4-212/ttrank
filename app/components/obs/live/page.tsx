@@ -66,7 +66,7 @@ export default function OverviewPage() {
       <Box
         p={4}
         minH="300px"
-        bg="whiteAlpha.500"
+        bg="transparent"
       >
         {
           match !== null ?
@@ -76,22 +76,21 @@ export default function OverviewPage() {
                 bg="transparent"
                 align="center"
                 justify="center"
-                pb="5px"
+                marginBottom="2px"
               >
                 <Box
                   w="40%"
                   bg="transparent"
-                  p={4}
+                  p={1}
                   pb="1px"
                   minH="100px">
-                  <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
                   <Flex
                     h="100%"
                     bg="transparent"
                     align="center"
                     justify="center">
                     <Box
-                      w="40%"
+                      w="50%"
                       bg="transparent"
                       p={4}
                       pb="1px"
@@ -104,7 +103,7 @@ export default function OverviewPage() {
                       <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
                     </Box>
                     <Box
-                      w="40%"
+                      w="50%"
                       bg="transparent"
                       p={4}
                       pb="1px"
@@ -128,14 +127,13 @@ export default function OverviewPage() {
                   pb="1px"
                   textAlign="right"
                   minH="100px">
-                  <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
                   <Flex
                     h="100%"
                     bg="transparent"
                     align="center"
                     justify="center">
                     <Box
-                      w="40%"
+                      w="50%"
                       bg="transparent"
                       p={4}
                       pb="1px"
@@ -147,7 +145,7 @@ export default function OverviewPage() {
                       <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
                     </Box>
                     <Box
-                      w="40%"
+                      w="50%"
                       bg="transparent"
                       p={4}
                       pb="1px"
