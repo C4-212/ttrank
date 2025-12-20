@@ -16,8 +16,8 @@ export async function POST(request: NextRequest) {
     const totalCount = await prisma.honors.count();
 
     const data = await prisma.honors.findMany({
-      skip,
-      take,
+      skip:skip,
+      take:take,
       orderBy: {
         point: "desc",
       },

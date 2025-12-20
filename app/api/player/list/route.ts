@@ -12,11 +12,12 @@ export async function POST(request: NextRequest) {
     const totalCount = await prisma.player.count();
 
     const data = await prisma.player.findMany({
-      skip,
-      take,
-      orderBy: {
-        mmr: "desc",
-      },
+      skip:skip,
+      take:take,
+      orderBy: [
+        {mmr: "desc" },
+        {name: "asc" }
+      ],
     });
 
     // rank 추가
