@@ -24,7 +24,6 @@ import FooterNav from "@/app/components/common/footer";
 import { redirect } from "next/navigation";
 import { HiHeart } from "react-icons/hi";
 import { useState, useEffect } from "react";
-import { set } from "react-hook-form";
 
 function logout() {
   setCookie("authToken", "");
@@ -66,25 +65,25 @@ export default function OverviewPage() {
   }, []);
 
   useEffect(() => {
-        const streak_rank_list = async () => {
-          setLoadingLeaderBoard(true);
-          const res = await fetch("/api/player/streak_rank", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({})
-          });
-    
-          const player_data = await res.json();
-    
-          if (player_data.data !== null) {
-            setLeaderBoard(player_data.data);
-          }
-          setLoadingLeaderBoard(false);
-        }
-        streak_rank_list();
-      }, []);
+    const streak_rank_list = async () => {
+      setLoadingLeaderBoard(true);
+      const res = await fetch("/api/player/streak_rank", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({})
+      });
+
+      const player_data = await res.json();
+
+      if (player_data.data !== null) {
+        setLeaderBoard(player_data.data);
+      }
+      setLoadingLeaderBoard(false);
+    }
+    streak_rank_list();
+  }, []);
 
   useEffect(() => {
     const match_live = async () => {
@@ -94,7 +93,7 @@ export default function OverviewPage() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ token: authToken })
+        body: JSON.stringify({ })
       });
 
       const match_data = await res.json();
