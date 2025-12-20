@@ -73,7 +73,7 @@ export default function OverviewPage() {
             <Box w="100%" bg="transparent">
               <Flex
                 h="100%"
-                bg="transparent"
+                bg="blackAlpha.700"
                 align="center"
                 justify="center"
                 marginBottom="2px"
