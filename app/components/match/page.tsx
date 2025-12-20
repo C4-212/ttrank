@@ -4,57 +4,43 @@ import {
   Box,
   Container,
   Flex,
-  Heading,
   VStack,
-  Image,
-  Link,
   Text,
   Spacer,
-  Icon,
-  IconButton,
-  Center
+  Spinner
 } from "@chakra-ui/react";
-import { Player, MatchPlayer, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
-import { useState } from "react";
+import { formatDate, Player, Match, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";
 import Pagination from "@/app/components/common/pagination";
+import { useState, useEffect } from "react";
 
 export default function OverviewPage() {
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [total_page, setTotalPage] = useState(1);
+  const [matches, setMatches] = useState<Match[] | null>(null);
 
-  let match_player: MatchPlayer = {
-    team1_player1: new Player,
-    team1_player2: new Player,
-    team2_player1: new Player,
-    team2_player2: new Player,
-    win_rate: 0,
-  };
+  useEffect(() => {
+    const match_list = async () => {
+      setLoading(true);
+      const res = await fetch("/api/match/list", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ page: page })
+      });
 
-  match_player.team1_player1.player_name = "StarJoKKACHiHam";
-  match_player.team1_player1.streak = 7;
-  match_player.team1_player1.player_mmr = 2153;
+      const match_data = await res.json();
 
-  match_player.team1_player2.player_name = "TT[Air]";
-  match_player.team1_player2.streak = 5;
-  match_player.team1_player2.player_mmr = 1621;
-
-  match_player.team2_player1.player_name = "Air.Force";
-  match_player.team2_player1.streak = 3;
-  match_player.team2_player1.player_mmr = 1522;
-
-  match_player.team2_player2.player_name = "GGyo^^";
-  match_player.team2_player2.streak = 7;
-  match_player.team2_player2.player_mmr = 1723;
-
-
-
-  let matches: MatchPlayer[] = [
-    match_player,
-    match_player,
-    match_player,
-    match_player,
-    match_player
-  ]
+      if (match_data.data !== null) {
+        setTotalPage(match_data.pagination.totalPage);
+        setMatches(match_data.data);
+      }
+      setLoading(false);
+    }
+    match_list();
+  }, [page]);
 
   return (
     <Flex minH="100vh" bg="gray.50" direction="column">
@@ -95,8 +81,13 @@ export default function OverviewPage() {
           >
 
             {
-              matches.length !== 0 ?
-                matches.map((item, idx) => (
+              loading ? (
+                <Flex h="300px" justify="center" align="center">
+                  <Spinner size="lg" />
+                </Flex>
+              ) :
+              matches?.length !== 0 ?
+                matches?.map((item, idx) => (
                   <Box
                     w="100%"
                     bg="white"
@@ -104,7 +95,7 @@ export default function OverviewPage() {
                     borderColor="gray.200"
                     minH="200px"
                     marginBottom="5px">
-                    <Text fontSize="10px" fontWeight="normal" color="grey" p={4} pb="1px">2025/01/01 19:12:12</Text>
+                    <Text fontSize="10px" fontWeight="normal" color="grey" p={4} pb="1px">{formatDate(item.updated_at)}</Text>
                     <Flex
                       h="100%"
                       bg="white"
@@ -126,33 +117,33 @@ export default function OverviewPage() {
                           pb="5px"
                         >
                           <Text fontWeight="bold" color="#f23f3f">[1팀]</Text>
-                          <Text fontWeight="bold" color="green">　👑승리!</Text>
+                          {item.winner == "1"?<Text fontWeight="bold" color="green">　👑승리!</Text>:""}
                           <Spacer />
                         </Flex>
                         <Text
                           color="black"
-                          fontSize={item.team1_player1.player_name.length > 10 ? "10px" : "16px"}>
-                          {item.team1_player1.player_name}
+                          fontSize={item.team1_player1_name.length > 10 ? "10px" : "16px"}>
+                          {item.team1_player1_name}
                         </Text>
                         <Flex
                           h="100%"
                           bg="white"
                           align="center">
-                          <Text fontSize="12px" color="grey">{item.team1_player1.streak}연승 ({item.team1_player1.player_mmr})</Text>
-                          <Text fontWeight="bold" fontSize="12px" color="green">　(+32)</Text>
+                          <Text fontSize="12px" color="grey">{item.team1_player1_streak}연승 ({item.team1_player1_mmr})</Text>
+                          <Text fontWeight="bold" fontSize="12px" color="green">　({item.team1_player1_mmr_changed >= 0?"+":""}{item.team1_player1_mmr_changed})</Text>
                         </Flex>
                         <Box minH="10px"></Box>
                         <Text
                           color="black"
-                          fontSize={item.team1_player2.player_name.length > 10 ? "10px" : "16px"}>
-                          {item.team1_player2.player_name}
+                          fontSize={item.team1_player2_name.length > 10 ? "10px" : "16px"}>
+                          {item.team1_player2_name}
                         </Text>
                         <Flex
                           h="100%"
                           bg="white"
                           align="center">
-                          <Text fontSize="12px" color="grey">{item.team1_player2.streak}연승 ({item.team1_player2.player_mmr})</Text>
-                          <Text fontWeight="bold" fontSize="12px" color="green">　(+22)</Text>
+                          <Text fontSize="12px" color="grey">{item.team1_player2_streak}연승 ({item.team1_player2_mmr})</Text>
+                          <Text fontWeight="bold" fontSize="12px" color="green">　({item.team1_player2_mmr_changed >= 0?"+":""}{item.team1_player2_mmr_changed})</Text>
                         </Flex>
                       </Box>
                       <Spacer />
@@ -172,35 +163,35 @@ export default function OverviewPage() {
                           pb="5px"
                         >
                           <Spacer />
-                          {/* <Text fontWeight="bold" color="green">👑승리!</Text> */}
+                          {item.winner == "2"?<Text fontWeight="bold" color="green">　👑승리!</Text>:""}
                           <Text fontWeight="bold" color="#4775ea">　[2팀]</Text>
                         </Flex>
                         <Text
                           color="black"
-                          fontSize={item.team2_player1.player_name.length > 10 ? "10px" : "16px"}>
-                          {item.team2_player1.player_name} </Text>
+                          fontSize={item.team2_player1_name.length > 10 ? "10px" : "16px"}>
+                          {item.team2_player1_name} </Text>
                         <Flex
                           h="100%"
                           bg="white"
                           align="center"
                           textAlign="right">
                           <Spacer />
-                          <Text fontSize="12px" color="grey">{item.team2_player1.streak}연승 ({item.team2_player1.player_mmr})</Text>
-                          <Text fontWeight="bold" fontSize="12px" color="red">　(-12)</Text>
+                          <Text fontSize="12px" color="grey">{item.team2_player1_streak}연승 ({item.team2_player1_mmr})</Text>
+                          <Text fontWeight="bold" fontSize="12px" color="red">　({item.team2_player1_mmr_changed >= 0?"+":""}{item.team2_player1_mmr_changed})</Text>
                         </Flex>
                         <Box minH="10px"></Box>
                         <Text
                           color="black"
-                          fontSize={item.team2_player2.player_name.length > 10 ? "10px" : "16px"}>
-                          {item.team2_player2.player_name} </Text>
+                          fontSize={item.team2_player2_name.length > 10 ? "10px" : "16px"}>
+                          {item.team2_player2_name} </Text>
                         <Flex
                           h="100%"
                           bg="white"
                           align="center"
                           textAlign="right">
                           <Spacer />
-                          <Text fontSize="12px" color="grey">{item.team2_player2.streak}연승 ({item.team2_player2.player_mmr})</Text>
-                          <Text fontWeight="bold" fontSize="12px" color="red">　(-12)</Text>
+                          <Text fontSize="12px" color="grey">{item.team2_player2_streak}연승 ({item.team2_player2_mmr})</Text>
+                          <Text fontWeight="bold" fontSize="12px" color="red">　({item.team2_player2_mmr_changed >= 0?"+":""}{item.team2_player2_mmr_changed})</Text>
                         </Flex>
                       </Box>
                     </Flex>
@@ -220,7 +211,7 @@ export default function OverviewPage() {
         </VStack>
         <Pagination
           page={page}
-          totalPages={10}
+          totalPages={total_page}
           onChange={setPage}
         />
       </Container>

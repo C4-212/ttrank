@@ -19,6 +19,15 @@ export async function POST(request: NextRequest) {
       where: { token }, 
     });
 
+    // 매치 유효성 체크
+    const live_match = await prisma.match.findFirst({
+      where:{status:"play"}
+    })
+    
+    if(live_match != null) {
+      return NextResponse.json({ success: false, error: "이미 진행중인 경기가 있습니다.", status: 500 });
+    }
+
     // 플레이어 유효성 체크
     const team1_player1 = await prisma.player.findFirst({ where: { name: team1_player1_name } });
     const team1_player2 = await prisma.player.findFirst({ where: { name: team1_player2_name } });

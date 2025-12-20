@@ -14,11 +14,12 @@ import {
   AbsoluteCenter,
   IconButton,
   Button,
-  Center
+  Center,
+  Spinner
 } from "@chakra-ui/react";
 import { setCookie, getCookie } from 'cookies-next';
-import { Player, MatchPlayer, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
-import WinRate from "@/app/components/overview/WinRate";
+import { getEmoji, Player, Match, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
+import WinRate from "@/app/components/common/winrate";
 import FooterNav from "@/app/components/common/footer";
 import { redirect } from "next/navigation";
 import { HiHeart } from "react-icons/hi";
@@ -32,8 +33,11 @@ function logout() {
 
 export default function OverviewPage() {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [match_player, setMatchPlayer] = useState<MatchPlayer | null>(null);
+  const [match, setMatch] = useState<Match | null>(null);
+  const [leaderboard, setLeaderBoard] = useState<Player[] | null>(null);
   const [win_rate, setWinRate] = useState<{ winrate_1: string, winrate_2: string } | null>(null);
+  const [loadingLive, setLoadingLive] = useState(false);
+  const [loadingLeaderBoard, setLoadingLeaderBoard] = useState(false);
 
 
   const authToken = getCookie('authToken')?.toString();
@@ -61,71 +65,30 @@ export default function OverviewPage() {
     checkAuth();
   }, []);
 
-  const leaderboard: Player[] = [
-    new Player,
-    new Player,
-    new Player,
-    new Player,
-    new Player,
-    new Player,
-    new Player,
-    new Player,
-    new Player,
-    new Player,
-  ];
-
-  leaderboard[0].rank = 1;
-  leaderboard[0].player_name = "Air.Force";
-  leaderboard[0].streak = 7;
-  leaderboard[0].player_mmr = 2152;
-
-  leaderboard[1].rank = 2;
-  leaderboard[1].player_name = "TT[Air]";
-  leaderboard[1].streak = 7;
-  leaderboard[1].player_mmr = 2032;
-
-  leaderboard[2].rank = 3;
-  leaderboard[2].player_name = "StarJoKKACHiHam";
-  leaderboard[2].streak = 6;
-  leaderboard[2].player_mmr = 2162;
-
-  leaderboard[3].rank = 4;
-  leaderboard[3].player_name = "Tato";
-  leaderboard[3].streak = 6;
-  leaderboard[3].player_mmr = 1937;
-
-  leaderboard[4].rank = 5;
-  leaderboard[4].player_name = "Sally-_-";
-  leaderboard[4].streak = 5;
-  leaderboard[4].player_mmr = 1983;
-
-  leaderboard[5].rank = 6;
-  leaderboard[5].player_name = "TemuRain";
-  leaderboard[5].streak = 5;
-  leaderboard[5].player_mmr = 2042;
-
-  leaderboard[6].rank = 7;
-  leaderboard[6].player_name = "GGyo^^";
-  leaderboard[6].streak = 4;
-  leaderboard[6].player_mmr = 2021;
-
-  leaderboard[7].rank = 8;
-  leaderboard[7].player_name = "MelonMangoDrink";
-  leaderboard[7].streak = 4;
-  leaderboard[7].player_mmr = 1996;
-
-  leaderboard[8].rank = 9;
-  leaderboard[8].player_name = "Hanyu..";
-  leaderboard[8].streak = 3;
-  leaderboard[8].player_mmr = 1879;
-
-  leaderboard[9].rank = 10;
-  leaderboard[9].player_name = "PlaytheLavi";
-  leaderboard[9].streak = 2;
-  leaderboard[9].player_mmr = 2038;
+  useEffect(() => {
+        const streak_rank_list = async () => {
+          setLoadingLeaderBoard(true);
+          const res = await fetch("/api/player/streak_rank", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({})
+          });
+    
+          const player_data = await res.json();
+    
+          if (player_data.data !== null) {
+            setLeaderBoard(player_data.data);
+          }
+          setLoadingLeaderBoard(false);
+        }
+        streak_rank_list();
+      }, []);
 
   useEffect(() => {
     const match_live = async () => {
+      setLoadingLive(true);
       const res = await fetch("/api/match/live", {
         method: "POST",
         headers: {
@@ -136,32 +99,33 @@ export default function OverviewPage() {
 
       const match_data = await res.json();
 
-      if (match_data !== null) {
-        const newMatchPlayer: MatchPlayer = new MatchPlayer();
+      if (match_data.data !== null) {
+        const newMatch: Match = new Match();
 
-        newMatchPlayer.team1_player1.player_name = match_data.data.team1_player1_name;
-        newMatchPlayer.team1_player1.streak = match_data.data.team1_player1_streak;
-        newMatchPlayer.team1_player1.player_mmr = match_data.data.team1_player1_mmr;
-        newMatchPlayer.team1_player1.streak = match_data.data.team1_player1_streak;
+        newMatch.team1_player1_name = match_data.data.team1_player1_name;
+        newMatch.team1_player1_streak = match_data.data.team1_player1_streak;
+        newMatch.team1_player1_mmr = match_data.data.team1_player1_mmr;
+        newMatch.team1_player1_mmr_changed = match_data.data.team1_player1_mmr_changed;
 
-        newMatchPlayer.team1_player2.player_name = match_data.data.team1_player2_name;
-        newMatchPlayer.team1_player2.streak = match_data.data.team1_player2_streak;
-        newMatchPlayer.team1_player2.player_mmr = match_data.data.team1_player2_mmr;
-        newMatchPlayer.team1_player2.streak = match_data.data.team1_player2_streak;
+        newMatch.team1_player2_name = match_data.data.team1_player2_name;
+        newMatch.team1_player2_streak = match_data.data.team1_player2_streak;
+        newMatch.team1_player2_mmr = match_data.data.team1_player2_mmr;
+        newMatch.team1_player2_mmr_changed = match_data.data.team1_player2_mmr_changed;
 
-        newMatchPlayer.team2_player1.player_name = match_data.data.team2_player1_name;
-        newMatchPlayer.team2_player1.streak = match_data.data.team2_player1_streak;
-        newMatchPlayer.team2_player1.player_mmr = match_data.data.team2_player1_mmr;
-        newMatchPlayer.team2_player1.streak = match_data.data.team2_player1_streak;
+        newMatch.team2_player1_name = match_data.data.team2_player1_name;
+        newMatch.team2_player1_streak = match_data.data.team2_player1_streak;
+        newMatch.team2_player1_mmr = match_data.data.team2_player1_mmr;
+        newMatch.team2_player1_mmr_changed = match_data.data.team2_player1_mmr_changed;
 
-        newMatchPlayer.team2_player2.player_name = match_data.data.team2_player2_name;
-        newMatchPlayer.team2_player2.streak = match_data.data.team2_player2_streak;
-        newMatchPlayer.team2_player2.player_mmr = match_data.data.team2_player2_mmr;
-        newMatchPlayer.team2_player2.streak = match_data.data.team2_player2_streak;
+        newMatch.team2_player2_name = match_data.data.team2_player2_name;
+        newMatch.team2_player2_streak = match_data.data.team2_player2_streak;
+        newMatch.team2_player2_mmr = match_data.data.team2_player2_mmr;
+        newMatch.team2_player2_mmr_changed = match_data.data.team2_player2_mmr_changed;
 
-        setMatchPlayer(newMatchPlayer);
-        setWinRate(WinRate(newMatchPlayer));
+        setMatch(newMatch);
+        setWinRate(WinRate(newMatch));
       }
+      setLoadingLive(false);
     }
     match_live();
   }, []);
@@ -307,7 +271,7 @@ export default function OverviewPage() {
                       <Button bg="black" color="white"marginRight="5px"> 선수생성 </Button>
                     </Link>
                     {
-                      match_player !== null ?
+                      match !== null ?
 
                         <Link href="/components/admin/match/edit">
                           <Button bg="black" color="white"> 경기변경 </Button>
@@ -322,7 +286,12 @@ export default function OverviewPage() {
               }
             </Flex>
             {
-              match_player !== null ?
+              loadingLive ? (
+                <Flex h="300px" justify="center" align="center">
+                  <Spinner size="lg" />
+                </Flex>
+              ) :
+              match !== null ?
                 <Box w="100%" bg="white">
                   <Flex
                     h="100%"
@@ -340,17 +309,17 @@ export default function OverviewPage() {
                       <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
                       <Text
                         color="black"
-                        fontSize={match_player.team1_player1.player_name.length > 10 ? "10px" : "16px"}>
-                        {match_player.team1_player1.player_name}
+                        fontSize={match.team1_player1_name.length > 10 ? "10px" : "16px"}>
+                        {match.team1_player1_name}
                       </Text>
-                      <Text fontSize="12px" color="grey">{match_player.team1_player1.streak}연승 ({match_player.team1_player1.player_mmr})</Text>
+                      <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
                       <Box minH="10px"></Box>
                       <Text
                         color="black"
-                        fontSize={match_player.team1_player2.player_name.length > 10 ? "10px" : "16px"}>
-                        {match_player.team1_player2.player_name}
+                        fontSize={match.team1_player2_name.length > 10 ? "10px" : "16px"}>
+                        {match.team1_player2_name}
                       </Text>
-                      <Text fontSize="12px" color="grey">{match_player.team1_player2.streak}연승 ({match_player.team1_player2.player_mmr})</Text>
+                      <Text fontSize="12px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr})</Text>
                     </Box>
                     <Spacer />
                     <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
@@ -365,15 +334,15 @@ export default function OverviewPage() {
                       <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
                       <Text
                         color="black"
-                        fontSize={match_player.team2_player1.player_name.length > 10 ? "10px" : "16px"}>
-                        {match_player.team2_player1.player_name} </Text>
-                      <Text fontSize="12px" color="grey">{match_player.team2_player1.streak}연승 ({match_player.team2_player1.player_mmr})</Text>
+                        fontSize={match.team2_player1_name.length > 10 ? "10px" : "16px"}>
+                        {match.team2_player1_name} </Text>
+                      <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
                       <Box minH="10px"></Box>
                       <Text
                         color="black"
-                        fontSize={match_player.team2_player2.player_name.length > 10 ? "10px" : "16px"}>
-                        {match_player.team2_player2.player_name} </Text>
-                      <Text fontSize="12px" color="grey">{match_player.team2_player2.streak}연승 ({match_player.team2_player2.player_mmr})</Text>
+                        fontSize={match.team2_player2_name.length > 10 ? "10px" : "16px"}>
+                        {match.team2_player2_name} </Text>
+                      <Text fontSize="12px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr})</Text>
                     </Box>
                   </Flex>
                   <Text fontSize="12px" color="grey" pb="1px">승자 예측</Text>
@@ -449,8 +418,13 @@ export default function OverviewPage() {
 
             {/* ITEM */}
             {
-              leaderboard.length !== 0 ?
-                leaderboard.map((item, idx) => (
+              loadingLeaderBoard ? (
+                <Flex h="300px" justify="center" align="center">
+                  <Spinner size="lg" />
+                </Flex>
+              ) :
+              leaderboard?.length !== 0 ?
+                leaderboard?.map((item, idx) => (
                   <Box
                     bg="white"
                     p={4}
@@ -460,8 +434,8 @@ export default function OverviewPage() {
                       h="20px"
                       bg="white"
                       align="center">
-                      <Text color="black">{item.rank_emoji} {item.player_name} </Text>
-                      <Text fontSize="12px" color="grey">　({item.player_mmr})</Text>
+                      <Text color="black">{getEmoji(item.rank)} {item.name} </Text>
+                      <Text fontSize="12px" color="grey">　({item.mmr})</Text>
                       <Spacer />
                       {/* 1~3등은 빨간색 */}
                       <Text fontWeight="normal" color={idx < 3 ? "#f23f3f" : "black"}>{item.streak}연승</Text>

@@ -41,6 +41,7 @@ model match {
   team2_player2_mmr           Int
   team2_player2_mmr_changed   Int?
   team2_player2_streak        Int
+  winner                      String?
   created_at                  DateTime @default(now())
   updated_at                  DateTime @default(now())
   status                      String @default("play")

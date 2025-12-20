@@ -73,6 +73,9 @@ export default function OverviewPage() {
     } = useForm<FormValues>()
 
     const onSubmit = handleSubmit(async (data) => {
+        const ok = window.confirm("플레이어를 생성하시겠습니까?");
+        if (!ok) return; 
+
         data.token = authToken as string;
         const res = await fetch("/api/player/make", {
             method: "POST",

@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 
 import { setCookie, getCookie } from 'cookies-next';
-import { Player, MatchPlayer, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
+import { Player, Match, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";
 import { useState, useEffect } from "react";
 import { redirect } from "next/navigation";
@@ -29,18 +29,70 @@ const items = [
     { label: "팀2", value: "2" },
 ]
 
-function update()
-{
+function update(authToken: string, match: Match, winner: string) {
+    const ok = window.confirm("정말 변경하시겠습니까?");
+    if (!ok) return;
 
+    const match_update = async () => {
+        const res = await fetch("/api/match/update", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ idx: match?.idx, token: authToken, winner: winner, status: "completed" })
+        });
+
+        const match_data = await res.json();
+
+        if (match_data.success) {
+            alert("경기가 완료되었습니다.");
+            redirect("/");
+        }
+        else {
+            alert(match_data.error);
+            redirect("/");
+        }
+    }
+    match_update();
+}
+
+function cancel(authToken: string, match: Match) {
+    const ok = window.confirm("정말 취소하시겠습니까?");
+    if (!ok) return;
+
+    const match_cancel = async () => {
+        const res = await fetch("/api/match/update", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ idx: match?.idx, token: authToken, winner: "", status: "cancelled" })
+        });
+
+        const match_data = await res.json();
+
+        if (match_data.success) {
+            alert("경기가 취소되었습니다.");
+            redirect("/");
+        }
+        else {
+            alert(match_data.error);
+            redirect("/");
+        }
+
+    }
+    match_cancel();
 }
 
 export default function OverviewPage() {
 
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-    const [match_player, setMatchPlayer] = useState<MatchPlayer | null>(null);
-    const [win_rate, setWinRate] = useState<{ winrate_1: string, winrate_2: string } | null>(null);
+    const [match, setMatch] = useState<Match | null>(null);
+    const [selectedTeam, setSelectedTeam] = useState<string | null>("1");
 
     const authToken = getCookie('authToken')?.toString();
+
+
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -84,30 +136,32 @@ export default function OverviewPage() {
 
             const match_data = await res.json();
 
-            if (match_data !== null) {
-                const newMatchPlayer: MatchPlayer = new MatchPlayer();
+            if (match_data.data !== null) {
+                const newMatch: Match = new Match();
 
-                newMatchPlayer.team1_player1.player_name = match_data.data.team1_player1_name;
-                newMatchPlayer.team1_player1.streak = match_data.data.team1_player1_streak;
-                newMatchPlayer.team1_player1.player_mmr = match_data.data.team1_player1_mmr;
-                newMatchPlayer.team1_player1.streak = match_data.data.team1_player1_streak;
+                newMatch.idx = match_data.data.idx;
 
-                newMatchPlayer.team1_player2.player_name = match_data.data.team1_player2_name;
-                newMatchPlayer.team1_player2.streak = match_data.data.team1_player2_streak;
-                newMatchPlayer.team1_player2.player_mmr = match_data.data.team1_player2_mmr;
-                newMatchPlayer.team1_player2.streak = match_data.data.team1_player2_streak;
+                newMatch.team1_player1_name = match_data.data.team1_player1_name;
+                newMatch.team1_player1_streak = match_data.data.team1_player1_streak;
+                newMatch.team1_player1_mmr = match_data.data.team1_player1_mmr;
+                newMatch.team1_player1_mmr_changed = match_data.data.team1_player1_mmr_changed;
 
-                newMatchPlayer.team2_player1.player_name = match_data.data.team2_player1_name;
-                newMatchPlayer.team2_player1.streak = match_data.data.team2_player1_streak;
-                newMatchPlayer.team2_player1.player_mmr = match_data.data.team2_player1_mmr;
-                newMatchPlayer.team2_player1.streak = match_data.data.team2_player1_streak;
+                newMatch.team1_player2_name = match_data.data.team1_player2_name;
+                newMatch.team1_player2_streak = match_data.data.team1_player2_streak;
+                newMatch.team1_player2_mmr = match_data.data.team1_player2_mmr;
+                newMatch.team1_player2_mmr_changed = match_data.data.team1_player2_mmr_changed;
 
-                newMatchPlayer.team2_player2.player_name = match_data.data.team2_player2_name;
-                newMatchPlayer.team2_player2.streak = match_data.data.team2_player2_streak;
-                newMatchPlayer.team2_player2.player_mmr = match_data.data.team2_player2_mmr;
-                newMatchPlayer.team2_player2.streak = match_data.data.team2_player2_streak;
+                newMatch.team2_player1_name = match_data.data.team2_player1_name;
+                newMatch.team2_player1_streak = match_data.data.team2_player1_streak;
+                newMatch.team2_player1_mmr = match_data.data.team2_player1_mmr;
+                newMatch.team2_player1_mmr_changed = match_data.data.team2_player1_mmr_changed;
 
-                setMatchPlayer(newMatchPlayer);
+                newMatch.team2_player2_name = match_data.data.team2_player2_name;
+                newMatch.team2_player2_streak = match_data.data.team2_player2_streak;
+                newMatch.team2_player2_mmr = match_data.data.team2_player2_mmr;
+                newMatch.team2_player2_mmr_changed = match_data.data.team2_player2_mmr_changed;
+
+                setMatch(newMatch);
             }
         }
         match_live();
@@ -150,7 +204,7 @@ export default function OverviewPage() {
                         transition={{ duration: 0.4 }}
                     >
                         {
-                            match_player !== null ?
+                            match !== null ?
                                 <Box w="100%" bg="white">
                                     <Flex
                                         h="100%"
@@ -168,17 +222,17 @@ export default function OverviewPage() {
                                             <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
                                             <Text
                                                 color="black"
-                                                fontSize={match_player.team1_player1.player_name.length > 10 ? "10px" : "16px"}>
-                                                {match_player.team1_player1.player_name}
+                                                fontSize={match.team1_player1_name.length > 10 ? "10px" : "16px"}>
+                                                {match.team1_player1_name}
                                             </Text>
-                                            <Text fontSize="12px" color="grey">{match_player.team1_player1.streak}연승 ({match_player.team1_player1.player_mmr})</Text>
+                                            <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
                                             <Box minH="10px"></Box>
                                             <Text
                                                 color="black"
-                                                fontSize={match_player.team1_player2.player_name.length > 10 ? "10px" : "16px"}>
-                                                {match_player.team1_player2.player_name}
+                                                fontSize={match.team1_player2_name.length > 10 ? "10px" : "16px"}>
+                                                {match.team1_player2_name}
                                             </Text>
-                                            <Text fontSize="12px" color="grey">{match_player.team1_player2.streak}연승 ({match_player.team1_player2.player_mmr})</Text>
+                                            <Text fontSize="12px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr})</Text>
                                         </Box>
                                         <Spacer />
                                         <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
@@ -193,21 +247,25 @@ export default function OverviewPage() {
                                             <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
                                             <Text
                                                 color="black"
-                                                fontSize={match_player.team2_player1.player_name.length > 10 ? "10px" : "16px"}>
-                                                {match_player.team2_player1.player_name} </Text>
-                                            <Text fontSize="12px" color="grey">{match_player.team2_player1.streak}연승 ({match_player.team2_player1.player_mmr})</Text>
+                                                fontSize={match.team2_player1_name.length > 10 ? "10px" : "16px"}>
+                                                {match.team2_player1_name} </Text>
+                                            <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
                                             <Box minH="10px"></Box>
                                             <Text
                                                 color="black"
-                                                fontSize={match_player.team2_player2.player_name.length > 10 ? "10px" : "16px"}>
-                                                {match_player.team2_player2.player_name} </Text>
-                                            <Text fontSize="12px" color="grey">{match_player.team2_player2.streak}연승 ({match_player.team2_player2.player_mmr})</Text>
+                                                fontSize={match.team2_player2_name.length > 10 ? "10px" : "16px"}>
+                                                {match.team2_player2_name} </Text>
+                                            <Text fontSize="12px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr})</Text>
                                         </Box>
                                     </Flex>
                                 </Box>
                                 : ""
                         }
-                        <RadioGroup.Root marginBottom="30px" defaultValue="1">
+                        <RadioGroup.Root
+                            marginBottom="30px"
+                            defaultValue="1"
+                            onValueChange={(details) => setSelectedTeam(details.value)}
+                        >
                             <Text fontSize="12px" color="grey" pb="2px">승리팀 선택</Text>
                             <HStack gap="6">
                                 {items.map((item) => (
@@ -219,8 +277,22 @@ export default function OverviewPage() {
                                 ))}
                             </HStack>
                         </RadioGroup.Root>
-                        <Button bg="black" color="white" marginRight="5px">변경</Button>
-                        <Button bg="black" color="white">경기무효</Button>
+                        <Button onClick={() => {
+                            if (authToken !== undefined && match !== null && selectedTeam !== null) {
+                                update(authToken, match, selectedTeam);
+                            }
+                        }}
+                            bg="black" color="white" marginRight="5px">
+                            변경
+                        </Button>
+                        <Button onClick={() => {
+                            if (authToken !== undefined && match !== null) {
+                                cancel(authToken, match);
+                            }
+                        }}
+                            bg="black" color="white">
+                            경기무효
+                        </Button>
                     </MotionBox>
                 </VStack>
             </Container>

@@ -1,7 +1,7 @@
 "use client";
 
 import { Text, Flex, Button, IconButton } from "@chakra-ui/react";
-import { MotionFlex, MotionBox } from "@/app/components/common/class";
+import { MotionFlex } from "@/app/components/common/class";
 
 type PaginationProps = {
   page: number;
@@ -26,7 +26,9 @@ export default function Pagination({
       mt={4}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }} >
+      transition={{ duration: 0.4 }}
+    >
+      {/* ◀ previous */}
       <IconButton
         aria-label="이전 페이지"
         disabled={page === 1}
@@ -44,15 +46,17 @@ export default function Pagination({
           <Button
             key={p}
             size="sm"
-            bg={active ? "black" : "white"}
             variant={active ? "solid" : "outline"}
+            color={active ? "white" : "black"}
+            bg={active ? "black" : "white"}
             onClick={() => onChange(p)}
           >
-            {active ? <Text color="white">{p}</Text> : <Text color="black">{p}</Text>}
+            {p}
           </Button>
         );
       })}
 
+      {/* ▶ next */}
       <IconButton
         aria-label="다음 페이지"
         disabled={page === totalPages}

@@ -1,12 +1,12 @@
-import { MatchPlayer } from "@/app/components/common/class";
+import { Match } from "@/app/components/common/class";
 
 // 승률 계산
-export default function WinRate(matchPlayer: MatchPlayer) {
+export default function WinRate(match: Match) {
 
-    const n0:number = matchPlayer.team1_player1.player_mmr;
-    const n1:number = matchPlayer.team1_player2.player_mmr;
-    const e0:number = matchPlayer.team2_player1.player_mmr;
-    const e1:number = matchPlayer.team2_player2.player_mmr;
+    const n0:number = match.team1_player1_mmr;
+    const n1:number = match.team1_player2_mmr;
+    const e0:number = match.team2_player1_mmr;
+    const e1:number = match.team2_player2_mmr;
 
     // console.log("n0 : " + n0);
     // console.log("n1 : " + n1);
