@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: components/admin
+Sitemap: https://ttrank.kr/sitemap.xml
