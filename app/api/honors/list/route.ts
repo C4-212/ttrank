@@ -18,9 +18,10 @@ export async function POST(request: NextRequest) {
     const data = await prisma.honors.findMany({
       skip:skip,
       take:take,
-      orderBy: {
-        point: "desc",
-      },
+      orderBy: [
+        { point: "desc" },
+        { name: "asc"}
+      ],
     });
 
     // rank 추가
