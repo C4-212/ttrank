@@ -7,18 +7,26 @@ import {
   VStack,
   Text,
   Spacer,
-  Spinner
+  Spinner,
+  Button,
+  Input
 } from "@chakra-ui/react";
 import { formatDate, Player, Match, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";
 import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form"
+
+interface FormValues {
+  name: string
+}
 
 export default function OverviewPage() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [total_page, setTotalPage] = useState(1);
   const [matches, setMatches] = useState<Match[] | null>(null);
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     const match_list = async () => {
@@ -28,7 +36,7 @@ export default function OverviewPage() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ page: page })
+        body: JSON.stringify({ page: page, keyword:keyword })
       });
 
       const match_data = await res.json();
@@ -40,7 +48,19 @@ export default function OverviewPage() {
       setLoading(false);
     }
     match_list();
-  }, [page]);
+  }, [page, keyword]);
+
+  const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm<FormValues>()
+  
+    const onSubmit = handleSubmit(async (data) => {
+      setPage(1);
+      setTotalPage(1);
+      setKeyword(data.name);
+    });
 
   return (
     <Flex minH="100vh" bg="gray.50" direction="column">
@@ -67,6 +87,38 @@ export default function OverviewPage() {
         pb="96px"
       >
         <VStack align="stretch">
+          <MotionBox
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            bg="white"
+            borderRadius="lg"
+            border="1px solid"
+            borderColor="gray.200"
+            p={4}
+            minH="60px"
+            variants={CardAnim}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.4 }}
+          >
+            <form onSubmit={onSubmit}>
+              <Flex
+                h="50px"
+                bg="white"
+                align="center"
+                justify="center"
+                gap="10px"
+              >
+                <Text>아이디</Text>
+                <Input width="55%" color="black" {...register("name")} />
+
+                <Button bg="black" color="white" type="submit">
+                  검색
+                </Button>
+              </Flex>
+            </form>
+          </MotionBox>
           <MotionBox
             bg="white"
             borderRadius="lg"

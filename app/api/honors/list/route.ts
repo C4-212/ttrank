@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       rank: skip + index + 1,
     }));
 
-    const totalPage = Math.ceil(totalCount / take);
+    const totalPage = totalCount === 0 ? 1 : Math.ceil(totalCount / take);
 
     return NextResponse.json({
       success: true,

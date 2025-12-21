@@ -3,17 +3,73 @@ import { prisma } from "@/app/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
-    const { page = 1 } = await request.json();
+    const { page = 1, keyword = "" } = await request.json();
 
     const take = 10;
     const currentPage = Number(page) || 1;
     const skip = (currentPage - 1) * take;
 
-    const totalCount = await prisma.match.count({where:{status:"completed"}});
+    const totalCount = await prisma.match.count({
+      where:{
+        status:"completed",
+        OR:[
+          {
+            team1_player1_name: {
+              contains: keyword,
+              mode: "insensitive",
+            }
+          },
+          {
+            team1_player2_name: {
+              contains: keyword,
+              mode: "insensitive",
+            }
+          },
+          {
+            team2_player1_name: {
+              contains: keyword,
+              mode: "insensitive",
+            }
+          },
+          {
+            team2_player2_name: {
+              contains: keyword,
+              mode: "insensitive",
+            }
+          }
+        ]
+      }
+    });
 
     const data = await prisma.match.findMany({
       where: {
-        status:"completed"
+        status:"completed",
+        OR:[
+          {
+            team1_player1_name: {
+              contains: keyword,
+              mode: "insensitive",
+            }
+          },
+          {
+            team1_player2_name: {
+              contains: keyword,
+              mode: "insensitive",
+            }
+          },
+          {
+            team2_player1_name: {
+              contains: keyword,
+              mode: "insensitive",
+            }
+          },
+          {
+            team2_player2_name: {
+              contains: keyword,
+              mode: "insensitive",
+            }
+          }
+        ]
       },
       skip,
       take,
@@ -22,7 +78,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    const totalPage = Math.ceil(totalCount / take);
+    const totalPage = totalCount === 0 ? 1 : Math.ceil(totalCount / take);
 
     return NextResponse.json({
       success: true,
