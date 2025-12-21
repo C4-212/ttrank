@@ -135,13 +135,13 @@ export default function OverviewPage() {
                         <form onSubmit={onSubmit}>
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.name}>
-                                    <Field.Label>아이디</Field.Label>
+                                    <Field.Label color="black">아이디</Field.Label>
                                     <Input color="black"{...register("name")} />
                                     <Field.ErrorText>{errors.name?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.point}>
-                                    <Field.Label>후원금</Field.Label>
+                                    <Field.Label color="black">후원금</Field.Label>
                                     <Input color="black"{...register("point")} />
                                     <Field.ErrorText>{errors.point?.message}</Field.ErrorText>
                                 </Field.Root>
