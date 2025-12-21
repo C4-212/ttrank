@@ -18,6 +18,13 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ success: false, error: "이름, 배틀코드를 입력해주세요.", status: 500 });
         }
 
+        // 플레이어 유효성 체크
+        const player = await prisma.player.findFirst({ where: { name: name } });
+
+        if(player != null){
+          return NextResponse.json({ success: false, error: "이미 생성된 플레이어 입니다.", status: 500 });
+        }
+
         const create = await prisma.player.create({
             data: {
                 name: name,
