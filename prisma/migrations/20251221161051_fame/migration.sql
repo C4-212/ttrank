@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "fame" ADD COLUMN     "date" TEXT NOT NULL DEFAULT '1900/01/01';

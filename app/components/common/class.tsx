@@ -13,6 +13,14 @@ export class Player
     lose:number = 0;
 }
 
+export class Fame
+{
+  idx:number = 0;
+  round:number = 1;
+  name:string = "플레이어1";
+  date:string = "1900/01/01";
+}
+
 export class Honors
 {
   rank:number = 0;
@@ -71,6 +79,16 @@ export function formatDate(date: string | Date): string {
   const seconds = String(d.getSeconds()).padStart(2, "0");
 
   return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+}
+
+export function formatDate_YMD(date: string | Date): string {
+  const d = new Date(date);
+
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+
+  return `${year}/${month}/${day}`;
 }
 
 export function getEmoji(rank: number) {

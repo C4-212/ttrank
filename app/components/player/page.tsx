@@ -10,7 +10,8 @@ import {
   Spinner,
   Button,
   Input,
-  IconButton
+  IconButton,
+  Link
 } from "@chakra-ui/react";
 import { toaster } from "@/components/ui/toaster";
 
@@ -80,6 +81,9 @@ export default function OverviewPage() {
         <Flex align="center" w="100%" h="100%">
           <Text fontWeight="semibold" color="black">🥇유저 랭킹 (MMR)</Text>
           <Spacer />
+          <Link href="/components/fame" target="_self" rel="noopener noreferrer">
+            <Button bg="black" color="white">  🏆명예의전당 </Button>
+          </Link>
         </Flex>
       </Box>
 

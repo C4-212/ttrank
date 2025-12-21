@@ -145,7 +145,7 @@ export default function OverviewPage() {
           <Text fontWeight="semibold" color="black">연승/승점/MMR 확인</Text>
           <Spacer />
           <Link href="/components/honors" target="_self" rel="noopener noreferrer">
-            <Button bg="black" color="white">아너스클럽</Button>
+            <Button bg="black" color="white"> 👑아너스클럽 </Button>
           </Link>
           {
             isAdmin ? <Button marginLeft="2px" bg="black" color="white" onClick={logout}>로그아웃</Button> : ""
