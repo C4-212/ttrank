@@ -169,7 +169,7 @@ export default function OverviewPage() {
                                 toaster.create({
                                   title: "아이디가 복사되었습니다!",
                                   type: "success",
-                                  duration: 1500,
+                                  duration: 500,
                                   closable: false,
                                 });
                               }}
