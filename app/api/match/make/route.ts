@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     const team2_player2 = await prisma.player.findFirst({ where: { name: team2_player2_name } });
 
     if(admin !== null){
-        if (!team1_player1 || !team1_player2 || !team2_player1 || !team2_player2) {
+        if (team1_player1 == null || team1_player2 == null || team2_player1 == null || team2_player2 == null) {
             return NextResponse.json({ success: false, error: "매치 플레이어 정보가 유효하지 않습니다.", status: 500 });
         }
 
