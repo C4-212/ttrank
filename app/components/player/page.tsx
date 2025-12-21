@@ -117,7 +117,7 @@ export default function OverviewPage() {
                 justify="center"
                 gap="10px"
               >
-                <Text>아이디</Text>
+                <Text color="black">아이디</Text>
                 <Input width="55%" color="black" {...register("name")} />
 
                 <Button bg="black" color="white" type="submit">
