@@ -194,7 +194,7 @@ export default function OverviewPage() {
           </Box>
         )}
       </Box>
-      <Box
+      {/* <Box
         w="70%"
         h="30px"
         position="relative"
@@ -237,7 +237,7 @@ export default function OverviewPage() {
             </Text>
           </Box>
         </Flex>
-      </Box>
+      </Box> */}
     </Box>
   );
 }
