@@ -9,6 +9,60 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": "https://ttrank.kr/#org",
+              "name": "TTRank",
+              "alternateName": ["TTRank", "티티랭크"],
+              "url": "https://ttrank.kr/",
+              "sameAs": [
+                "https://www.sooplive.co.kr/station/prowlgus",
+                "https://www.youtube.com/@%ED%8B%B0%ED%8B%B02",
+                "https://chzzk.naver.com/10a18c8e9a3a0672a9f0987b2f4394e7",
+              ]
+            })
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "TTRank",
+              "url": "https://ttrank.kr/",
+              "inLanguage": "ko-KR",
+              "publisher": { "@id": "https://ttrank.kr/#org" },
+              "hasPart": [
+                {
+                  "@type": "WebPage",
+                  "name": "유저 랭킹",
+                  "url": "https://ttrank.kr/components/player"
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "경기 기록",
+                  "url": "https://ttrank.kr/components/match"
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "아너스클럽",
+                  "url": "https://ttrank.kr/components/honors"
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "명예의전당",
+                  "url": "https://ttrank.kr/components/fame"
+                }
+              ]
+            })
+          }}
+        />
         <style>
           {`
             html, body, #__next {
