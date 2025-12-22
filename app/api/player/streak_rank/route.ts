@@ -5,10 +5,10 @@ export async function POST(request: NextRequest) {
   try {
     const data = await prisma.player.findMany({
       take:10,
-      orderBy: {
-        streak: "desc",
-        name:"asc"
-      },
+      orderBy: [
+        {streak: "desc"},
+        {name:"asc"}
+      ],
     });
 
     // rank 추가
