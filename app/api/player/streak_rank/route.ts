@@ -7,6 +7,7 @@ export async function POST(request: NextRequest) {
       take:10,
       orderBy: {
         streak: "desc",
+        name:"asc"
       },
     });
 
