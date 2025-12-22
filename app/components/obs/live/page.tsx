@@ -128,7 +128,7 @@ export default function OverviewPage() {
 
   return (
     <Box position="fixed" inset={0} pointerEvents="none" bg="transparent">
-      <Box p={2} minH="100px" bg="transparent">
+      <Box p={2} width="70%" minH="100px" bg="transparent">
         {match && (
           <Box w="100%" bg="transparent">
             <Flex
@@ -194,14 +194,13 @@ export default function OverviewPage() {
           </Box>
         )}
       </Box>
-      <Text fontSize="12px" color="grey" pb="1px">승자 예측</Text>
+      <Text fontSize="12px" color="white" pb="1px">승자 예측</Text>
       <Box
         w="100%"
         h="30px"
         position="relative"
-        borderRadius="lg"
         border="1px solid"
-        borderColor="gray.200">
+        borderColor="white.200">
         <Flex
           h="100%"
           bg="white"
