@@ -19,6 +19,17 @@ import { redirect } from "next/navigation";
 import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
 
+export const metadata = {
+  title: "TT Rank - 명예의전당",
+  description: "TT 방송 경기 명예의 전당",
+  keywords: "TT, MMR, 연승, 승점, 랭킹, 명예의 전당",
+  openGraph: {
+    title: "TT Rank - 명예의 전당",
+    description: "TT 방송 경기 명예의 전당",
+    images: ["/og/og_image.png"],
+  },
+};
+
 function remove(token: string|undefined, name: string, idx: number) {
     let data = {
         token: token,
