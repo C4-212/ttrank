@@ -30,6 +30,8 @@ function logout() {
   redirect("/");
 }
 
+
+
 export default function OverviewPage() {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [match, setMatch] = useState<Match | null>(null);

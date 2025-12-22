@@ -1,14 +1,14 @@
-export default function OverviewLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="min-h-screen bg-black text-white flex justify-center">
-      {/* 모바일 최대 폭 */}
-      <div className="w-full max-w-[1080px] flex">
-        {children}
-      </div>
-    </div>
-  );
+export const metadata = {
+  title: "TT Rank - 실시간 MMR & 랭킹",
+  description: "TT 방송 경기 MMR/연승/승점 실시간 확인 페이지",
+  keywords: "TT, MMR, 연승, 승점, 랭킹",
+  openGraph: {
+    title: "TT Rank - 실시간 MMR & 랭킹",
+    description: "TT 방송 경기 MMR/연승/승점 실시간 확인 페이지",
+    images: ["/og/og_image.png"],
+  },
+};
+
+export default function OverviewPage({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }
