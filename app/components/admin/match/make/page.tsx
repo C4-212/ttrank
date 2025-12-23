@@ -139,25 +139,25 @@ export default function OverviewPage() {
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.team1_player1_name}>
                                     <Field.Label color="black">[팀1] 플레이어1 아이디</Field.Label>
-                                    <Input fontSize="16px" color="black"{...register("team1_player1_name")} />
+                                    <Input maxLength={30} fontSize="16px" color="black"{...register("team1_player1_name")} />
                                     <Field.ErrorText>{errors.team1_player1_name?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.team1_player2_name}>
                                     <Field.Label color="black">[팀1] 플레이어2 아이디</Field.Label>
-                                    <Input fontSize="16px" color="black"{...register("team1_player2_name")} />
+                                    <Input maxLength={30} fontSize="16px" color="black"{...register("team1_player2_name")} />
                                     <Field.ErrorText>{errors.team1_player2_name?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.team2_player1_name}>
                                     <Field.Label color="black">[팀2] 플레이어1 아이디</Field.Label>
-                                    <Input fontSize="16px" color="black"{...register("team2_player1_name")} />
+                                    <Input maxLength={30} fontSize="16px" color="black"{...register("team2_player1_name")} />
                                     <Field.ErrorText>{errors.team2_player1_name?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.team2_player2_name}>
                                     <Field.Label color="black">[팀2] 플레이어2 아이디</Field.Label>
-                                    <Input fontSize="16px" color="black"{...register("team2_player2_name")} />
+                                    <Input maxLength={30} fontSize="16px" color="black"{...register("team2_player2_name")} />
                                     <Field.ErrorText>{errors.team2_player2_name?.message}</Field.ErrorText>
                                 </Field.Root>
 

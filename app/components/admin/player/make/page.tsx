@@ -138,13 +138,13 @@ export default function OverviewPage() {
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.name}>
                                     <Field.Label color="black">아이디</Field.Label>
-                                    <Input fontSize="16px" color="black"{...register("name")} />
+                                    <Input maxLength={30} fontSize="16px" color="black"{...register("name")} />
                                     <Field.ErrorText>{errors.name?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.battle_tag}>
                                     <Field.Label color="black">배틀태그</Field.Label>
-                                    <Input fontSize="16px" color="black"{...register("battle_tag")} />
+                                    <Input maxLength={30} fontSize="16px" color="black"{...register("battle_tag")} />
                                     <Field.ErrorText>{errors.battle_tag?.message}</Field.ErrorText>
                                 </Field.Root>
 
