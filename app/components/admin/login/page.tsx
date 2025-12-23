@@ -101,14 +101,14 @@ export default function OverviewPage() {
                         <form onSubmit={onSubmit}>
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.id}>
-                                    <Field.Label>아이디</Field.Label>
-                                    <Input color="black" {...register("id")} />
+                                    <Field.Label color="black">아이디</Field.Label>
+                                    <Input fontSize="16px" color="black" {...register("id")} />
                                     <Field.ErrorText>{errors.id?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.password}>
-                                    <Field.Label>패스워드</Field.Label>
-                                    <PasswordInput color="black" {...register("password")} />
+                                    <Field.Label color="black">패스워드</Field.Label>
+                                    <PasswordInput fontSize="16px" color="black" {...register("password")} />
                                     <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
                                 </Field.Root>
 

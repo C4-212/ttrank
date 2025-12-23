@@ -111,7 +111,7 @@ export default function OverviewPage() {
                 gap="10px"
               >
                 <Text color="black">아이디</Text>
-                <Input width="55%" color="black" {...register("name")} />
+                <Input fontSize="16px" width="55%" color="black" {...register("name")} />
 
                 <Button bg="black" color="white" type="submit">
                   검색
