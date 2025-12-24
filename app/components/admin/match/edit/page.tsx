@@ -219,7 +219,7 @@ export default function OverviewPage() {
                                             p={4}
                                             pb="1px"
                                             minH="150px">
-                                            <Text fontWeight="bold" color="#f23f3f" pb="5px">[1팀]</Text>
+                                            <Text fontWeight="bold" fontSize="12px" color="#f23f3f" pb="5px">[1팀 {match.team1_race}]</Text>
                                             <Text
                                                 color="black"
                                                 fontSize={match.team1_player1_name.length > 10 ? "10px" : "16px"}>
@@ -244,7 +244,7 @@ export default function OverviewPage() {
                                             pb="1px"
                                             textAlign="right"
                                             minH="150px">
-                                            <Text fontWeight="bold" color="#4775ea" pb="5px">[2팀]</Text>
+                                            <Text fontWeight="bold" fontSize="12px" color="#4775ea" pb="5px">[2팀 {match.team2_race}]</Text>
                                             <Text
                                                 color="black"
                                                 fontSize={match.team2_player1_name.length > 10 ? "10px" : "16px"}>

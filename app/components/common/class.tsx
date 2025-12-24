@@ -33,6 +33,8 @@ export class Match
 {
     idx:number = 0;
 
+    team1_race:string = "";
+
     team1_player1_name:string = "";
     team1_player1_mmr:number = 0;
     team1_player1_mmr_changed:number = 0;
@@ -42,6 +44,8 @@ export class Match
     team1_player2_mmr:number = 0;
     team1_player2_mmr_changed:number = 0;
     team1_player2_streak:number = 0;
+
+    team2_race:string = "";
 
     team2_player1_name:string = "";
     team2_player1_mmr:number = 0;

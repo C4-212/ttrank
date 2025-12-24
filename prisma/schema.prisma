@@ -25,6 +25,7 @@ model admin {
 
 model match {
   idx                         Int      @id @default(autoincrement())
+  team1_race                  String?
   team1_player1_name          String
   team1_player1_mmr           Int
   team1_player1_mmr_changed   Int?
@@ -33,6 +34,7 @@ model match {
   team1_player2_mmr           Int
   team1_player2_mmr_changed   Int?
   team1_player2_streak        Int
+  team2_race                  String?
   team2_player1_name          String
   team2_player1_mmr           Int
   team2_player1_mmr_changed   Int?

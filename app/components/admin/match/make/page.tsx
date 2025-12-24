@@ -6,6 +6,7 @@ import {
     Flex,
     Heading,
     VStack,
+    HStack,
     Image,
     Button,
     Text,
@@ -13,6 +14,7 @@ import {
     Field,
     Input,
     Stack,
+    RadioGroup
 } from "@chakra-ui/react";
 
 import { setCookie, getCookie } from 'cookies-next';
@@ -25,15 +27,28 @@ import { useForm } from "react-hook-form"
 
 interface FormValues {
     token: string
+
+    team1_race: string|null
     team1_player1_name: string
     team1_player2_name: string
+
+    team2_race: string|null
     team2_player1_name: string
     team2_player2_name: string
 }
 
+const items = [
+    { label: "Zerg", value: "1" },
+    { label: "Terran", value: "2" },
+    { label: "Protoss", value: "3" },
+]
+
 export default function OverviewPage() {
 
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+    const [selectedTeam1, setSelectedTeam1] = useState<string | null>("Z");
+    const [selectedTeam2, setSelectedTeam2] = useState<string | null>("Z");
+
     const authToken = getCookie('authToken')?.toString();
 
     useEffect(() => {
@@ -77,6 +92,10 @@ export default function OverviewPage() {
         if (!ok) return; 
 
         data.token = authToken as string;
+
+        data.team1_race = selectedTeam1;
+        data.team2_race = selectedTeam2;
+
         const res = await fetch("/api/match/make", {
             method: "POST",
             headers: {
@@ -135,28 +154,61 @@ export default function OverviewPage() {
                         transition={{ duration: 0.4 }}
                     >
                         <form onSubmit={onSubmit}>
-
+                            <RadioGroup.Root
+                                marginBottom="10px"
+                                defaultValue="1"
+                                onValueChange={(details) => setSelectedTeam1(details.value)}
+                            >
+                                <Text fontSize="12px" color="grey" pb="2px">1팀 종족</Text>
+                                <HStack gap="6">
+                                    {items.map((item) => (
+                                        <RadioGroup.Item key={item.value} value={item.value}>
+                                            <RadioGroup.ItemHiddenInput />
+                                            <RadioGroup.ItemIndicator />
+                                            <RadioGroup.ItemText color="black">{item.label}</RadioGroup.ItemText>
+                                        </RadioGroup.Item>
+                                    ))}
+                                </HStack>
+                            </RadioGroup.Root>
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.team1_player1_name}>
-                                    <Field.Label color="black">[팀1] 플레이어1 아이디</Field.Label>
+                                    <Field.Label color="black">[팀1] Maker ID</Field.Label>
                                     <Input maxLength={30} fontSize="16px" color="black"{...register("team1_player1_name")} />
                                     <Field.ErrorText>{errors.team1_player1_name?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.team1_player2_name}>
-                                    <Field.Label color="black">[팀1] 플레이어2 아이디</Field.Label>
+                                    <Field.Label color="black">[팀1] Controller ID</Field.Label>
                                     <Input maxLength={30} fontSize="16px" color="black"{...register("team1_player2_name")} />
                                     <Field.ErrorText>{errors.team1_player2_name?.message}</Field.ErrorText>
                                 </Field.Root>
 
+                                <RadioGroup.Root
+                                    marginTop="30px"
+                                    marginBottom="10px"
+                                    defaultValue="1"
+                                    onValueChange={(details) => setSelectedTeam2(details.value)}
+                                >
+                                    <Text fontSize="12px" color="grey" pb="2px">2팀 종족</Text>
+                                    <HStack gap="6">
+                                        {items.map((item) => (
+                                            <RadioGroup.Item key={item.value} value={item.value}>
+                                                <RadioGroup.ItemHiddenInput />
+                                                <RadioGroup.ItemIndicator />
+                                                <RadioGroup.ItemText color="black">{item.label}</RadioGroup.ItemText>
+                                            </RadioGroup.Item>
+                                        ))}
+                                    </HStack>
+                                </RadioGroup.Root>
+
                                 <Field.Root invalid={!!errors.team2_player1_name}>
-                                    <Field.Label color="black">[팀2] 플레이어1 아이디</Field.Label>
+                                    <Field.Label color="black">[팀2] Maker ID</Field.Label>
                                     <Input maxLength={30} fontSize="16px" color="black"{...register("team2_player1_name")} />
                                     <Field.ErrorText>{errors.team2_player1_name?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.team2_player2_name}>
-                                    <Field.Label color="black">[팀2] 플레이어2 아이디</Field.Label>
+                                    <Field.Label color="black">[팀2] Controller ID</Field.Label>
                                     <Input maxLength={30} fontSize="16px" color="black"{...register("team2_player2_name")} />
                                     <Field.ErrorText>{errors.team2_player2_name?.message}</Field.ErrorText>
                                 </Field.Root>
