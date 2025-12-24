@@ -235,15 +235,14 @@ export default function OverviewPage() {
           >
             <Text fontWeight="medium" color="black">📢공지사항</Text>
             <Flex
-              h="150px"
+              h="180px"
               bg="white"
               align="center"
               justify="center"
             >
               <Text color="black">
                 [방송 시간]<br />
-                평일 : 오후8시 ~ 오후 12시<br />
-                토요일 : 오후 6시 ~ 오후 12시 <br />
+                평일 : 오후 8시 시작 / 토요일 : 오후 6시 시작<br />
                 TT 방송에서 참여한 경기의 승점, MMR을 확인할 수 있는 페이지 입니다 <br />
                 상품 수령은 오픈챗 TT스타 (<Link color="blue" target="_blank" href="https://open.kakao.com/o/s4NX6SVh" rel="noopener noreferrer">링크</Link>)</Text>
             </Flex>
