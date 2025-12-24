@@ -235,7 +235,7 @@ export default function OverviewPage() {
           >
             <Text fontWeight="medium" color="black">📢공지사항</Text>
             <Flex
-              h="100px"
+              h="140px"
               bg="white"
               align="center"
               justify="center"
