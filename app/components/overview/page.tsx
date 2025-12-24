@@ -244,7 +244,7 @@ export default function OverviewPage() {
                 [방송 시간]<br />
                 평일 : 오후8시 ~ 오후 12시 / 토요일 오후 6시 ~ 오후 12시 <br />
                 TT 방송에서 참여한 경기의 승점, MMR을 확인할 수 있는 페이지 입니다 <br />
-                상품 수령은 오픈챗 TT스타 (<Link color="grey" target="_blank" href="https://open.kakao.com/o/s4NX6SVh" rel="noopener noreferrer">링크</Link>)</Text>
+                상품 수령은 오픈챗 TT스타 (<Link color="blue" target="_blank" href="https://open.kakao.com/o/s4NX6SVh" rel="noopener noreferrer">링크</Link>)</Text>
             </Flex>
           </MotionBox>
 
