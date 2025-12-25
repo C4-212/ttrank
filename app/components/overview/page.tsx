@@ -103,6 +103,8 @@ export default function OverviewPage() {
       if (match_data.data !== null) {
         const newMatch: Match = new Match();
 
+        newMatch.team1_race = match_data.data.team1_race;
+
         newMatch.team1_player1_name = match_data.data.team1_player1_name;
         newMatch.team1_player1_streak = match_data.data.team1_player1_streak;
         newMatch.team1_player1_mmr = match_data.data.team1_player1_mmr;
@@ -112,6 +114,8 @@ export default function OverviewPage() {
         newMatch.team1_player2_streak = match_data.data.team1_player2_streak;
         newMatch.team1_player2_mmr = match_data.data.team1_player2_mmr;
         newMatch.team1_player2_mmr_changed = match_data.data.team1_player2_mmr_changed;
+
+        newMatch.team2_race = match_data.data.team2_race;
 
         newMatch.team2_player1_name = match_data.data.team2_player1_name;
         newMatch.team2_player1_streak = match_data.data.team2_player1_streak;
