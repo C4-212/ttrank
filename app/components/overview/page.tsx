@@ -127,6 +127,8 @@ export default function OverviewPage() {
         newMatch.team2_player2_mmr = match_data.data.team2_player2_mmr;
         newMatch.team2_player2_mmr_changed = match_data.data.team2_player2_mmr_changed;
 
+        newMatch.point = match_data.data.point;
+
         setMatch(newMatch);
         setWinRate(WinRate(newMatch));
       }
@@ -239,7 +241,7 @@ export default function OverviewPage() {
           >
             <Text fontWeight="medium" color="black">📢공지사항</Text>
             <Flex
-              h="180px"
+              h="120px"
               bg="white"
               align="center"
               justify="center"
@@ -247,8 +249,7 @@ export default function OverviewPage() {
               <Text color="black">
                 [방송 시간]<br />
                 평일 : 오후 8시 시작 / 토요일 : 오후 6시 시작<br /><br />
-                TT 방송에서 참여한 경기의 승점, MMR을 확인할 수 있는 페이지 입니다 <br />
-                상품 수령은 오픈챗 TT스타 (<Link color="blue" target="_blank" href="https://open.kakao.com/o/s4NX6SVh" rel="noopener noreferrer">링크</Link>)</Text>
+                상품 수령은 오픈챗 TT스타 <Link color="black" target="_blank" href="https://open.kakao.com/o/s4NX6SVh" rel="noopener noreferrer">🔗</Link></Text>
             </Flex>
           </MotionBox>
 
@@ -302,6 +303,16 @@ export default function OverviewPage() {
               ) :
                 match !== null ?
                   <Box w="100%" bg="white">
+                    <Flex
+                      minH="10px"
+                      bg="white"
+                      align="center"
+                      justify="center"
+                      pb="2px"
+                    >
+                      <Spacer />
+                      <Text fontSize="10px" fontWeight="normal" color="black" p={4}>♦️{match.point}</Text>
+                    </Flex>
                     <Flex
                       h="100%"
                       bg="white"

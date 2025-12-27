@@ -49,6 +49,8 @@ export default function OverviewPage() {
         newMatch.team2_player2_mmr = match_data.data.team2_player2_mmr;
         newMatch.team2_player2_mmr_changed = match_data.data.team2_player2_mmr_changed;
 
+        newMatch.point = match_data.data.point;
+
         setMatch(newMatch);
         setWinRate(WinRate(newMatch));
       }

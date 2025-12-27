@@ -147,7 +147,16 @@ export default function OverviewPage() {
                     borderColor="gray.200"
                     minH="200px"
                     marginBottom="5px">
-                    <Text fontSize="10px" fontWeight="normal" color="grey" p={4} pb="1px">{formatDate(item.updated_at)}</Text>
+                    <Flex
+                      minH="10px"
+                      bg="white"
+                      align="center"
+                      justify="center"
+                    >
+                      <Text fontSize="10px" fontWeight="normal" color="grey" p={4} pb="1px">{formatDate(item.updated_at)}</Text>
+                      <Spacer/>
+                      <Text fontSize="10px" fontWeight="normal" color="black" p={4} pb="1px">♦️{item.point}</Text>
+                    </Flex>
                     <Flex
                       h="100%"
                       bg="white"

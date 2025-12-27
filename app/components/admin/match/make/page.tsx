@@ -35,6 +35,8 @@ interface FormValues {
     team2_race: string|null
     team2_player1_name: string
     team2_player2_name: string
+
+    point:string|null
 }
 
 const items = [
@@ -46,8 +48,8 @@ const items = [
 export default function OverviewPage() {
 
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-    const [selectedTeam1, setSelectedTeam1] = useState<string | null>("Z");
-    const [selectedTeam2, setSelectedTeam2] = useState<string | null>("Z");
+    const [selectedTeam1, setSelectedTeam1] = useState<string | null>("1");
+    const [selectedTeam2, setSelectedTeam2] = useState<string | null>("1");
 
     const authToken = getCookie('authToken')?.toString();
 
@@ -95,6 +97,10 @@ export default function OverviewPage() {
 
         data.team1_race = selectedTeam1;
         data.team2_race = selectedTeam2;
+
+        if(data.point == ""){
+            data.point = "1"
+        }
 
         const res = await fetch("/api/match/make", {
             method: "POST",
@@ -154,6 +160,11 @@ export default function OverviewPage() {
                         transition={{ duration: 0.4 }}
                     >
                         <form onSubmit={onSubmit}>
+                            <Field.Root invalid={!!errors.point}>
+                                <Field.Label color="black">포인트 (입력없을 시 기본 1)</Field.Label>
+                                <Input maxLength={5} fontSize="16px" color="black"{...register("point")} />
+                                <Field.ErrorText>{errors.point?.message}</Field.ErrorText>
+                            </Field.Root>
                             <RadioGroup.Root
                                 marginBottom="10px"
                                 defaultValue="1"

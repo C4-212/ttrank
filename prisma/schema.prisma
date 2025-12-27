@@ -43,6 +43,7 @@ model match {
   team2_player2_mmr           Int
   team2_player2_mmr_changed   Int?
   team2_player2_streak        Int
+  point                       Int @default(1)
   winner                      String?
   created_at                  DateTime @default(now())
   updated_at                  DateTime @default(now())
@@ -77,5 +78,15 @@ model fame {
   created_at  DateTime  @default(now())
   updated_at  DateTime  @default(now())
   date        String    @default("1900/01/01")
+}
+
+model point {
+  idx         Int       @id @default(autoincrement())
+  name        String
+  type        String    @default("receive")
+  description String?    
+  point       Int       @default(0)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @default(now())
 }
 

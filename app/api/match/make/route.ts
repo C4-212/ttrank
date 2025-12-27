@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
       team2_race,
       team2_player1_name,
       team2_player2_name,
+      point="1"
     } = await request.json();
 
     if (!token) {
@@ -43,6 +44,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: "이미 진행중인 경기가 있습니다.", status: 500 });
     }
 
+    if (!(Number(point) > 0 && Number(point) <= 10000)) {
+      return NextResponse.json({ success: false, error: "1 ~ 10000 사이의 포인트만 적용 가능합니다.", status: 500 });
+    }
+
     // 플레이어 유효성 체크
     const team1_player1 = await prisma.player.findFirst({ where: { name: team1_player1_name } });
     const team1_player2 = await prisma.player.findFirst({ where: { name: team1_player2_name } });
@@ -59,6 +64,8 @@ export async function POST(request: NextRequest) {
 
       const create = await prisma.match.create({
         data: {
+          point:Number(point),
+
           team1_race: getRace(team1_race),
 
           team1_player1_name: team1_player1.name,

@@ -29,9 +29,21 @@ export class Honors
   point:string = "🪙";
 }
 
+export class Point
+{
+  idx:number = 0;
+  name:string = "";
+  point:number = 0;
+  type:string = "pay";
+  description:string = "";
+  updated_at:string = "1900/01/01";
+  created_at:string = "1900/01/01";
+}
+
 export class Match
 {
     idx:number = 0;
+    point:number = 1;
 
     team1_race:string = "";
 

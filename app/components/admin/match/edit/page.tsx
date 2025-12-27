@@ -39,7 +39,7 @@ function update(authToken: string, match: Match, winner: string) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ idx: match?.idx, token: authToken, winner: winner, status: "completed" })
+            body: JSON.stringify({ idx: match?.idx, token: authToken, winner: winner, status: "completed", point:match.point })
         });
 
         const match_data = await res.json();
@@ -164,6 +164,8 @@ export default function OverviewPage() {
                 newMatch.team2_player2_streak = match_data.data.team2_player2_streak;
                 newMatch.team2_player2_mmr = match_data.data.team2_player2_mmr;
                 newMatch.team2_player2_mmr_changed = match_data.data.team2_player2_mmr_changed;
+
+                newMatch.point = match_data.data.point;
 
                 setMatch(newMatch);
             }

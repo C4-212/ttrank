@@ -8,7 +8,8 @@ export async function POST(request: NextRequest) {
       token,
       idx,
       winner,
-      status
+      status,
+      point="1"
     } = await request.json();
 
     const change_mmr = {
@@ -50,6 +51,10 @@ export async function POST(request: NextRequest) {
           return NextResponse.json({ success: false, error: "매치 플레이어 정보가 유효하지 않습니다.", status: 500 });
         }
 
+        if (!(Number(point) > 0 && Number(point) <= 10000)) {
+          return NextResponse.json({ success: false, error: "1 ~ 10000 사이의 포인트만 적용 가능합니다.", status: 500 });
+        }
+
         // MMR 계산 및 연승 정보 변경
         const team1_mmr = match.team1_player1_mmr + match.team1_player2_mmr;
         const team2_mmr = match.team2_player1_mmr + match.team2_player2_mmr;
@@ -65,7 +70,7 @@ export async function POST(request: NextRequest) {
             data: {
               mmr: match.team1_player1_mmr + change_mmr.team1_player1_mmr_changed,
               streak: (winner == "1") ? match.team1_player1_streak + 1 : 0,
-              point: (winner == "1") ? team1_player1.point + 1 : team1_player1.point,
+              point: (winner == "1") ? team1_player1.point + Number(point) : team1_player1.point,
               win: (winner == "1") ? team1_player1.win + 1 : team1_player1.win,
               lose: (winner == "1") ? team1_player1.lose : team1_player1.lose + 1,
               updated_at: new Date()
@@ -87,7 +92,7 @@ export async function POST(request: NextRequest) {
               data: {
                 mmr: match.team1_player2_mmr + change_mmr.team1_player2_mmr_changed,
                 streak: (winner == "1") ? match.team1_player2_streak + 1 : 0,
-                point: (winner == "1") ? team1_player2.point + 1 : team1_player2.point,
+                point: (winner == "1") ? team1_player2.point + Number(point) : team1_player2.point,
                 win: (winner == "1") ? team1_player2.win + 1 : team1_player2.win,
                 lose: (winner == "1") ? team1_player2.lose : team1_player2.lose + 1,
                 updated_at: new Date()
@@ -107,7 +112,7 @@ export async function POST(request: NextRequest) {
             data: {
               mmr: match.team2_player1_mmr + change_mmr.team2_player1_mmr_changed,
               streak: (winner == "2") ? match.team2_player1_streak + 1 : 0,
-              point: (winner == "2") ? team2_player1.point + 1 : team2_player1.point,
+              point: (winner == "2") ? team2_player1.point + Number(point) : team2_player1.point,
               win: (winner == "2") ? team2_player1.win + 1 : team2_player1.win,
               lose: (winner == "2") ? team2_player1.lose : team2_player1.lose + 1,
               updated_at: new Date()
@@ -129,7 +134,7 @@ export async function POST(request: NextRequest) {
               data: {
                 mmr: match.team2_player2_mmr + change_mmr.team2_player2_mmr_changed,
                 streak: (winner == "2") ? match.team2_player2_streak + 1 : 0,
-                point: (winner == "2") ? team2_player2.point + 1 : team2_player2.point,
+                point: (winner == "2") ? team2_player2.point + Number(point) : team2_player2.point,
                 win: (winner == "2") ? team2_player2.win + 1 : team2_player2.win,
                 lose: (winner == "2") ? team2_player2.lose : team2_player2.lose + 1,
                 updated_at: new Date()

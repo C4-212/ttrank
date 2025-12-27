@@ -186,7 +186,7 @@ export default function OverviewPage() {
                             align="center">
                             <Text fontSize="12px" color="green">{item.win} W</Text>
                             <Text fontSize="12px" color="red">　{item.lose} L</Text>
-                            <Text fontSize="12px" color="grey">　({item.point} Point)</Text>
+                            <Text fontSize="12px" color="grey">　(♦️{item.point})</Text>
                           </Flex>
                         </Flex>
                         <Spacer />
