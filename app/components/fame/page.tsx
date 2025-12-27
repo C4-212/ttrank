@@ -19,7 +19,7 @@ import { redirect } from "next/navigation";
 import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
 
-function remove(token: string|undefined, name: string, idx: number) {
+function remove(token: string | undefined, name: string, idx: number) {
     let data = {
         token: token,
         idx: idx
@@ -119,7 +119,7 @@ export default function OverviewPage() {
                 alignItems="center"
             >
                 <Flex align="center" w="100%" h="100%">
-                    <Text fontWeight="semibold" color="black">🏆명예의전당 (10연승)</Text>
+                    <Text fontWeight="semibold" color="black">🏆명예의전당</Text>
                     <Spacer />
                     {
                         isAdmin ?
@@ -137,6 +137,29 @@ export default function OverviewPage() {
                 pb="96px"
             >
                 <VStack align="stretch">
+                    <MotionBox
+                        bg="white"
+                        borderRadius="lg"
+                        border="1px solid"
+                        borderColor="gray.200"
+                        p={4}
+                        minH="70px"
+                        variants={CardAnim}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ duration: 0.4 }}
+                    >
+                        <Text fontWeight="medium" color="black">🏆(명예의전당)이란?</Text>
+                        <Flex
+                            h="70px"
+                            bg="white"
+                            align="center"
+                            justify="center"
+                        >
+                            <Text color="black">10연승을 달성하면 명예의전당에 기록됩니다.<br />
+                                상품으로 ♦️100을 지급합니다. </Text>
+                        </Flex>
+                    </MotionBox>
                     <MotionBox
                         bg="white"
                         borderRadius="lg"
@@ -177,7 +200,7 @@ export default function OverviewPage() {
                                                     <Text color="black" fontSize={item.name.length > 10 ? "12px" : "14px"}>{item.name}</Text>
                                                 </Flex>
                                                 {
-                                                    isAdmin?<Button onClick={()=>remove(authToken, item.name, item.idx)} bg="black" color="white">삭제</Button>:""
+                                                    isAdmin ? <Button onClick={() => remove(authToken, item.name, item.idx)} bg="black" color="white">삭제</Button> : ""
                                                 }
                                                 <Spacer />
                                                 <Text fontWeight="normal" color="grey" fontSize="12px">{item.date}</Text>
