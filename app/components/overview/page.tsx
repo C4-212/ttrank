@@ -18,7 +18,7 @@ import {
   Spinner
 } from "@chakra-ui/react";
 import { setCookie, getCookie } from 'cookies-next';
-import { getEmoji, Player, Match, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
+import { formatDate, getEmoji, Player, LiveMatch, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
 import WinRate from "@/app/components/common/winrate";
 import FooterNav from "@/app/components/common/footer";
 import { redirect } from "next/navigation";
@@ -34,7 +34,7 @@ function logout() {
 
 export default function OverviewPage() {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-  const [match, setMatch] = useState<Match | null>(null);
+  const [match, setMatch] = useState<LiveMatch | null>(null);
   const [leaderboard, setLeaderBoard] = useState<Player[] | null>(null);
   const [win_rate, setWinRate] = useState<{ winrate_1: string, winrate_2: string } | null>(null);
   const [loadingLive, setLoadingLive] = useState(false);
@@ -101,7 +101,7 @@ export default function OverviewPage() {
       const match_data = await res.json();
 
       if (match_data.data !== null) {
-        const newMatch: Match = new Match();
+        const newMatch: LiveMatch = new LiveMatch();
 
         newMatch.team1_race = match_data.data.team1_race;
 
@@ -109,11 +109,13 @@ export default function OverviewPage() {
         newMatch.team1_player1_streak = match_data.data.team1_player1_streak;
         newMatch.team1_player1_mmr = match_data.data.team1_player1_mmr;
         newMatch.team1_player1_mmr_changed = match_data.data.team1_player1_mmr_changed;
+        newMatch.team1_player1_point = match_data.data.team1_player1_point;
 
         newMatch.team1_player2_name = match_data.data.team1_player2_name;
         newMatch.team1_player2_streak = match_data.data.team1_player2_streak;
         newMatch.team1_player2_mmr = match_data.data.team1_player2_mmr;
         newMatch.team1_player2_mmr_changed = match_data.data.team1_player2_mmr_changed;
+        newMatch.team1_player2_point = match_data.data.team1_player2_point;
 
         newMatch.team2_race = match_data.data.team2_race;
 
@@ -121,11 +123,13 @@ export default function OverviewPage() {
         newMatch.team2_player1_streak = match_data.data.team2_player1_streak;
         newMatch.team2_player1_mmr = match_data.data.team2_player1_mmr;
         newMatch.team2_player1_mmr_changed = match_data.data.team2_player1_mmr_changed;
+        newMatch.team2_player1_point = match_data.data.team2_player1_point;
 
         newMatch.team2_player2_name = match_data.data.team2_player2_name;
         newMatch.team2_player2_streak = match_data.data.team2_player2_streak;
         newMatch.team2_player2_mmr = match_data.data.team2_player2_mmr;
         newMatch.team2_player2_mmr_changed = match_data.data.team2_player2_mmr_changed;
+        newMatch.team2_player2_point = match_data.data.team2_player2_point;
 
         newMatch.point = match_data.data.point;
 
@@ -308,10 +312,10 @@ export default function OverviewPage() {
                       bg="white"
                       align="center"
                       justify="center"
-                      pb="2px"
                     >
+                      <Text fontSize="10px" fontWeight="normal" color="grey" p={4} pb="1px">{formatDate(match.updated_at)}</Text>
                       <Spacer />
-                      <Text fontSize="10px" fontWeight="normal" color="black" p={4}>♦️{match.point}</Text>
+                      <Text fontSize="10px" fontWeight="normal" color="black" p={4} pb="1px">♦️{match.point}</Text>
                     </Flex>
                     <Flex
                       h="100%"
@@ -332,14 +336,14 @@ export default function OverviewPage() {
                           fontSize={match.team1_player1_name.length > 10 ? "10px" : "16px"}>
                           {match.team1_player1_name}
                         </Text>
-                        <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
+                        <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr}) ♦️{match.team1_player1_point}</Text>
                         <Box minH="10px"></Box>
                         <Text
                           color="black"
                           fontSize={match.team1_player2_name.length > 10 ? "10px" : "16px"}>
                           {match.team1_player2_name}
                         </Text>
-                        <Text fontSize="12px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr})</Text>
+                        <Text fontSize="12px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr}) ♦️{match.team1_player2_point}</Text>
                       </Box>
                       <Spacer />
                       <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
@@ -356,13 +360,13 @@ export default function OverviewPage() {
                           color="black"
                           fontSize={match.team2_player1_name.length > 10 ? "10px" : "16px"}>
                           {match.team2_player1_name} </Text>
-                        <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
+                        <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr}) ♦️{match.team2_player1_point}</Text>
                         <Box minH="10px"></Box>
                         <Text
                           color="black"
                           fontSize={match.team2_player2_name.length > 10 ? "10px" : "16px"}>
                           {match.team2_player2_name} </Text>
-                        <Text fontSize="12px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr})</Text>
+                        <Text fontSize="12px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr}) ♦️{match.team2_player2_point}</Text>
                       </Box>
                     </Flex>
                     <Text fontSize="12px" color="grey" pb="1px">승자 예측</Text>

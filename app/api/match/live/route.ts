@@ -8,9 +8,31 @@ export async function POST(request: NextRequest) {
       orderBy: { created_at: "desc", },
     });
 
+    const result = {
+      ...data,
+      team1_player1_point:0,
+      team1_player2_point:0,
+      team2_player1_point:0,
+      team2_player2_point:0
+    };
+
+    if (data != null) {
+      const team1_player1 = await prisma.player.findFirst({ where: { name: data.team1_player1_name } });
+      const team1_player2 = await prisma.player.findFirst({ where: { name: data.team1_player2_name } });
+      const team2_player1 = await prisma.player.findFirst({ where: { name: data.team2_player1_name } });
+      const team2_player2 = await prisma.player.findFirst({ where: { name: data.team2_player2_name } });
+
+      if(team1_player1 != null && team1_player2 != null && team2_player1 != null && team2_player2 != null) {
+        result.team1_player1_point = team1_player1.point;
+        result.team1_player2_point = team1_player2.point;
+        result.team2_player1_point = team2_player1.point;
+        result.team2_player2_point = team2_player2.point;
+      }
+    }
+
     return NextResponse.json({
       success: true,
-      data:data,
+      data: data == null ? null : result,
       status: 200,
     });
   } catch (err) {

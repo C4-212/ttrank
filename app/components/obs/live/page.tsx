@@ -6,12 +6,12 @@ import {
   Text,
   Spacer,
 } from "@chakra-ui/react";
-import { Match, Player, getOBSEmoji } from "@/app/components/common/class";
+import { LiveMatch, Player, getOBSEmoji } from "@/app/components/common/class";
 import { useState, useEffect } from "react";
 import WinRate from "@/app/components/common/winrate";
 
 export default function OverviewPage() {
-  const [match, setMatch] = useState<Match | null>(null);
+  const [match, setMatch] = useState<LiveMatch | null>(null);
   const [win_rate, setWinRate] = useState<{ winrate_1: string, winrate_2: string } | null>(null);
 
   useEffect(() => {
@@ -27,27 +27,31 @@ export default function OverviewPage() {
       const match_data = await res.json();
 
       if (match_data.data !== null) {
-        const newMatch: Match = new Match();
+        const newMatch: LiveMatch = new LiveMatch();
 
         newMatch.team1_player1_name = match_data.data.team1_player1_name;
         newMatch.team1_player1_streak = match_data.data.team1_player1_streak;
         newMatch.team1_player1_mmr = match_data.data.team1_player1_mmr;
         newMatch.team1_player1_mmr_changed = match_data.data.team1_player1_mmr_changed;
+        newMatch.team1_player1_point = match_data.data.team1_player1_point;
 
         newMatch.team1_player2_name = match_data.data.team1_player2_name;
         newMatch.team1_player2_streak = match_data.data.team1_player2_streak;
         newMatch.team1_player2_mmr = match_data.data.team1_player2_mmr;
         newMatch.team1_player2_mmr_changed = match_data.data.team1_player2_mmr_changed;
+        newMatch.team1_player2_point = match_data.data.team1_player2_point;
 
         newMatch.team2_player1_name = match_data.data.team2_player1_name;
         newMatch.team2_player1_streak = match_data.data.team2_player1_streak;
         newMatch.team2_player1_mmr = match_data.data.team2_player1_mmr;
         newMatch.team2_player1_mmr_changed = match_data.data.team2_player1_mmr_changed;
+        newMatch.team2_player1_point = match_data.data.team2_player1_point;
 
         newMatch.team2_player2_name = match_data.data.team2_player2_name;
         newMatch.team2_player2_streak = match_data.data.team2_player2_streak;
         newMatch.team2_player2_mmr = match_data.data.team2_player2_mmr;
         newMatch.team2_player2_mmr_changed = match_data.data.team2_player2_mmr_changed;
+        newMatch.team2_player2_point = match_data.data.team2_player2_point;
 
         newMatch.point = match_data.data.point;
 
@@ -101,11 +105,13 @@ export default function OverviewPage() {
     name,
     streak,
     mmr,
+    point,
     align = "left",
   }: {
     name: string,
     streak: number,
     mmr: number,
+    point: number,
     align?: "left" | "right"
   }) => (
     <Box
@@ -123,7 +129,7 @@ export default function OverviewPage() {
         {name}
       </Text>
       <Text fontSize="14px" color="white">
-        {streak}연승 ({mmr})
+        {streak}연승 ({mmr}) ♦️{point}
       </Text>
     </Box>
   );
@@ -150,12 +156,14 @@ export default function OverviewPage() {
                     name={match.team1_player1_name}
                     streak={match.team1_player1_streak}
                     mmr={match.team1_player1_mmr}
+                    point={match.team1_player1_point}
                     align="left"
                   />
                   <PlayerBox
                     name={match.team1_player2_name}
                     streak={match.team1_player2_streak}
                     mmr={match.team1_player2_mmr}
+                    point={match.team1_player2_point}
                     align="left"
                   />
                 </Flex>
@@ -182,12 +190,14 @@ export default function OverviewPage() {
                     name={match.team2_player1_name}
                     streak={match.team2_player1_streak}
                     mmr={match.team2_player1_mmr}
+                    point={match.team2_player1_point}
                     align="right"
                   />
                   <PlayerBox
                     name={match.team2_player2_name}
                     streak={match.team2_player2_streak}
                     mmr={match.team2_player2_mmr}
+                    point={match.team2_player2_point}
                     align="right"
                   />
                 </Flex>
