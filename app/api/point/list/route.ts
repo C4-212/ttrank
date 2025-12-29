@@ -3,7 +3,7 @@ import { prisma } from "@/app/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
-    const { page = 1, keyword = ""  } = await request.json();
+    const { page = 1, keyword = ""  } = await request.json();9
 
     const take = 20;
     const currentPage = Number(page) || 1;

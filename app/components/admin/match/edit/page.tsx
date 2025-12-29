@@ -15,11 +15,12 @@ import {
     IconButton,
     Center,
     Button,
-    RadioGroup
+    RadioGroup,
+    Spinner
 } from "@chakra-ui/react";
 
 import { setCookie, getCookie } from 'cookies-next';
-import { Player, Match, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
+import { Player, LiveMatch, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";
 import { useState, useEffect } from "react";
 import { redirect } from "next/navigation";
@@ -29,7 +30,7 @@ const items = [
     { label: "팀2", value: "2" },
 ]
 
-function update(authToken: string, match: Match, winner: string) {
+function update(authToken: string, match: LiveMatch, winner: string) {
     const ok = window.confirm("정말 변경하시겠습니까?");
     if (!ok) return;
 
@@ -56,7 +57,7 @@ function update(authToken: string, match: Match, winner: string) {
     match_update();
 }
 
-function cancel(authToken: string, match: Match) {
+function cancel(authToken: string, match: LiveMatch) {
     const ok = window.confirm("정말 취소하시겠습니까?");
     if (!ok) return;
 
@@ -87,8 +88,9 @@ function cancel(authToken: string, match: Match) {
 export default function OverviewPage() {
 
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-    const [match, setMatch] = useState<Match | null>(null);
+    const [match, setMatch] = useState<LiveMatch | null>(null);
     const [selectedTeam, setSelectedTeam] = useState<string | null>("1");
+    const [loading, setLoading] = useState(false);
 
     const authToken = getCookie('authToken')?.toString();
 
@@ -126,6 +128,7 @@ export default function OverviewPage() {
 
     useEffect(() => {
         const match_live = async () => {
+            setLoading(true);
             const res = await fetch("/api/match/live", {
                 method: "POST",
                 headers: {
@@ -137,7 +140,7 @@ export default function OverviewPage() {
             const match_data = await res.json();
 
             if (match_data.data !== null) {
-                const newMatch: Match = new Match();
+                const newMatch: LiveMatch = new LiveMatch();
 
                 newMatch.idx = match_data.data.idx;
 
@@ -147,11 +150,13 @@ export default function OverviewPage() {
                 newMatch.team1_player1_streak = match_data.data.team1_player1_streak;
                 newMatch.team1_player1_mmr = match_data.data.team1_player1_mmr;
                 newMatch.team1_player1_mmr_changed = match_data.data.team1_player1_mmr_changed;
+                newMatch.team1_player1_point = match_data.data.team1_player1_point;
 
                 newMatch.team1_player2_name = match_data.data.team1_player2_name;
                 newMatch.team1_player2_streak = match_data.data.team1_player2_streak;
                 newMatch.team1_player2_mmr = match_data.data.team1_player2_mmr;
                 newMatch.team1_player2_mmr_changed = match_data.data.team1_player2_mmr_changed;
+                newMatch.team1_player2_point = match_data.data.team1_player2_point;
 
                 newMatch.team2_race = match_data.data.team2_race;
 
@@ -159,16 +164,19 @@ export default function OverviewPage() {
                 newMatch.team2_player1_streak = match_data.data.team2_player1_streak;
                 newMatch.team2_player1_mmr = match_data.data.team2_player1_mmr;
                 newMatch.team2_player1_mmr_changed = match_data.data.team2_player1_mmr_changed;
+                newMatch.team2_player1_point = match_data.data.team2_player1_point;
 
                 newMatch.team2_player2_name = match_data.data.team2_player2_name;
                 newMatch.team2_player2_streak = match_data.data.team2_player2_streak;
                 newMatch.team2_player2_mmr = match_data.data.team2_player2_mmr;
                 newMatch.team2_player2_mmr_changed = match_data.data.team2_player2_mmr_changed;
+                newMatch.team2_player2_point = match_data.data.team2_player2_point;
 
                 newMatch.point = match_data.data.point;
 
                 setMatch(newMatch);
             }
+            setLoading(false);
         }
         match_live();
     }, []);
@@ -210,6 +218,11 @@ export default function OverviewPage() {
                         transition={{ duration: 0.4 }}
                     >
                         {
+                            loading ? (
+                                <Flex h="300px" justify="center" align="center">
+                                    <Spinner size="lg" />
+                                </Flex>
+                            ) :
                             match !== null ?
                                 <Box w="100%" bg="white">
                                     <Flex
@@ -231,14 +244,14 @@ export default function OverviewPage() {
                                                 fontSize={match.team1_player1_name.length > 10 ? "10px" : "16px"}>
                                                 {match.team1_player1_name}
                                             </Text>
-                                            <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr})</Text>
+                                            <Text fontSize="12px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr}) ♦️{match.team1_player1_point}</Text>
                                             <Box minH="10px"></Box>
                                             <Text
                                                 color="black"
                                                 fontSize={match.team1_player2_name.length > 10 ? "10px" : "16px"}>
                                                 {match.team1_player2_name}
                                             </Text>
-                                            <Text fontSize="12px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr})</Text>
+                                            <Text fontSize="12px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr}) ♦️{match.team1_player2_point}</Text>
                                         </Box>
                                         <Spacer />
                                         <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
@@ -255,13 +268,13 @@ export default function OverviewPage() {
                                                 color="black"
                                                 fontSize={match.team2_player1_name.length > 10 ? "10px" : "16px"}>
                                                 {match.team2_player1_name} </Text>
-                                            <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr})</Text>
+                                            <Text fontSize="12px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr}) ♦️{match.team2_player1_point}</Text>
                                             <Box minH="10px"></Box>
                                             <Text
                                                 color="black"
                                                 fontSize={match.team2_player2_name.length > 10 ? "10px" : "16px"}>
                                                 {match.team2_player2_name} </Text>
-                                            <Text fontSize="12px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr})</Text>
+                                            <Text fontSize="12px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr}) ♦️{match.team2_player2_point}</Text>
                                         </Box>
                                     </Flex>
                                 </Box>

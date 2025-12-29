@@ -21,6 +21,7 @@ import FooterNav from "@/app/components/common/footer";
 import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form"
+import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
 
 interface FormValues {
   name: string
@@ -58,6 +59,7 @@ export default function OverviewPage() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>()
 
@@ -119,8 +121,10 @@ export default function OverviewPage() {
                 gap="10px"
               >
                 <Text color="black">아이디</Text>
-                <Input maxLength={30} fontSize="16px" width="55%" color="black" {...register("name")} />
-
+                <PlayerSearchInput
+                  name="name"
+                  setValue={setValue}
+                />
                 <Button bg="black" color="white" type="submit">
                   검색
                 </Button>

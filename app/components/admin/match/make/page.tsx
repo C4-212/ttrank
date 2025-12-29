@@ -24,6 +24,7 @@ import FooterNav from "@/app/components/common/footer";
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form"
+import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
 
 interface FormValues {
     token: string
@@ -86,6 +87,7 @@ export default function OverviewPage() {
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm<FormValues>()
 
@@ -162,7 +164,7 @@ export default function OverviewPage() {
                         <form onSubmit={onSubmit}>
                             <Field.Root invalid={!!errors.point}>
                                 <Field.Label color="black">포인트 (입력없을 시 기본 1)</Field.Label>
-                                <Input maxLength={5} fontSize="16px" color="black"{...register("point")} />
+                                <Input w="60%" maxLength={5} fontSize="16px" color="black"{...register("point")} />
                                 <Field.ErrorText>{errors.point?.message}</Field.ErrorText>
                             </Field.Root>
                             <RadioGroup.Root
@@ -184,14 +186,18 @@ export default function OverviewPage() {
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.team1_player1_name}>
                                     <Field.Label color="black">[팀1] Maker ID</Field.Label>
-                                    <Input maxLength={30} fontSize="16px" color="black"{...register("team1_player1_name")} />
-                                    <Field.ErrorText>{errors.team1_player1_name?.message}</Field.ErrorText>
+                                    <PlayerSearchInput
+                                        name="team1_player1_name"
+                                        setValue={setValue}
+                                    />
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.team1_player2_name}>
                                     <Field.Label color="black">[팀1] Controller ID</Field.Label>
-                                    <Input maxLength={30} fontSize="16px" color="black"{...register("team1_player2_name")} />
-                                    <Field.ErrorText>{errors.team1_player2_name?.message}</Field.ErrorText>
+                                    <PlayerSearchInput
+                                        name="team1_player2_name"
+                                        setValue={setValue}
+                                    />
                                 </Field.Root>
 
                                 <RadioGroup.Root
@@ -214,13 +220,18 @@ export default function OverviewPage() {
 
                                 <Field.Root invalid={!!errors.team2_player1_name}>
                                     <Field.Label color="black">[팀2] Maker ID</Field.Label>
-                                    <Input maxLength={30} fontSize="16px" color="black"{...register("team2_player1_name")} />
-                                    <Field.ErrorText>{errors.team2_player1_name?.message}</Field.ErrorText>
+                                    <PlayerSearchInput
+                                        name="team2_player1_name"
+                                        setValue={setValue}
+                                    />
                                 </Field.Root>
 
                                 <Field.Root invalid={!!errors.team2_player2_name}>
                                     <Field.Label color="black">[팀2] Controller ID</Field.Label>
-                                    <Input maxLength={30} fontSize="16px" color="black"{...register("team2_player2_name")} />
+                                    <PlayerSearchInput
+                                        name="team2_player2_name"
+                                        setValue={setValue}
+                                    />
                                     <Field.ErrorText>{errors.team2_player2_name?.message}</Field.ErrorText>
                                 </Field.Root>
 
