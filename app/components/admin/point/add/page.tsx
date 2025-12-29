@@ -211,7 +211,7 @@ export default function OverviewPage() {
 
                                 <Field.Root invalid={!!errors.point}>
                                     <Field.Label color="black">포인트</Field.Label>
-                                    <Input maxLength={7} fontSize="16px" color="black"{...register("point")} />
+                                    <Input w="60%" maxLength={7} fontSize="16px" color="black"{...register("point")} />
                                     <Field.ErrorText>{errors.point?.message}</Field.ErrorText>
                                 </Field.Root>
 
