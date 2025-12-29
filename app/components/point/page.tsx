@@ -9,7 +9,8 @@ import {
     Spacer,
     Spinner,
     Link,
-    Button
+    Button,
+    Input
 } from "@chakra-ui/react";
 
 import { formatDate_YMD, Point, MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
@@ -18,12 +19,18 @@ import FooterNav from "@/app/components/common/footer";
 import { redirect } from "next/navigation";
 import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form"
+
+interface FormValues {
+    name: string
+}
 
 export default function OverviewPage() {
     const [page, setPage] = useState(1);
     const [total_page, setTotalPage] = useState(1);
     const [leaderboard, setLeaderBoard] = useState<Point[] | null>(null);
     const [loading, setLoading] = useState(false);
+    const [keyword, setKeyword] = useState("");
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
 
     const authToken = getCookie('authToken')?.toString();
@@ -59,7 +66,7 @@ export default function OverviewPage() {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ page: page })
+                body: JSON.stringify({ page: page, keyword: keyword })
             });
 
             const fame_data = await res.json();
@@ -71,7 +78,19 @@ export default function OverviewPage() {
             setLoading(false);
         }
         player_list();
-    }, [page]);
+    }, [page, keyword]);
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormValues>()
+
+    const onSubmit = handleSubmit(async (data) => {
+        setPage(1);
+        setTotalPage(1);
+        setKeyword(data.name);
+    });
 
     return (
         <Flex minH="100vh" bg="gray.50" direction="column">
@@ -143,6 +162,38 @@ export default function OverviewPage() {
                         transition={{ duration: 0.4 }}
                     >
                         <Text fontWeight="medium" color="black">♦️100 = 치킨 기프티콘</Text>
+                    </MotionBox>
+                    <MotionBox
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        bg="white"
+                        borderRadius="lg"
+                        border="1px solid"
+                        borderColor="gray.200"
+                        p={4}
+                        minH="60px"
+                        variants={CardAnim}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ duration: 0.4 }}
+                    >
+                        <form onSubmit={onSubmit}>
+                            <Flex
+                                h="50px"
+                                bg="white"
+                                align="center"
+                                justify="center"
+                                gap="10px"
+                            >
+                                <Text color="black">아이디</Text>
+                                <Input maxLength={30} fontSize="16px" width="55%" color="black" {...register("name")} />
+
+                                <Button bg="black" color="white" type="submit">
+                                    검색
+                                </Button>
+                            </Flex>
+                        </form>
                     </MotionBox>
                     <MotionBox
                         bg="white"
