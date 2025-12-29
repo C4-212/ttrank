@@ -25,6 +25,7 @@ import FooterNav from "@/app/components/common/footer";
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form"
+import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
 
 interface FormValues {
     token: string,
@@ -86,8 +87,16 @@ export default function OverviewPage() {
     const {
         register,
         handleSubmit,
+        setValue,
+        watch,
         formState: { errors },
-    } = useForm<FormValues>()
+    } = useForm<FormValues>({
+        defaultValues: {
+            name: "",
+        },
+    });
+
+    const nameValue = watch("name");
 
     const onSubmit = handleSubmit(async (data) => {
         const ok = window.confirm("포인트를 추가/사용 하시겠습니까?");
@@ -159,8 +168,11 @@ export default function OverviewPage() {
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.name}>
                                     <Field.Label color="black">아이디</Field.Label>
-                                    <Input maxLength={30} fontSize="16px" color="black"{...register("name")} />
-                                    <Field.ErrorText>{errors.name?.message}</Field.ErrorText>
+                                    <PlayerSearchInput
+                                        name="name"
+                                        value={nameValue}
+                                        setValue={setValue}
+                                    />
                                 </Field.Root>
 
                                 <RadioGroup.Root
