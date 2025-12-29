@@ -182,7 +182,7 @@ export default function OverviewPage() {
                 <Text fontWeight="bold" fontSize="32px" color="white" lineHeight="1">
                   VS
                 </Text>
-                <Text fontSize="12px" color="whiteAlpha.700" mt="4px">
+                <Text fontSize="12px" color="white" mt="4px">
                   ♦️{match.point} 매치
                 </Text>
               </Flex>
