@@ -1,24 +1,23 @@
 "use client";
 
 import { Box, Input, Text, Spinner } from "@chakra-ui/react";
-import { useEffect, useState, useRef  } from "react";
+import { useEffect, useState, useRef } from "react";
 import { UseFormSetValue } from "react-hook-form";
 
 interface Props {
     name: string;
+    value: string;
     setValue: UseFormSetValue<any>;
 }
 
-export default function PlayerSearchInput({ name, setValue }: Props) {
-    const [keyword, setKeyword] = useState("");
+export default function PlayerSearchInput({ name, value, setValue }: Props) {
     const [list, setList] = useState<any[]>([]);
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-
     const isSelectingRef = useRef(false);
 
     useEffect(() => {
-        if (!keyword || isSelectingRef.current) {
+        if (!value || isSelectingRef.current) {
             setList([]);
             isSelectingRef.current = false;
             return;
@@ -29,7 +28,7 @@ export default function PlayerSearchInput({ name, setValue }: Props) {
             const res = await fetch("/api/player/list", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ keyword: keyword }),
+                body: JSON.stringify({ keyword: value }),
             });
 
             const data = await res.json();
@@ -39,7 +38,7 @@ export default function PlayerSearchInput({ name, setValue }: Props) {
         }, 400);
 
         return () => clearTimeout(timer);
-    }, [keyword]);
+    }, [value]);
 
     return (
         <Box position="relative" w="60%">
@@ -47,15 +46,15 @@ export default function PlayerSearchInput({ name, setValue }: Props) {
                 maxLength={30}
                 fontSize="16px"
                 color="black"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
+                value={value}
+                onChange={(e) =>
+                    setValue(name, e.target.value, {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                    })
+                }
                 onFocus={() => list.length > 0 && setOpen(true)}
-                onBlur={() => {
-                    setTimeout(() => {
-                        setOpen(false);
-                    }, 150);
-                }}
-
+                onBlur={() => setTimeout(() => setOpen(false), 150)}
             />
 
             {open && (
@@ -87,10 +86,19 @@ export default function PlayerSearchInput({ name, setValue }: Props) {
                                 px={3}
                                 py={2}
                                 _hover={{ bg: "gray.100", cursor: "pointer" }}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        isSelectingRef.current = true;
+                                        setOpen(false);
+                                    }
+                                }}
+
                                 onMouseDown={() => {
                                     isSelectingRef.current = true;
-                                    setKeyword(player.name);
-                                    setValue(name, player.name);
+                                    setValue(name, player.name, {
+                                        shouldDirty: true,
+                                        shouldValidate: true,
+                                    });
                                     setOpen(false);
                                 }}
                             >

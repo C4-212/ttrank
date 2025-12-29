@@ -60,13 +60,20 @@ export default function OverviewPage() {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
-  } = useForm<FormValues>()
+  } = useForm<FormValues>({
+    defaultValues: {
+      name: "",
+    },
+  })
+
+  const nameValue = watch("name");
 
   const onSubmit = handleSubmit(async (data) => {
     setPage(1);
     setTotalPage(1);
-    setKeyword(data.name);
+    setKeyword(!data.name ? "" : data.name);
   });
 
   return (
@@ -123,6 +130,7 @@ export default function OverviewPage() {
                 <Text color="black">아이디</Text>
                 <PlayerSearchInput
                   name="name"
+                  value={nameValue}
                   setValue={setValue}
                 />
                 <Button bg="black" color="white" type="submit">

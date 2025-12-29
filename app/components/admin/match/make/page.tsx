@@ -88,8 +88,21 @@ export default function OverviewPage() {
         register,
         handleSubmit,
         setValue,
+        watch,
         formState: { errors },
-    } = useForm<FormValues>()
+      } = useForm<FormValues>({
+        defaultValues: {
+          team1_player1_name: "",
+          team1_player2_name: "",
+          team2_player1_name: "",
+          team2_player2_name: "",
+        },
+      })
+    
+      const team1_player1_name = watch("team1_player1_name");
+      const team1_player2_name = watch("team1_player2_name");
+      const team2_player1_name = watch("team2_player1_name");
+      const team2_player2_name = watch("team2_player2_name");
 
     const onSubmit = handleSubmit(async (data) => {
          const ok = window.confirm("매치를 생성하시겠습니까?");
@@ -188,6 +201,7 @@ export default function OverviewPage() {
                                     <Field.Label color="black">[팀1] Maker ID</Field.Label>
                                     <PlayerSearchInput
                                         name="team1_player1_name"
+                                        value={team1_player1_name}
                                         setValue={setValue}
                                     />
                                 </Field.Root>
@@ -196,6 +210,7 @@ export default function OverviewPage() {
                                     <Field.Label color="black">[팀1] Controller ID</Field.Label>
                                     <PlayerSearchInput
                                         name="team1_player2_name"
+                                        value={team1_player2_name}
                                         setValue={setValue}
                                     />
                                 </Field.Root>
@@ -222,6 +237,7 @@ export default function OverviewPage() {
                                     <Field.Label color="black">[팀2] Maker ID</Field.Label>
                                     <PlayerSearchInput
                                         name="team2_player1_name"
+                                        value={team2_player1_name}
                                         setValue={setValue}
                                     />
                                 </Field.Root>
@@ -230,6 +246,7 @@ export default function OverviewPage() {
                                     <Field.Label color="black">[팀2] Controller ID</Field.Label>
                                     <PlayerSearchInput
                                         name="team2_player2_name"
+                                        value={team2_player2_name}
                                         setValue={setValue}
                                     />
                                     <Field.ErrorText>{errors.team2_player2_name?.message}</Field.ErrorText>

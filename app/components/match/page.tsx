@@ -37,7 +37,7 @@ export default function OverviewPage() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ page: page, keyword:keyword })
+        body: JSON.stringify({ page: page, keyword: keyword })
       });
 
       const match_data = await res.json();
@@ -52,17 +52,24 @@ export default function OverviewPage() {
   }, [page, keyword]);
 
   const {
-      register,
-      handleSubmit,
-      setValue,
-      formState: { errors },
-    } = useForm<FormValues>()
-  
-    const onSubmit = handleSubmit(async (data) => {
-      setPage(1);
-      setTotalPage(1);
-      setKeyword(data.name);
-    });
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues>({
+    defaultValues: {
+      name: "",
+    },
+  })
+
+  const nameValue = watch("name");
+
+  const onSubmit = handleSubmit(async (data) => {
+    setPage(1);
+    setTotalPage(1);
+    setKeyword(!data.name?"":data.name);
+  });
 
   return (
     <Flex minH="100vh" bg="gray.50" direction="column">
@@ -115,6 +122,7 @@ export default function OverviewPage() {
                 <Text color="black">아이디</Text>
                 <PlayerSearchInput
                   name="name"
+                  value={nameValue}
                   setValue={setValue}
                 />
                 <Button bg="black" color="white" type="submit">
@@ -142,135 +150,135 @@ export default function OverviewPage() {
                   <Spinner size="lg" />
                 </Flex>
               ) :
-              matches?.length !== 0 ?
-                matches?.map((item, idx) => (
-                  <Box
-                    w="100%"
-                    bg="white"
-                    border="1px solid"
-                    borderColor="gray.200"
-                    minH="200px"
-                    marginBottom="5px">
-                    <Flex
-                      minH="10px"
+                matches?.length !== 0 ?
+                  matches?.map((item, idx) => (
+                    <Box
+                      w="100%"
                       bg="white"
-                      align="center"
-                      justify="center"
-                    >
-                      <Text fontSize="10px" fontWeight="normal" color="grey" p={4} pb="1px">{formatDate(item.updated_at)}</Text>
-                      <Spacer/>
-                      <Text fontSize="10px" fontWeight="normal" color="black" p={4} pb="1px">♦️{item.point}</Text>
-                    </Flex>
-                    <Flex
-                      h="100%"
-                      bg="white"
-                      align="center"
-                      justify="center"
-                    >
-                      <Box
-                        w="50%"
+                      border="1px solid"
+                      borderColor="gray.200"
+                      minH="200px"
+                      marginBottom="5px">
+                      <Flex
+                        minH="10px"
                         bg="white"
-                        p={4}
-                        pb="1px"
-                        minH="150px">
-                        <Flex
-                          h="100%"
-                          bg="white"
-                          align="center"
-                          justify="center"
-                          textAlign="left"
-                          pb="5px"
-                        >
-                          <Text fontWeight="bold" fontSize="12px" color="#f23f3f">[1팀 {item.team1_race}]</Text>
-                          {item.winner == "1"?<Text fontWeight="bold" color="green">　👑승리!</Text>:""}
-                          <Spacer />
-                        </Flex>
-                        <Text
-                          color="black"
-                          fontSize={item.team1_player1_name.length > 10 ? "10px" : "16px"}>
-                          {item.team1_player1_name}
-                        </Text>
-                        <Flex
-                          h="100%"
-                          bg="white"
-                          align="center">
-                          <Text fontSize="12px" color="grey">{item.team1_player1_streak}연승 ({item.team1_player1_mmr})</Text>
-                          <Text fontWeight="bold" fontSize="12px" color={item.winner == "1"?"green":"red"}>　({item.team1_player1_mmr_changed >= 0?"+":""}{item.team1_player1_mmr_changed})</Text>
-                        </Flex>
-                        <Box minH="10px"></Box>
-                        <Text
-                          color="black"
-                          fontSize={item.team1_player2_name.length > 10 ? "10px" : "16px"}>
-                          {item.team1_player2_name}
-                        </Text>
-                        <Flex
-                          h="100%"
-                          bg="white"
-                          align="center">
-                          <Text fontSize="12px" color="grey">{item.team1_player2_streak}연승 ({item.team1_player2_mmr})</Text>
-                          <Text fontWeight="bold" fontSize="12px" color={item.winner == "1"?"green":"red"}>　({item.team1_player2_mmr_changed >= 0?"+":""}{item.team1_player2_mmr_changed})</Text>
-                        </Flex>
-                      </Box>
-                      <Spacer />
-                      <Box
-                        w="50%"
+                        align="center"
+                        justify="center"
+                      >
+                        <Text fontSize="10px" fontWeight="normal" color="grey" p={4} pb="1px">{formatDate(item.updated_at)}</Text>
+                        <Spacer />
+                        <Text fontSize="10px" fontWeight="normal" color="black" p={4} pb="1px">♦️{item.point}</Text>
+                      </Flex>
+                      <Flex
+                        h="100%"
                         bg="white"
-                        p={4}
-                        pb="1px"
-                        textAlign="right"
-                        minH="150px">
-                        <Flex
-                          h="100%"
+                        align="center"
+                        justify="center"
+                      >
+                        <Box
+                          w="50%"
                           bg="white"
-                          align="center"
-                          justify="center"
+                          p={4}
+                          pb="1px"
+                          minH="150px">
+                          <Flex
+                            h="100%"
+                            bg="white"
+                            align="center"
+                            justify="center"
+                            textAlign="left"
+                            pb="5px"
+                          >
+                            <Text fontWeight="bold" fontSize="12px" color="#f23f3f">[1팀 {item.team1_race}]</Text>
+                            {item.winner == "1" ? <Text fontWeight="bold" color="green">　👑승리!</Text> : ""}
+                            <Spacer />
+                          </Flex>
+                          <Text
+                            color="black"
+                            fontSize={item.team1_player1_name.length > 10 ? "10px" : "16px"}>
+                            {item.team1_player1_name}
+                          </Text>
+                          <Flex
+                            h="100%"
+                            bg="white"
+                            align="center">
+                            <Text fontSize="12px" color="grey">{item.team1_player1_streak}연승 ({item.team1_player1_mmr})</Text>
+                            <Text fontWeight="bold" fontSize="12px" color={item.winner == "1" ? "green" : "red"}>　({item.team1_player1_mmr_changed >= 0 ? "+" : ""}{item.team1_player1_mmr_changed})</Text>
+                          </Flex>
+                          <Box minH="10px"></Box>
+                          <Text
+                            color="black"
+                            fontSize={item.team1_player2_name.length > 10 ? "10px" : "16px"}>
+                            {item.team1_player2_name}
+                          </Text>
+                          <Flex
+                            h="100%"
+                            bg="white"
+                            align="center">
+                            <Text fontSize="12px" color="grey">{item.team1_player2_streak}연승 ({item.team1_player2_mmr})</Text>
+                            <Text fontWeight="bold" fontSize="12px" color={item.winner == "1" ? "green" : "red"}>　({item.team1_player2_mmr_changed >= 0 ? "+" : ""}{item.team1_player2_mmr_changed})</Text>
+                          </Flex>
+                        </Box>
+                        <Spacer />
+                        <Box
+                          w="50%"
+                          bg="white"
+                          p={4}
+                          pb="1px"
                           textAlign="right"
-                          pb="5px"
-                        >
-                          <Spacer />
-                          {item.winner == "2"?<Text fontWeight="bold" color="green">　👑승리!</Text>:""}
-                          <Text fontWeight="bold" fontSize="12px" color="#4775ea">　[2팀 {item.team2_race}]</Text>
-                        </Flex>
-                        <Text
-                          color="black"
-                          fontSize={item.team2_player1_name.length > 10 ? "10px" : "16px"}>
-                          {item.team2_player1_name} </Text>
-                        <Flex
-                          h="100%"
-                          bg="white"
-                          align="center"
-                          textAlign="right">
-                          <Spacer />
-                          <Text fontSize="12px" color="grey">{item.team2_player1_streak}연승 ({item.team2_player1_mmr})</Text>
-                          <Text fontWeight="bold" fontSize="12px" color={item.winner == "2"?"green":"red"}>　({item.team2_player1_mmr_changed >= 0?"+":""}{item.team2_player1_mmr_changed})</Text>
-                        </Flex>
-                        <Box minH="10px"></Box>
-                        <Text
-                          color="black"
-                          fontSize={item.team2_player2_name.length > 10 ? "10px" : "16px"}>
-                          {item.team2_player2_name} </Text>
-                        <Flex
-                          h="100%"
-                          bg="white"
-                          align="center"
-                          textAlign="right">
-                          <Spacer />
-                          <Text fontSize="12px" color="grey">{item.team2_player2_streak}연승 ({item.team2_player2_mmr})</Text>
-                          <Text fontWeight="bold" fontSize="12px" color={item.winner == "2"?"green":"red"}>　({item.team2_player2_mmr_changed >= 0?"+":""}{item.team2_player2_mmr_changed})</Text>
-                        </Flex>
-                      </Box>
-                    </Flex>
-                  </Box>
-                ))
-                :
-                <Flex
-                  h="200px"
-                  bg="white"
-                  align="center"
-                  justify="center"
-                >
-                  <Text color="black">경기 정보가 없습니다.</Text>
-                </Flex>
+                          minH="150px">
+                          <Flex
+                            h="100%"
+                            bg="white"
+                            align="center"
+                            justify="center"
+                            textAlign="right"
+                            pb="5px"
+                          >
+                            <Spacer />
+                            {item.winner == "2" ? <Text fontWeight="bold" color="green">　👑승리!</Text> : ""}
+                            <Text fontWeight="bold" fontSize="12px" color="#4775ea">　[2팀 {item.team2_race}]</Text>
+                          </Flex>
+                          <Text
+                            color="black"
+                            fontSize={item.team2_player1_name.length > 10 ? "10px" : "16px"}>
+                            {item.team2_player1_name} </Text>
+                          <Flex
+                            h="100%"
+                            bg="white"
+                            align="center"
+                            textAlign="right">
+                            <Spacer />
+                            <Text fontSize="12px" color="grey">{item.team2_player1_streak}연승 ({item.team2_player1_mmr})</Text>
+                            <Text fontWeight="bold" fontSize="12px" color={item.winner == "2" ? "green" : "red"}>　({item.team2_player1_mmr_changed >= 0 ? "+" : ""}{item.team2_player1_mmr_changed})</Text>
+                          </Flex>
+                          <Box minH="10px"></Box>
+                          <Text
+                            color="black"
+                            fontSize={item.team2_player2_name.length > 10 ? "10px" : "16px"}>
+                            {item.team2_player2_name} </Text>
+                          <Flex
+                            h="100%"
+                            bg="white"
+                            align="center"
+                            textAlign="right">
+                            <Spacer />
+                            <Text fontSize="12px" color="grey">{item.team2_player2_streak}연승 ({item.team2_player2_mmr})</Text>
+                            <Text fontWeight="bold" fontSize="12px" color={item.winner == "2" ? "green" : "red"}>　({item.team2_player2_mmr_changed >= 0 ? "+" : ""}{item.team2_player2_mmr_changed})</Text>
+                          </Flex>
+                        </Box>
+                      </Flex>
+                    </Box>
+                  ))
+                  :
+                  <Flex
+                    h="200px"
+                    bg="white"
+                    align="center"
+                    justify="center"
+                  >
+                    <Text color="black">경기 정보가 없습니다.</Text>
+                  </Flex>
             }
           </MotionBox>
         </VStack>
