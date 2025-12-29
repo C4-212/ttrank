@@ -177,8 +177,14 @@ export default function OverviewPage() {
                 height="100px"
                 align="center"
                 justify="center"
+                direction="column"
               >
-                <Text fontWeight="bold" fontSize="32px" color="white">VS</Text>
+                <Text fontWeight="bold" fontSize="32px" color="white" lineHeight="1">
+                  VS
+                </Text>
+                <Text fontSize="12px" color="whiteAlpha.700" mt="4px">
+                  ♦️{match.point} 매치
+                </Text>
               </Flex>
 
               <Spacer />
@@ -250,6 +256,7 @@ export default function OverviewPage() {
           </Box>
         </Flex>
       </Box> */}
+      
     </Box>
   );
 }
