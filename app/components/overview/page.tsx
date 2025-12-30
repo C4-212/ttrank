@@ -154,7 +154,7 @@ export default function OverviewPage() {
         alignItems="center"
       >
         <Flex align="center" w="100%" h="100%">
-          <Link href="/components/honors" target="_self" rel="noopener noreferrer">
+          <Link href="/" target="_self" rel="noopener noreferrer">
             <Image src="/logo.png" />
           </Link>
           <Spacer />
