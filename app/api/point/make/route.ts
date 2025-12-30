@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
       }
 
       // 플레이어 포인트 잔액 확인
-      if(type=="pay" && player.point < point){
+      if(getType(type)=="pay" && player.point < point){
         return NextResponse.json({ success: false, error: "플레이어 포인트가 부족합니다.", status: 500 });
       }
 
