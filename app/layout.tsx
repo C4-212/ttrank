@@ -35,6 +35,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "TTRank",
+              "alternateName":"TTRank",
               "url": "https://ttrank.kr/",
               "inLanguage": "ko-KR",
               "publisher": { "@id": "https://ttrank.kr/#org" },
