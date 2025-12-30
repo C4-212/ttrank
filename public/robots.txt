@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: components/admin
+Disallow: /components/admin
 Disallow: /components/obs
 Sitemap: https://ttrank.kr/sitemap.xml
