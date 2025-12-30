@@ -17,7 +17,7 @@ export default function RootLayout({
               "@type": "Organization",
               "@id": "https://ttrank.kr/#org",
               "name": "TTRank",
-              "alternateName": ["TTRank", "티티랭크"],
+              "alternateName": ["TTRank", "티티랭크", "TT랭크"],
               "url": "https://ttrank.kr/",
               "sameAs": [
                 "https://www.sooplive.co.kr/station/prowlgus",
