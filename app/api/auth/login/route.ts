@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateToken } from "@/app/components/common/auth";
 import { prisma } from "@/app/lib/prisma";
+import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,11 +11,17 @@ export async function POST(req: NextRequest) {
     }
 
     const admin = await prisma.admin.findFirst({
-      where: { id, password }
+      where: { 
+        id:id,
+      }
     });
 
-
     if (!admin) {
+      return NextResponse.json({ success: false, error: "아이디 또는 비밀번호가 올바르지 않습니다.", status: 500 });
+    }
+
+    const isMatch = await bcrypt.compare(password, admin.password);
+    if (!isMatch) {
       return NextResponse.json({ success: false, error: "아이디 또는 비밀번호가 올바르지 않습니다.", status: 500 });
     }
 
@@ -33,6 +40,23 @@ export async function POST(req: NextRequest) {
         id: updated.id,
         token: updated.token
       }
+
+    // 임시 비밀번호 생성 코드
+    // const pass = await bcrypt.hashSync(password, 10);
+
+    // const updated = await prisma.admin.update({
+    //   where: { idx: admin.idx },
+    //   data: {
+    //     password: pass,
+    //     updated_at: new Date()
+    //   }
+    // });
+
+    // return NextResponse.json({
+    //   success: true, data: {
+    //     password: pass
+    //   }
+    // });
     });
   } catch (err) {
     console.error(err);
