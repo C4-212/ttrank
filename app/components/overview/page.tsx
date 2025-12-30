@@ -154,7 +154,9 @@ export default function OverviewPage() {
         alignItems="center"
       >
         <Flex align="center" w="100%" h="100%">
-          <Text fontWeight="semibold" color="black">연승/승점/MMR 확인</Text>
+          <Link href="/components/honors" target="_self" rel="noopener noreferrer">
+            <Image src="/logo.png" />
+          </Link>
           <Spacer />
           <Link href="/components/honors" target="_self" rel="noopener noreferrer">
             <Button bg="black" color="white"> 👑아너스클럽 </Button>
