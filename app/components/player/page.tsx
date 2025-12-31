@@ -22,6 +22,7 @@ import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form"
 import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
+import { RefreshCw } from "lucide-react";
 
 interface FormValues {
   name: string
@@ -33,6 +34,7 @@ export default function OverviewPage() {
   const [leaderboard, setLeaderBoard] = useState<Player[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [keyword, setKeyword] = useState("");
+  const [rankingType, setRankingType] = useState<"mmr" | "point">("mmr");
 
   useEffect(() => {
     const player_list = async () => {
@@ -42,7 +44,7 @@ export default function OverviewPage() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ page: page, keyword: keyword })
+        body: JSON.stringify({ page: page, keyword: keyword, rankingType: rankingType })
       });
 
       const player_data = await res.json();
@@ -54,7 +56,7 @@ export default function OverviewPage() {
       setLoading(false);
     }
     player_list();
-  }, [page, keyword]);
+  }, [page, keyword, rankingType]);
 
   const {
     register,
@@ -92,7 +94,24 @@ export default function OverviewPage() {
         alignItems="center"
       >
         <Flex align="center" w="100%" h="100%">
-          <Text fontWeight="semibold" color="black">🥇유저 랭킹 (MMR)</Text>
+          <Text fontWeight="semibold" color="black">🥇유저 랭킹 ({rankingType === "mmr" ? "MMR" : "Point"})</Text>
+          <IconButton
+            aria-label="랭킹 전환"
+            variant="ghost"
+            size="sm"
+            onClick={() =>
+              setRankingType(prev => (prev === "mmr" ? "point" : "mmr"))
+            }
+          >
+            <RefreshCw
+              size={16}
+              style={{
+                transition: "transform 0.3s ease",
+                transform:
+                  rankingType === "point" ? "rotate(180deg)" : "rotate(0deg)",
+              }}
+            />
+          </IconButton>
           <Spacer />
           <Link href="/components/fame" target="_self" rel="noopener noreferrer">
             <Button bg="black" color="white">  🏆명예의전당 </Button>

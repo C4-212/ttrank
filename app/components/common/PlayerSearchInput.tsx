@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Input, Text, Spinner } from "@chakra-ui/react";
+import { Box, Input, Text, Spinner, Flex, Spacer } from "@chakra-ui/react";
 import { useEffect, useState, useRef } from "react";
 import { UseFormSetValue } from "react-hook-form";
 
@@ -102,7 +102,17 @@ export default function PlayerSearchInput({ name, value, setValue }: Props) {
                                     setOpen(false);
                                 }}
                             >
-                                <Text color="black">{player.name}</Text>
+                                <Flex
+                                    minH="12px"
+                                    bg="white"
+                                    align="center"
+                                    justify="center"
+                                >
+                                    <Text fontSize="10px" fontWeight="normal" color="black">{player.name}</Text>
+                                    <Text fontSize="10px" fontWeight="normal" color="grey">　({player.mmr})</Text>
+                                    <Spacer/>
+                                    <Text fontSize="10px" fontWeight="normal" color="black">♦️{player.point}</Text>
+                                </Flex>
                             </Box>
                         ))
                     )}

@@ -3,11 +3,16 @@ import { prisma } from "@/app/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
-    const { page = 1, keyword = "" } = await request.json();
+    const { page = 1, keyword = "", rankingType = "mmr" } = await request.json();
 
     const take = 20;
     const currentPage = Number(page) || 1;
     const skip = (currentPage - 1) * take;
+
+    const orderBy =
+      rankingType === "point"
+        ? [{ point: "desc" as const }, { name: "asc" as const }] 
+        : [{ mmr: "desc" as const }, { name: "asc" as const }];
 
     const totalCount = await prisma.player.count({
       where:{
@@ -25,10 +30,7 @@ export async function POST(request: NextRequest) {
       }},
       skip:skip,
       take:take,
-      orderBy: [
-        {mmr: "desc" },
-        {name: "asc" }
-      ],
+      orderBy:orderBy,
     });
 
     // rank 추가
