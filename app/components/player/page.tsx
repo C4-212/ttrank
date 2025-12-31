@@ -104,6 +104,7 @@ export default function OverviewPage() {
             }
           >
             <RefreshCw
+              color="black"
               size={16}
               style={{
                 transition: "transform 0.3s ease",
