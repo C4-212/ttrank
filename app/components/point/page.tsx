@@ -96,13 +96,11 @@ export default function OverviewPage() {
     const nameValue = watch("name");
 
     const onSubmit = handleSubmit(async (data) => {
-        if (data.name == "" || data.name == null || data.name == undefined) {
-            window.location.reload();
-            return;
-        }
-
         setPage(1);
-        setTotalPage(1);
+        if(keyword !== data.name)
+    {
+      setTotalPage(1);
+    }
         setKeyword(data.name);
     });
 

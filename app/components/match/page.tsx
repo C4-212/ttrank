@@ -67,7 +67,10 @@ export default function OverviewPage() {
 
   const onSubmit = handleSubmit(async (data) => {
     setPage(1);
-    setTotalPage(1);
+    if(keyword !== data.name)
+    {
+      setTotalPage(1);
+    }
     setKeyword(!data.name?"":data.name);
   });
 
