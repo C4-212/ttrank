@@ -23,14 +23,26 @@ import { useForm } from "react-hook-form"
 import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
 
 const ITEMS = [
-    { label: "꽝", weight: 220, color: "#f87171" },
-    { label: "♦️1", weight: 200, color: "#f8d971ff" },
-    { label: "♦️5", weight: 40, color: "#97fb24ff" },
-    { label: "♦️10", weight: 16, color: "#34d3cbff" },
+    { label: "꽝", weight: 800, color: "#f87171" },
+    { label: "♦️1", weight: 800, color: "#f8d971ff" },
+    { label: "♦️2", weight: 120, color: "#edfb24ff" },
+    { label: "♦️5", weight: 60, color: "#97fb24ff" },
+    { label: "♦️10", weight: 30, color: "#34d3cbff" },
     { label: "♦️50", weight: 6, color: "#6a60faff" },
-    { label: "♦️100", weight: 2, color: "#d18bfaff" },
+    { label: "♦️100", weight: 3, color: "#d18bfaff" },
     { label: "♦️500", weight: 1, color: "#fb71b1ff" },
 ];
+
+// 테스트 코드
+// const pickWeightedIndex = () => {
+//     const total = ITEMS.reduce((s, i) => s + i.weight, 0);
+//     let r = Math.random() * total;
+//     for (let i = 0; i < ITEMS.length; i++) {
+//         r -= ITEMS[i].weight;
+//         if (r <= 0) return i;
+//     }
+//     return 0;
+// };
 
 const size = 320;
 const radius = size / 2;
@@ -42,6 +54,27 @@ export default function RouletteCanvas() {
     const [rotation, setRotation] = useState(0);
     const [spinning, setSpinning] = useState(false);
     const [result, setResult] = useState<string | null>(null);
+
+    // // 테스트 코드
+    // const counter = [
+    //     { label: "꽝", count: 0 },
+    //     { label: "♦️1", count: 0 },
+    //     { label: "♦️2", count: 0 },
+    //     { label: "♦️5", count: 0 },
+    //     { label: "♦️10", count: 0 },
+    //     { label: "♦️50", count: 0 },
+    //     { label: "♦️100", count: 0 },
+    //     { label: "♦️500", count: 0 },
+    // ];
+
+    // let count = 0;
+    // while(count < 100000)
+    // {
+    //     count++;
+    //     counter[pickWeightedIndex()].count++;
+    // }
+
+    // console.log(counter);
 
     const draw = (angle: number) => {
         const canvas = canvasRef.current;

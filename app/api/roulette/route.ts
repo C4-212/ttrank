@@ -2,13 +2,14 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 
 const ITEMS = [
-    { label: "꽝", weight: 220 },
-    { label: "♦️1", weight: 200 },
-    { label: "♦️5", weight: 40 },
-    { label: "♦️10", weight: 16 },
+    { label: "꽝", weight: 800 },
+    { label: "♦️1", weight: 800 },
+    { label: "♦️2", weight: 120 },
+    { label: "♦️5", weight: 60 },
+    { label: "♦️10", weight: 30 },
     { label: "♦️50", weight: 6 },
-    { label: "♦️100", weight: 2 },
-    { label: "♦️500", weight: 1 },
+    { label: "♦️100", weight: 3 },
+    { label: "♦️500", weight: 1 }, 
 ];
 
 function pickWeightedIndexSecure() {
