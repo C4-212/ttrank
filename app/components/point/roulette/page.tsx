@@ -242,19 +242,19 @@ export default function RouletteCanvas() {
 
                             <Table.Body bg="white">
                                 {ITEMS.map((item) => (
-                                    <Table.Row key={item.label}>
-                                        <Table.Cell color="black">
+                                    <Table.Row bg="white" key={item.label}>
+                                        <Table.Cell bg="white" color="black">
                                             {item.label}
                                         </Table.Cell>
-                                        <Table.Cell color="black" textAlign="right">
+                                        <Table.Cell bg="white" color="black" textAlign="right">
                                             {((item.weight / TOTAL) * 100).toFixed(1)}%
                                         </Table.Cell>
                                     </Table.Row>
                                 ))}
 
                                 <Table.Row bg="white" fontWeight="bold">
-                                    <Table.Cell color="black">합계</Table.Cell>
-                                    <Table.Cell color="black" textAlign="right">100%</Table.Cell>
+                                    <Table.Cell bg="white" color="black">합계</Table.Cell>
+                                    <Table.Cell bg="white" color="black" textAlign="right">100%</Table.Cell>
                                 </Table.Row>
                             </Table.Body>
                         </Table.Root>
