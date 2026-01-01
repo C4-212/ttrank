@@ -185,7 +185,7 @@ export default function RouletteCanvas() {
                             align="center"
                             justify="center"
                         >
-                            <Text color="black">방송에서 사용하는 룰렛입니다.<br />
+                            <Text color="black">방송에서 사용하는 룰렛입니다. (1회:♦️5)<br />
                             1,000원 이상 후원시 룰렛 기회가 주어집니다.</Text>
                         </Flex>
                     </MotionBox>
