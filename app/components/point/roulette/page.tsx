@@ -79,8 +79,8 @@ export default function RouletteCanvas() {
         // ▼ 포인터
         ctx.fillStyle = "#000000ff";
         ctx.beginPath();
-        ctx.moveTo(size + 2, radius - 10);
-        ctx.lineTo(size + 2, radius + 10);
+        ctx.moveTo(size + 2, radius - 5);
+        ctx.lineTo(size + 2, radius + 5);
         ctx.lineTo(size - 18, radius);
         ctx.closePath();
         ctx.fill();
