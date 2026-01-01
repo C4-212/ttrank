@@ -265,7 +265,7 @@ export default function RouletteCanvas() {
                         <Text fontWeight="medium" color="black" pb="4px">🎁확률표</Text>
                         <Table.Root size="sm">
                             <Table.Header>
-                                <Table.Row bg="#dadadaff">
+                                <Table.Row bg="#eeeeeeff">
                                     <Table.ColumnHeader color="black">결과</Table.ColumnHeader>
                                     <Table.ColumnHeader color="black" textAlign="right">
                                         확률
