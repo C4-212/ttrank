@@ -125,7 +125,7 @@ export default function OverviewPage() {
                     {
                         isAdmin ?
                             <Link href="/components/admin/point/add">
-                                <Button bg="black" color="white"> 추가 </Button>
+                                <Button marginLeft="2px" bg="black" color="white"> 추가 </Button>
                             </Link> : ""
                     }
                 </Flex>
