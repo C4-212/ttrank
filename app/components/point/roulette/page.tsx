@@ -211,7 +211,7 @@ export default function RouletteCanvas() {
                             </Button>
 
                             {result && (
-                                <Text fontSize="lg" fontWeight="bold">
+                                <Text color="black" fontSize="lg" fontWeight="bold">
                                     🎉 결과: {result}
                                 </Text>
                             )}
@@ -232,29 +232,29 @@ export default function RouletteCanvas() {
                         <Text fontWeight="medium" color="black" pb="4px">🎁확률표</Text>
                         <Table.Root size="sm">
                             <Table.Header>
-                                <Table.Row bg="gray.100">
-                                    <Table.ColumnHeader>결과</Table.ColumnHeader>
-                                    <Table.ColumnHeader textAlign="right">
+                                <Table.Row bg="grey">
+                                    <Table.ColumnHeader color="black">결과</Table.ColumnHeader>
+                                    <Table.ColumnHeader color="black" textAlign="right">
                                         확률
                                     </Table.ColumnHeader>
                                 </Table.Row>
                             </Table.Header>
 
-                            <Table.Body>
+                            <Table.Body bg="white">
                                 {ITEMS.map((item) => (
                                     <Table.Row key={item.label}>
-                                        <Table.Cell>
+                                        <Table.Cell color="black">
                                             {item.label}
                                         </Table.Cell>
-                                        <Table.Cell textAlign="right">
+                                        <Table.Cell color="black" textAlign="right">
                                             {((item.weight / TOTAL) * 100).toFixed(1)}%
                                         </Table.Cell>
                                     </Table.Row>
                                 ))}
 
-                                <Table.Row fontWeight="bold">
-                                    <Table.Cell>합계</Table.Cell>
-                                    <Table.Cell textAlign="right">100%</Table.Cell>
+                                <Table.Row bg="white" fontWeight="bold">
+                                    <Table.Cell color="black">합계</Table.Cell>
+                                    <Table.Cell color="black" textAlign="right">100%</Table.Cell>
                                 </Table.Row>
                             </Table.Body>
                         </Table.Root>
