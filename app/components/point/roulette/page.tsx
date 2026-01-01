@@ -23,8 +23,8 @@ import { useForm } from "react-hook-form"
 import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
 
 const ITEMS = [
-    { label: "꽝", weight: 50, color: "#f87171" },
-    { label: "♦️1", weight: 50, color: "#f8d971ff" },
+    { label: "꽝", weight: 100, color: "#f87171" },
+    { label: "♦️1", weight: 100, color: "#f8d971ff" },
     { label: "♦️5", weight: 20, color: "#97fb24ff" },
     { label: "♦️10", weight: 10, color: "#34d3cbff" },
     { label: "리액션", weight: 5, color: "#71acf8ff" },
