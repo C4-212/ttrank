@@ -19,6 +19,7 @@ function getDescription(description:string)
     case "1": return "상품교환";
     case "2": return "매치포인트";
     case "3": return "관리자";
+    case "4": return "룰렛";
 
     default: return "관리자";
   }

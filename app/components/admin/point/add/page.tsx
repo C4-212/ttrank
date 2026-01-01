@@ -45,6 +45,7 @@ const description = [
     { label: "상품", value: "1" },
     { label: "매치", value: "2" },
     { label: "관리자", value: "3" },
+    { label: "룰렛", value: "4" },
 ]
 
 export default function OverviewPage() {
