@@ -21,6 +21,9 @@ import { redirect } from "next/navigation";
 import Pagination from "@/app/components/common/pagination";
 import { useForm } from "react-hook-form"
 import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
+const seedrandom = require("seedrandom");
+
+const rng = seedrandom("ttrank-roulett");
 
 const ITEMS = [
     { label: "꽝", weight: 220, color: "#f87171" },
@@ -34,7 +37,7 @@ const ITEMS = [
 
 const pickWeightedIndex = () => {
     const total = ITEMS.reduce((s, i) => s + i.weight, 0);
-    let r = Math.random() * total;
+    let r = rng() * total;
     for (let i = 0; i < ITEMS.length; i++) {
         r -= ITEMS[i].weight;
         if (r <= 0) return i;
@@ -42,16 +45,37 @@ const pickWeightedIndex = () => {
     return 0;
 };
 
+const size = 320;
+const radius = size / 2;
+const sliceAngle = (Math.PI * 2) / ITEMS.length;
+const TOTAL = ITEMS.reduce((s, i) => s + i.weight, 0);
+
 export default function RouletteCanvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [rotation, setRotation] = useState(0);
     const [spinning, setSpinning] = useState(false);
     const [result, setResult] = useState<string | null>(null);
 
-    const size = 320;
-    const radius = size / 2;
-    const sliceAngle = (Math.PI * 2) / ITEMS.length;
-    const TOTAL = ITEMS.reduce((s, i) => s + i.weight, 0);
+
+    // 테스트 코드
+    // const counter = [
+    //     { label: "꽝", count: 0 },
+    //     { label: "♦️1", count: 0 },
+    //     { label: "♦️5", count: 0 },
+    //     { label: "♦️10", count: 0 },
+    //     { label: "♦️50", count: 0 },
+    //     { label: "♦️100", count: 0 },
+    //     { label: "♦️500", count: 0 },
+    // ];
+
+    // let count = 0;
+    // while(count < 100000)
+    // {
+    //     count++;
+    //     counter[pickWeightedIndex()].count++;
+    // }
+
+    // console.log(counter);
 
     const draw = (angle: number) => {
         const canvas = canvasRef.current;
