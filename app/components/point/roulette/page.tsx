@@ -27,7 +27,6 @@ const ITEMS = [
     { label: "♦️1", weight: 100, color: "#f8d971ff" },
     { label: "♦️5", weight: 20, color: "#97fb24ff" },
     { label: "♦️10", weight: 10, color: "#34d3cbff" },
-    { label: "리액션", weight: 5, color: "#71acf8ff" },
     { label: "♦️50", weight: 5, color: "#6a60faff" },
     { label: "♦️100", weight: 2, color: "#d18bfaff" },
     { label: "♦️500", weight: 1, color: "#fb71b1ff" },
