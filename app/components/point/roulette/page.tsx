@@ -29,8 +29,8 @@ const ITEMS = [
     { label: "♦️5", weight: 120, color: "#97fb24ff" },
     { label: "♦️10", weight: 50, color: "#34d3cbff" },
     { label: "♦️50", weight: 6, color: "#6a60faff" },
-    { label: "♦️100", weight: 3, color: "#d18bfaff" },
-    { label: "♦️500", weight: 1, color: "#fb71b1ff" },
+    { label: "♦️100", weight: 4, color: "#d18bfaff" },
+    { label: "♦️500", weight: 2, color: "#fb71b1ff" },
 ];
 
 // // 테스트 코드

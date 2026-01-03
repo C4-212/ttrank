@@ -8,8 +8,8 @@ const ITEMS = [
     { label: "♦️5", weight: 120 },
     { label: "♦️10", weight: 50 },
     { label: "♦️50", weight: 6 },
-    { label: "♦️100", weight: 3 },
-    { label: "♦️500", weight: 1 }, 
+    { label: "♦️100", weight: 4 },
+    { label: "♦️500", weight: 2 }, 
 ];
 
 function pickWeightedIndexSecure() {
