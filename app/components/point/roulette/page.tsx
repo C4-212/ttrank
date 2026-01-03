@@ -25,15 +25,15 @@ import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
 const ITEMS = [
     { label: "꽝", weight: 800, color: "#f87171" },
     { label: "♦️1", weight: 700, color: "#f8d971ff" },
-    { label: "♦️2", weight: 300, color: "#edfb24ff" },
-    { label: "♦️5", weight: 90, color: "#97fb24ff" },
-    { label: "♦️10", weight: 30, color: "#34d3cbff" },
+    { label: "♦️2", weight: 400, color: "#edfb24ff" },
+    { label: "♦️5", weight: 120, color: "#97fb24ff" },
+    { label: "♦️10", weight: 50, color: "#34d3cbff" },
     { label: "♦️50", weight: 6, color: "#6a60faff" },
     { label: "♦️100", weight: 3, color: "#d18bfaff" },
     { label: "♦️500", weight: 1, color: "#fb71b1ff" },
 ];
 
-// 테스트 코드
+// // 테스트 코드
 // const pickWeightedIndex = () => {
 //     const total = ITEMS.reduce((s, i) => s + i.weight, 0);
 //     let r = Math.random() * total;
@@ -55,7 +55,7 @@ export default function RouletteCanvas() {
     const [spinning, setSpinning] = useState(false);
     const [result, setResult] = useState<string | null>(null);
 
-    // // 테스트 코드
+    // 테스트 코드
     // const counter = [
     //     { label: "꽝", count: 0 },
     //     { label: "♦️1", count: 0 },
