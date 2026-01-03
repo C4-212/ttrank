@@ -34,15 +34,15 @@ const ITEMS = [
 ];
 
 // 테스트 코드
-const pickWeightedIndex = () => {
-    const total = ITEMS.reduce((s, i) => s + i.weight, 0);
-    let r = Math.random() * total;
-    for (let i = 0; i < ITEMS.length; i++) {
-        r -= ITEMS[i].weight;
-        if (r <= 0) return i;
-    }
-    return 0;
-};
+// const pickWeightedIndex = () => {
+//     const total = ITEMS.reduce((s, i) => s + i.weight, 0);
+//     let r = Math.random() * total;
+//     for (let i = 0; i < ITEMS.length; i++) {
+//         r -= ITEMS[i].weight;
+//         if (r <= 0) return i;
+//     }
+//     return 0;
+// };
 
 const size = 320;
 const radius = size / 2;
@@ -56,25 +56,25 @@ export default function RouletteCanvas() {
     const [result, setResult] = useState<string | null>(null);
 
     // // 테스트 코드
-    const counter = [
-        { label: "꽝", count: 0 },
-        { label: "♦️1", count: 0 },
-        { label: "♦️2", count: 0 },
-        { label: "♦️5", count: 0 },
-        { label: "♦️10", count: 0 },
-        { label: "♦️50", count: 0 },
-        { label: "♦️100", count: 0 },
-        { label: "♦️500", count: 0 },
-    ];
+    // const counter = [
+    //     { label: "꽝", count: 0 },
+    //     { label: "♦️1", count: 0 },
+    //     { label: "♦️2", count: 0 },
+    //     { label: "♦️5", count: 0 },
+    //     { label: "♦️10", count: 0 },
+    //     { label: "♦️50", count: 0 },
+    //     { label: "♦️100", count: 0 },
+    //     { label: "♦️500", count: 0 },
+    // ];
 
-    let count = 0;
-    while(count < 100000)
-    {
-        count++;
-        counter[pickWeightedIndex()].count++;
-    }
+    // let count = 0;
+    // while(count < 100000)
+    // {
+    //     count++;
+    //     counter[pickWeightedIndex()].count++;
+    // }
 
-    console.log(counter);
+    // console.log(counter);
 
     const draw = (angle: number) => {
         const canvas = canvasRef.current;
