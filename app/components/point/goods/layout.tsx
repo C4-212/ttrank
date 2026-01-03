@@ -1,0 +1,14 @@
+export const metadata = {
+  title: "TT Rank - 상품 리스트",
+  description: "TT랭크 상품 리스트",
+  keywords: "티티랭크, TT랭크, TTRank, TT, MMR, 연승, 승점, 랭킹, 기록, 후원, 아너스, 클럽, 포인트, 상품",
+  openGraph: {
+    title: "TT Rank - 상품 리스트",
+    description: "TT랭크 상품 리스트",
+    images: ["/og/og_image.png"],
+  },
+};
+
+export default function OverviewPage({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}

@@ -12,6 +12,17 @@ export class Player {
   lose: number = 0;
 }
 
+export class Goods {
+  idx: number = 0;
+  name: string ="";
+  point: number = 0;
+  count: number = 0;
+  description:string = "";
+  src:string = "";
+  updated_at:string ="1900/01/01";
+  created_at:string ="1900/01/01";
+}
+
 export class Fame {
   idx: number = 0;
   round: number = 1;

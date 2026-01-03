@@ -10,28 +10,21 @@ import {
     Spinner,
     Link,
     Button,
-    Input
+    Image
 } from "@chakra-ui/react";
 
-import { formatDate_YMD, Point, MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
+import { formatDate_YMD, Goods, MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
 import { setCookie, getCookie } from 'cookies-next';
 import FooterNav from "@/app/components/common/footer";
 import { redirect } from "next/navigation";
 import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form"
-import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
-
-interface FormValues {
-    name: string
-}
 
 export default function OverviewPage() {
     const [page, setPage] = useState(1);
     const [total_page, setTotalPage] = useState(1);
-    const [leaderboard, setLeaderBoard] = useState<Point[] | null>(null);
+    const [leaderboard, setLeaderBoard] = useState<Goods[] | null>(null);
     const [loading, setLoading] = useState(false);
-    const [keyword, setKeyword] = useState("");
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
 
     const authToken = getCookie('authToken')?.toString();
@@ -62,12 +55,12 @@ export default function OverviewPage() {
     useEffect(() => {
         const player_list = async () => {
             setLoading(true);
-            const res = await fetch("/api/point/list", {
+            const res = await fetch("/api/goods/list", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ page: page, keyword: keyword })
+                body: JSON.stringify({ page: page })
             });
 
             const fame_data = await res.json();
@@ -79,30 +72,7 @@ export default function OverviewPage() {
             setLoading(false);
         }
         player_list();
-    }, [page, keyword]);
-
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        watch,
-        formState: { errors },
-    } = useForm<FormValues>({
-        defaultValues: {
-            name: "",
-        },
-    })
-
-    const nameValue = watch("name");
-
-    const onSubmit = handleSubmit(async (data) => {
-        setPage(1);
-        if(keyword !== data.name)
-    {
-      setTotalPage(1);
-    }
-        setKeyword(data.name);
-    });
+    }, [page]);
 
     return (
         <Flex minH="100vh" bg="gray.50" direction="column">
@@ -117,15 +87,12 @@ export default function OverviewPage() {
                 alignItems="center"
             >
                 <Flex align="center" w="100%" h="100%">
-                    <Text fontWeight="semibold" color="black">♦️포인트 사용내역</Text>
+                    <Text fontWeight="semibold" color="black">🎁상품 리스트</Text>
                     <Spacer />
-                    <Link href="/components/point/roulette">
-                        <Button bg="black" color="white"> 🎯룰렛 </Button>
-                    </Link>
                     {
                         isAdmin ?
-                            <Link href="/components/admin/point/add">
-                                <Button marginLeft="2px" bg="black" color="white"> 추가 </Button>
+                            <Link href="/components/admin/goods/add">
+                                <Button bg="black" color="white"> 추가 </Button>
                             </Link> : ""
                     }
                 </Flex>
@@ -150,62 +117,15 @@ export default function OverviewPage() {
                         animate="visible"
                         transition={{ duration: 0.4 }}
                     >
+                        <Text fontWeight="medium" color="black">🎁상품 리스트란?</Text>
                         <Flex
                             h="70px"
                             bg="white"
                             align="center"
                             justify="center"
                         >
-                            <Text fontWeight="medium" color="black">♦️(포인트)란?</Text>
-                            <Spacer/>
-                            <Link href="/components/point/goods">
-                                <Button marginLeft="2px" bg="black" color="white"> 🎁상품 리스트 </Button>
-                            </Link>
+                            <Text color="black">♦️(포인트)를 상품으로 교환할 수 있습니다.</Text>
                         </Flex>
-                        <Flex
-                            h="70px"
-                            bg="white"
-                            align="center"
-                            justify="center"
-                        >
-                            <Text color="black">경기에서 승리 시 얻을 수 있는 점수입니다.<br />
-                                획득한 포인트는 상품으로 교환 가능합니다. </Text>
-                        </Flex>
-                    </MotionBox>
-                    <MotionBox
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        bg="white"
-                        borderRadius="lg"
-                        border="1px solid"
-                        borderColor="gray.200"
-                        p={4}
-                        minH="60px"
-                        variants={CardAnim}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ duration: 0.4 }}
-                    >
-                        <form onSubmit={onSubmit}>
-                            <Flex
-                                h="50px"
-                                bg="white"
-                                align="center"
-                                justify="center"
-                                gap="10px"
-                            >
-                                <Text color="black">아이디</Text>
-                                <PlayerSearchInput
-                                    name="name"
-                                    value={nameValue}
-                                    setValue={setValue}
-                                />
-                                <Button bg="black" color="white" type="submit">
-                                    검색
-                                </Button>
-                            </Flex>
-                        </form>
                     </MotionBox>
                     <MotionBox
                         bg="white"
@@ -237,8 +157,11 @@ export default function OverviewPage() {
                                             <Flex
                                                 h="30px"
                                                 bg="white"
-                                                align="center">
-                                                <Text w="70px" fontWeight="normal" color="grey" fontSize="12px">{formatDate_YMD(item.updated_at)}</Text>
+                                                align="center"
+                                                marginBottom="5px">
+                                                <Image w="50px" h="50px" pr="5px" src={item.src ? `/goods/${item.src}` : "/goods/default.jpg"} onError={(e) => {
+                                                    (e.currentTarget as HTMLImageElement).src = "/goods/default.jpg";
+                                                }}/>
                                                 <Flex
                                                     direction="column"
                                                     h="100%"
@@ -246,10 +169,17 @@ export default function OverviewPage() {
                                                     justify="center">
                                                     <Text color="black" fontSize={item.name.length > 10 ? "12px" : "14px"}>{item.name}</Text>
                                                 </Flex>
-                                                <Text color="grey" fontSize="12px">({item.description})</Text>
+                                                {
+                                                    isAdmin ? <Link href={"/components/admin/goods/edit/" + item.idx}><Button bg="black" color="white">변경</Button></Link> : ""
+                                                }
                                                 <Spacer />
-                                                <Text fontWeight="bold" fontSize="12px" color={item.type == "pay" ? "red" : "green"}>♦️{item.point} {item.type == "pay" ? "소모" : "적립"}</Text>
+                                                <Text fontWeight="normal" color="black" fontSize="12px">♦️{item.point}</Text>
                                             </Flex>
+                                            {
+                                                item.count > 0?<Text pt="5px" fontWeight="normal" color="black" fontSize="12px">{item.count}개 남음</Text>:
+                                                <Text pt="5px" fontWeight="normal" color="red" fontSize="12px">재고없음</Text>
+                                            }
+                                            
                                         </Box>
                                     )) :
                                     <Flex
@@ -257,7 +187,7 @@ export default function OverviewPage() {
                                         bg="white"
                                         align="center"
                                         justify="center">
-                                        <Text color="black">포인트 내역이 없습니다.</Text>
+                                        <Text color="black">상품 정보가 없습니다.</Text>
                                     </Flex>
                         }
                     </MotionBox>

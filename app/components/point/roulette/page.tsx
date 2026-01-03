@@ -179,7 +179,7 @@ export default function RouletteCanvas() {
                 alignItems="center"
             >
                 <Flex align="center" w="100%" h="100%">
-                    <Text fontWeight="semibold" color="black">🎁룰렛 돌리기 (방송용)</Text>
+                    <Text fontWeight="semibold" color="black">🎯룰렛 돌리기 (방송용)</Text>
                     <Spacer />
                 </Flex>
             </Box>
@@ -203,7 +203,7 @@ export default function RouletteCanvas() {
                         animate="visible"
                         transition={{ duration: 0.4 }}
                     >
-                        <Text fontWeight="medium" color="black">🎁룰렛 돌리기란?</Text>
+                        <Text fontWeight="medium" color="black">🎯룰렛 돌리기란?</Text>
                         <Flex
                             h="70px"
                             bg="white"
