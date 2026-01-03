@@ -140,7 +140,7 @@ export default function RouletteCanvas() {
             Math.PI * 6 - (winIndex * sliceAngle + sliceAngle / 2);
 
         const start = performance.now();
-        const duration = 2400;
+        const duration = 3500;
 
         const animate = (time: number) => {
             const progress = Math.min((time - start) / duration, 1);
