@@ -32,6 +32,39 @@ interface FormValues {
     count: number
 }
 
+function remove(token: string | undefined, name: string, idx: number) {
+    let data = {
+        token: token,
+        idx: idx
+    };
+
+    const removeFame = async () => {
+
+        const ok = window.confirm(name + "을(를) 삭제하시겠습니까?");
+        if (!ok) return;
+
+        const res = await fetch(`/api/goods/delete/${idx}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+        console.log(result)
+
+        if (!result.success) {
+            alert(result.error || "서버 에러");
+            return;
+        }
+
+        alert("상품 삭제 성공!");
+        redirect("/components/point/goods");
+    }
+    removeFame();
+}
+
 export default function OverviewPage() {
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
     const authToken = getCookie('authToken')?.toString();
@@ -71,6 +104,7 @@ export default function OverviewPage() {
         register,
         handleSubmit,
         setValue,
+        getValues,
         formState: { errors },
     } = useForm<FormValues>()
 
@@ -183,7 +217,10 @@ export default function OverviewPage() {
                                     <Field.ErrorText>{errors.count?.message}</Field.ErrorText>
                                 </Field.Root>
 
-                                <Button bg="black" color="white" type="submit">변경</Button>
+                                <Flex align="center" w="100%" h="100%">
+                                    <Button bg="black" color="white" type="submit">변경</Button>
+                                    <Button marginLeft="5px" onClick={() => { remove(authToken, getValues("name"), Number(params.id)) }} bg="black" color="white">삭제</Button>
+                                </Flex>
                             </Stack>
                         </form>
 

@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma";
 
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest, { params }: any) {
   try {
-    const { token, idx } = await request.json();
+    const { token } = await request.json();
+    const idx = Number(params.id);
 
     if (!token) {
       return NextResponse.json({ success: false, error: "유효하지 않은 접근입니다.", status: 500 });
