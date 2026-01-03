@@ -24,10 +24,10 @@ import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
 
 const ITEMS = [
     { label: "꽝", weight: 800, color: "#f87171" },
-    { label: "♦️1", weight: 800, color: "#f8d971ff" },
-    { label: "♦️2", weight: 120, color: "#edfb24ff" },
-    { label: "♦️5", weight: 60, color: "#97fb24ff" },
-    { label: "♦️10", weight: 30, color: "#34d3cbff" },
+    { label: "♦️1", weight: 700, color: "#f8d971ff" },
+    { label: "♦️2", weight: 240, color: "#edfb24ff" },
+    { label: "♦️5", weight: 120, color: "#97fb24ff" },
+    { label: "♦️10", weight: 50, color: "#34d3cbff" },
     { label: "♦️50", weight: 6, color: "#6a60faff" },
     { label: "♦️100", weight: 3, color: "#d18bfaff" },
     { label: "♦️500", weight: 1, color: "#fb71b1ff" },
