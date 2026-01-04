@@ -19,7 +19,12 @@ export async function POST(request: NextRequest) {
         }
 
         // 플레이어 유효성 체크
-        const player = await prisma.player.findFirst({ where: { name: name } });
+        const player = await prisma.player.findFirst({ 
+          where: { 
+            name: {
+              equals: name,
+              mode: 'insensitive',
+        } } });
 
         if(player != null){
           return NextResponse.json({ success: false, error: "이미 생성된 플레이어 입니다.", status: 500 });

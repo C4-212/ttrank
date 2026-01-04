@@ -49,10 +49,40 @@ export async function POST(request: NextRequest) {
     }
 
     // 플레이어 유효성 체크
-    const team1_player1 = await prisma.player.findFirst({ where: { name: team1_player1_name } });
-    const team1_player2 = await prisma.player.findFirst({ where: { name: team1_player2_name } });
-    const team2_player1 = await prisma.player.findFirst({ where: { name: team2_player1_name } });
-    const team2_player2 = await prisma.player.findFirst({ where: { name: team2_player2_name } });
+    const team1_player1 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:team1_player1_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
+
+
+      const team1_player2 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:team1_player2_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
+      const team2_player1 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:team2_player1_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
+      const team2_player2 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:team2_player2_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
 
     if (admin !== null) {
       if (team1_player1 == null || team1_player2 == null || team2_player1 == null || team2_player2 == null) {

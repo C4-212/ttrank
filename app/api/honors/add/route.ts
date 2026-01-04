@@ -15,7 +15,12 @@ export async function POST(request: NextRequest) {
 
     if(admin !== null){
         if (!name || !point) {
-            return NextResponse.json({ success: false, error: "이름, 후원금을 입력해주세요.", status: 500 });
+            return NextResponse.json({ success: false, error: "이름을 입력해주세요.", status: 500 });
+        }
+
+        if(!(Number(point) > 0))
+        {
+            return NextResponse.json({ success: false, error: "후원금이 유효하지 않습니다.\n후원금은 숫자만 입력가능합니다.", status: 500 });
         }
 
         const honors = await prisma.honors.findFirst({

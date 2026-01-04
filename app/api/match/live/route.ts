@@ -17,10 +17,40 @@ export async function POST(request: NextRequest) {
     };
 
     if (data != null) {
-      const team1_player1 = await prisma.player.findFirst({ where: { name: data.team1_player1_name } });
-      const team1_player2 = await prisma.player.findFirst({ where: { name: data.team1_player2_name } });
-      const team2_player1 = await prisma.player.findFirst({ where: { name: data.team2_player1_name } });
-      const team2_player2 = await prisma.player.findFirst({ where: { name: data.team2_player2_name } });
+      const team1_player1 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:data.team1_player1_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
+
+
+      const team1_player2 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:data.team1_player2_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
+      const team2_player1 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:data.team2_player1_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
+      const team2_player2 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:data.team2_player2_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
 
       if(team1_player1 != null && team1_player2 != null && team2_player1 != null && team2_player2 != null) {
         result.team1_player1_point = team1_player1.point;

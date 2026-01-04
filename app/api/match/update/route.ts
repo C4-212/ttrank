@@ -42,10 +42,39 @@ export async function POST(request: NextRequest) {
         }
 
         // 플레이어 유효성 체크
-        const team1_player1 = await prisma.player.findFirst({ where: { name: match.team1_player1_name } });
-        const team1_player2 = await prisma.player.findFirst({ where: { name: match.team1_player2_name } });
-        const team2_player1 = await prisma.player.findFirst({ where: { name: match.team2_player1_name } });
-        const team2_player2 = await prisma.player.findFirst({ where: { name: match.team2_player2_name } });
+        const team1_player1 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:match.team1_player1_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
+
+      const team1_player2 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:match.team1_player2_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
+      const team2_player1 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:match.team2_player1_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
+      const team2_player2 = await prisma.player.findFirst({ 
+        where: { 
+          name: {
+            equals:match.team2_player2_name,
+            mode: 'insensitive'
+          } 
+        }
+      });
 
         if (!team1_player1 || !team1_player2 || !team2_player1 || !team2_player2) {
           return NextResponse.json({ success: false, error: "매치 플레이어 정보가 유효하지 않습니다.", status: 500 });
@@ -66,7 +95,7 @@ export async function POST(request: NextRequest) {
 
         const team1_player1_trans = await prisma.player.update(
           {
-            where: { name: match.team1_player1_name },
+            where: { name: team1_player1.name },
             data: {
               mmr: match.team1_player1_mmr + change_mmr.team1_player1_mmr_changed,
               streak: (winner == "1") ? match.team1_player1_streak + 1 : 0,
@@ -88,7 +117,7 @@ export async function POST(request: NextRequest) {
         if (team1_player1.name != team1_player2.name) {
           const team1_player2_trans = await prisma.player.update(
             {
-              where: { name: match.team1_player2_name },
+              where: { name: team1_player2.name },
               data: {
                 mmr: match.team1_player2_mmr + change_mmr.team1_player2_mmr_changed,
                 streak: (winner == "1") ? match.team1_player2_streak + 1 : 0,
@@ -108,7 +137,7 @@ export async function POST(request: NextRequest) {
 
         const team2_player1_trans = await prisma.player.update(
           {
-            where: { name: match.team2_player1_name },
+            where: { name: team2_player1.name },
             data: {
               mmr: match.team2_player1_mmr + change_mmr.team2_player1_mmr_changed,
               streak: (winner == "2") ? match.team2_player1_streak + 1 : 0,
@@ -130,7 +159,7 @@ export async function POST(request: NextRequest) {
         if (team2_player1.name != team2_player2.name) {
           const team2_player2_trans = await prisma.player.update(
             {
-              where: { name: match.team2_player2_name },
+              where: { name: team2_player2.name },
               data: {
                 mmr: match.team2_player2_mmr + change_mmr.team2_player2_mmr_changed,
                 streak: (winner == "2") ? match.team2_player2_streak + 1 : 0,

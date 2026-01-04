@@ -46,7 +46,15 @@ export async function POST(request: NextRequest) {
       }
 
       // 플레이어 유효성 체크
-      const player = await prisma.player.findFirst({ where: { name: name } });
+      const player = await prisma.player.findFirst({
+        where: {
+          name: {
+            equals: name,
+            mode: 'insensitive',
+          }
+        }
+      });
+
 
       if (player == null) {
         return NextResponse.json({ success: false, error: "플레이어 정보가 유효하지 않습니다.", status: 500 });
@@ -61,7 +69,7 @@ export async function POST(request: NextRequest) {
       // 포인트 내역 등록
       const create = await prisma.point.create({
         data: {
-          name: name,
+          name: player.name,
           type: getType(type),
           description: getDescription(description),
           point: Number(point)
@@ -71,7 +79,7 @@ export async function POST(request: NextRequest) {
       // 유저 포인트 적용
       const player_trans = await prisma.player.update(
         {
-          where: { name: name },
+          where: { name: player.name },
           data: {
             point: (getType(type) == "pay") ? player.point - Number(point) : player.point + Number(point),
             updated_at: new Date()
