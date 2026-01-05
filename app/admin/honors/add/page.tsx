@@ -22,14 +22,12 @@ import { MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common
 import FooterNav from "@/app/components/common/footer";
 import { useState } from "react";
 import { redirect } from "next/navigation";
-import { useForm } from "react-hook-form";
-import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
+import { useForm } from "react-hook-form"
 
 interface FormValues {
     token: string
     name: string
-    round: number
-    date: string
+    point: number
 }
 
 export default function OverviewPage() {
@@ -69,23 +67,15 @@ export default function OverviewPage() {
     const {
         register,
         handleSubmit,
-        setValue,
-        watch,
         formState: { errors },
-    } = useForm<FormValues>({
-        defaultValues: {
-            name: ""
-        },
-    })
-
-    const name = watch("name");
+    } = useForm<FormValues>()
 
     const onSubmit = handleSubmit(async (data) => {
-        const ok = window.confirm("명예의전당을 추가하시겠습니까?");
+        const ok = window.confirm("추원을 추가하시겠습니까?");
         if (!ok) return; 
 
         data.token = authToken as string;
-        const res = await fetch("/api/fame/add", {
+        const res = await fetch("/api/honors/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -101,8 +91,8 @@ export default function OverviewPage() {
             return;
         }
 
-        alert("명예의전당 추가 성공!");
-        redirect("/components/fame");
+        alert("후원 추가 성공!");
+        redirect("/honors");
     });
 
 
@@ -119,7 +109,7 @@ export default function OverviewPage() {
                 alignItems="center"
             >
                 <Flex align="center" w="100%" h="100%">
-                    <Text fontWeight="semibold" color="black">명예의전당 추가</Text>
+                    <Text fontWeight="semibold" color="black">후원 추가</Text>
                     <Spacer />
                 </Flex>
             </Box>
@@ -146,32 +136,14 @@ export default function OverviewPage() {
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.name}>
                                     <Field.Label color="black">아이디</Field.Label>
-                                    <PlayerSearchInput
-                                        name="name"
-                                        value={name}
-                                        setValue={setValue}
-                                    />
+                                    <Input maxLength={30} fontSize="16px" color="black"{...register("name")} />
                                     <Field.ErrorText>{errors.name?.message}</Field.ErrorText>
                                 </Field.Root>
 
-                                <Field.Root invalid={!!errors.round}>
-                                    <Field.Label color="black">회차</Field.Label>
-                                    <Input w="60%" maxLength={30} fontSize="16px" color="black"{...register("round")} />
-                                    <Field.ErrorText>{errors.round?.message}</Field.ErrorText>
-                                </Field.Root>
-
-                                <Field.Root invalid={!!errors.round}>
-                                    <Field.Label color="black">날짜</Field.Label>
-                                    <Input 
-                                        w="60%"
-                                        maxLength={30}
-                                        fontSize="16px"
-                                        placeholder="YYYY-MM-DD"
-                                        type="text"
-                                        pattern="\d{4}-\d{2}-\d{2}"
-                                        title="YYYY-MM-DD 형식으로 입력하세요."
-                                        color="black"{...register("date")} />
-                                    <Field.ErrorText>{errors.round?.message}</Field.ErrorText>
+                                <Field.Root invalid={!!errors.point}>
+                                    <Field.Label color="black">후원금</Field.Label>
+                                    <Input maxLength={30} fontSize="16px" color="black"{...register("point")} />
+                                    <Field.ErrorText>{errors.point?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Button bg="black" color="white" type="submit">추가</Button>

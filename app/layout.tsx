@@ -43,22 +43,22 @@ export default function RootLayout({
                 {
                   "@type": "WebPage",
                   "name": "유저 랭킹",
-                  "url": "https://ttrank.kr/components/player"
+                  "url": "https://ttrank.kr/player"
                 },
                 {
                   "@type": "WebPage",
                   "name": "경기 기록",
-                  "url": "https://ttrank.kr/components/match"
+                  "url": "https://ttrank.kr/match"
                 },
                 {
                   "@type": "WebPage",
                   "name": "아너스클럽",
-                  "url": "https://ttrank.kr/components/honors"
+                  "url": "https://ttrank.kr/honors"
                 },
                 {
                   "@type": "WebPage",
                   "name": "명예의전당",
-                  "url": "https://ttrank.kr/components/fame"
+                  "url": "https://ttrank.kr/fame"
                 }
               ]
             })

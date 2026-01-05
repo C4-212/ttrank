@@ -158,7 +158,7 @@ export default function OverviewPage() {
             <Image src="/logo.png" />
           </Link>
           <Spacer />
-          <Link href="/components/honors" target="_self" rel="noopener noreferrer">
+          <Link href="/honors" target="_self" rel="noopener noreferrer">
             <Button bg="black" color="white"> 👑아너스클럽 </Button>
           </Link>
           {
@@ -283,17 +283,17 @@ export default function OverviewPage() {
                     h="100%"
                     bg="white"
                     align="center">
-                    <Link href="/components/admin/player/make">
+                    <Link href="/admin/player/make">
                       <Button bg="black" color="white" marginRight="5px"> 선수생성 </Button>
                     </Link>
                     {
                       match !== null ?
 
-                        <Link href="/components/admin/match/edit">
+                        <Link href="/admin/match/edit">
                           <Button bg="black" color="white"> 경기변경 </Button>
                         </Link>
                         :
-                        <Link href="/components/admin/match/make">
+                        <Link href="/admin/match/make">
                           <Button bg="black" color="white"> 경기생성 </Button>
                         </Link>
                     }

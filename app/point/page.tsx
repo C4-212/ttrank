@@ -119,12 +119,12 @@ export default function OverviewPage() {
                 <Flex align="center" w="100%" h="100%">
                     <Text fontWeight="semibold" color="black">♦️포인트 사용내역</Text>
                     <Spacer />
-                    <Link href="/components/point/roulette">
+                    <Link href="/point/roulette">
                         <Button bg="black" color="white"> 🎯룰렛 </Button>
                     </Link>
                     {
                         isAdmin ?
-                            <Link href="/components/admin/point/add">
+                            <Link href="/admin/point/add">
                                 <Button marginLeft="2px" bg="black" color="white"> 추가 </Button>
                             </Link> : ""
                     }
@@ -158,7 +158,7 @@ export default function OverviewPage() {
                         >
                             <Text fontWeight="medium" color="black">♦️(포인트)란?</Text>
                             <Spacer/>
-                            <Link href="/components/point/goods">
+                            <Link href="/point/goods">
                                 <Button marginLeft="2px" bg="black" color="white"> 🎁상품 리스트 </Button>
                             </Link>
                         </Flex>

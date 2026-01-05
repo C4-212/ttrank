@@ -9,21 +9,53 @@ import {
     Spacer,
     Spinner,
     Link,
-    Button,
-    Image
+    Button
 } from "@chakra-ui/react";
 
-import { formatDate_YMD, Goods, MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
+import { formatDate_YMD, Fame, MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
 import { setCookie, getCookie } from 'cookies-next';
 import FooterNav from "@/app/components/common/footer";
 import { redirect } from "next/navigation";
 import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
 
+function remove(token: string | undefined, name: string, idx: number) {
+    let data = {
+        token: token,
+        idx: idx
+    };
+
+    const removeFame = async () => {
+
+        const ok = window.confirm(name + "을(를) 삭제하시겠습니까?");
+        if (!ok) return;
+
+        const res = await fetch("/api/fame/delete", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+        console.log(result)
+
+        if (!result.success) {
+            alert(result.error || "서버 에러");
+            return;
+        }
+
+        alert("명예의전당 삭제 성공!");
+        window.location.reload();
+    }
+    removeFame();
+}
+
 export default function OverviewPage() {
     const [page, setPage] = useState(1);
     const [total_page, setTotalPage] = useState(1);
-    const [leaderboard, setLeaderBoard] = useState<Goods[] | null>(null);
+    const [leaderboard, setLeaderBoard] = useState<Fame[] | null>(null);
     const [loading, setLoading] = useState(false);
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
 
@@ -55,7 +87,7 @@ export default function OverviewPage() {
     useEffect(() => {
         const player_list = async () => {
             setLoading(true);
-            const res = await fetch("/api/goods/list", {
+            const res = await fetch("/api/fame/list", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -87,11 +119,11 @@ export default function OverviewPage() {
                 alignItems="center"
             >
                 <Flex align="center" w="100%" h="100%">
-                    <Text fontWeight="semibold" color="black">🎁상품 리스트</Text>
+                    <Text fontWeight="semibold" color="black">🏆명예의전당</Text>
                     <Spacer />
                     {
                         isAdmin ?
-                            <Link href="/components/admin/goods/add">
+                            <Link href="/admin/fame/add">
                                 <Button bg="black" color="white"> 추가 </Button>
                             </Link> : ""
                     }
@@ -117,14 +149,15 @@ export default function OverviewPage() {
                         animate="visible"
                         transition={{ duration: 0.4 }}
                     >
-                        <Text fontWeight="medium" color="black">🎁상품 리스트란?</Text>
+                        <Text fontWeight="medium" color="black">🏆(명예의전당)이란?</Text>
                         <Flex
                             h="70px"
                             bg="white"
                             align="center"
                             justify="center"
                         >
-                            <Text color="black">♦️(포인트)를 상품으로 교환할 수 있습니다.</Text>
+                            <Text color="black">10연승을 달성하면 명예의전당에 기록됩니다.<br />
+                                상품으로 ♦️100을 지급합니다. </Text>
                         </Flex>
                     </MotionBox>
                     <MotionBox
@@ -157,11 +190,8 @@ export default function OverviewPage() {
                                             <Flex
                                                 h="30px"
                                                 bg="white"
-                                                align="center"
-                                                marginBottom="5px">
-                                                <Image w="50px" h="50px" pr="5px" src={item.src ? `/goods/${item.src}` : "/goods/default.jpg"} onError={(e) => {
-                                                    (e.currentTarget as HTMLImageElement).src = "/goods/default.jpg";
-                                                }}/>
+                                                align="center">
+                                                <Text w="50px" fontSize="12px" fontWeight="bold" color="black">{item.round}회</Text>
                                                 <Flex
                                                     direction="column"
                                                     h="100%"
@@ -170,16 +200,11 @@ export default function OverviewPage() {
                                                     <Text color="black" fontSize={item.name.length > 10 ? "12px" : "14px"}>{item.name}</Text>
                                                 </Flex>
                                                 {
-                                                    isAdmin ? <Link href={"/components/admin/goods/edit/" + item.idx}><Button bg="black" color="white">변경</Button></Link> : ""
+                                                    isAdmin ? <Button onClick={() => remove(authToken, item.name, item.idx)} bg="black" color="white">삭제</Button> : ""
                                                 }
                                                 <Spacer />
-                                                <Text fontWeight="normal" color="black" fontSize="12px">♦️{item.point}</Text>
+                                                <Text fontWeight="normal" color="grey" fontSize="12px">{item.date}</Text>
                                             </Flex>
-                                            {
-                                                item.count > 0?<Text pt="5px" fontWeight="normal" color="black" fontSize="12px">{item.count}개 남음</Text>:
-                                                <Text pt="5px" fontWeight="normal" color="red" fontSize="12px">재고없음</Text>
-                                            }
-                                            
                                         </Box>
                                     )) :
                                     <Flex
@@ -187,7 +212,7 @@ export default function OverviewPage() {
                                         bg="white"
                                         align="center"
                                         justify="center">
-                                        <Text color="black">상품 정보가 없습니다.</Text>
+                                        <Text color="black">명예의전당 정보가 없습니다.</Text>
                                     </Flex>
                         }
                     </MotionBox>

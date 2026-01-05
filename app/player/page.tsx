@@ -114,7 +114,7 @@ export default function OverviewPage() {
             />
           </IconButton>
           <Spacer />
-          <Link href="/components/fame" target="_self" rel="noopener noreferrer">
+          <Link href="/fame" target="_self" rel="noopener noreferrer">
             <Button bg="black" color="white">  🏆명예의전당 </Button>
           </Link>
         </Flex>

@@ -13,8 +13,6 @@ import {
     Field,
     Input,
     Stack,
-    RadioGroup,
-    HStack
 } from "@chakra-ui/react";
 import { LuUser } from "react-icons/lu"
 
@@ -25,34 +23,16 @@ import FooterNav from "@/app/components/common/footer";
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form"
-import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
 
 interface FormValues {
-    token: string,
-    name: string,
-    point: number,
-    type: string | null,
-    description: string | null,
-    date: string
+    token: string
+    name: string
+    point: number
+    count: number
 }
-
-const type = [
-    { label: "소모", value: "1" },
-    { label: "적립", value: "2" },
-]
-
-const description = [
-    { label: "상품", value: "1" },
-    { label: "매치", value: "2" },
-    { label: "관리자", value: "3" },
-    { label: "룰렛", value: "4" },
-]
 
 export default function OverviewPage() {
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-    const [selectedType, setSelectedType] = useState<string | null>("1");
-    const [selectedDescription, setSelectedDescription] = useState<string | null>("1");
-
     const authToken = getCookie('authToken')?.toString();
 
     useEffect(() => {
@@ -88,27 +68,15 @@ export default function OverviewPage() {
     const {
         register,
         handleSubmit,
-        setValue,
-        watch,
         formState: { errors },
-    } = useForm<FormValues>({
-        defaultValues: {
-            name: "",
-        },
-    });
-
-    const nameValue = watch("name");
+    } = useForm<FormValues>()
 
     const onSubmit = handleSubmit(async (data) => {
-        const ok = window.confirm("포인트를 추가/사용 하시겠습니까?");
-        if (!ok) return;
+        const ok = window.confirm("상품을 추가하시겠습니까?");
+        if (!ok) return; 
 
         data.token = authToken as string;
-
-        data.type = selectedType;
-        data.description = selectedDescription;
-
-        const res = await fetch("/api/point/make", {
+        const res = await fetch("/api/goods/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -118,14 +86,14 @@ export default function OverviewPage() {
 
         const result = await res.json();
         console.log(result)
-
+        
         if (!result.success) {
             alert(result.error || "서버 에러");
             return;
         }
 
-        alert("포인트 추가/사용 성공!");
-        redirect("/components/point");
+        alert("상품 추가 성공!");
+        redirect("/point/goods");
     });
 
 
@@ -142,7 +110,7 @@ export default function OverviewPage() {
                 alignItems="center"
             >
                 <Flex align="center" w="100%" h="100%">
-                    <Text fontWeight="semibold" color="black">포인트 추가/사용</Text>
+                    <Text fontWeight="semibold" color="black">상품 추가</Text>
                     <Spacer />
                 </Flex>
             </Box>
@@ -168,52 +136,21 @@ export default function OverviewPage() {
                         <form onSubmit={onSubmit}>
                             <Stack gap="4" align="flex-start" maxW="sm">
                                 <Field.Root invalid={!!errors.name}>
-                                    <Field.Label color="black">아이디</Field.Label>
-                                    <PlayerSearchInput
-                                        name="name"
-                                        value={nameValue}
-                                        setValue={setValue}
-                                    />
+                                    <Field.Label color="black">이름</Field.Label>
+                                    <Input maxLength={30} fontSize="16px" color="black"{...register("name")} />
+                                    <Field.ErrorText>{errors.name?.message}</Field.ErrorText>
                                 </Field.Root>
-
-                                <RadioGroup.Root
-                                    marginBottom="30px"
-                                    defaultValue="1"
-                                    onValueChange={(details) => setSelectedType(details.value)}
-                                >
-                                    <Text fontSize="12px" color="grey" pb="2px">타입 선택</Text>
-                                    <HStack gap="6">
-                                        {type.map((item) => (
-                                            <RadioGroup.Item key={item.value} value={item.value}>
-                                                <RadioGroup.ItemHiddenInput />
-                                                <RadioGroup.ItemIndicator />
-                                                <RadioGroup.ItemText color="black">{item.label}</RadioGroup.ItemText>
-                                            </RadioGroup.Item>
-                                        ))}
-                                    </HStack>
-                                </RadioGroup.Root>
-
-                                <RadioGroup.Root
-                                    marginBottom="30px"
-                                    defaultValue="1"
-                                    onValueChange={(details) => setSelectedDescription(details.value)}
-                                >
-                                    <Text fontSize="12px" color="grey" pb="2px">설명 선택</Text>
-                                    <HStack gap="6">
-                                        {description.map((item) => (
-                                            <RadioGroup.Item key={item.value} value={item.value}>
-                                                <RadioGroup.ItemHiddenInput />
-                                                <RadioGroup.ItemIndicator />
-                                                <RadioGroup.ItemText color="black">{item.label}</RadioGroup.ItemText>
-                                            </RadioGroup.Item>
-                                        ))}
-                                    </HStack>
-                                </RadioGroup.Root>
 
                                 <Field.Root invalid={!!errors.point}>
                                     <Field.Label color="black">포인트</Field.Label>
-                                    <Input w="60%" maxLength={7} fontSize="16px" color="black"{...register("point")} />
+                                    <Input maxLength={30} fontSize="16px" color="black"{...register("point")} />
                                     <Field.ErrorText>{errors.point?.message}</Field.ErrorText>
+                                </Field.Root>
+
+                                <Field.Root invalid={!!errors.count}>
+                                    <Field.Label color="black">수량</Field.Label>
+                                    <Input maxLength={30} fontSize="16px" color="black"{...register("count")} />
+                                    <Field.ErrorText>{errors.count?.message}</Field.ErrorText>
                                 </Field.Root>
 
                                 <Button bg="black" color="white" type="submit">추가</Button>

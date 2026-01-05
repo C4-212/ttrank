@@ -12,50 +12,16 @@ import {
     Button
 } from "@chakra-ui/react";
 
-import { formatDate_YMD, Fame, MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
+import { Honors, MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
 import { setCookie, getCookie } from 'cookies-next';
 import FooterNav from "@/app/components/common/footer";
-import { redirect } from "next/navigation";
 import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
-
-function remove(token: string | undefined, name: string, idx: number) {
-    let data = {
-        token: token,
-        idx: idx
-    };
-
-    const removeFame = async () => {
-
-        const ok = window.confirm(name + "을(를) 삭제하시겠습니까?");
-        if (!ok) return;
-
-        const res = await fetch("/api/fame/delete", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data),
-        });
-
-        const result = await res.json();
-        console.log(result)
-
-        if (!result.success) {
-            alert(result.error || "서버 에러");
-            return;
-        }
-
-        alert("명예의전당 삭제 성공!");
-        window.location.reload();
-    }
-    removeFame();
-}
 
 export default function OverviewPage() {
     const [page, setPage] = useState(1);
     const [total_page, setTotalPage] = useState(1);
-    const [leaderboard, setLeaderBoard] = useState<Fame[] | null>(null);
+    const [leaderboard, setLeaderBoard] = useState<Honors[] | null>(null);
     const [loading, setLoading] = useState(false);
     const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
 
@@ -87,7 +53,7 @@ export default function OverviewPage() {
     useEffect(() => {
         const player_list = async () => {
             setLoading(true);
-            const res = await fetch("/api/fame/list", {
+            const res = await fetch("/api/honors/list", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -95,11 +61,11 @@ export default function OverviewPage() {
                 body: JSON.stringify({ page: page })
             });
 
-            const fame_data = await res.json();
+            const honors_data = await res.json();
 
-            if (fame_data.data !== null) {
-                setTotalPage(fame_data.pagination.totalPage);
-                setLeaderBoard(fame_data.data);
+            if (honors_data.data !== null) {
+                setTotalPage(honors_data.pagination.totalPage);
+                setLeaderBoard(honors_data.data);
             }
             setLoading(false);
         }
@@ -119,12 +85,12 @@ export default function OverviewPage() {
                 alignItems="center"
             >
                 <Flex align="center" w="100%" h="100%">
-                    <Text fontWeight="semibold" color="black">🏆명예의전당</Text>
+                    <Text fontWeight="semibold" color="black">👑아너스클럽</Text>
                     <Spacer />
                     {
                         isAdmin ?
-                            <Link href="/components/admin/fame/add">
-                                <Button bg="black" color="white"> 추가 </Button>
+                            <Link href="/admin/honors/add">
+                                <Button bg="black" color="white"> 후원 추가 </Button>
                             </Link> : ""
                     }
                 </Flex>
@@ -137,29 +103,6 @@ export default function OverviewPage() {
                 pb="96px"
             >
                 <VStack align="stretch">
-                    <MotionBox
-                        bg="white"
-                        borderRadius="lg"
-                        border="1px solid"
-                        borderColor="gray.200"
-                        p={4}
-                        minH="70px"
-                        variants={CardAnim}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ duration: 0.4 }}
-                    >
-                        <Text fontWeight="medium" color="black">🏆(명예의전당)이란?</Text>
-                        <Flex
-                            h="70px"
-                            bg="white"
-                            align="center"
-                            justify="center"
-                        >
-                            <Text color="black">10연승을 달성하면 명예의전당에 기록됩니다.<br />
-                                상품으로 ♦️100을 지급합니다. </Text>
-                        </Flex>
-                    </MotionBox>
                     <MotionBox
                         bg="white"
                         borderRadius="lg"
@@ -191,19 +134,15 @@ export default function OverviewPage() {
                                                 h="30px"
                                                 bg="white"
                                                 align="center">
-                                                <Text w="50px" fontSize="12px" fontWeight="bold" color="black">{item.round}회</Text>
+                                                <Text w="50px" fontSize="12px" fontWeight="bold" color="black">{item.rank}등</Text>
                                                 <Flex
                                                     direction="column"
                                                     h="100%"
-                                                    pr="5px"
                                                     justify="center">
                                                     <Text color="black" fontSize={item.name.length > 10 ? "12px" : "14px"}>{item.name}</Text>
                                                 </Flex>
-                                                {
-                                                    isAdmin ? <Button onClick={() => remove(authToken, item.name, item.idx)} bg="black" color="white">삭제</Button> : ""
-                                                }
                                                 <Spacer />
-                                                <Text fontWeight="normal" color="grey" fontSize="12px">{item.date}</Text>
+                                                <Text fontWeight="normal" color="grey" fontSize="12px">{item.point} 원</Text>
                                             </Flex>
                                         </Box>
                                     )) :
@@ -212,7 +151,7 @@ export default function OverviewPage() {
                                         bg="white"
                                         align="center"
                                         justify="center">
-                                        <Text color="black">명예의전당 정보가 없습니다.</Text>
+                                        <Text color="black">아너스클럽 정보가 없습니다.</Text>
                                     </Flex>
                         }
                     </MotionBox>
