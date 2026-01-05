@@ -31,4 +31,22 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://ttrank.kr/point</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://ttrank.kr/point/roulette</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://ttrank.kr/point/goods</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
