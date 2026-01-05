@@ -155,7 +155,7 @@ export default function OverviewPage() {
       >
         <Flex align="center" w="100%" h="100%">
           <Link href="/" target="_self" rel="noopener noreferrer">
-            <Image src="/logo.webp" />
+            <Image alt="TTRank" src="/logo.webp" />
           </Link>
           <Spacer />
           <Link href="/honors" target="_self" rel="noopener noreferrer">
