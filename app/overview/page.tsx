@@ -155,7 +155,7 @@ export default function OverviewPage() {
       >
         <Flex align="center" w="100%" h="100%">
           <Link href="/" target="_self" rel="noopener noreferrer">
-            <Image src="/logo.png" />
+            <Image src="/logo.webp" />
           </Link>
           <Spacer />
           <Link href="/honors" target="_self" rel="noopener noreferrer">
@@ -178,7 +178,7 @@ export default function OverviewPage() {
         <Flex align="center" w="100%" h="100%">
           <Link href="https://www.sooplive.co.kr/station/prowlgus" target="_blank" rel="noopener noreferrer">
             <Image
-              src="/icons/streaming/icon_soop.png"
+              src="/icons/streaming/icon_soop_128.webp"
               boxSize="50px"
               borderRadius="full"
               fit="cover"
@@ -190,7 +190,7 @@ export default function OverviewPage() {
           <Spacer />
           <Link href="https://www.youtube.com/@티티2" target="_blank" rel="noopener noreferrer">
             <Image
-              src="/icons/streaming/icon_youtube.png"
+              src="/icons/streaming/icon_youtube_128.webp"
               boxSize="50px"
               borderRadius="full"
               fit="cover"
@@ -202,7 +202,7 @@ export default function OverviewPage() {
           <Spacer />
           <Link href="https://chzzk.naver.com/10a18c8e9a3a0672a9f0987b2f4394e7" target="_blank" rel="noopener noreferrer">
             <Image
-              src="/icons/streaming/icon_chzzk.png"
+              src="/icons/streaming/icon_chzzk_128.webp"
               boxSize="50px"
               borderRadius="full"
               fit="cover"

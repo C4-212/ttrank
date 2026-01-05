@@ -159,8 +159,8 @@ export default function OverviewPage() {
                                                 bg="white"
                                                 align="center"
                                                 marginBottom="5px">
-                                                <Image w="50px" h="50px" pr="5px" src={item.src ? `/goods/${item.src}` : "/goods/default.jpg"} onError={(e) => {
-                                                    (e.currentTarget as HTMLImageElement).src = "/goods/default.jpg";
+                                                <Image w="50px" h="50px" pr="5px" src={item.src ? `/goods/${item.src}` : "/goods/default.webp"} onError={(e) => {
+                                                    (e.currentTarget as HTMLImageElement).src = "/goods/default.webp";
                                                 }}/>
                                                 <Flex
                                                     direction="column"
