@@ -14,7 +14,8 @@ import {
     Field,
     Input,
     Stack,
-    RadioGroup
+    RadioGroup,
+    Checkbox
 } from "@chakra-ui/react";
 
 import { setCookie, getCookie } from 'cookies-next';
@@ -38,6 +39,7 @@ interface FormValues {
     team2_player2_name: string
 
     point:string|null
+    is_champion: boolean
 }
 
 const items = [
@@ -96,6 +98,7 @@ export default function OverviewPage() {
           team1_player2_name: "",
           team2_player1_name: "",
           team2_player2_name: "",
+          is_champion: false,
         },
       })
     
@@ -175,7 +178,17 @@ export default function OverviewPage() {
                         transition={{ duration: 0.4 }}
                     >
                         <form onSubmit={onSubmit}>
-                            <Field.Root invalid={!!errors.point}>
+                            <Field.Root marginBottom="10px">
+                                <Checkbox.Root
+                                    checked={watch("is_champion")}
+                                    onCheckedChange={(e) => setValue("is_champion", !!e.checked)}
+                                >
+                                    <Checkbox.HiddenInput />
+                                    <Checkbox.Control />
+                                    <Checkbox.Label>챔피언 매치 (8연승 이상)</Checkbox.Label>
+                                </Checkbox.Root>
+                            </Field.Root>
+                            <Field.Root marginBottom="10px" invalid={!!errors.point}>
                                 <Field.Label color="black">포인트 (입력없을 시 기본 1)</Field.Label>
                                 <Input w="60%" maxLength={5} fontSize="16px" color="black"{...register("point")} />
                                 <Field.ErrorText>{errors.point?.message}</Field.ErrorText>

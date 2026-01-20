@@ -79,6 +79,8 @@ export class Match {
   created_at: Date = new Date();
   updated_at: Date = new Date();
   status: string = "play"
+
+  is_champion: boolean = false;
 }
 
 export class LiveMatch extends Match {

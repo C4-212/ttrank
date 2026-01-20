@@ -9,7 +9,7 @@
 
   <url>
     <loc>https://ttrank.kr/fame</loc>
-    <changefreq>hourly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
@@ -27,13 +27,13 @@
 
   <url>
     <loc>https://ttrank.kr/player</loc>
-    <changefreq>daily</changefreq>
+    <changefreq>hourly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://ttrank.kr/point</loc>
-    <changefreq>daily</changefreq>
+    <changefreq>hourly</changefreq>
     <priority>0.8</priority>
   </url>
 
@@ -45,7 +45,7 @@
 
   <url>
     <loc>https://ttrank.kr/point/goods</loc>
-    <changefreq>daily</changefreq>
+    <changefreq>hourly</changefreq>
     <priority>0.8</priority>
   </url>
 

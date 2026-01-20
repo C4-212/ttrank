@@ -170,7 +170,7 @@ export default function OverviewPage() {
                       >
                         <Text fontSize="10px" fontWeight="normal" color="grey" p={4} pb="1px">{formatDate(item.updated_at)}</Text>
                         <Spacer />
-                        <Text fontSize="10px" fontWeight="normal" color="black" p={4} pb="1px">♦️{item.point}</Text>
+                        <Text fontSize="10px" fontWeight="normal" color="black" p={4} pb="1px">♦️{item.point} {item.is_champion ? "챔피언" : ""} 매치</Text>
                       </Flex>
                       <Flex
                         h="100%"

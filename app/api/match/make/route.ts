@@ -24,7 +24,8 @@ export async function POST(request: NextRequest) {
       team2_race,
       team2_player1_name,
       team2_player2_name,
-      point="1"
+      point="1",
+      is_champion=false,
     } = await request.json();
 
     if (!token) {
@@ -89,6 +90,14 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ success: false, error: "매치 플레이어 정보가 유효하지 않습니다.", status: 500 });
       }
 
+      // 챔피언 매치 조건 검사 (8연승 이상)
+      if(is_champion == false)
+      {
+        if(team1_player1.streak%10 >= 8 || team1_player2.streak%10 >= 8 || team2_player1.streak%10 >= 8 || team2_player2.streak%10 >= 8) {
+          return NextResponse.json({ success: false, error: "8연승 이상 플레이어는 챔피언 매치를 진행해야 합니다.", status: 500 });
+        }
+      }
+
       if(team1_race == "" || team2_race == "")
         return NextResponse.json({ success: false, error: "종족이 선택되지 않았습니다.", status: 500 });
 
@@ -115,6 +124,8 @@ export async function POST(request: NextRequest) {
           team2_player2_name: team2_player2.name,
           team2_player2_mmr: team2_player2.mmr,
           team2_player2_streak: team2_player2.streak,
+
+          is_champion: is_champion,
         }
       });
 

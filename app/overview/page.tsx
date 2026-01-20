@@ -103,6 +103,8 @@ export default function OverviewPage() {
       if (match_data.data !== null) {
         const newMatch: LiveMatch = new LiveMatch();
 
+        newMatch.is_champion = match_data.data.is_champion;
+
         newMatch.team1_race = match_data.data.team1_race;
 
         newMatch.team1_player1_name = match_data.data.team1_player1_name;
@@ -317,7 +319,7 @@ export default function OverviewPage() {
                     >
                       <Text fontSize="10px" fontWeight="normal" color="grey" p={4} pb="1px">{formatDate(match.updated_at)}</Text>
                       <Spacer />
-                      <Text fontSize="10px" fontWeight="normal" color="black" p={4} pb="1px">♦️{match.point}</Text>
+                      <Text fontSize="10px" fontWeight="normal" color="black" p={4} pb="1px">♦️{match.point} {match.is_champion ? "챔피언" : ""} 매치</Text>
                     </Flex>
                     <Flex
                       h="100%"

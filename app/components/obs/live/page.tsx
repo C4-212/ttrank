@@ -29,6 +29,8 @@ export default function OverviewPage() {
       if (match_data.data !== null) {
         const newMatch: LiveMatch = new LiveMatch();
 
+        newMatch.is_champion = match_data.data.is_champion;
+
         newMatch.team1_player1_name = match_data.data.team1_player1_name;
         newMatch.team1_player1_streak = match_data.data.team1_player1_streak;
         newMatch.team1_player1_mmr = match_data.data.team1_player1_mmr;
@@ -183,7 +185,7 @@ export default function OverviewPage() {
                   VS
                 </Text>
                 <Text fontSize="12px" color="white" mt="4px">
-                  ♦️{match.point} 매치
+                  ♦️{match.point} {match.is_champion ? "챔피언" : ""} 매치
                 </Text>
               </Flex>
 

@@ -48,6 +48,7 @@ model match {
   created_at                  DateTime @default(now())
   updated_at                  DateTime @default(now())
   status                      String @default("play")
+  is_champion                 Boolean @default(false)
 }
 
 model player {
