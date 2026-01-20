@@ -241,15 +241,15 @@ export default function OverviewPage() {
                                                 h="30px"
                                                 bg="white"
                                                 align="center">
-                                                <Text w="70px" fontWeight="normal" color="grey" fontSize="12px">{formatDate_YMD(item.updated_at)}</Text>
+                                                <Text w="60px" fontWeight="normal" color="grey" fontSize="10px">{formatDate_YMD(item.updated_at)}</Text>
                                                 <Flex
                                                     direction="column"
                                                     h="100%"
                                                     pr="5px"
                                                     justify="center">
-                                                    <Text color="black" fontSize={item.name.length > 10 ? "12px" : "14px"}>{item.name}</Text>
+                                                    <Text color="black" fontSize={item.name.length > 10 ? "10px" : "12px"}>{item.name}</Text>
                                                 </Flex>
-                                                <Text color="grey" fontSize="12px">({item.description})</Text>
+                                                <Text color="grey" fontSize="10px">({item.description})</Text>
                                                 <Spacer />
                                                 <Text fontWeight="bold" fontSize="12px" color={item.type == "pay" ? "red" : "green"}>♦️{item.point} {item.type == "pay" ? "소모" : "적립"}</Text>
                                             </Flex>
