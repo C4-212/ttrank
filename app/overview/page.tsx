@@ -224,7 +224,10 @@ export default function OverviewPage() {
       >
         <Flex h="100%" align="center" justify="center">
           <Icon as={HiHeart} color="red.400" mr={2} />
-          <Text fontSize="sm" color="black"> 후원 계좌 : 100-183-280224 케이뱅크 (강천수) </Text>
+          <Text fontSize="sm" color="black"> 후원 계좌 : 100-183-280224 케이뱅크 (강천수)</Text>
+        </Flex>
+        <Flex h="100%" align="center" justify="center">
+          <Text fontSize="sm" color="black">서버비, 상품 후원 부탁드립니다..</Text>
         </Flex>
       </Box>
 

@@ -119,9 +119,12 @@ export default function OverviewPage() {
                 <Flex align="center" w="100%" h="100%">
                     <Text fontWeight="semibold" color="black">♦️포인트 사용내역</Text>
                     <Spacer />
-                    <Link href="/point/roulette">
-                        <Button bg="black" color="white"> 🎯룰렛 </Button>
-                    </Link>
+                    {
+                        isAdmin ?
+                            <Link href="/point/roulette">
+                                <Button bg="black" color="white"> 🎯룰렛 </Button>
+                            </Link> : ""
+                    }
                     {
                         isAdmin ?
                             <Link href="/admin/point/add">

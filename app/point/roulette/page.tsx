@@ -54,6 +54,38 @@ export default function RouletteCanvas() {
     const [rotation, setRotation] = useState(0);
     const [spinning, setSpinning] = useState(false);
     const [result, setResult] = useState<string | null>(null);
+    const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+    const authToken = getCookie('authToken')?.toString();
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            if (!authToken) {
+                setIsAdmin(false);
+                return;
+            }
+
+            const res = await fetch("/api/auth/token", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ token: authToken })
+            });
+
+            const data = await res.json();
+
+            setIsAdmin(data.success);
+        };
+
+        checkAuth();
+    }, []);
+
+    useEffect(() => {
+        if (isAdmin === false) {
+            alert("관리자만 접근 가능합니다.");
+            redirect("/");
+        }
+    }, [isAdmin]);
 
     // 테스트 코드
     // const counter = [

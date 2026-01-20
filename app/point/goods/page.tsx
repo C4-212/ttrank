@@ -124,7 +124,7 @@ export default function OverviewPage() {
                             align="center"
                             justify="center"
                         >
-                            <Text color="black">♦️(포인트)를 상품으로 교환할 수 있습니다.</Text>
+                            <Text color="black">♦️(포인트)를 상품으로 교환할 수 있습니다.<br/>상품 후원 부탁드립니다!</Text>
                         </Flex>
                     </MotionBox>
                     <MotionBox
