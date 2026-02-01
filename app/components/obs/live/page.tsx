@@ -185,8 +185,12 @@ export default function OverviewPage() {
                   VS
                 </Text>
                 <Text fontSize="12px" color="white" mt="4px">
-                  ♦️{match.point} {match.is_champion ? "챔피언" : ""} 매치
+                  ♦️{match.point} {match.is_champion ? "" : "매치"}
                 </Text>
+                {match.is_champion ?
+                  <Text fontSize="12px" color="white" mt="4px">
+                    챔피언 매치
+                  </Text> : ""}
               </Flex>
 
               <Spacer />
