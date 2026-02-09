@@ -197,7 +197,7 @@ export default function OverviewPage() {
                                                     h="100%"
                                                     pr="5px"
                                                     justify="center">
-                                                    <Text color="black" fontSize={item.name.length > 10 ? "12px" : "14px"}>{item.name}</Text>
+                                                    <Text color="black" fontSize={item.name.= 10 ? "12px" : "14px"}>{item.name}</Text>
                                                 </Flex>
                                                 {
                                                     isAdmin ? <Button onClick={() => remove(authToken, item.name, item.idx)} bg="black" color="white">삭제</Button> : ""

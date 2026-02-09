@@ -139,7 +139,7 @@ export default function OverviewPage() {
                                                     direction="column"
                                                     h="100%"
                                                     justify="center">
-                                                    <Text color="black" fontSize={item.name.length > 10 ? "12px" : "14px"}>{item.name}</Text>
+                                                    <Text color="black" fontSize={item.name.length >= 10 ? "12px" : "14px"}>{item.name}</Text>
                                                 </Flex>
                                                 <Spacer />
                                                 <Text fontWeight="normal" color="grey" fontSize="12px">{item.point} 원</Text>

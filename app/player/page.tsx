@@ -200,7 +200,7 @@ export default function OverviewPage() {
                           justify="center">
                           <Flex
                             align="center">
-                            <Text color="black" fontSize={item.name.length > 10 ? "12px" : "14px"}>{item.name}</Text>
+                            <Text color="black" fontSize={item.name.length >= 10 ? "12px" : "14px"}>{item.name}</Text>
                             <Text pl="5px" fontSize="12px" color="#f23f3f">({item.mmr})</Text>
                             <IconButton
                               aria-label="copy-name"

@@ -247,7 +247,7 @@ export default function OverviewPage() {
                                                     h="100%"
                                                     pr="5px"
                                                     justify="center">
-                                                    <Text color="black" fontSize={item.name.length > 10 ? "10px" : "12px"}>{item.name}</Text>
+                                                    <Text color="black" fontSize={item.name.length >= 10 ? "10px" : "12px"}>{item.name}</Text>
                                                 </Flex>
                                                 <Text color="grey" fontSize="10px">({item.description})</Text>
                                                 <Spacer />

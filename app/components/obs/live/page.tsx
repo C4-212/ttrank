@@ -126,7 +126,7 @@ export default function OverviewPage() {
     >
       <Text
         color="white"
-        fontSize={name.length > 10 ? "14px" : "14px"}
+        fontSize={name.length >= 10 ? "14px" : "14px"}
       >
         {name}
       </Text>

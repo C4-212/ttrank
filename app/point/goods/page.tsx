@@ -167,7 +167,7 @@ export default function OverviewPage() {
                                                     h="100%"
                                                     pr="5px"
                                                     justify="center">
-                                                    <Text color="black" fontSize={item.name.length > 10 ? "12px" : "14px"}>{item.name}</Text>
+                                                    <Text color="black" fontSize={item.name.length >= 10 ? "12px" : "14px"}>{item.name}</Text>
                                                 </Flex>
                                                 {
                                                     isAdmin ? <Link href={"/admin/goods/edit/" + item.idx}><Button bg="black" color="white">변경</Button></Link> : ""
