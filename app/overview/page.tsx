@@ -264,11 +264,11 @@ export default function OverviewPage() {
 
                 <b>[참가비]</b><br/>
                 도전자 : ♦️5<br/>
-                챔피언(🏆) : 면제<br/><br/>
+                챔피언🏆 : 면제<br/><br/>
 
                 <b>[승리 시 보상]</b><br/>
                 도전자 : ♦️20<br/>
-                챔피언(🏆) : ♦️5<br/><br/>
+                챔피언🏆 : ♦️5<br/><br/>
 
                 상품 수령은 오픈챗 TT스타 <Link color="black" target="_blank" href="https://open.kakao.com/o/s4NX6SVh" rel="noopener noreferrer">🔗</Link></Text>
             </Flex>
