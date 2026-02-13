@@ -244,7 +244,7 @@ export default function OverviewPage() {
                           </Flex>
                           <Text
                             color="black"
-                            fontSize={item.team2_player1_name.length >= 10 ? "10px" : "10px"}
+                            fontSize={item.team2_player1_name.length >= 10 ? "10px" : "10px"}>
                             {item.team2_player1_name} </Text>
                           <Flex
                             h="100%"
