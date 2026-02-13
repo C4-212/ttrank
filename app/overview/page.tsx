@@ -227,7 +227,7 @@ export default function OverviewPage() {
           <Text fontSize="sm" color="black"> 후원 계좌 : 100-183-280224 케이뱅크 (강천수)</Text>
         </Flex>
         <Flex h="100%" align="center" justify="center">
-          <Text fontSize="sm" color="black">서버비, 상품 후원 부탁드립니다..</Text>
+          <Text fontSize="sm" color="black">서버비, 상품 후원 부탁드립니다🥹</Text>
         </Flex>
       </Box>
 
@@ -259,7 +259,7 @@ export default function OverviewPage() {
             >
               <Text color="black">
                 [방송 시간]<br />
-                평일 : 오후 8시 시작 / 토요일 : 오후 6시 시작<br /><br />
+                평일 : 오후 8시 ~ / 일요일 : 오후 6시 ~ <br /><br />
                 상품 수령은 오픈챗 TT스타 <Link color="black" target="_blank" href="https://open.kakao.com/o/s4NX6SVh" rel="noopener noreferrer">🔗</Link></Text>
             </Flex>
           </MotionBox>
