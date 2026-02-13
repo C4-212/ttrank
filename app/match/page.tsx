@@ -193,7 +193,7 @@ export default function OverviewPage() {
                             pb="5px"
                           >
                             <Text fontWeight="bold" fontSize="12px" color="#f23f3f">[1팀 {item.team1_race}]</Text>
-                            {item.winner == "1" ? <Text fontWeight="bold" color="green">　👑승리!</Text> : ""}
+                            {item.winner == "1" ? <Text fontSize="12px" fontWeight="bold" color="green">　👑승리!</Text> : ""}
                             <Spacer />
                           </Flex>
                           <Text
@@ -239,7 +239,7 @@ export default function OverviewPage() {
                             pb="5px"
                           >
                             <Spacer />
-                            {item.winner == "2" ? <Text fontWeight="bold" color="green">　👑승리!</Text> : ""}
+                            {item.winner == "2" ? <Text fontSize="12px" fontWeight="bold" color="green">　👑승리!</Text> : ""}
                             <Text fontWeight="bold" fontSize="12px" color="#4775ea">　[2팀 {item.team2_race}]</Text>
                           </Flex>
                           <Text
