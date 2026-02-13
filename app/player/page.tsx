@@ -16,7 +16,7 @@ import {
 import { toaster } from "@/components/ui/toaster";
 
 import { Copy } from "lucide-react";
-import { MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
+import { getChampionEmoji, MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";
 import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
@@ -227,7 +227,7 @@ export default function OverviewPage() {
                         </Flex>
                         <Spacer />
                         {/* 1~3등은 빨간색 */}
-                        <Text fontWeight="normal" color="grey">{item.streak}연승</Text>
+                        <Text fontWeight="normal" color="grey">{getChampionEmoji(item.streak)} {item.streak}연승</Text>
                       </Flex>
                     </Box>
                   )) :

@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Text } from "@chakra-ui/react";
-import { Player, getOBSEmoji} from "@/app/components/common/class";
+import { getChampionEmoji, Player, getOBSEmoji} from "@/app/components/common/class";
 import { useState, useEffect } from "react";
 
 export default function OverviewPage() {
@@ -46,7 +46,7 @@ export default function OverviewPage() {
             color={item.rank>3?"white":"yellow"}
             textShadow="-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black"
           >
-            {getOBSEmoji(item.rank)}{item.name} ({item.streak}연승)
+            {getOBSEmoji(item.rank)}{item.name} ({item.streak}연승) {getChampionEmoji(item.streak)}
           </Text>
         ))}
       </Box>

@@ -137,6 +137,13 @@ export function getEmoji(rank: number) {
   }
 }
 
+export function getChampionEmoji(streak: number) {
+  if (streak % 10 >= 8) {
+    return "🏆";
+  }
+  return "";
+}
+
 export function getOBSEmoji(rank: number) {
   switch (rank) {
     case 1: return "🥇";

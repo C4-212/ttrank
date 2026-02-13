@@ -18,7 +18,7 @@ import {
   Spinner
 } from "@chakra-ui/react";
 import { setCookie, getCookie } from 'cookies-next';
-import { formatDate, getEmoji, Player, LiveMatch, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
+import { getChampionEmoji, formatDate, getEmoji, Player, LiveMatch, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
 import WinRate from "@/app/components/common/winrate";
 import FooterNav from "@/app/components/common/footer";
 import { redirect } from "next/navigation";
@@ -343,14 +343,14 @@ export default function OverviewPage() {
                           fontSize={match.team1_player1_name.length >= 10 ? "10px" : "16px"}>
                           {match.team1_player1_name}
                         </Text>
-                        <Text fontSize="10px" color="grey">{match.team1_player1_streak}연승 ({match.team1_player1_mmr}) ♦️{match.team1_player1_point}</Text>
+                        <Text fontSize="10px" color="grey">{getChampionEmoji(match.team1_player1_streak)} {match.team1_player1_streak}연승 ({match.team1_player1_mmr}) ♦️{match.team1_player1_point}</Text>
                         <Box minH="10px"></Box>
                         <Text
                           color="black"
                           fontSize={match.team1_player2_name.length >= 10 ? "10px" : "16px"}>
                           {match.team1_player2_name}
                         </Text>
-                        <Text fontSize="10px" color="grey">{match.team1_player2_streak}연승 ({match.team1_player2_mmr}) ♦️{match.team1_player2_point}</Text>
+                        <Text fontSize="10px" color="grey">{getChampionEmoji(match.team1_player2_streak)} {match.team1_player2_streak}연승 ({match.team1_player2_mmr}) ♦️{match.team1_player2_point}</Text>
                       </Box>
                       <Spacer />
                       <Text fontWeight="bold" fontSize="32px" color="black">VS</Text>
@@ -367,13 +367,13 @@ export default function OverviewPage() {
                           color="black"
                           fontSize={match.team2_player1_name.length >= 10 ? "10px" : "16px"}>
                           {match.team2_player1_name} </Text>
-                        <Text fontSize="10px" color="grey">{match.team2_player1_streak}연승 ({match.team2_player1_mmr}) ♦️{match.team2_player1_point}</Text>
+                        <Text fontSize="10px" color="grey">{getChampionEmoji(match.team2_player1_streak)} {match.team2_player1_streak}연승 ({match.team2_player1_mmr}) ♦️{match.team2_player1_point}</Text>
                         <Box minH="10px"></Box>
                         <Text
                           color="black"
                           fontSize={match.team2_player2_name.length >= 10 ? "10px" : "16px"}>
                           {match.team2_player2_name} </Text>
-                        <Text fontSize="10px" color="grey">{match.team2_player2_streak}연승 ({match.team2_player2_mmr}) ♦️{match.team2_player2_point}</Text>
+                        <Text fontSize="10px" color="grey">{getChampionEmoji(match.team2_player2_streak)} {match.team2_player2_streak}연승 ({match.team2_player2_mmr}) ♦️{match.team2_player2_point}</Text>
                       </Box>
                     </Flex>
                     <Text fontSize="12px" color="grey" pb="1px">승자 예측</Text>
@@ -469,7 +469,7 @@ export default function OverviewPage() {
                         <Text fontSize="12px" color="grey">　({item.mmr})</Text>
                         <Spacer />
                         {/* 1~3등은 빨간색 */}
-                        <Text fontWeight="normal" color={idx < 3 ? "#f23f3f" : "black"}>{item.streak}연승</Text>
+                        <Text fontWeight="normal" color={idx < 3 ? "#f23f3f" : "black"}>{getChampionEmoji(item.streak)} {item.streak}연승</Text>
 
                       </Flex>
                     </Box>

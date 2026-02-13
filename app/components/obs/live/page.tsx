@@ -6,7 +6,7 @@ import {
   Text,
   Spacer,
 } from "@chakra-ui/react";
-import { LiveMatch, Player, getOBSEmoji } from "@/app/components/common/class";
+import { getChampionEmoji, LiveMatch, Player, getOBSEmoji } from "@/app/components/common/class";
 import { useState, useEffect } from "react";
 import WinRate from "@/app/components/common/winrate";
 
@@ -131,7 +131,7 @@ export default function OverviewPage() {
         {name}
       </Text>
       <Text fontSize="14px" color="white">
-        {streak}연승 ({mmr}) ♦️{point}
+        {getChampionEmoji(streak)} {streak}연승 ({mmr}) ♦️{point}
       </Text>
     </Box>
   );

@@ -11,7 +11,7 @@ import {
   Button,
   Input
 } from "@chakra-ui/react";
-import { formatDate, Player, Match, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
+import { getChampionEmoji, formatDate, Player, Match, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";
 import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
@@ -205,7 +205,7 @@ export default function OverviewPage() {
                             h="100%"
                             bg="white"
                             align="center">
-                            <Text fontSize="12px" color="grey">{item.team1_player1_streak}연승 ({item.team1_player1_mmr})</Text>
+                            <Text fontSize="12px" color="grey">{getChampionEmoji(item.team1_player1_streak)} {item.team1_player1_streak}연승 ({item.team1_player1_mmr})</Text>
                             <Text fontWeight="bold" fontSize="12px" color={item.winner == "1" ? "green" : "red"}>　({item.team1_player1_mmr_changed >= 0 ? "+" : ""}{item.team1_player1_mmr_changed})</Text>
                           </Flex>
                           <Box minH="10px"></Box>
@@ -218,7 +218,7 @@ export default function OverviewPage() {
                             h="100%"
                             bg="white"
                             align="center">
-                            <Text fontSize="12px" color="grey">{item.team1_player2_streak}연승 ({item.team1_player2_mmr})</Text>
+                            <Text fontSize="12px" color="grey">{getChampionEmoji(item.team1_player2_streak)} {item.team1_player2_streak}연승 ({item.team1_player2_mmr})</Text>
                             <Text fontWeight="bold" fontSize="12px" color={item.winner == "1" ? "green" : "red"}>　({item.team1_player2_mmr_changed >= 0 ? "+" : ""}{item.team1_player2_mmr_changed})</Text>
                           </Flex>
                         </Box>
@@ -252,7 +252,7 @@ export default function OverviewPage() {
                             align="center"
                             textAlign="right">
                             <Spacer />
-                            <Text fontSize="12px" color="grey">{item.team2_player1_streak}연승 ({item.team2_player1_mmr})</Text>
+                            <Text fontSize="12px" color="grey">{getChampionEmoji(item.team2_player1_streak)} {item.team2_player1_streak}연승 ({item.team2_player1_mmr})</Text>
                             <Text fontWeight="bold" fontSize="12px" color={item.winner == "2" ? "green" : "red"}>　({item.team2_player1_mmr_changed >= 0 ? "+" : ""}{item.team2_player1_mmr_changed})</Text>
                           </Flex>
                           <Box minH="10px"></Box>
@@ -266,7 +266,7 @@ export default function OverviewPage() {
                             align="center"
                             textAlign="right">
                             <Spacer />
-                            <Text fontSize="12px" color="grey">{item.team2_player2_streak}연승 ({item.team2_player2_mmr})</Text>
+                            <Text fontSize="12px" color="grey">{getChampionEmoji(item.team2_player2_streak)} {item.team2_player2_streak}연승 ({item.team2_player2_mmr})</Text>
                             <Text fontWeight="bold" fontSize="12px" color={item.winner == "2" ? "green" : "red"}>　({item.team2_player2_mmr_changed >= 0 ? "+" : ""}{item.team2_player2_mmr_changed})</Text>
                           </Flex>
                         </Box>
