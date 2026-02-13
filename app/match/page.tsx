@@ -160,7 +160,7 @@ export default function OverviewPage() {
                       bg="white"
                       border="1px solid"
                       borderColor="gray.200"
-                      minH="200px"
+                      minH="160px"
                       marginBottom="5px">
                       <Flex
                         minH="10px"
