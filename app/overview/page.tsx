@@ -244,7 +244,7 @@ export default function OverviewPage() {
             border="1px solid"
             borderColor="gray.200"
             p={4}
-            minH="120px"
+            minH="400px"
             variants={CardAnim}
             initial="hidden"
             animate="visible"
@@ -252,14 +252,24 @@ export default function OverviewPage() {
           >
             <Text fontWeight="medium" color="black">📢공지사항</Text>
             <Flex
-              h="120px"
+              h="350px"
               bg="white"
               align="center"
               justify="center"
             >
               <Text color="black">
-                [방송 시간]<br />
-                평일 : 오후 8시 ~ / 일요일 : 오후 6시 ~ <br /><br />
+                <b>[챔피언 매치]</b><br/>
+                8연승 이상 선수는 챔피언 자격(🏆)이 주어집니다.<br/>
+                챔피언은 반드시 챔피언 매치를 진행해야 합니다. <br/><br/>
+
+                <b>[참가비]</b><br/>
+                도전자 : ♦️5<br/>
+                챔피언(🏆) : 면제<br/><br/>
+
+                <b>[승리 시 보상]</b><br/>
+                도전자 : ♦️20<br/>
+                챔피언(🏆) : ♦️5<br/><br/>
+
                 상품 수령은 오픈챗 TT스타 <Link color="black" target="_blank" href="https://open.kakao.com/o/s4NX6SVh" rel="noopener noreferrer">🔗</Link></Text>
             </Flex>
           </MotionBox>
