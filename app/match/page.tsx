@@ -205,8 +205,8 @@ export default function OverviewPage() {
                             h="100%"
                             bg="white"
                             align="center">
-                            <Text fontSize="12px" color="grey">{getChampionEmoji(item.team1_player1_streak)} {item.team1_player1_streak}연승 ({item.team1_player1_mmr})</Text>
-                            <Text fontWeight="bold" fontSize="12px" color={item.winner == "1" ? "green" : "red"}>　({item.team1_player1_mmr_changed >= 0 ? "+" : ""}{item.team1_player1_mmr_changed})</Text>
+                            <Text fontSize="10px" color="grey">{getChampionEmoji(item.team1_player1_streak)} {item.team1_player1_streak}연승 ({item.team1_player1_mmr})</Text>
+                            <Text fontWeight="bold" fontSize="10px" color={item.winner == "1" ? "green" : "red"}>　({item.team1_player1_mmr_changed >= 0 ? "+" : ""}{item.team1_player1_mmr_changed})</Text>
                           </Flex>
                           <Box minH="10px"></Box>
                           <Text
@@ -218,8 +218,8 @@ export default function OverviewPage() {
                             h="100%"
                             bg="white"
                             align="center">
-                            <Text fontSize="12px" color="grey">{getChampionEmoji(item.team1_player2_streak)} {item.team1_player2_streak}연승 ({item.team1_player2_mmr})</Text>
-                            <Text fontWeight="bold" fontSize="12px" color={item.winner == "1" ? "green" : "red"}>　({item.team1_player2_mmr_changed >= 0 ? "+" : ""}{item.team1_player2_mmr_changed})</Text>
+                            <Text fontSize="10px" color="grey">{getChampionEmoji(item.team1_player2_streak)} {item.team1_player2_streak}연승 ({item.team1_player2_mmr})</Text>
+                            <Text fontWeight="bold" fontSize="10px" color={item.winner == "1" ? "green" : "red"}>　({item.team1_player2_mmr_changed >= 0 ? "+" : ""}{item.team1_player2_mmr_changed})</Text>
                           </Flex>
                         </Box>
                         <Spacer />
@@ -252,8 +252,8 @@ export default function OverviewPage() {
                             align="center"
                             textAlign="right">
                             <Spacer />
-                            <Text fontSize="12px" color="grey">{getChampionEmoji(item.team2_player1_streak)} {item.team2_player1_streak}연승 ({item.team2_player1_mmr})</Text>
-                            <Text fontWeight="bold" fontSize="12px" color={item.winner == "2" ? "green" : "red"}>　({item.team2_player1_mmr_changed >= 0 ? "+" : ""}{item.team2_player1_mmr_changed})</Text>
+                            <Text fontSize="10px" color="grey">{getChampionEmoji(item.team2_player1_streak)} {item.team2_player1_streak}연승 ({item.team2_player1_mmr})</Text>
+                            <Text fontWeight="bold" fontSize="10px" color={item.winner == "2" ? "green" : "red"}>　({item.team2_player1_mmr_changed >= 0 ? "+" : ""}{item.team2_player1_mmr_changed})</Text>
                           </Flex>
                           <Box minH="10px"></Box>
                           <Text
@@ -266,8 +266,8 @@ export default function OverviewPage() {
                             align="center"
                             textAlign="right">
                             <Spacer />
-                            <Text fontSize="12px" color="grey">{getChampionEmoji(item.team2_player2_streak)} {item.team2_player2_streak}연승 ({item.team2_player2_mmr})</Text>
-                            <Text fontWeight="bold" fontSize="12px" color={item.winner == "2" ? "green" : "red"}>　({item.team2_player2_mmr_changed >= 0 ? "+" : ""}{item.team2_player2_mmr_changed})</Text>
+                            <Text fontSize="10px" color="grey">{getChampionEmoji(item.team2_player2_streak)} {item.team2_player2_streak}연승 ({item.team2_player2_mmr})</Text>
+                            <Text fontWeight="bold" fontSize="10px" color={item.winner == "2" ? "green" : "red"}>　({item.team2_player2_mmr_changed >= 0 ? "+" : ""}{item.team2_player2_mmr_changed})</Text>
                           </Flex>
                         </Box>
                       </Flex>
