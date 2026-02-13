@@ -226,8 +226,7 @@ export default function OverviewPage() {
                           </Flex>
                         </Flex>
                         <Spacer />
-                        {/* 1~3등은 빨간색 */}
-                        <Text fontWeight="normal" color="grey">{getChampionEmoji(item.streak)} {item.streak}연승</Text>
+                        <Text fontSize="12px" fontWeight="normal" color="grey">{getChampionEmoji(item.streak)} {item.streak}연승</Text>
                       </Flex>
                     </Box>
                   )) :
