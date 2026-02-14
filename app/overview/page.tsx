@@ -244,7 +244,7 @@ export default function OverviewPage() {
             border="1px solid"
             borderColor="gray.200"
             p={4}
-            minH="400px"
+            minH="440px"
             variants={CardAnim}
             initial="hidden"
             animate="visible"
@@ -252,7 +252,7 @@ export default function OverviewPage() {
           >
             <Text fontWeight="medium" color="black">📢공지사항</Text>
             <Flex
-              h="350px"
+              h="380px"
               bg="white"
               align="center"
               justify="center"
