@@ -34,7 +34,8 @@ export default function OverviewPage() {
   const [leaderboard, setLeaderBoard] = useState<Player[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [keyword, setKeyword] = useState("");
-  const [rankingType, setRankingType] = useState<"mmr" | "point">("mmr");
+  const [rankingType, setRankingType] = useState<"mmr" | "point" | "streak">("mmr");
+  const [rotateDeg, setRotateDeg] = useState(0);
 
   useEffect(() => {
     const player_list = async () => {
@@ -57,6 +58,10 @@ export default function OverviewPage() {
     }
     player_list();
   }, [page, keyword, rankingType]);
+
+  useEffect(() => {
+    setRotateDeg((prev) => prev + 180);
+  }, [rankingType]);
 
   const {
     register,
@@ -94,13 +99,13 @@ export default function OverviewPage() {
         alignItems="center"
       >
         <Flex align="center" w="100%" h="100%">
-          <Text fontWeight="semibold" color="black">🥇유저 랭킹 ({rankingType === "mmr" ? "MMR" : "Point"})</Text>
+          <Text fontWeight="semibold" color="black">🥇유저 랭킹 ({rankingType === "mmr" ? "MMR" : rankingType === "point" ? "Point" : "연승"})</Text>
           <IconButton
             aria-label="랭킹 전환"
             variant="ghost"
             size="sm"
             onClick={() =>
-              setRankingType(prev => (prev === "mmr" ? "point" : "mmr"))
+              setRankingType(prev => (prev === "mmr" ? "point" : prev === "point"? "streak" : "mmr"))
             }
           >
             <RefreshCw
@@ -108,8 +113,7 @@ export default function OverviewPage() {
               size={16}
               style={{
                 transition: "transform 0.3s ease",
-                transform:
-                  rankingType === "point" ? "rotate(180deg)" : "rotate(0deg)",
+                transform: `rotate(${rotateDeg}deg)`
               }}
             />
           </IconButton>
