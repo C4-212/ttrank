@@ -6,10 +6,12 @@ import { HiHeart } from "react-icons/hi";
 export default function FooterNav() {
   return (
     <Box
+      w="100%"
+      maxW="430px"
       position="fixed"
       bottom="0"
-      left="0"
-      right="0"
+      left="50%"
+      transform="translateX(-50%)"
       h="64px"
       bg="white"
       borderTop="1px solid"

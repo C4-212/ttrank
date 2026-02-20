@@ -1,3 +1,4 @@
+
 export const metadata = {
   title: "TT Rank - 실시간 MMR & 랭킹",
   description: "TT 방송 경기 MMR/연승/승점 실시간 확인 페이지",
@@ -9,6 +10,24 @@ export const metadata = {
   },
 };
 
+import {
+  Box,
+} from "@chakra-ui/react";
+
 export default function OverviewPage({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+  <Box bg="gray.200" minH="100vh" py={6}>
+    <Box
+      maxW="430px"
+      mx="auto"
+      bg="white"
+      minH="100vh"
+      boxShadow="lg"
+      borderRadius="lg"
+      overflow="hidden"
+    >
+      {children}
+    </Box>
+  </Box>
+  );
 }
