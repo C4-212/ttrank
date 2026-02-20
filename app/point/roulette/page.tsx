@@ -218,7 +218,7 @@ export default function RouletteCanvas() {
 
             {/* Main Content */}
             <Container
-                py={6}
+                
                 flex="1"
                 pb="96px"
             >

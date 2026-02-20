@@ -4,7 +4,7 @@ import {
 
 export default function OverviewPage({ children }: { children: React.ReactNode }) {
   return (
-  <Box bg="gray.200" minH="100vh" py={6}>
+  <Box bg="gray.200" minH="100vh" >
     <Box
       maxW="430px"
       mx="auto"
