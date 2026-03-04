@@ -260,7 +260,7 @@ export default function OverviewPage() {
 
                                         <Text color="black" fontStyle="bold" fontSize="14px">1.Maker</Text>
                                         <Table.Root size="sm" variant="outline">
-                                            <Table.Header>
+                                            <Table.Header backgroundColor="gray.100">
                                                 <Table.Row>
                                                     <Table.ColumnHeader>Matchup</Table.ColumnHeader>
                                                     <Table.ColumnHeader textAlign="right">Zerg</Table.ColumnHeader>
@@ -320,7 +320,7 @@ export default function OverviewPage() {
                                         <br />
                                         <Text color="black" fontSize="14px">2. Controller</Text>
                                         <Table.Root size="sm" variant="outline">
-                                            <Table.Header>
+                                            <Table.Header backgroundColor="gray.100">
                                                 <Table.Row>
                                                     <Table.ColumnHeader>Matchup</Table.ColumnHeader>
                                                     <Table.ColumnHeader textAlign="right">Zerg</Table.ColumnHeader>
@@ -380,11 +380,11 @@ export default function OverviewPage() {
 
                                         <Box
                                             bg="white"
-                                            borderRadius="2xl"
+                                            borderRadius="xl"
                                             boxShadow="0 8px 24px rgba(0,0,0,0.06)"
                                             p={5}
                                         >
-                                            <Text fontSize="lg" color="black" fontWeight="bold" mb={4}>
+                                            <Text fontSize="14px" color="black" fontWeight="bold" mb={4}>
                                                 MMR 변동
                                             </Text>
 
@@ -395,26 +395,26 @@ export default function OverviewPage() {
                                                         <defs>
                                                             <linearGradient id="mmrGradient" x1="0" y1="0" x2="0" y2="1">
                                                                 <stop offset="0%" stopColor="#4F8CFF" stopOpacity={0.8} />
-                                                                <stop offset="100%" stopColor="#4F8CFF" stopOpacity={0.05} />
+                                                                <stop offset="100%" stopColor="#4F8CFF" stopOpacity={0.8} />
                                                             </linearGradient>
                                                         </defs>
 
                                                         <CartesianGrid
                                                             vertical={false}
                                                             strokeDasharray="3 3"
-                                                            stroke="#f0f0f0"
+                                                            stroke="#a1a1a1"
                                                         />
 
                                                         <XAxis
                                                             dataKey="date"
-                                                            tick={{ fontSize: 11, fill: "#999" }}
+                                                            tick={{ fontSize: 11, fill: "#5a5a5a" }}
                                                             axisLine={false}
                                                             tickLine={false}
                                                         />
 
                                                         <YAxis
                                                             domain={["dataMin - 30", "dataMax + 30"]}
-                                                            tick={{ fontSize: 11, fill: "#999" }}
+                                                            tick={{ fontSize: 11, fill: "#5a5a5a" }}
                                                             axisLine={false}
                                                             tickLine={false}
                                                         />
