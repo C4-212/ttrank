@@ -104,7 +104,7 @@ export default function PlayerSearchInput({ name, value, setValue }: Props) {
                             >
                                 <Flex
                                     minH="12px"
-                                    bg="white"
+                                    bg="transparent"
                                     align="center"
                                     justify="center"
                                 >

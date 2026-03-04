@@ -388,17 +388,22 @@ export default function OverviewPage() {
                                                 p={3}
                                             >
                                                 <ResponsiveContainer width="100%" height="100%">
-                                                    <LineChart data={MMRData}>
+                                                    <LineChart
+                                                        data={MMRData}
+                                                        tabIndex={-1}
+                                                        style={{ outline: "none" }}>
                                                         <CartesianGrid strokeDasharray="3 3" />
                                                         <XAxis dataKey="date" fontSize={8} />
                                                         <YAxis fontSize={8} />
-                                                        <Tooltip />
+                                                        <Tooltip 
+                                                        cursor={false}/>
                                                         <Line
                                                             type="monotone"
                                                             dataKey="mmr"
                                                             stroke="#3182CE"
                                                             strokeWidth={2}
                                                             dot={{ r: 3 }}
+                                                            activeDot={false}
                                                         />
                                                     </LineChart>
                                                 </ResponsiveContainer>
