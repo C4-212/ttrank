@@ -384,7 +384,7 @@ export default function OverviewPage() {
                                             boxShadow="0 8px 24px rgba(0,0,0,0.06)"
                                             p={5}
                                         >
-                                            <Text fontSize="lg" fonyColor="black" fontWeight="bold" mb={4}>
+                                            <Text fontSize="lg" color="black" fontWeight="bold" mb={4}>
                                                 MMR 변동
                                             </Text>
 
