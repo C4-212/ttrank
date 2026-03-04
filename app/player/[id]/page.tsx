@@ -12,7 +12,7 @@ import {
     Input,
     IconButton,
     Link,
-    Table
+    Table,
 } from "@chakra-ui/react";
 
 import {
@@ -23,6 +23,7 @@ import {
     Tooltip,
     ResponsiveContainer,
     CartesianGrid,
+    Area,
 } from "recharts";
 
 import { toaster } from "@/components/ui/toaster";
@@ -71,9 +72,9 @@ export default function OverviewPage() {
 
             if (mmr.data) {
                 // console.log(mmr.data)
-                
+
                 // 마지막 MMR 반영
-                mmr.data[mmr.data.length-1].mmr = curr_mmr;
+                mmr.data[mmr.data.length - 1].mmr = curr_mmr;
 
                 const updatedData: MMR[] = [
                     ...mmr.data,
@@ -96,7 +97,7 @@ export default function OverviewPage() {
             setLoadingStatistics(false);
         };
 
-        const statistics_data = async (name:string, curr_mmr:number) => {
+        const statistics_data = async (name: string, curr_mmr: number) => {
             const res = await fetch(`/api/statistics/find/`, {
                 method: "POST",
                 headers: {
@@ -313,7 +314,7 @@ export default function OverviewPage() {
                                             </Table.Body>
                                         </Table.Root>
 
-                                        <br/>
+                                        <br />
                                         <Text color="black" fontSize="14px">2. Controller</Text>
                                         <Table.Root size="sm" variant="outline">
                                             <Table.Header>
@@ -372,38 +373,72 @@ export default function OverviewPage() {
                                                 </Table.Row>
                                             </Table.Body>
                                         </Table.Root>
+                                        <br/><br/>
 
-                                        <Box mt={8}>
-                                            <Text mb={3} fontWeight="semibold">
+                                        <Box
+                                            bg="white"
+                                            borderRadius="2xl"
+                                            boxShadow="0 8px 24px rgba(0,0,0,0.06)"
+                                            p={5}
+                                        >
+                                            <Text fontSize="lg" fontWeight="bold" mb={4}>
                                                 MMR 변동
                                             </Text>
 
-                                            <Box
-                                                w="100%"
-                                                h="250px"
-                                                bg="white"
-                                                border="1px solid"
-                                                borderColor="gray.200"
-                                                borderRadius="lg"
-                                                p={3}
-                                            >
+                                            <Box h="220px">
                                                 <ResponsiveContainer width="100%" height="100%">
-                                                    <LineChart
-                                                        data={MMRData}
-                                                        tabIndex={-1}
-                                                        style={{ outline: "none" }}>
-                                                        <CartesianGrid strokeDasharray="3 3" />
-                                                        <XAxis dataKey="date" fontSize={8} />
-                                                        <YAxis fontSize={8} />
-                                                        <Tooltip 
-                                                        cursor={false}/>
+                                                    <LineChart data={MMRData} tabIndex={-1}>
+
+                                                        <defs>
+                                                            <linearGradient id="mmrGradient" x1="0" y1="0" x2="0" y2="1">
+                                                                <stop offset="0%" stopColor="#4F8CFF" stopOpacity={0.8} />
+                                                                <stop offset="100%" stopColor="#4F8CFF" stopOpacity={0.05} />
+                                                            </linearGradient>
+                                                        </defs>
+
+                                                        <CartesianGrid
+                                                            vertical={false}
+                                                            strokeDasharray="3 3"
+                                                            stroke="#f0f0f0"
+                                                        />
+
+                                                        <XAxis
+                                                            dataKey="date"
+                                                            tick={{ fontSize: 11, fill: "#999" }}
+                                                            axisLine={false}
+                                                            tickLine={false}
+                                                        />
+
+                                                        <YAxis
+                                                            domain={["dataMin - 30", "dataMax + 30"]}
+                                                            tick={{ fontSize: 11, fill: "#999" }}
+                                                            axisLine={false}
+                                                            tickLine={false}
+                                                        />
+
+                                                        <Tooltip
+                                                            cursor={{ stroke: "#4F8CFF", strokeWidth: 1 }}
+                                                            contentStyle={{
+                                                                borderRadius: "12px",
+                                                                border: "none",
+                                                                boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+                                                            }}
+                                                        />
+
+                                                        <Area
+                                                            type="monotone"
+                                                            dataKey="mmr"
+                                                            stroke="none"
+                                                            fill="url(#mmrGradient)"
+                                                        />
+
                                                         <Line
                                                             type="monotone"
                                                             dataKey="mmr"
-                                                            stroke="#3182CE"
-                                                            strokeWidth={2}
-                                                            dot={{ r: 3 }}
-                                                            activeDot={false}
+                                                            stroke="#4F8CFF"
+                                                            strokeWidth={3}
+                                                            dot={false}
+                                                            activeDot={{ r: 6 }}
                                                         />
                                                     </LineChart>
                                                 </ResponsiveContainer>

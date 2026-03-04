@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
                     OR team2_player2_name = ${name}
                 )
                 ORDER BY DATE(created_at) DESC, created_at DESC
-                LIMIT 10
+                LIMIT 30
             ) t
             ORDER BY raw_date ASC;
             `;
