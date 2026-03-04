@@ -427,7 +427,7 @@ export default function OverviewPage() {
                                                                 boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
                                                             }}
                                                             labelStyle={{ color: "black" }}
-                                                            itemStyle={{ color: "black" }}
+                                                            itemStyle={{ color: "#4F8CFF" }}
 
                                                         />
 
