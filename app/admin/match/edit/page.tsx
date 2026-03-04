@@ -47,6 +47,28 @@ function update(authToken: string, match: LiveMatch, winner: string) {
 
         if (match_data.success) {
             alert("경기가 완료되었습니다.");
+
+            // 통계 업데이트
+            const res2 = await fetch("/api/statistics/update", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ idx: match?.idx, token: authToken, winner: winner, 
+                    team1_race: match?.team1_race, team2_race:match?.team2_race,
+                    team1_player1_name:match?.team1_player1_name,
+                    team1_player2_name:match?.team1_player2_name,
+                    team2_player1_name:match?.team2_player1_name,
+                    team2_player2_name:match?.team2_player2_name })
+            });
+
+            const result2 = await res2.json();
+
+            if (!result2.success) {
+                alert(result2.error || "통계 적용 에러");
+                return;
+            }
+
             redirect("/");
         }
         else {

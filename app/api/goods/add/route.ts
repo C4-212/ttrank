@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
   } 
   catch (err) 
   {
-    console.log(err);
+    // console.log(err);
     return NextResponse.json({ success: false, error: "서버 에러", status: 500 });
   }
 }

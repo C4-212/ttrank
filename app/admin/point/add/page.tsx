@@ -117,7 +117,7 @@ export default function OverviewPage() {
         });
 
         const result = await res.json();
-        console.log(result)
+        // console.log(result)
 
         if (!result.success) {
             alert(result.error || "서버 에러");

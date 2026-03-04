@@ -12,6 +12,11 @@ export class Player {
   lose: number = 0;
 }
 
+export class MMR {
+  date:string = "";
+  mmr:number = 0
+}
+
 export class Statistics {
   idx: number = 0;
   name: string = "플레이어1";
@@ -163,6 +168,15 @@ export function formatDate_YMD(date: string | Date): string {
   const day = String(d.getDate()).padStart(2, "0");
 
   return `${year}/${month}/${day}`;
+}
+
+export function formatDate_MD(date: string | Date): string {
+  const d = new Date(date);
+
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+
+  return `${month}/${day}`;
 }
 
 export function getEmoji(rank: number) {

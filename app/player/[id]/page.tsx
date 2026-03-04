@@ -28,7 +28,7 @@ import {
 import { toaster } from "@/components/ui/toaster";
 
 import { Copy } from "lucide-react";
-import { Statistics, getChampionEmoji, MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
+import { formatDate_MD, MMR, Statistics, getChampionEmoji, MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";
 import Pagination from "@/app/components/common/pagination";
 import { useState, useEffect } from "react";
@@ -41,22 +41,13 @@ interface FormValues {
     name: string
 }
 
-const mmrHistory = [
-    { date: "02-26", mmr: 1200 },
-    { date: "02-27", mmr: 1215 },
-    { date: "02-28", mmr: 1190 },
-    { date: "03-01", mmr: 1220 },
-    { date: "03-02", mmr: 1240 },
-    { date: "03-03", mmr: 1230 },
-    { date: "03-04", mmr: 1260 },
-];
-
 export default function OverviewPage() {
     const params = useParams<{ id: string }>();
 
     const [page, setPage] = useState(1);
     const [playerData, setPlayerData] = useState<Player | null>(null);
     const [statisticsData, setStatisticsData] = useState<Statistics | null>(null);
+    const [MMRData, setMMRData] = useState<MMR[]>([]);
     const [loading, setLoading] = useState(false);
     const [loadingStatistics, setLoadingStatistics] = useState(false);
     const [keyword, setKeyword] = useState("");
@@ -64,27 +55,64 @@ export default function OverviewPage() {
     useEffect(() => {
         if (!params?.id) return;
 
-        const statistics_data = async () => {
+        const mmr_data = async (name: string, curr_mmr: number) => {
+            const res = await fetch(`/api/match/mmr/list`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: name || "",
+                }),
+            });
+
+            const mmr = await res.json();
+            const formattedDate = formatDate_MD(new Date());
+
+            if (mmr.data) {
+                // console.log(mmr.data)
+                
+                // 마지막 MMR 반영
+                mmr.data[mmr.data.length-1].mmr = curr_mmr;
+
+                const updatedData: MMR[] = [
+                    ...mmr.data,
+                    {
+                        date: formattedDate,
+                        mmr: curr_mmr,
+                    },
+                ];
+
+                setMMRData(updatedData);
+            } else {
+                setMMRData([
+                    {
+                        date: formattedDate,
+                        mmr: curr_mmr,
+                    },
+                ]);
+            }
+
+            setLoadingStatistics(false);
+        };
+
+        const statistics_data = async (name:string, curr_mmr:number) => {
             const res = await fetch(`/api/statistics/find/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    name: playerData?.name || ""
+                    name: name || ""
                 })
             });
 
-            console.log(res);
-
             const statistics = await res.json();
-
-            console.log(statistics);
 
             if (statistics.data !== null) {
                 setStatisticsData(statistics.data);
+                mmr_data(name, curr_mmr);
             }
-            setLoadingStatistics(false);
         }
 
         const player_data = async () => {
@@ -99,9 +127,9 @@ export default function OverviewPage() {
 
             if (player.data !== null) {
                 setPlayerData(player.data);
+                statistics_data(player.data.name, player.data.mmr);
             }
             setLoading(false);
-            statistics_data();
         }
 
         setLoadingStatistics(true);
@@ -243,13 +271,13 @@ export default function OverviewPage() {
                                                         vs Z
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Maker_ZvsZ_W}/{statisticsData.Maker_ZvsZ_L}
+                                                        {statisticsData.Maker_ZvsZ_W}W {statisticsData.Maker_ZvsZ_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Maker_ZvsT_W}/{statisticsData.Maker_ZvsT_L}
+                                                        {statisticsData.Maker_TvsZ_W}W {statisticsData.Maker_TvsZ_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Maker_ZvsP_W}/{statisticsData.Maker_ZvsP_L}
+                                                        {statisticsData.Maker_PvsZ_W}W {statisticsData.Maker_PvsZ_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
 
@@ -258,13 +286,13 @@ export default function OverviewPage() {
                                                         vs T
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Maker_TvsZ_W}/{statisticsData.Maker_TvsZ_L}
+                                                        {statisticsData.Maker_ZvsT_W}W {statisticsData.Maker_ZvsT_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Maker_TvsT_W}/{statisticsData.Maker_TvsT_L}
+                                                        {statisticsData.Maker_TvsT_W}W {statisticsData.Maker_TvsT_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Maker_TvsP_W}/{statisticsData.Maker_TvsP_L}
+                                                        {statisticsData.Maker_PvsT_W}W {statisticsData.Maker_PvsT_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
 
@@ -273,19 +301,19 @@ export default function OverviewPage() {
                                                         vs P
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Maker_PvsZ_W}/{statisticsData.Maker_PvsZ_L}
+                                                        {statisticsData.Maker_ZvsP_W}W {statisticsData.Maker_ZvsP_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Maker_PvsT_W}/{statisticsData.Maker_PvsT_L}
+                                                        {statisticsData.Maker_TvsP_W}W {statisticsData.Maker_TvsP_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Maker_PvsP_W}/{statisticsData.Maker_PvsP_L}
+                                                        {statisticsData.Maker_PvsP_W}W {statisticsData.Maker_PvsP_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
                                             </Table.Body>
                                         </Table.Root>
 
-                                        <br /><br />
+                                        <br/>
                                         <Text color="black" fontSize="14px">2. Controller</Text>
                                         <Table.Root size="sm" variant="outline">
                                             <Table.Header>
@@ -303,13 +331,13 @@ export default function OverviewPage() {
                                                         vs Z
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Controller_ZvsZ_W}/{statisticsData.Controller_ZvsZ_L}
+                                                        {statisticsData.Controller_ZvsZ_W}W {statisticsData.Controller_ZvsZ_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Controller_ZvsT_W}/{statisticsData.Controller_ZvsT_L}
+                                                        {statisticsData.Controller_TvsZ_W}W {statisticsData.Controller_TvsZ_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Controller_ZvsP_W}/{statisticsData.Controller_ZvsP_L}
+                                                        {statisticsData.Controller_PvsZ_W}W {statisticsData.Controller_PvsZ_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
 
@@ -318,13 +346,13 @@ export default function OverviewPage() {
                                                         vs T
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Controller_TvsZ_W}/{statisticsData.Controller_TvsZ_L}
+                                                        {statisticsData.Controller_ZvsT_W}W {statisticsData.Controller_ZvsT_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Controller_TvsT_W}/{statisticsData.Controller_TvsT_L}
+                                                        {statisticsData.Controller_TvsT_W}W {statisticsData.Controller_TvsT_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Controller_TvsP_W}/{statisticsData.Controller_TvsP_L}
+                                                        {statisticsData.Controller_PvsT_W}W {statisticsData.Controller_PvsT_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
 
@@ -333,13 +361,13 @@ export default function OverviewPage() {
                                                         vs P
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Controller_PvsZ_W}/{statisticsData.Controller_PvsZ_L}
+                                                        {statisticsData.Controller_ZvsP_W}W {statisticsData.Controller_ZvsP_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Controller_PvsT_W}/{statisticsData.Controller_PvsT_L}
+                                                        {statisticsData.Controller_TvsP_W}W {statisticsData.Controller_TvsP_L}L
                                                     </Table.Cell>
                                                     <Table.Cell fontSize="10px" color="grey" textAlign="right">
-                                                        {statisticsData.Controller_PvsP_W}/{statisticsData.Controller_PvsP_L}
+                                                        {statisticsData.Controller_PvsP_W}W {statisticsData.Controller_PvsP_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
                                             </Table.Body>
@@ -347,10 +375,11 @@ export default function OverviewPage() {
 
                                         <Box mt={8}>
                                             <Text mb={3} fontWeight="semibold">
-                                                최근 1주일 MMR 변화
+                                                MMR 변동
                                             </Text>
 
                                             <Box
+                                                w="100%"
                                                 h="250px"
                                                 bg="white"
                                                 border="1px solid"
@@ -359,10 +388,10 @@ export default function OverviewPage() {
                                                 p={3}
                                             >
                                                 <ResponsiveContainer width="100%" height="100%">
-                                                    <LineChart data={mmrHistory}>
+                                                    <LineChart data={MMRData}>
                                                         <CartesianGrid strokeDasharray="3 3" />
-                                                        <XAxis dataKey="date" fontSize={12} />
-                                                        <YAxis fontSize={12} />
+                                                        <XAxis dataKey="date" fontSize={8} />
+                                                        <YAxis fontSize={8} />
                                                         <Tooltip />
                                                         <Line
                                                             type="monotone"

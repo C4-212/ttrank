@@ -86,10 +86,27 @@ export default function OverviewPage() {
         });
 
         const result = await res.json();
-        console.log(result)
+        // console.log(result)
         
         if (!result.success) {
             alert(result.error || "서버 에러");
+            return;
+        }
+
+        // 통계 생성
+        const res2 = await fetch("/api/statistics/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result2 = await res2.json();
+        // console.log(result2)
+        
+        if (!result2.success) {
+            alert(result2.error || "서버 에러");
             return;
         }
 
