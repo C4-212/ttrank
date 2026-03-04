@@ -204,7 +204,9 @@ export default function OverviewPage() {
                           justify="center">
                           <Flex
                             align="center">
-                            <Text color="black" fontSize={item.name.length >= 10 ? "12px" : "14px"}>{item.name}</Text>
+                            <Link href={`/player/${item.idx}`} target="_self" rel="noopener noreferrer">
+                              <Text color="black" fontSize={item.name.length >= 10 ? "12px" : "14px"}>{item.name}</Text>
+                            </Link>
                             <Text pl="5px" fontSize="12px" color="#f23f3f">({item.mmr})</Text>
                             <IconButton
                               aria-label="copy-name"
@@ -226,6 +228,7 @@ export default function OverviewPage() {
                             align="center">
                             <Text fontSize="12px" color="green">{item.win} W</Text>
                             <Text fontSize="12px" color="red">　{item.lose} L</Text>
+                            <Text fontSize="12px" color="black">　({((item.win || 0) / ((item.win || 0) + (item.lose || 1)) * 100).toFixed(2)}%)</Text>
                             <Text fontSize="12px" color="grey">　(♦️{item.point})</Text>
                           </Flex>
                         </Flex>

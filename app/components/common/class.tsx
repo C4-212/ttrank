@@ -12,6 +12,49 @@ export class Player {
   lose: number = 0;
 }
 
+export class Statistics {
+  idx: number = 0;
+  name: string = "플레이어1";
+  
+  Maker_ZvsZ_W: number = 0;
+  Maker_ZvsZ_L: number = 0;
+  Maker_ZvsT_W: number = 0;
+  Maker_ZvsT_L: number = 0;
+  Maker_ZvsP_W: number = 0;
+  Maker_ZvsP_L: number = 0;
+  Maker_TvsZ_W: number = 0;
+  Maker_TvsZ_L: number = 0;
+  Maker_TvsT_W: number = 0;
+  Maker_TvsT_L: number = 0;
+  Maker_TvsP_W: number = 0;
+  Maker_TvsP_L: number = 0;
+  Maker_PvsZ_W: number = 0;
+  Maker_PvsZ_L: number = 0;
+  Maker_PvsT_W: number = 0;
+  Maker_PvsT_L: number = 0;
+  Maker_PvsP_W: number = 0;
+  Maker_PvsP_L: number = 0;
+
+  Controller_ZvsZ_W: number = 0;
+  Controller_ZvsZ_L: number = 0;
+  Controller_ZvsT_W: number = 0;
+  Controller_ZvsT_L: number = 0;
+  Controller_ZvsP_W: number = 0;
+  Controller_ZvsP_L: number = 0;
+  Controller_TvsZ_W: number = 0;
+  Controller_TvsZ_L: number = 0;
+  Controller_TvsT_W: number = 0;
+  Controller_TvsT_L: number = 0;
+  Controller_TvsP_W: number = 0;
+  Controller_TvsP_L: number = 0;
+  Controller_PvsZ_W: number = 0;
+  Controller_PvsZ_L: number = 0;
+  Controller_PvsT_W: number = 0;
+  Controller_PvsT_L: number = 0;
+  Controller_PvsP_W: number = 0;
+  Controller_PvsP_L: number = 0;
+}
+
 export class Goods {
   idx: number = 0;
   name: string ="";

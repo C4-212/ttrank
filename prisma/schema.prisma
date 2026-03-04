@@ -102,3 +102,46 @@ model goods {
   updated_at  DateTime  @default(now())
 }
 
+
+model statistics {
+  idx               Int       @id @default(autoincrement())
+  name              String    @unique
+  
+  Maker_ZvsZ_W      Int       @default(0)
+  Maker_ZvsZ_L      Int       @default(0)
+  Maker_ZvsT_W      Int       @default(0)
+  Maker_ZvsT_L      Int       @default(0)
+  Maker_ZvsP_W      Int       @default(0)
+  Maker_ZvsP_L      Int       @default(0)
+  Maker_TvsZ_W      Int       @default(0)
+  Maker_TvsZ_L      Int       @default(0)
+  Maker_TvsT_W      Int       @default(0)
+  Maker_TvsT_L      Int       @default(0)
+  Maker_TvsP_W      Int       @default(0)
+  Maker_TvsP_L      Int       @default(0)
+  Maker_PvsZ_W      Int       @default(0)
+  Maker_PvsZ_L      Int       @default(0)
+  Maker_PvsT_W      Int       @default(0)
+  Maker_PvsT_L      Int       @default(0)
+  Maker_PvsP_W      Int       @default(0)
+  Maker_PvsP_L      Int       @default(0)
+
+  Controller_ZvsZ_W      Int       @default(0)
+  Controller_ZvsZ_L      Int       @default(0)
+  Controller_ZvsT_W      Int       @default(0)
+  Controller_ZvsT_L      Int       @default(0)
+  Controller_ZvsP_W      Int       @default(0)
+  Controller_ZvsP_L      Int       @default(0)
+  Controller_TvsZ_W      Int       @default(0)
+  Controller_TvsZ_L      Int       @default(0)
+  Controller_TvsT_W      Int       @default(0)
+  Controller_TvsT_L      Int       @default(0)
+  Controller_TvsP_W      Int       @default(0)
+  Controller_TvsP_L      Int       @default(0)
+  Controller_PvsZ_W      Int       @default(0)
+  Controller_PvsZ_L      Int       @default(0)
+  Controller_PvsT_W      Int       @default(0)
+  Controller_PvsT_L      Int       @default(0)
+  Controller_PvsP_W      Int       @default(0)
+  Controller_PvsP_L      Int       @default(0)
+}
