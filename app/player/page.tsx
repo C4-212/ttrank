@@ -228,7 +228,7 @@ export default function OverviewPage() {
                             align="center">
                             <Text fontSize="12px" color="green">{item.win} W</Text>
                             <Text fontSize="12px" color="red">　{item.lose} L</Text>
-                            <Text fontSize="12px" color="black">　({((item.win || 0) / ((item.win || 0) + (item.lose || 1)) * 100).toFixed(2)}%)</Text>
+                            <Text fontSize="12px" color="black">　({((item.win || 0) / ((item.win || 0) + (item.lose || 0)) * 100).toFixed(2)}%)</Text>
                             <Text fontSize="12px" color="grey">　(♦️{item.point})</Text>
                           </Flex>
                         </Flex>

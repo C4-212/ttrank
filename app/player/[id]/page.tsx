@@ -193,7 +193,7 @@ export default function OverviewPage() {
                                                 align="center">
                                                 <Text fontSize="12px" color="green">{playerData?.win} W</Text>
                                                 <Text fontSize="12px" color="red">　{playerData?.lose} L</Text>
-                                                <Text fontSize="12px" color="black">　({((playerData?.win || 0) / ((playerData?.win || 0) + (playerData?.lose || 1)) * 100).toFixed(2)}%)</Text>
+                                                <Text fontSize="12px" color="black">　({((playerData?.win || 0) / ((playerData?.win || 0) + (playerData?.lose || 0)) * 100).toFixed(2)}%)</Text>
                                                 <Text fontSize="12px" color="grey">　(♦️{playerData?.point})</Text>
                                             </Flex>
                                         </Flex>
