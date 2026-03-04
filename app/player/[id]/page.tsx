@@ -254,7 +254,7 @@ export default function OverviewPage() {
                                     <Box>
                                         <Text color="black" fontSize="14px">
                                         <b>{statisticsData.name}</b>님의 상세 정보 
-                                        <Text/>
+                                        </Text>
                                         <br /><br />
 
 
