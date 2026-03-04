@@ -260,7 +260,7 @@ export default function OverviewPage() {
 
                                         <Text color="black" fontStyle="bold" fontSize="14px">1.Maker</Text>
                                         <Table.Root size="sm" variant="outline">
-                                            <Table.Header backgroundColor="gray.100">
+                                            <Table.Header backgroundColor="gray.200">
                                                 <Table.Row>
                                                     <Table.ColumnHeader>Matchup</Table.ColumnHeader>
                                                     <Table.ColumnHeader textAlign="right">Zerg</Table.ColumnHeader>
@@ -320,7 +320,7 @@ export default function OverviewPage() {
                                         <br />
                                         <Text color="black" fontSize="14px">2. Controller</Text>
                                         <Table.Root size="sm" variant="outline">
-                                            <Table.Header backgroundColor="gray.100">
+                                            <Table.Header backgroundColor="gray.200">
                                                 <Table.Row>
                                                     <Table.ColumnHeader>Matchup</Table.ColumnHeader>
                                                     <Table.ColumnHeader textAlign="right">Zerg</Table.ColumnHeader>
@@ -426,6 +426,9 @@ export default function OverviewPage() {
                                                                 border: "none",
                                                                 boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
                                                             }}
+                                                            labelStyle={{ color: "black" }}
+                                                            itemStyle={{ color: "black" }}
+
                                                         />
 
                                                         <Area
