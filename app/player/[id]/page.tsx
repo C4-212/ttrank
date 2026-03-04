@@ -252,7 +252,10 @@ export default function OverviewPage() {
                             ) :
                                 statisticsData != null ?
                                     <Box>
-                                        <b>{statisticsData.name}</b>님의 상세 정보 <br /><br />
+                                        <Text color="black" fontSize="14px">
+                                        <b>{statisticsData.name}</b>님의 상세 정보 
+                                        <Text/>
+                                        <br /><br />
 
 
                                         <Text color="black" fontStyle="bold" fontSize="14px">1.Maker</Text>
@@ -381,7 +384,7 @@ export default function OverviewPage() {
                                             boxShadow="0 8px 24px rgba(0,0,0,0.06)"
                                             p={5}
                                         >
-                                            <Text fontSize="lg" fontWeight="bold" mb={4}>
+                                            <Text fontSize="lg" fonyColor="black" fontWeight="bold" mb={4}>
                                                 MMR 변동
                                             </Text>
 
