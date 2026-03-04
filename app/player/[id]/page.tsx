@@ -262,10 +262,10 @@ export default function OverviewPage() {
                                         <Table.Root size="sm" variant="outline">
                                             <Table.Header backgroundColor="gray.200">
                                                 <Table.Row>
-                                                    <Table.ColumnHeader>Matchup</Table.ColumnHeader>
-                                                    <Table.ColumnHeader textAlign="right">Zerg</Table.ColumnHeader>
-                                                    <Table.ColumnHeader textAlign="right">Terran</Table.ColumnHeader>
-                                                    <Table.ColumnHeader textAlign="right">Protoss</Table.ColumnHeader>
+                                                    <Table.ColumnHeader color="black">Matchup</Table.ColumnHeader>
+                                                    <Table.ColumnHeader color="black" textAlign="center">Zerg</Table.ColumnHeader>
+                                                    <Table.ColumnHeader color="black" textAlign="center">Terran</Table.ColumnHeader>
+                                                    <Table.ColumnHeader color="black" textAlign="center">Protoss</Table.ColumnHeader>
                                                 </Table.Row>
                                             </Table.Header>
 
@@ -274,13 +274,13 @@ export default function OverviewPage() {
                                                     <Table.Cell fontWeight="bold" color="purple.500">
                                                         vs Z
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Maker_ZvsZ_W}W {statisticsData.Maker_ZvsZ_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Maker_TvsZ_W}W {statisticsData.Maker_TvsZ_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Maker_PvsZ_W}W {statisticsData.Maker_PvsZ_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
@@ -289,13 +289,13 @@ export default function OverviewPage() {
                                                     <Table.Cell fontWeight="bold" color="blue.400">
                                                         vs T
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Maker_ZvsT_W}W {statisticsData.Maker_ZvsT_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Maker_TvsT_W}W {statisticsData.Maker_TvsT_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Maker_PvsT_W}W {statisticsData.Maker_PvsT_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
@@ -304,13 +304,13 @@ export default function OverviewPage() {
                                                     <Table.Cell fontWeight="bold" color="orange.500">
                                                         vs P
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Maker_ZvsP_W}W {statisticsData.Maker_ZvsP_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Maker_TvsP_W}W {statisticsData.Maker_TvsP_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Maker_PvsP_W}W {statisticsData.Maker_PvsP_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
@@ -322,10 +322,10 @@ export default function OverviewPage() {
                                         <Table.Root size="sm" variant="outline">
                                             <Table.Header backgroundColor="gray.200">
                                                 <Table.Row>
-                                                    <Table.ColumnHeader>Matchup</Table.ColumnHeader>
-                                                    <Table.ColumnHeader textAlign="right">Zerg</Table.ColumnHeader>
-                                                    <Table.ColumnHeader textAlign="right">Terran</Table.ColumnHeader>
-                                                    <Table.ColumnHeader textAlign="right">Protoss</Table.ColumnHeader>
+                                                    <Table.ColumnHeader color="black">Matchup</Table.ColumnHeader>
+                                                    <Table.ColumnHeader color="black" textAlign="center">Zerg</Table.ColumnHeader>
+                                                    <Table.ColumnHeader color="black" textAlign="center">Terran</Table.ColumnHeader>
+                                                    <Table.ColumnHeader color="black" textAlign="center">Protoss</Table.ColumnHeader>
                                                 </Table.Row>
                                             </Table.Header>
 
@@ -334,13 +334,13 @@ export default function OverviewPage() {
                                                     <Table.Cell fontWeight="bold" color="purple.500">
                                                         vs Z
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Controller_ZvsZ_W}W {statisticsData.Controller_ZvsZ_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Controller_TvsZ_W}W {statisticsData.Controller_TvsZ_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Controller_PvsZ_W}W {statisticsData.Controller_PvsZ_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
@@ -349,13 +349,13 @@ export default function OverviewPage() {
                                                     <Table.Cell fontWeight="bold" color="blue.400">
                                                         vs T
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Controller_ZvsT_W}W {statisticsData.Controller_ZvsT_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Controller_TvsT_W}W {statisticsData.Controller_TvsT_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Controller_PvsT_W}W {statisticsData.Controller_PvsT_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
@@ -364,13 +364,13 @@ export default function OverviewPage() {
                                                     <Table.Cell fontWeight="bold" color="orange.500">
                                                         vs P
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Controller_ZvsP_W}W {statisticsData.Controller_ZvsP_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Controller_TvsP_W}W {statisticsData.Controller_TvsP_L}L
                                                     </Table.Cell>
-                                                    <Table.Cell fontSize="10px" color="grey" textAlign="right">
+                                                    <Table.Cell fontSize="10px" color="grey" textAlign="center">
                                                         {statisticsData.Controller_PvsP_W}W {statisticsData.Controller_PvsP_L}L
                                                     </Table.Cell>
                                                 </Table.Row>
