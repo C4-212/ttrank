@@ -1,4 +1,5 @@
 export const metadata = {
+  metadataBase: new URL("https://ttrank.kr"),
   title: "TT Rank - 명예의전당",
   description: "TT 방송 경기 명예의 전당",
   keywords: "티티랭크, TT랭크, TTRank, TT, MMR, 연승, 승점, 랭킹, 명예의 전당",
