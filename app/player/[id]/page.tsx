@@ -24,6 +24,7 @@ import {
     ResponsiveContainer,
     CartesianGrid,
     Area,
+    Brush
 } from "recharts";
 
 import { toaster } from "@/components/ui/toaster";
@@ -51,7 +52,6 @@ export default function OverviewPage() {
     const [MMRData, setMMRData] = useState<MMR[]>([]);
     const [loading, setLoading] = useState(false);
     const [loadingStatistics, setLoadingStatistics] = useState(false);
-    const [keyword, setKeyword] = useState("");
 
     useEffect(() => {
         if (!params?.id) return;
@@ -253,7 +253,7 @@ export default function OverviewPage() {
                                 statisticsData != null ?
                                     <Box>
                                         <Text color="black" fontSize="14px">
-                                        <b>{statisticsData.name}</b>님의 상세 정보 
+                                            <b>{statisticsData.name}</b>님의 상세 정보
                                         </Text>
                                         <br /><br />
 
@@ -376,7 +376,7 @@ export default function OverviewPage() {
                                                 </Table.Row>
                                             </Table.Body>
                                         </Table.Root>
-                                        <br/><br/>
+                                        <br /><br />
 
                                         <Box
                                             bg="white"
@@ -385,10 +385,11 @@ export default function OverviewPage() {
                                             p={5}
                                         >
                                             <Text fontSize="14px" color="black" fontWeight="bold" mb={4}>
-                                                MMR 변동
+                                                MMR 변동 (최근 100경기)
                                             </Text>
 
                                             <Box h="220px">
+
                                                 <ResponsiveContainer width="100%" height="100%">
                                                     <LineChart data={MMRData} tabIndex={-1}>
 
@@ -407,14 +408,19 @@ export default function OverviewPage() {
 
                                                         <XAxis
                                                             dataKey="date"
-                                                            tick={{ fontSize: 11, fill: "#5a5a5a" }}
+                                                            interval="preserveStartEnd"
+                                                            minTickGap={25}
+                                                            tick={{ fontSize: 4, fill: "#5a5a5a" }}
                                                             axisLine={false}
                                                             tickLine={false}
                                                         />
 
                                                         <YAxis
-                                                            domain={["dataMin - 30", "dataMax + 30"]}
-                                                            tick={{ fontSize: 11, fill: "#5a5a5a" }}
+                                                            domain={[
+                                                                (dataMin: number) => dataMin - 30,
+                                                                (dataMax: number) => dataMax + 30,
+                                                            ]}
+                                                            tick={{ fontSize: 4, fill: "#5a5a5a" }}
                                                             axisLine={false}
                                                             tickLine={false}
                                                         />
@@ -443,8 +449,15 @@ export default function OverviewPage() {
                                                             dataKey="mmr"
                                                             stroke="#4F8CFF"
                                                             strokeWidth={3}
-                                                            dot={false}
+                                                            dot={{ r: 2 }}
                                                             activeDot={{ r: 6 }}
+                                                        />
+
+                                                        <Brush
+                                                            dataKey="date"
+                                                            height={20}
+                                                            stroke="#4F8CFF"
+                                                            travellerWidth={10}
                                                         />
                                                     </LineChart>
                                                 </ResponsiveContainer>
