@@ -72,19 +72,28 @@ export default function OverviewPage() {
 
             if (mmr.data) {
                 // console.log(mmr.data)
+                let updatedData: MMR[];
 
                 // 마지막 MMR 반영
-                // mmr.data[mmr.data.length - 1].mmr = curr_mmr;
+                if (mmr.data[mmr.data.length - 1].date == formattedDate) {
+                    mmr.data[mmr.data.length - 1].mmr = curr_mmr;
 
-                const updatedData: MMR[] = [
-                    ...mmr.data,
-                    {
-                        date: formattedDate,
-                        mmr: curr_mmr,
-                    },
-                ];
+                    updatedData = [
+                        ...mmr.data,
+                    ];
+                }
+                else {
+                    updatedData = [
+                        ...mmr.data,
+                        {
+                            date: formattedDate,
+                            mmr: curr_mmr,
+                        },
+                    ];
+                }
 
                 setMMRData(updatedData);
+
             } else {
                 setMMRData([
                     {
