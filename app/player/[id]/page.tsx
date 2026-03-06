@@ -74,7 +74,7 @@ export default function OverviewPage() {
                 // console.log(mmr.data)
 
                 // 마지막 MMR 반영
-                mmr.data[mmr.data.length - 1].mmr = curr_mmr;
+                // mmr.data[mmr.data.length - 1].mmr = curr_mmr;
 
                 const updatedData: MMR[] = [
                     ...mmr.data,
