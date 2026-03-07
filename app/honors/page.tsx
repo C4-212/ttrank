@@ -109,6 +109,35 @@ export default function OverviewPage() {
                         border="1px solid"
                         borderColor="gray.200"
                         p={4}
+                        minH="70px"
+                        variants={CardAnim}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ duration: 0.4 }}
+                    >
+                        <Text fontWeight="medium" color="black">👑아너스클럽이란?</Text>
+                        <Flex
+                            h="70px"
+                            fontSize="14px"
+                            bg="white"
+                            align="center"
+                            justify="center"
+                        >
+                            <Text 
+                            color="black"
+                            fontSize="14px"
+                            text-align="center"
+                            >♥️TT에게 후원해주신 고마운 분들♥️<br/>
+                                후원금액은 서버비/상품구매에 사용됩니다.🥹<br />
+                                후원 계좌 : 100-183-280224 케이뱅크 (강천수)</Text>
+                        </Flex>
+                    </MotionBox>
+                    <MotionBox
+                        bg="white"
+                        borderRadius="lg"
+                        border="1px solid"
+                        borderColor="gray.200"
+                        p={4}
                         minH="600px"
                         variants={CardAnim}
                         initial="hidden"
