@@ -264,7 +264,7 @@ export default function OverviewPage() {
                                         <Text color="black" fontSize="14px">
                                             <b>{statisticsData.name}</b>님의 상세 정보
                                         </Text>
-                                        <br /><br />
+                                        <br />
 
 
                                         <Text color="black" fontStyle="bold" fontSize="14px">1.Maker</Text>
