@@ -14,7 +14,6 @@ import {
   Link
 } from "@chakra-ui/react";
 import { toaster } from "@/components/ui/toaster";
-
 import { Copy } from "lucide-react";
 import { getChampionEmoji, MotionFlex, Player, MotionBox, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";

@@ -9,8 +9,11 @@ import {
   Spacer,
   Spinner,
   Button,
+  IconButton,
   Input
 } from "@chakra-ui/react";
+import { toaster } from "@/components/ui/toaster";
+import { Copy } from "lucide-react";
 import { getChampionEmoji, formatDate, Player, Match, MotionBox, MotionFlex, CardAnim } from "@/app/components/common/class";
 import FooterNav from "@/app/components/common/footer";
 import Pagination from "@/app/components/common/pagination";
@@ -196,11 +199,30 @@ export default function OverviewPage() {
                             {item.winner == "1" ? <Text fontSize="12px" fontWeight="bold" color="green">　👑승리!</Text> : ""}
                             <Spacer />
                           </Flex>
-                          <Text
-                            color="black"
-                            fontSize={item.team1_player1_name.length >= 10 ? "10px" : "10px"}>
-                            {item.team1_player1_name}
-                          </Text>
+                          <Flex
+                            h="100%"
+                            bg="white"
+                            align="center">
+                            <Text
+                              color="black"
+                              fontSize={item.team1_player1_name.length >= 10 ? "10px" : "10px"}>
+                              {item.team1_player1_name}
+                            </Text>
+                            <IconButton
+                              aria-label="copy-name"
+                              onClick={() => {
+                                navigator.clipboard.writeText(item.team1_player1_name);
+                                toaster.create({
+                                  title: "아이디가 복사되었습니다!",
+                                  type: "success",
+                                  duration: 500,
+                                  closable: false,
+                                });
+                              }}
+                              pl="15px" w="6px" h="6px" minW="6px" bg="white" _hover={{ bg: "gray.100" }} _active={{ bg: "gray.200" }}>
+                              <Copy size={3} color="grey" />
+                            </IconButton>
+                          </Flex>
                           <Flex
                             h="100%"
                             bg="white"
@@ -209,11 +231,30 @@ export default function OverviewPage() {
                             <Text fontWeight="bold" fontSize="10px" color={item.winner == "1" ? "green" : "red"}>　({item.team1_player1_mmr_changed >= 0 ? "+" : ""}{item.team1_player1_mmr_changed})</Text>
                           </Flex>
                           <Box minH="10px"></Box>
-                          <Text
-                            color="black"
-                            fontSize={item.team1_player2_name.length >= 10 ? "10px" : "10px"}>
-                            {item.team1_player2_name}
-                          </Text>
+                          <Flex
+                            h="100%"
+                            bg="white"
+                            align="center">
+                            <Text
+                              color="black"
+                              fontSize={item.team1_player2_name.length >= 10 ? "10px" : "10px"}>
+                              {item.team1_player2_name}
+                            </Text>
+                            <IconButton
+                              aria-label="copy-name"
+                              onClick={() => {
+                                navigator.clipboard.writeText(item.team1_player2_name);
+                                toaster.create({
+                                  title: "아이디가 복사되었습니다!",
+                                  type: "success",
+                                  duration: 500,
+                                  closable: false,
+                                });
+                              }}
+                              pl="15px" w="6px" h="6px" minW="6px" bg="white" _hover={{ bg: "gray.100" }} _active={{ bg: "gray.200" }}>
+                              <Copy size={3} color="grey" />
+                            </IconButton>
+                          </Flex>
                           <Flex
                             h="100%"
                             bg="white"
@@ -242,10 +283,30 @@ export default function OverviewPage() {
                             {item.winner == "2" ? <Text fontSize="12px" fontWeight="bold" color="green">　👑승리!</Text> : ""}
                             <Text fontWeight="bold" fontSize="12px" color="#4775ea">　[2팀 {item.team2_race}]</Text>
                           </Flex>
-                          <Text
-                            color="black"
-                            fontSize={item.team2_player1_name.length >= 10 ? "10px" : "10px"}>
-                            {item.team2_player1_name} </Text>
+                          <Flex
+                            h="100%"
+                            bg="white"
+                            align="center">
+                            <Spacer/>
+                            <Text
+                              color="black"
+                              fontSize={item.team2_player1_name.length >= 10 ? "10px" : "10px"}>
+                              {item.team2_player1_name} </Text>
+                            <IconButton
+                              aria-label="copy-name"
+                              onClick={() => {
+                                navigator.clipboard.writeText(item.team2_player1_name);
+                                toaster.create({
+                                  title: "아이디가 복사되었습니다!",
+                                  type: "success",
+                                  duration: 500,
+                                  closable: false,
+                                });
+                              }}
+                              pl="15px" w="6px" h="6px" minW="6px" bg="white" _hover={{ bg: "gray.100" }} _active={{ bg: "gray.200" }}>
+                              <Copy size={3} color="grey" />
+                            </IconButton>
+                          </Flex>
                           <Flex
                             h="100%"
                             bg="white"
@@ -256,10 +317,30 @@ export default function OverviewPage() {
                             <Text fontWeight="bold" fontSize="10px" color={item.winner == "2" ? "green" : "red"}>　({item.team2_player1_mmr_changed >= 0 ? "+" : ""}{item.team2_player1_mmr_changed})</Text>
                           </Flex>
                           <Box minH="10px"></Box>
-                          <Text
-                            color="black"
-                            fontSize={item.team2_player2_name.length >= 10 ? "10px" : "10px"}>
-                            {item.team2_player2_name} </Text>
+                          <Flex
+                            h="100%"
+                            bg="white"
+                            align="center">
+                            <Spacer/>
+                            <Text
+                              color="black"
+                              fontSize={item.team2_player2_name.length >= 10 ? "10px" : "10px"}>
+                              {item.team2_player2_name} </Text>
+                            <IconButton
+                              aria-label="copy-name"
+                              onClick={() => {
+                                navigator.clipboard.writeText(item.team2_player2_name);
+                                toaster.create({
+                                  title: "아이디가 복사되었습니다!",
+                                  type: "success",
+                                  duration: 500,
+                                  closable: false,
+                                });
+                              }}
+                              pl="15px" w="6px" h="6px" minW="6px" bg="white" _hover={{ bg: "gray.100" }} _active={{ bg: "gray.200" }}>
+                              <Copy size={3} color="grey" />
+                            </IconButton>
+                          </Flex>
                           <Flex
                             h="100%"
                             bg="white"
