@@ -3,7 +3,7 @@ import { prisma } from "@/app/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
-    const { page = 1, keyword = "" } = await request.json();
+    const { page = 1, keyword = "", is_champion = false } = await request.json();
 
     const take = 10;
     const currentPage = Number(page) || 1;
@@ -12,6 +12,7 @@ export async function POST(request: NextRequest) {
     const totalCount = await prisma.match.count({
       where:{
         status:"completed",
+        ...(is_champion ? { is_champion: true } : {}),
         OR:[
           {
             team1_player1_name: {
@@ -44,6 +45,7 @@ export async function POST(request: NextRequest) {
     const data = await prisma.match.findMany({
       where: {
         status:"completed",
+        ...(is_champion ? { is_champion: true } : {}),
         OR:[
           {
             team1_player1_name: {

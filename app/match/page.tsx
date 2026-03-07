@@ -10,7 +10,8 @@ import {
   Spinner,
   Button,
   IconButton,
-  Input
+  Input,
+  Checkbox
 } from "@chakra-ui/react";
 import { toaster } from "@/components/ui/toaster";
 import { Copy } from "lucide-react";
@@ -23,6 +24,7 @@ import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
 
 interface FormValues {
   name: string
+  is_champion: boolean
 }
 
 export default function OverviewPage() {
@@ -31,6 +33,7 @@ export default function OverviewPage() {
   const [total_page, setTotalPage] = useState(1);
   const [matches, setMatches] = useState<Match[] | null>(null);
   const [keyword, setKeyword] = useState("");
+  const [is_champion, setIsChampion] = useState(false);
 
   useEffect(() => {
     const match_list = async () => {
@@ -40,7 +43,7 @@ export default function OverviewPage() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ page: page, keyword: keyword })
+        body: JSON.stringify({ page: page, keyword: keyword, is_champion:is_champion })
       });
 
       const match_data = await res.json();
@@ -52,7 +55,7 @@ export default function OverviewPage() {
       setLoading(false);
     }
     match_list();
-  }, [page, keyword]);
+  }, [page, keyword, is_champion]);
 
   const {
     register,
@@ -63,6 +66,7 @@ export default function OverviewPage() {
   } = useForm<FormValues>({
     defaultValues: {
       name: "",
+      is_champion: false,
     },
   })
 
@@ -70,10 +74,12 @@ export default function OverviewPage() {
 
   const onSubmit = handleSubmit(async (data) => {
     setPage(1);
-    if(keyword !== data.name)
+    if(keyword !== data.name || is_champion !== data.is_champion)
     {
       setTotalPage(1);
     }
+
+    setIsChampion(data.is_champion);
     setKeyword(!data.name?"":data.name);
   });
 
@@ -135,6 +141,14 @@ export default function OverviewPage() {
                   검색
                 </Button>
               </Flex>
+              <Checkbox.Root
+                checked={watch("is_champion")}
+                onCheckedChange={(e) => setValue("is_champion", !!e.checked)}
+              >
+                <Checkbox.HiddenInput />
+                <Checkbox.Control />
+                <Checkbox.Label>🏆챔피언 매치만 검색</Checkbox.Label>
+              </Checkbox.Root> 
             </form>
           </MotionBox>
           <MotionBox
