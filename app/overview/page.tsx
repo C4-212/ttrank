@@ -257,7 +257,7 @@ export default function OverviewPage() {
               align="center"
               justify="center"
             >
-              <Text color="black" fontSize="12px">
+              <Text color="black" fontSize="14px">
                 <b>[챔피언 매치]</b><br/>
                 8연승 이상 선수는 챔피언 자격(🏆)이 주어집니다.<br/>
                 챔피언은 반드시 챔피언 매치를 진행해야 합니다. <br/><br/>
