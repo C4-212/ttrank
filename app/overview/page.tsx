@@ -244,7 +244,7 @@ export default function OverviewPage() {
             border="1px solid"
             borderColor="gray.200"
             p={4}
-            minH="440px"
+            minH="300px"
             variants={CardAnim}
             initial="hidden"
             animate="visible"
@@ -252,12 +252,12 @@ export default function OverviewPage() {
           >
             <Text fontWeight="medium" color="black">📢공지사항</Text>
             <Flex
-              h="380px"
+              h="300px"
               bg="white"
               align="center"
               justify="center"
             >
-              <Text color="black">
+              <Text color="black" fontSize="12px">
                 <b>[챔피언 매치]</b><br/>
                 8연승 이상 선수는 챔피언 자격(🏆)이 주어집니다.<br/>
                 챔피언은 반드시 챔피언 매치를 진행해야 합니다. <br/><br/>
