@@ -130,7 +130,7 @@ export default function OverviewPage() {
               >
                 <Checkbox.HiddenInput />
                 <Checkbox.Control />
-                <Checkbox.Label>🏆챔피언 매치만 검색</Checkbox.Label>
+                <Checkbox.Label color="black">🏆챔피언 매치만 검색</Checkbox.Label>
               </Checkbox.Root> 
               <Flex
                 h="50px"
