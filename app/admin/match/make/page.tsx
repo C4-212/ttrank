@@ -185,7 +185,7 @@ export default function OverviewPage() {
                                 >
                                     <Checkbox.HiddenInput />
                                     <Checkbox.Control />
-                                    <Checkbox.Label>챔피언 매치 (8연승 이상)</Checkbox.Label>
+                                    <Checkbox.Label color="black">챔피언 매치 (8연승 이상)</Checkbox.Label>
                                 </Checkbox.Root>
                             </Field.Root>
                             <Field.Root marginBottom="10px" invalid={!!errors.point}>
