@@ -385,7 +385,7 @@ export default function OverviewPage() {
                                                 </Table.Row>
                                             </Table.Body>
                                         </Table.Root>
-                                        <br /><br />
+                                        <br />
 
                                         <Box
                                             bg="white"
