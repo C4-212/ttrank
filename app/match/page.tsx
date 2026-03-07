@@ -124,6 +124,14 @@ export default function OverviewPage() {
             transition={{ duration: 0.4 }}
           >
             <form onSubmit={onSubmit}>
+              <Checkbox.Root
+                checked={watch("is_champion")}
+                onCheckedChange={(e) => setValue("is_champion", !!e.checked)}
+              >
+                <Checkbox.HiddenInput />
+                <Checkbox.Control />
+                <Checkbox.Label>🏆챔피언 매치만 검색</Checkbox.Label>
+              </Checkbox.Root> 
               <Flex
                 h="50px"
                 bg="white"
@@ -141,14 +149,6 @@ export default function OverviewPage() {
                   검색
                 </Button>
               </Flex>
-              <Checkbox.Root
-                checked={watch("is_champion")}
-                onCheckedChange={(e) => setValue("is_champion", !!e.checked)}
-              >
-                <Checkbox.HiddenInput />
-                <Checkbox.Control />
-                <Checkbox.Label>🏆챔피언 매치만 검색</Checkbox.Label>
-              </Checkbox.Root> 
             </form>
           </MotionBox>
           <MotionBox
