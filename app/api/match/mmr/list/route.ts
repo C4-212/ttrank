@@ -16,10 +16,10 @@ export async function POST(request: NextRequest) {
                     DATE(created_at) as raw_date,
                     TO_CHAR(created_at, 'MM/DD') AS date,
                     CASE
-                        WHEN team1_player1_name = ${name} THEN team1_player1_mmr
-                        WHEN team1_player2_name = ${name} THEN team1_player2_mmr
-                        WHEN team2_player1_name = ${name} THEN team2_player1_mmr
-                        WHEN team2_player2_name = ${name} THEN team2_player2_mmr
+                        WHEN team1_player1_name = ${name} THEN team1_player1_mmr + team1_player1_mmr_changed 
+                        WHEN team1_player2_name = ${name} THEN team1_player2_mmr + team1_player2_mmr_changed 
+                        WHEN team2_player1_name = ${name} THEN team2_player1_mmr + team2_player1_mmr_changed 
+                        WHEN team2_player2_name = ${name} THEN team2_player2_mmr + team2_player2_mmr_changed 
                     END AS mmr
                 FROM "match"
                 WHERE status = 'completed'

@@ -129,7 +129,15 @@ export default function OverviewPage() {
                 onCheckedChange={(e) => setValue("is_champion", !!e.checked)}
               >
                 <Checkbox.HiddenInput />
-                <Checkbox.Control />
+                <Checkbox.Control 
+                  bg="white" 
+                  color="black"
+                  borderColor="gray.300"
+                  _checked={{
+                    bg: "black",
+                    borderColor: "black",
+                    color: "white"
+                  }} />
                 <Checkbox.Label color="black">🏆챔피언 매치만 검색</Checkbox.Label>
               </Checkbox.Root> 
               <Flex
