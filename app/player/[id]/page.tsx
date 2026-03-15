@@ -70,7 +70,7 @@ export default function OverviewPage() {
             const mmr = await res.json();
             const formattedDate = formatDate_MD(new Date());
 
-            if (mmr.data) {
+            if (mmr?.data) {
                 // console.log(mmr.data)
                 let updatedData: MMR[];
 
