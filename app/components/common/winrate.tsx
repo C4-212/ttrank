@@ -19,8 +19,8 @@ export default function WinRate(match: Match) {
     // console.log("nSum : " + nSum);
     // console.log("eSum : " + eSum);
 
-    const w0:number = 1 / (1+Math.pow(10,((eSum-nSum)/400)));
-    const w1:number = 1 / (1+Math.pow(10,((nSum-eSum)/400)));
+    const w0:number = 1 / (1+Math.pow(10,((eSum-nSum)/2000)));
+    const w1:number = 1 / (1+Math.pow(10,((nSum-eSum)/2000)));
 
     const winrate_1:string = (w0*100).toFixed(2)+"%";
     const winrate_2:string = (w1*100).toFixed(2)+"%";
