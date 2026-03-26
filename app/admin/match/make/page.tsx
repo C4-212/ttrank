@@ -143,6 +143,7 @@ export default function OverviewPage() {
 
     return (
         <Flex minH="100vh" bg="gray.50" direction="column">
+            <meta name="format-detection" content="telephone=no"/>
             {/* Navbar */}
             <Box
                 h="48px"
