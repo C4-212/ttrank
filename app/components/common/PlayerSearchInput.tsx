@@ -2,6 +2,7 @@
 
 import { Box, Input, Text, Spinner, Flex, Spacer } from "@chakra-ui/react";
 import { useEffect, useState, useRef } from "react";
+import { getChampionEmoji } from "@/app/components/common/class";
 import { UseFormSetValue } from "react-hook-form";
 
 interface Props {
@@ -106,10 +107,23 @@ export default function PlayerSearchInput({ name, value, setValue }: Props) {
                                     minH="12px"
                                     bg="transparent"
                                     align="center"
-                                    justify="center"
-                                >
-                                    <Text fontSize="10px" fontWeight="normal" color="black">{player.name}</Text>
-                                    <Text fontSize="10px" fontWeight="normal" color="grey">　({player.mmr})</Text>
+                                    justify="center">
+                                        <Box>
+                                        <Flex
+                                            bg="transparent"
+                                            align="center"
+                                            justify="center">
+                                            <Text fontSize="10px" fontWeight="normal" color="black">{player.name}</Text>
+                                            <Text fontSize="10px" fontWeight="normal" color="grey">　({player.mmr})</Text>
+                                        </Flex>
+                                        <Flex
+                                            bg="transparent"
+                                            align="center"
+                                            justify="center">
+                                            <Text fontSize="10px" fontWeight="normal" color="grey">{player.streak} 연승 {getChampionEmoji(player.streak)}</Text>
+                                            <Spacer/>
+                                        </Flex>
+                                        </Box>
                                     <Spacer/>
                                     <Text fontSize="10px" fontWeight="normal" color="black">♦️{player.point}</Text>
                                 </Flex>
