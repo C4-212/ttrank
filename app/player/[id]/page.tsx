@@ -165,7 +165,7 @@ export default function OverviewPage() {
                 <Flex align="center" w="100%" h="100%">
                     <Text fontWeight="semibold" color="black">👤유저 정보</Text>
                     <Spacer />
-                    <Text pl="5px" fontWeight="semibold" fontSize="14px" color="grey">{playerData?.name}</Text>
+                    <Text pl="5px" fontWeight="semibold" fontSize="14px" color="grey">{playerData != null ? `${playerData.rank} 등` : "데이터를 불러오고 있습니다.."}</Text>
                 </Flex>
             </Box>
 

@@ -26,10 +26,25 @@ export async function GET(
       }, { status: 404 });
     }
 
+    // 순위 가져오기
+    const higherCount = await prisma.player.count({
+      where: {
+        mmr: {
+          gt: data.mmr,
+        },
+      },
+    });
+
+    const rank = higherCount + 1;
+
     return NextResponse.json({
       success: true,
-      data,
+      data:{
+        ...data,
+        rank:rank
+      },
     });
+    
   } catch (err) {
     return NextResponse.json({
       success: false,
