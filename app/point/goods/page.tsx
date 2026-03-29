@@ -166,7 +166,7 @@ export default function OverviewPage() {
                                                 <Flex
                                                     direction="column"
                                                     h="100%"
-                                                    marginRight="10px"
+                                                    marginLeft="10px"
                                                     justify="center">
                                                     <Text color="black" fontSize="12px">{item.name}</Text>
                                                 </Flex>
