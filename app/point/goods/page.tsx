@@ -160,7 +160,7 @@ export default function OverviewPage() {
                                                 bg="white"
                                                 align="center"
                                                 marginBottom="5px">
-                                                <Image alt="goods" w="50px" h="50px" pr="5px" src={item.src ? `/goods/${item.src}` : "/goods/default.webp"} onError={(e) => {
+                                                <Image alt="goods" w="50px" h="50px" src={item.src ? `/goods/${item.src}` : "/goods/default.webp"} onError={(e) => {
                                                     (e.currentTarget as HTMLImageElement).src = "/goods/default.webp";
                                                 }}/>
                                                 <Flex
