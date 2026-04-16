@@ -185,7 +185,7 @@ export default function OverviewPage() {
                             </HStack>
                         </RadioGroup.Root>
                         <Field.Root marginBottom="10px">
-                            <Field.Label color="black">사용 포인트 (1인당)</Field.Label>
+                            <Field.Label color="black">참여 포인트 (1인당)</Field.Label>
                             <Input
                                 w="60%"
                                 maxLength={5}
