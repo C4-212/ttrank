@@ -162,6 +162,9 @@ export default function OverviewPage() {
                         >
                             <Text fontWeight="medium" color="black">♦️(포인트)란?</Text>
                             <Spacer/>
+                            <Link href="/point/rule">
+                                <Button marginLeft="2px" bg="black" color="white"> 🚩규칙 </Button>
+                            </Link>
                             <Link href="/point/goods">
                                 <Button marginLeft="2px" bg="black" color="white"> 🎁상품 리스트 </Button>
                             </Link>

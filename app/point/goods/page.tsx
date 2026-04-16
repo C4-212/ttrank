@@ -171,10 +171,10 @@ export default function OverviewPage() {
                                                     <Text color="black" fontSize="14px">{item.name}</Text>
                                                     <Text color="grey" fontSize="12px">{item.description}</Text>
                                                 </Flex>
+                                                <Spacer />
                                                 {
                                                     isAdmin ? <Link href={"/admin/goods/edit/" + item.idx}><Button bg="black" color="white">변경</Button></Link> : ""
                                                 }
-                                                <Spacer />
                                                 <Text fontWeight="normal" color="black" fontSize="12px">♦️{item.point}</Text>
                                             </Flex>
                                             {
