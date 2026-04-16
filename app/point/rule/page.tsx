@@ -162,12 +162,12 @@ export default function OverviewPage() {
                             defaultValue="1vs1"
                             onValueChange={(details) => setselectType(details.value)}>
                             <Text fontSize="14px" color="black" mb="2px">[게임 종류]</Text>
-                            <HStack gap="6">
+                            <HStack gap="3">
                                 {items.map((item) => (
                                     <RadioGroup.Item
                                         key={item.value}
                                         value={item.value}
-                                        px={1}
+                                        px={3}
                                         py={1}
                                         border="1px solid"
                                         borderColor="gray.400"
