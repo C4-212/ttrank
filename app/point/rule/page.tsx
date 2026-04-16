@@ -27,8 +27,8 @@ import { redirect } from "next/navigation";
 import PlayerSearchInput from "@/app/components/common/PlayerSearchInput";
 
 interface FormValues {
-    type: string|null
-    point:string|null
+    type: string | null
+    point: string | null
 }
 
 const items = [
@@ -42,7 +42,7 @@ export default function OverviewPage() {
 
     const authToken = getCookie('authToken')?.toString();
 
-    const resultText = useMemo (() => {
+    const resultText = useMemo(() => {
         if (!point) return "";
 
         const pointNum = Number(point);
@@ -65,24 +65,24 @@ export default function OverviewPage() {
             pointSum = pointNum * 4;
         }
 
-        const commission = Math.max(1, Math.ceil(pointSum * 0.05));
-        const winnerPoint = Math.floor((pointSum - commission) / (selectType === "1vs1" ? 2 : 4)) + 1;
+        const commission = Math.ceil(pointSum * 0.05);
+        const winnerPoint = Math.floor((pointSum - commission) / (selectType === "1vs1" ? 2 : 4));
 
         return (
             <VStack align="start" spaceY={1} mt="10px">
-                <Text color="black" fontSize="14px">총 참여 포인트 : ♦️{pointSum}</Text>
                 <Text color="black" fontSize="14px">참여 인원 : {selectType === "1vs1" ? "2명" : "4명"}</Text>
+                <Text color="black" fontSize="14px">총 참여 포인트 : ♦️{pointSum}</Text>
                 <Text color="black" fontSize="14px">승리 포인트 : ♦️1</Text>
                 <Text color="black" fontSize="14px" mb="20px">운영 포인트 : ♦️{commission}</Text>
 
-                <Text color="black" fontWeight="bold" fontSize="16px">승리 시 1인당 획득 포인트 : ♦️{winnerPoint}</Text>
+                <Text color="black" fontWeight="bold" fontSize="16px">승리 시 1인당 획득 포인트 : ♦️{winnerPoint} + 1(승리 포인트)</Text>
             </VStack>
         );
     }, [point, selectType]);
 
     return (
         <Flex minH="100vh" bg="gray.50" direction="column">
-            <meta name="format-detection" content="telephone=no"/>
+            <meta name="format-detection" content="telephone=no" />
             {/* Navbar */}
             <Box
                 h="48px"
@@ -123,7 +123,7 @@ export default function OverviewPage() {
                             align="center"
                             justify="center">
                             <Text fontWeight="medium" color="black">♦️포인트 규칙</Text>
-                            <Spacer/>
+                            <Spacer />
                         </Flex>
                         <Flex
                             h="70px"
@@ -131,10 +131,10 @@ export default function OverviewPage() {
                             align="center"
                             justify="center"
                         >
-                            <Text color="black" fontSize="14px">포인트는 타인에게 양도 불가능합니다.<br/>
-                                본인의 계정에 한해서만 인증 완료 후 이동 가능합니다.<br/>
+                            <Text color="black" fontSize="14px">포인트는 타인에게 양도 불가능합니다.<br />
+                                본인의 계정에 한해서만 인증 완료 후 이동 가능합니다.<br />
                                 타인에게 사용해주는 것은 가능합니다. (참가비/상품교환)</Text>
-                            <Spacer/>
+                            <Spacer />
                         </Flex>
                     </MotionBox>
                     <MotionBox
@@ -151,21 +151,27 @@ export default function OverviewPage() {
                     >
                         <Text fontWeight="medium" color="black" mb="4px">♦️포인트빵 계산기</Text>
                         <Text fontSize="14px" color="black" mb="2px">[기본 규칙]</Text>
-                        <Text fontSize="12px" color="grey" mb="2px">운영 포인트 : 총 참여 포인트의 5% (소수점 올림)</Text>
-                        <Text fontSize="12px" color="grey" mb="10px">승점 포인트 : ♦️1</Text>
+                        <Text fontSize="12px" color="grey" mb="2px">운영 포인트 : 총 참여 포인트의 5% ※소수점 올림</Text>
+                        <Text fontSize="12px" color="grey" mb="10px">승리 포인트 : ♦️1</Text>
 
-                        <Text fontSize="14px" color="black" mb="2px">[승리 시 1인당 획득 포인트(♦️)]</Text>
-                        <Text fontSize="12px" color="grey" mb="2px">([총 참여 포인트] - [운영 포인트]) / [참여 인원] + [승리 포인트]</Text>
-                        <Text fontSize="12px" color="grey" mb="20px">※소수점 버림</Text>
+                        <Text fontSize="14px" color="black" mb="2px">[승리 시 1인당 획득 포인트(♦️)] ※소수점 버림</Text>
+                        <Text fontSize="12px" color="grey" mb="20px">([총 참여 포인트] - [운영 포인트]) / [참여 인원] + [승리 포인트]</Text>
 
                         <RadioGroup.Root
                             marginBottom="10px"
                             defaultValue="1vs1"
                             onValueChange={(details) => setselectType(details.value)}>
-                            <Text fontSize="12px" color="grey" pb="2px">게임 종류</Text>
+                            <Text fontSize="14px" color="black" mb="2px">[게임 종류]</Text>
                             <HStack gap="6">
                                 {items.map((item) => (
-                                    <RadioGroup.Item key={item.value} value={item.value}>
+                                    <RadioGroup.Item
+                                        key={item.value}
+                                        value={item.value}
+                                        _checked={{
+                                            bg: "white",
+                                            color: "black",
+                                            borderColor: "white",
+                                        }}>
                                         <RadioGroup.ItemHiddenInput />
                                         <RadioGroup.ItemIndicator />
                                         <RadioGroup.ItemText color="black">{item.label}</RadioGroup.ItemText>
@@ -174,7 +180,7 @@ export default function OverviewPage() {
                             </HStack>
                         </RadioGroup.Root>
                         <Field.Root marginBottom="10px">
-                            <Field.Label color="black">사용 포인트</Field.Label>
+                            <Field.Label color="black">사용 포인트 (1인당)</Field.Label>
                             <Input
                                 w="60%"
                                 maxLength={5}
