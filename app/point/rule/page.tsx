@@ -155,7 +155,7 @@ export default function OverviewPage() {
                         <Text fontSize="12px" color="grey" mb="10px">승리 포인트 : ♦️1</Text>
 
                         <Text fontSize="14px" color="black" mb="2px">[승리 시 1인당 획득 포인트(♦️)] ※소수점 버림</Text>
-                        <Text fontSize="12px" color="grey" mb="20px">([총 참여 포인트] - [운영 포인트]) / [참여 인원] + [승리 포인트]</Text>
+                        <Text fontSize="12px" color="grey" mb="20px">([총 참여 포인트] - [운영 포인트]) / ([참여 인원] / 2) + [승리 포인트]</Text>
 
                         <RadioGroup.Root
                             marginBottom="10px"
