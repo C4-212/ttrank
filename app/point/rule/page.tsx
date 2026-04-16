@@ -66,7 +66,7 @@ export default function OverviewPage() {
         }
 
         const commission = Math.ceil(pointSum * 0.05);
-        const winnerPoint = Math.floor((pointSum - commission) / (selectType === "1vs1" ? 2 : 4));
+        const winnerPoint = Math.floor((pointSum - commission) / (selectType === "1vs1" ? 1 : 2));
 
         return (
             <VStack align="start" spaceY={1} mt="10px">
