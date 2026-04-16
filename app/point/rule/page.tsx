@@ -69,13 +69,14 @@ export default function OverviewPage() {
         const winnerPoint = Math.floor((pointSum - commission) / (selectType === "1vs1" ? 1 : 2));
 
         return (
-            <VStack align="start" spaceY={1} mt="10px">
-                <Text color="black" fontSize="14px">참여 인원 : {selectType === "1vs1" ? "2명" : "4명"}</Text>
-                <Text color="black" fontSize="14px">총 참여 포인트 : ♦️{pointSum}</Text>
-                <Text color="black" fontSize="14px">승리 포인트 : ♦️1</Text>
-                <Text color="black" fontSize="14px" mb="20px">운영 포인트 : ♦️{commission}</Text>
-
-                <Text color="black" fontWeight="bold" fontSize="16px">승리 시 1인당 획득 포인트 : ♦️{winnerPoint} + 1(승리 포인트)</Text>
+            <VStack align="start" mt="10px">
+                <Text color="black" fontSize="14px" mb="2px">참여 인원 : {selectType === "1vs1" ? "2명" : "4명"}</Text>
+                <Text color="black" fontSize="14px" mb="2px">총 참여 포인트 : ♦️{pointSum}</Text>
+                <Text color="black" fontSize="14px" mb="2px">승리 포인트 : ♦️1</Text>
+                <Text color="black" fontSize="14px" mb="30px">운영 포인트 : ♦️{commission}</Text>
+                <Text color="red" fontWeight="bold" fontSize="16px" mb="2px">[승리 시 1인당 획득 포인트]</Text>
+                <Text color="black" fontSize="14px">♦️{winnerPoint} + 1(승리 포인트)</Text>
+                
             </VStack>
         );
     }, [point, selectType]);
@@ -151,10 +152,10 @@ export default function OverviewPage() {
                     >
                         <Text fontWeight="medium" color="black" mb="4px">♦️포인트빵 계산기</Text>
                         <Text fontSize="14px" color="black" mb="2px">[기본 규칙]</Text>
-                        <Text fontSize="12px" color="grey" mb="2px">운영 포인트 : 총 참여 포인트의 5% ※소수점 올림</Text>
+                        <Text fontSize="12px" color="grey" mb="2px">운영 포인트 : 총 참여 포인트의 5% ※ 소수점 올림</Text>
                         <Text fontSize="12px" color="grey" mb="10px">승리 포인트 : ♦️1</Text>
 
-                        <Text fontSize="14px" color="black" mb="2px">[승리 시 1인당 획득 포인트(♦️)] ※소수점 버림</Text>
+                        <Text fontSize="14px" color="black" mb="2px">[승리 시 1인당 획득 포인트(♦️)] ※ 소수점 버림</Text>
                         <Text fontSize="12px" color="grey" mb="20px">([총 참여 포인트] - [운영 포인트]) / ([참여 인원] / 2) + [승리 포인트]</Text>
 
                         <RadioGroup.Root
