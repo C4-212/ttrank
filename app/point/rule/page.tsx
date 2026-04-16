@@ -164,7 +164,7 @@ export default function OverviewPage() {
                             <Text fontSize="14px" color="black" mb="2px">[게임 종류]</Text>
                             <HStack gap="3">
                                 {items.map((item) => (
-                                    <RadioGroup.Item
+                                    <RadioGroup.Item color="black"
                                         key={item.value}
                                         value={item.value}
                                         px={3}
