@@ -167,14 +167,19 @@ export default function OverviewPage() {
                                     <RadioGroup.Item
                                         key={item.value}
                                         value={item.value}
+                                        px={1}
+                                        py={1}
+                                        border="1px solid"
+                                        borderColor="gray.400"
+                                        borderRadius="md"
                                         _checked={{
-                                            bg: "white",
-                                            color: "black",
-                                            borderColor: "white",
-                                        }}>
+                                            bg: "black",
+                                            color: "white",
+                                            borderColor: "black",
+                                        }}
+                                    >
                                         <RadioGroup.ItemHiddenInput />
-                                        <RadioGroup.ItemIndicator />
-                                        <RadioGroup.ItemText color="black">{item.label}</RadioGroup.ItemText>
+                                        <RadioGroup.ItemText>{item.label}</RadioGroup.ItemText>
                                     </RadioGroup.Item>
                                 ))}
                             </HStack>
