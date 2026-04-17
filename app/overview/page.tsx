@@ -320,7 +320,7 @@ export default function OverviewPage() {
             {
               loadingLive ? (
                 <Flex h="300px" justify="center" align="center">
-                  <Spinner size="lg" />
+                  <Spinner size="lg" color="black"/>
                 </Flex>
               ) :
                 match !== null ?
@@ -462,7 +462,7 @@ export default function OverviewPage() {
             {
               loadingLeaderBoard ? (
                 <Flex h="300px" justify="center" align="center">
-                  <Spinner size="lg" />
+                  <Spinner size="lg" color="black"/>
                 </Flex>
               ) :
                 leaderboard?.length !== 0 ?

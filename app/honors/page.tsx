@@ -148,7 +148,7 @@ export default function OverviewPage() {
                         {
                             loading ? (
                                 <Flex h="300px" justify="center" align="center">
-                                    <Spinner size="lg" />
+                                    <Spinner size="lg" color="black"/>
                                 </Flex>
                             ) :
                                 leaderboard?.length !== 0 ?

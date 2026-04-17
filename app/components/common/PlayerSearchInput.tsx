@@ -74,7 +74,7 @@ export default function PlayerSearchInput({ name, value, setValue }: Props) {
                 >
                     {loading ? (
                         <Box p={2} textAlign="center">
-                            <Spinner size="sm" />
+                            <Spinner size="lg" color="black"/>
                         </Box>
                     ) : list.length === 0 ? (
                         <Text p={2} fontSize="12px" color="gray.500">
