@@ -17,9 +17,11 @@ function getDescription(description:string)
   switch(description)
   {
     case "1": return "상품교환";
-    case "2": return "매치포인트";
+    case "2": return "포인트매치";
     case "3": return "관리자";
     case "4": return "룰렛";
+    case "5": return "챔피언매치";
+    case "6": return "승자예측";
 
     default: return "관리자";
   }

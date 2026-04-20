@@ -150,7 +150,7 @@ export default function OverviewPage() {
                         animate="visible"
                         transition={{ duration: 0.4 }}
                     >
-                        <Text fontWeight="medium" color="black" mb="4px">♦️포인트빵 계산기</Text>
+                        <Text fontWeight="medium" color="black" mb="4px">♦️포인트매치 계산기</Text>
                         <Text fontSize="14px" color="black" mb="2px">[기본 규칙]</Text>
                         <Text fontSize="12px" color="grey" mb="2px">운영 포인트 : 총 참여 포인트의 5% ※ 소수점 올림</Text>
                         <Text fontSize="12px" color="grey" mb="10px">승리 포인트 : ♦️1</Text>

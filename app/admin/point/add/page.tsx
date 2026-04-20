@@ -14,7 +14,8 @@ import {
     Input,
     Stack,
     RadioGroup,
-    HStack
+    HStack,
+    SimpleGrid
 } from "@chakra-ui/react";
 import { LuUser } from "react-icons/lu"
 
@@ -43,9 +44,11 @@ const type = [
 
 const description = [
     { label: "상품", value: "1" },
-    { label: "매치", value: "2" },
+    { label: "포인트매치", value: "2" },
     { label: "관리자", value: "3" },
     { label: "룰렛", value: "4" },
+    { label: "챔피언매치", value: "5" },
+    { label: "승자예측", value: "6" },
 ]
 
 export default function OverviewPage() {
@@ -200,7 +203,7 @@ export default function OverviewPage() {
                                     onValueChange={(details) => setSelectedDescription(details.value)}
                                 >
                                     <Text fontSize="12px" color="grey" pb="2px">설명 선택</Text>
-                                    <HStack gap="6">
+                                    <SimpleGrid columns={1} columnGap={6} rowGap={2}>
                                         {description.map((item) => (
                                             <RadioGroup.Item key={item.value} value={item.value}>
                                                 <RadioGroup.ItemHiddenInput />
@@ -208,7 +211,7 @@ export default function OverviewPage() {
                                                 <RadioGroup.ItemText color="black">{item.label}</RadioGroup.ItemText>
                                             </RadioGroup.Item>
                                         ))}
-                                    </HStack>
+                                    </SimpleGrid>
                                 </RadioGroup.Root>
 
                                 <Field.Root invalid={!!errors.point}>
