@@ -151,12 +151,12 @@ export default function OverviewPage() {
                                         <Box
                                             bg="white"
                                             p={4}
-                                            minH="30px"
+                                            minH="40px"
                                             border="1px solid"
                                             borderColor="gray.200"
                                             marginBottom="5px">
                                             <Flex
-                                                h="30px"
+                                                h="40px"
                                                 bg="white"
                                                 align="center"
                                                 marginBottom="5px">
